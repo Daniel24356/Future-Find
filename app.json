@@ -1,16 +1,16 @@
 {
   "expo": {
-    "name": "future-find",
-    "slug": "future-find",
+    "name": "Future Find",
+    "slug": "Future-Find",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/ff-logo.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#2C14DD"
     },
     "ios": {
       "supportsTablet": true
@@ -19,10 +19,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.dan27.FutureFind"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/ff-logo.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "d4560a7d-83aa-4fce-a82c-91c68ffabc53"
+      }
     }
   }
 }
