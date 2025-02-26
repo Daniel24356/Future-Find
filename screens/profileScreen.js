@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { Image, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
@@ -27,9 +27,11 @@ const profileScreen = () => {
         <View style={styles.mid_holder}>
         <View style={styles.mid_container}>
             <View style={styles.section}>
-                <View></View>
-
+              <Image source={require('../assets/Group 20105.png')} style={styles.image}/>
+              <Text style={styles.text_1}>Malvin YaaBari</Text>
+              <Text style={styles.text_2}>malvindesigner@gmail.com</Text>
             </View>
+
             <View style={styles.section_1}></View>
         </View>
         </View>
@@ -42,7 +44,7 @@ const profileScreen = () => {
 
 
 const styles = StyleSheet.create({
-    container: { flex: 1, width:'100%', alignItems: 'center' , backgroundColor: 'white', },
+    container: { flex: 1, width:'100%', alignItems: 'center' , backgroundColor: '#F5F7FF', },
     text: { fontSize: 20, marginBottom: 20 },
 
     safe_view:{flex: 1, backgroundColor:'BLUE', width:'100%'},
@@ -108,7 +110,7 @@ const styles = StyleSheet.create({
         height:'500',
         // flex:1,
         alignItems:'center',
-        backgroundColor:'red'
+        // backgroundColor:'red'
     },
   
     mid_container:{
@@ -122,7 +124,28 @@ const styles = StyleSheet.create({
     section:{
         width:181,
         height:158,
-        backgroundColor:'white'
+        backgroundColor:'white',
+        flexDirection:'column',
+        alignItems:'center',
+        justifyContent:'center',
+        gap:4
+    },
+    image:{
+        width:90,
+        height:90,
+    },
+    text_1:{
+        fontSize:18,
+    },
+    text_2:{
+        fontSize:14,
+        lineHeight:24,
+        color:'#6C727F',
+    },
+    section_1:{
+        width:328,
+        height:250,
+        backgroundColor:'pink'
     }
 
    
