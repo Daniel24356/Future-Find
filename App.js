@@ -1,6 +1,6 @@
-import AppNavigator from './navigation/AppNavigator';
+import LoanLandingScreen from './screens/LoanLandingScreen';
 
 export default function App() {
-  return <AppNavigator/>
+  return <LoanLandingScreen/>
 }
 
