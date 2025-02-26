@@ -98,7 +98,7 @@ export default function SignUpForm() {
         />
         <Text style={styles.termsText}>
           By signing up, you agree to the{" "}
-          <Text style={styles.link}>Terms of Service</Text> and <Text style={styles.link}>Privacy Policy</Text>
+          <Text style={styles.link}> Terms of Service</Text> and <Text style={styles.link}> Privacy Policy</Text>
         </Text>
       </View>
 
@@ -195,13 +195,13 @@ const styles = StyleSheet.create({
   checkboxContainer: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 20,
-    marginTop: 15
+    marginBottom: 25,
   },
   termsText: {
     flex: 1,
     fontSize: 14,
     color: "#5e5e5e",
+  
   },
   link: {
     color: "#4a3aff",
