@@ -1,6 +1,9 @@
-import LoanLandingScreen from './screens/LoanLandingScreen';
+
+import AppNavigator from './navigation/AppNavigator';
+import HomeScreen from './screens/HomeScreen';
 
 export default function App() {
-  return <LoanLandingScreen/>
+  return <AppNavigator/>
+  // return <HomeScreen/>
 }
 

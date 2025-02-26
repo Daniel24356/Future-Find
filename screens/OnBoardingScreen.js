@@ -6,7 +6,7 @@ const OnBoardingScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Welcome to Future Find</Text>
+      <Text style={styles.text}>Welcome to Future Fund</Text>
       <Button title="Get Started" onPress={() => navigation.navigate('Login')} />
     </View>
   );
