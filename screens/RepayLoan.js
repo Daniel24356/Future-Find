@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Image } from 'react-native'
 import React from 'react'
 import Ionicons from '@expo/vector-icons/Ionicons';
 
@@ -10,34 +10,41 @@ const RepayLoan = () => {
                     <View style={styles.smallBox}>
                         <Ionicons name="chevron-back" size={20} color="black" />
                     </View>
-                    <Text style={styles.textshi}>RepayLoan</Text>
+                    <Text style={styles.pay}>RepayLoan</Text>
                 </View>
             </View>
 
             <View style={styles.contpartTwoo}>
                 <View style={styles.contpartTwo}>
-                    {/* <Image source={require('../assets/icon.png')}/> */}
+                    <Image source={require('../assets/group.png')} />
                     <Text style={{ textAlign: 'center', fontSize: 17 }}>Total Loan Amount</Text>
                     <Text style={{ fontSize: 39, fontWeight: 'bold', textAlign: 'center', paddingTop: 15 }}>N8,500,000</Text>
-                    <View style={styles.loanAmount}>
-                        <View style={styles.interest}>
-                            <Text style={{ fontSize: 18 }}>Loan amount</Text>
-                            <Text style={{ fontSize: 18 }}>N2,500,00</Text>
+                    <ScrollView>
+                        <View style={styles.loanAmount}>
+                            <View style={styles.interest}>
+                                <Text style={{ fontSize: 18 }}>Loan amount</Text>
+                                <Text style={{ fontSize: 18, }}>N2,500,00</Text>
+                            </View>
+                            <View style={styles.interest}>
+                                <Text style={{ fontSize: 18 }}>Interest</Text>
+                                <Text style={{ fontSize: 18 }}>10% (250,000)</Text>
+                            </View>
+                            <View style={styles.interest}>
+                                <Text style={{ fontSize: 18 }}>Total amount</Text>
+                                <Text style={{ fontSize: 18 }}>2,750,000</Text>
+                            </View>
+                            <View style={styles.interest}>
+                                <Text style={{ fontSize: 18 }}>Repayment due</Text>
+                                <Text style={{ fontSize: 18 }}>28, Mar, 2027</Text>
+                            </View>
                         </View>
-                        <View style={styles.interest}>
-                            <Text style={{ fontSize: 18 }}>Interest</Text>
-                            <Text style={{ fontSize: 18 }}>10% (250,000)</Text>
-                        </View>
-                        <View style={styles.interest}>
-                            <Text style={{ fontSize: 18 }}>Total amount</Text>
-                            <Text style={{ fontSize: 18 }}>2,750,000</Text>
-                        </View>
-                        <View style={styles.interest}>
-                            <Text style={{ fontSize: 18 }}>Repayment due</Text>
-                            <Text style={{ fontSize: 18 }}>28, Mar, 2027</Text>
-                        </View>
-                    </View>
+                    </ScrollView>
                 </View>
+            </View>
+            <View style={styles.bottonCon}>
+                <TouchableOpacity style={styles.button}>
+                    <Text style={styles.buttonText}>Repay Loan</Text>
+                </TouchableOpacity>
             </View>
         </View>
     )
@@ -50,6 +57,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#f5f7ff",
         flex: 1,
     },
+
 
     con_two: {
         //   flex: 1,
@@ -74,7 +82,10 @@ const styles = StyleSheet.create({
         alignItems: "center",
         paddingLeft: 15,
         gap: 10,
-        paddingTop: 90
+        paddingTop: 90,
+    },
+    pay: {
+        color: "white"
     },
     contpartTwo: {
         backgroundColor: "white",
@@ -82,7 +93,8 @@ const styles = StyleSheet.create({
         marginLeft: 20,
         marginRight: 20,
         marginTop: 50,
-        borderRadius: 10
+        borderRadius: 10,
+        alignItems: "center"
     },
     loanAmount: {
         backgroundColor: "#f5f7ff",
@@ -95,7 +107,23 @@ const styles = StyleSheet.create({
     interest: {
         flex: 1,
         flexDirection: "row",
-        justifyContent: "space-between"
+        justifyContent: "space-between",
+        marginBottom: 10
+    },
+    bottonCon: {
+        padding: 20,
+        color: "white"
+    },
+    button: {
+        backgroundColor: "#4a3aff",
+        padding: 15,
+        borderRadius: 15,
+        alignItems: "center",
+        marginTop: 37,
+    },
+    buttonText: {
+        color: "#FFFFFF",
+        fontSize: 16,
+        fontWeight: "bold"
     }
-
 })
