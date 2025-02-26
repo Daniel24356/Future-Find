@@ -6,7 +6,7 @@ import OnboardingCard from '../props/OnboardingCard'
 import { useNavigation } from '@react-navigation/native'
 
 
-const OnboardingScreen1 = () => {
+const OnboardingScreen2 = () => {
     const navigate = useNavigation();
   return (
     <SafeAreaView style={styles.container}>
@@ -14,29 +14,22 @@ const OnboardingScreen1 = () => {
         <View style={styles.image_container}>
             <View style={styles.skip}>
                 <TouchableOpacity style={styles.skip_opacity}>
-                    <Text style={styles.text} onPress={()=> navigate.navigate("onboarding2")}>
+                    <Text style={styles.text} onPress={()=> navigate.navigate("onboarding3")}>
                         Skip
                     </Text>
                 </TouchableOpacity>
             </View>
             <Image 
-                source={require("../assets/onboarding/3.png")} 
-                style={styles.img_3}
+                source={require("../assets/onboarding/Illustrations1.png")} 
+                style={styles.bundle}
             />
-            <Image
-                source={require("../assets/onboarding/6.png")}
-                style={styles.img_6}
-            />
-            <Image
-                source={require("../assets/onboarding/Ellipse_76.png")}
-                style={styles.shadow}
-            />
+            
         </View>
 
         <View style={styles.message_container}>
             <OnboardingCard 
-                headText={"You ought to know where your money goes"}
-                parText={"Get an overview of how you are performing and motivate yourself to achieve even more"}
+                headText={"Gain total control of your money"}
+                parText={"Track your transaction easily, with categories and financial report"}
                 butnText={"Continue"}
             />
         </View>
@@ -44,7 +37,7 @@ const OnboardingScreen1 = () => {
   )
 }
 
-export default OnboardingScreen1
+export default OnboardingScreen2;
 
 const styles = StyleSheet.create({
     container: {
@@ -77,9 +70,14 @@ const styles = StyleSheet.create({
         bottom: 140,
         right: 140
     },
+    bundle: {
+        position: 'absolute',
+        bottom: -10
+    },
     shadow: {
         position: 'absolute',
         bottom: 0,
+        backgroundColor:'red'
     },
     message_container: {
         flex: 1,

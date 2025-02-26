@@ -4,7 +4,7 @@ import CustomButton from './CustomButton'
 import { ActivityIndicator } from 'react-native'
 
 
-const OnboardingCard = ({headText, parText}) => {
+const OnboardingCard = ({headText, parText, butnText}) => {
   return (
     <View style={styles.container}>
       <Text style={styles.head}>
@@ -15,11 +15,14 @@ const OnboardingCard = ({headText, parText}) => {
       </Text>
 
       <View style={styles.indicator}>
-        <ActivityIndicator/>
+        <View style={styles.loader}></View>
+        <View style={styles.loader2}></View>
+        <View style={styles.loader2}></View>
       </View>
 
       <CustomButton
-        title={'Continue'}
+        title={butnText}
+        backgroundColor={'#2C14DD'}
       />
     </View>
   )
@@ -55,6 +58,22 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     },
     indicator: {
-        width: 100,
+        width: 40,
+        height: 25,
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 3
+    },
+    loader: {
+        width: 6,
+        height: 18,
+        backgroundColor: '#2C14DD',
+        borderRadius: 56
+    },
+    loader2: {
+        width: 6,
+        height: 6,
+        backgroundColor: '#BBBBBB',
+        borderRadius: 56
     }
 })
