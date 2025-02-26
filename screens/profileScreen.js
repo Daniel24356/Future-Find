@@ -5,6 +5,7 @@ import { StatusBar } from 'expo-status-bar';
 // import Ionicons from '@expo/vector-icons/Ionicons';
 import Entypo from '@expo/vector-icons/Entypo';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+// import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 
 
 const profileScreen = () => {
@@ -32,7 +33,33 @@ const profileScreen = () => {
               <Text style={styles.text_2}>malvindesigner@gmail.com</Text>
             </View>
 
-            <View style={styles.section_1}></View>
+            <View style={styles.section_1}>
+                {/* <View style={styles.account}>
+                <MaterialCommunityIcons name="account" size={24} color="black" /> <Text>my acc</Text>
+                </View> */}
+                <View style={styles.account}>
+                <Image source={require("../assets/prof.png")}/>
+                <Text style={styles.textprof}>My account</Text>
+                </View>
+                <View style={styles.account}>
+                <Image source={require("../assets/prof.png")}/>
+                <Text style={styles.textprof}>My account</Text>
+                </View>
+                <View style={styles.account}>
+                <Image source={require("../assets/prof.png")}/>
+                <Text style={styles.textprof}>My account</Text>
+                </View>
+                <View style={styles.account}>
+                <Image source={require("../assets/prof.png")}/>
+                <Text style={styles.textprof}>My account</Text>
+                </View>
+            </View>
+
+            <View style={styles.text_div}> 
+                <Text style={styles.text_under}>You joined Future on September 2021, its been 1 month since then and our mission is still the same,
+                    help you better manage your finances like a pro.
+                </Text>
+            </View>
         </View>
         </View>
 
@@ -92,9 +119,7 @@ const styles = StyleSheet.create({
            lineHeight:20,
            alignContent:'center'
         },
-    
-
-
+         
     profile_2:{
         width:'17%',
         height:30,
@@ -115,8 +140,8 @@ const styles = StyleSheet.create({
   
     mid_container:{
         width:328,
-        height:437,
-        backgroundColor:'purple',
+        height:600,
+        // backgroundColor:'purple',
         // flex:1,
         alignItems:'center',
         marginTop:23
@@ -124,11 +149,12 @@ const styles = StyleSheet.create({
     section:{
         width:181,
         height:158,
-        backgroundColor:'white',
+        // backgroundColor:'white',
         flexDirection:'column',
         alignItems:'center',
         justifyContent:'center',
-        gap:4
+        gap:4,
+        marginBottom: 50
     },
     image:{
         width:90,
@@ -144,9 +170,41 @@ const styles = StyleSheet.create({
     },
     section_1:{
         width:328,
-        height:250,
-        backgroundColor:'pink'
-    }
+        height:100,
+        flex:1,
+        flexDirection:'column',
+        gap: 12,
+      
+    },
+    account:{
+        width:'100%',
+        height:50,
+        backgroundColor:'white',
+        flex: 1,
+        alignItems: "center",
+        flexDirection: "row",
+        gap: 10,
+        paddingLeft:10,
+        borderRadius: 13
+        // gap
+
+    },
+    textprof:{
+        fontSize: 19,
+        fontWeight: 500
+    },
+    text_under:{
+        textAlign: 'center',
+        fontSize: 15,
+        fontWeight: 400,
+        color: "#6C727F",
+        marginTop:100,
+        lineHeight: 23
+    },
+    //  text_div:{
+    //   marginTop: 80
+    //  }
+
 
    
 
