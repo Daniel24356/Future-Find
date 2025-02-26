@@ -14,10 +14,10 @@ const AppNavigator = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-        {/* <Stack.Screen name="Splash" component={SplashScreen} />
+        <Stack.Screen name="Splash" component={SplashScreen} />
         <Stack.Screen name="OnBoarding" component={OnBoardingScreen} />
         <Stack.Screen name="Login" component={LoginScreen} />
-        <Stack.Screen name="Signup" component={SignupScreen} /> */}
+        <Stack.Screen name="Signup" component={SignupScreen} />
         <Stack.Screen name="onboarding1" component={OnboardingScreen1} />
         <Stack.Screen name="onboarding2" component={OnboardingScreen2} />
         <Stack.Screen name="onboarding3" component={OnboardingScreen3} />
