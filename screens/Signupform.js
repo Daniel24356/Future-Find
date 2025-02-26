@@ -21,9 +21,15 @@ export default function SignUpForm() {
       {/* Header */}
       <View style={styles.minicontainer}>
          <View style={styles.innerdiv}>
-         <TouchableOpacity style={styles.backButton}>
-        <Ionicons name="arrow-back" size={24} color="black" style={styles.icon}/>
+           <View>
+           <TouchableOpacity style={styles.backButton}>
+         <Ionicons 
+  name="chevron-back" 
+  size={25} 
+  color="black"  
+/>
       </TouchableOpacity>
+           </View>
       <Text style={styles.writeup}>Sign Up</Text>
          </View>
       </View>
@@ -112,7 +118,7 @@ export default function SignUpForm() {
 // Styles
 const styles = StyleSheet.create({
    minicontainer: {
-    backgroundColor: "#4a3aff",
+    backgroundColor: "#442CF5",
     height: 115,
    },
     container: {
@@ -143,14 +149,19 @@ const styles = StyleSheet.create({
        paddingBottom: 15
   },
   backButton: {
-    marginTop: 30,
+     marginTop: 50,
     marginBottom: 10,
-    padding: 10,
-    borderRadius: 50,
-    width: 40,
-    height: 40,
+    // padding: 10,
+    // borderRadius: 50,
+    // marginBottom: 20,
+    // flex: 1,
+    // flexDirection: "row",
+    width: 30,
+    height: 30,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "white",
+    borderRadius: 10,
   },
   title: {
     fontSize: 30,
@@ -215,9 +226,11 @@ const styles = StyleSheet.create({
   icon: {
     backgroundColor: "#fff",
     padding: 15,
-    borderRadius: 8,
+    borderRadius: 10,
     fontSize: 24,
-    color: "black"
+    color: "black",
+    width: 40,
+    height: 40
   },
   iconstwo: {
     color: "navy"
