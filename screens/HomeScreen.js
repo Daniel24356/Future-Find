@@ -11,108 +11,116 @@ const HomeScreen = () => {
       <View style={styles.container}>
         <StatusBar style="dark" />
         <SafeAreaView style={styles.safeArea}>
-            <View style={styles.user_info}>
-                <View style={styles.user_div}>
-                    <Image 
-                        source={require("../assets/homePage/Group_20105.png")}
-                    />
-                    <View>
-                        <View style={styles.greeting}>
-                            <Text style={styles.greetTxt1} >Hello </Text>
-                            <Text style={styles.greetTxt2}>Malvin</Text>
-                        </View>
-                        <Text style={styles.regText}>Good morning</Text>
-                    </View>
+          <View style={styles.user_info}>
+            <View style={styles.user_div}>
+              <Image 
+                source={require("../assets/homePage/Group_20105.png")}
+              />
+              <View>
+                <View style={styles.greeting}>
+                  <Text style={styles.greetTxt1} >Hello </Text>
+                  <Text style={styles.greetTxt2}>Malvin</Text>
                 </View>
-                <View style={styles.notification}>
-                    <Ionicons name="notifications" size={24} color="black" />
-                </View>
+                <Text style={styles.regText}>Good morning</Text>
+              </View>
             </View>
+            <View style={styles.notification}>
+              <Ionicons name="notifications" size={24} color="black" />
+            </View>
+          </View>
 
             <View style={styles.user_below}>
-                <View>
-                    <Text style={styles.text1}>Your loan balance</Text>
-                    <View>Transactions</View>
-                </View>
-                <Text style={styles.text2}>N20,983</Text>
-                <Text style={styles.text3}>Repayment due: 28 March, 2025</Text>
+              <View>
+                <Text style={styles.text1}>Your loan balance</Text>
+                <View>Transactions</View>
+              </View>
+              <Text style={styles.text2}>N20,983</Text>
+              <Text style={styles.text3}>Repayment due: 28 March, 2025</Text>
             </View>
 
             <View style={styles.loanContainer}>
-                <View style={styles.loan1}>
-                    <Image source={require("../assets/onboarding/home-icon.png")}/>
-                    <Text>Take loan</Text>
-                </View>
-                <View style={styles.loan1}>
-                    <Image source={require("../assets/onboarding/home-icon.png")}/>
-                    <Text>Take loan</Text>
-                </View>
-                <View style={styles.loan1}>
-                    <Image source={require("../assets/onboarding/home-icon.png")}/>
-                    <Text>Take loan</Text>
-                </View>
+              <View style={styles.loan1}>
+                <Image source={require("../assets/homePage/Group_11.png")} style={styles.loan_icon} />
+                <Text style={styles.small_text}>Take loan</Text>
+              </View>
+              <View style={styles.loan1}>
+                <Image source={require("../assets/homePage/withdraw.png")}/>
+                <Text style={styles.small_text}>Withdraw</Text>
+              </View>
+              <View style={styles.loan1}>
+                <Image source={require("../assets/homePage/repay.png")}/>
+                <Text style={styles.small_text}>Repay loan</Text>
+              </View>
             </View>
 
             <View style={styles.loanContainer2}>
-                <View style={styles.loan2}>
-                    <Image source={require("../assets/onboarding/home-icon.png")}/>
-                    <Text>Take loan</Text>
+              <View style={styles.loan2}>
+                <View style={styles.small_logo}>
+                  <Image source={require("../assets/homePage/airtime.png")}/>
                 </View>
-                <View style={styles.loan2}>
-                    <Image source={require("../assets/onboarding/home-icon.png")}/>
-                    <Text>Take loan</Text>
+                <Text style={styles.small_text}>Airtime</Text>
+              </View>
+              <View style={styles.loan2}>
+                <View style={styles.small_logo}>
+                  <Image source={require("../assets/homePage/data.png")}/>
                 </View>
-                <View style={styles.loan2}>
-                    <Image source={require("../assets/onboarding/home-icon.png")}/>
-                    <Text>Take loan</Text>
+                <Text style={styles.small_text}>Data</Text>
+              </View>
+              <View style={styles.loan2}>
+                <View style={styles.small_logo}>
+                  <Image source={require("../assets/homePage/electricity.png")}/>
                 </View>
-                <View style={styles.loan2}>
-                    <Image source={require("../assets/onboarding/home-icon.png")}/>
-                    <Text>Take loan</Text>
+                <Text style={styles.small_text}>Electricity</Text>
+              </View>
+              <View style={styles.loan2}>
+                <View style={styles.small_logo}>
+                  <Image source={require("../assets/homePage/bet_acc.png")}/>
                 </View>
+                <Text style={styles.small_text}>Bet account</Text>
+              </View>
             </View>
 
             <View style={styles.investMain}>
-                <View style={styles.invest}>
+              <View style={styles.invest}>
                 <Image source={require("../assets/onboarding/home-icon.png")}/>
                 <View>
-                    <Text>Invest your money</Text>
-                    <Text>Earn interest on your invested money</Text>
+                  <Text>Invest your money</Text>
+                  <Text>Earn interest on your invested money</Text>
                 </View>
-                </View>
-                <View style={styles.invest}>
-                <Image source={require("../assets/onboarding/home-icon.png")}/>
-                <View>
-                    <Text>Invest your money</Text>
-                    <Text>Earn interest on your invested money</Text>
-                </View>
-                </View>
-                <View style={styles.invest}>
-                <Image source={require("../assets/onboarding/home-icon.png")}/>
-                <View>
-                    <Text>Invest your money</Text>
-                    <Text>Earn interest on your invested money</Text>
-                </View>
-                </View>
+              </View>
+              <View style={styles.invest}>
+              <Image source={require("../assets/onboarding/home-icon.png")}/>
+              <View>
+                <Text>Invest your money</Text>
+                <Text>Earn interest on your invested money</Text>
+              </View>
+              </View>
+              <View style={styles.invest}>
+              <Image source={require("../assets/onboarding/home-icon.png")}/>
+              <View>
+                <Text>Invest your money</Text>
+                <Text>Earn interest on your invested money</Text>
+              </View>
+              </View>
             </View>
 
             <View style={styles.undercont}>
-                <View>
+              <View>
                 <Image source={require("../assets/onboarding/home-icon.png")}/>
                 <Text>Home</Text>
-                </View>
-                <View>
+              </View>
+              <View>
                 <Image source={require("../assets/onboarding/home-icon.png")}/>
                 <Text>Home</Text>
-                </View>
-                <View>
+              </View>
+              <View>
                 <Image source={require("../assets/onboarding/home-icon.png")}/>
                 <Text>Home</Text>
-                </View>
-                <View>
+              </View>
+              <View>
                 <Image source={require("../assets/onboarding/home-icon.png")}/>
                 <Text>Home</Text>
-                </View>
+              </View>
             </View>
         </SafeAreaView>
       </View>
@@ -212,6 +220,14 @@ loanContainer: {
     backgroundColor: '#f5f7ff',
     borderRadius: 16
   },
+  loan_icon: {
+    width: 38
+  },
+  small_text:{
+    fontSize: 12,
+    color: '#292B2D',
+    marginTop: 10
+  },
   loanContainer2: {
     height: 86,
     flexDirection: 'row',
@@ -222,17 +238,29 @@ loanContainer: {
   loan2: {
     flex: 1,
     alignItems: 'center',
-    justifyContent:'center'
+    justifyContent:'center',
+  },
+  small_logo: {
+    width: 38,
+    height: 38,
+    backgroundColor:'#f4f6fe',
+    borderRadius: 10,
+    justifyContent:'center',
+    alignItems:'center'
   },
   investMain:{
     height: 185,
     flexDirection:'column',
-    gap: 20,
-    backgroundColor:'#FFFF',
+    gap: 8,
   },
   invest:{
+    height: 55,
     flexDirection: 'row',
-    gap:10
+    alignItems:'center',
+    gap:10,
+    backgroundColor:'#FFFF',
+    borderRadius: 16,
+    padding: 10
   },
   undercont:{
     flexDirection: 'row',
