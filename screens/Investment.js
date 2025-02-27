@@ -90,8 +90,10 @@ const Investment = () => {
                 </Text>
             </View>
 
-            <TabBar/>
         </View>
+
+        <TabBar/>
+        
     </SafeAreaView>
   )
 }

@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView } from "react-native";
 import { Checkbox } from "react-native-paper";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from '@react-navigation/native';
+import { StatusBar } from "expo-status-bar";
 
 export default function SignUpForm() {
  const navigation = useNavigation();
@@ -21,6 +22,8 @@ export default function SignUpForm() {
 
   return (
     <View style={styles.container}>
+      <StatusBar backgroundColor="#442CF5" style="light"/>
+      <ScrollView>
       {/* Header */}
       <View style={styles.minicontainer}>
          <View style={styles.innerdiv}>
@@ -114,6 +117,7 @@ export default function SignUpForm() {
         <Text style={styles.buttonTexttwo}>Sign In</Text>
       </TouchableOpacity>
      </View>
+     </ScrollView>
     </View>
   );
 }
@@ -122,7 +126,7 @@ export default function SignUpForm() {
 const styles = StyleSheet.create({
    minicontainer: {
     backgroundColor: "#442CF5",
-    height: 115,
+    height: 100,
    },
     container: {
     flex: 1,
