@@ -23,8 +23,8 @@ const HomeScreen = () => {
               />
               <View>
                 <View style={styles.greeting}>
-                  <Text style={styles.greetTxt1} >Hello </Text>
-                  <Text style={styles.greetTxt2}>Malvin</Text>
+                  <Text onPress={() => navigation.navigate('profile')} style={styles.greetTxt1} >Hello </Text>
+                  <Text onPress={() => navigation.navigate('profile')} style={styles.greetTxt2}>Malvin</Text>
                 </View>
                 <Text style={styles.regText}>Good morning</Text>
               </View>
@@ -58,7 +58,7 @@ const HomeScreen = () => {
             </View>
             <View style={styles.loan1}>
               <Image source={require("../assets/homePage/repay.png")}/>
-              <Text style={styles.small_text}>Repay loan</Text>
+              <Text onPress={() => navigation.navigate('repayLoan')} style={styles.small_text}>Repay loan</Text>
             </View>
           </View>
 

@@ -1,5 +1,5 @@
 import { createStackNavigator } from '@react-navigation/stack';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native'; 
 import SplashScreen from '../screens/SplashScreen';
 import OnBoardingScreen from '../screens/OnBoardingScreen';
 import OnboardingScreen1 from '../screens/OnboardingScreen1';
@@ -10,6 +10,8 @@ import SignupScreen from '../screens/SignUpScreen';
 import SignUpForm from '../screens/Signupform';
 import HomeScreen from '../screens/HomeScreen';
 import LoanLandingScreen from '../screens/LoanLandingScreen';
+import profileScreen from '../screens/profileScreen';
+import RepayLoan from '../screens/RepayLoan';
 
 const Stack = createStackNavigator();
 
@@ -25,6 +27,8 @@ const AppNavigator = () => {
         <Stack.Screen name="onboarding3" component={OnboardingScreen3} />
         <Stack.Screen name="home" component={HomeScreen} />
         <Stack.Screen name="loanLandingScreen" component={LoanLandingScreen} />
+        <Stack.Screen name="profile" component={profileScreen} />
+        <Stack.Screen name="repayLoan" component={RepayLoan} />
       </Stack.Navigator>
     </NavigationContainer>
   );
