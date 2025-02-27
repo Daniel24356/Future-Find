@@ -2,6 +2,8 @@ import { Image, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
+import EvilIcons from '@expo/vector-icons/EvilIcons';
+import TabBar from '../props/TabBar';
 
 const Investment = () => {
   return (
@@ -79,8 +81,16 @@ const Investment = () => {
                     </View>
                 </View>
 
-                <View></View>
             </View>
+
+            <View style={styles.bottom_comment}>
+                <EvilIcons style={{color:'#292B2D', height:20, width:20}} name="exclamation" size={24} color="black" />
+                <Text>
+                    Choose the saving plan that best suits your needs
+                </Text>
+            </View>
+
+            <TabBar/>
         </View>
     </SafeAreaView>
   )
@@ -209,4 +219,12 @@ const styles = StyleSheet.create({
         paddingTop: 20,
         backgroundColor:'#ECEAFE'
     },
+    bottom_comment: {
+        width:'100%',
+        height: 25,
+        flexDirection:'row',
+        alignItems:'center',
+        gap: 6,
+        // backgroundColor:'red'
+    }
 })
