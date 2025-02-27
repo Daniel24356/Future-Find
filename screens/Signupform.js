@@ -2,8 +2,11 @@ import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
 import { Checkbox } from "react-native-paper";
 import { Ionicons } from "@expo/vector-icons";
+import { useNavigation } from '@react-navigation/native';
 
 export default function SignUpForm() {
+ const navigation = useNavigation();
+
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -107,7 +110,7 @@ export default function SignUpForm() {
         <Text style={styles.buttonText}>Sign up</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.secButton}>
+      <TouchableOpacity   onPress={() => navigation.navigate('home')}  style={styles.secButton}>
         <Text style={styles.buttonTexttwo}>Sign In</Text>
       </TouchableOpacity>
      </View>
@@ -125,7 +128,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#f3f3ff",
   },
-
   innerCont: {
       padding: 20
   }, 
