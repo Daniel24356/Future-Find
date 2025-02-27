@@ -5,7 +5,8 @@ import HomeScreen from './screens/HomeScreen';
 import Investment from './screens/Investment';
 
 export default function App() {
-  // return <AppNavigator/>
-  return <Investment/>
+  return <AppNavigator/>
+  // return <Investment/>
+  // return <HomeScreen/>
 }
 

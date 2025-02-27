@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View } from 'react-native'
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
@@ -48,44 +48,44 @@ const Investment = () => {
                 <Text style={styles.plans_text}>Investment plans</Text>
 
                 <View style={styles.plans_pack}>
-                    <View style={styles.plans_box1}>
+                    <TouchableOpacity style={styles.plans_box1}>
                         <Image 
                             source={require('../assets/investing/fixed_plan.png')}
                         />
                         <Text style={styles.plans_text1}>Fixed plan</Text>
                         <Text style={styles.plans_text2}>Earn 10% interest in return yearly</Text>
-                    </View>
-                    <View style={styles.plans_box2}>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.plans_box2}>
                         <Image 
                             source={require('../assets/investing/spend_save.png')}
                         />
                         <Text style={styles.plans_text1}>Spend & save</Text>
                         <Text style={styles.plans_text2}>Earn 8% interest in return yearly</Text>
-                    </View>
+                    </TouchableOpacity>
                 </View>
 
                 <View style={styles.plans_pack}>
-                    <View style={styles.plans_box3}>
+                    <TouchableOpacity style={styles.plans_box3}>
                         <Image 
                             source={require('../assets/investing/safe_box.png')}
                         />
                         <Text style={styles.plans_text1}>SafeBox</Text>
                         <Text style={styles.plans_text2}>Earn 8% interest in return yearly</Text>
-                    </View>
-                    <View style={styles.plans_box4}>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.plans_box4}>
                         <Image 
                             source={require('../assets/investing/target.png')}
                         />
                         <Text style={styles.plans_text1}>Target</Text>
                         <Text style={styles.plans_text2}>Save up money daily as you spend</Text>
-                    </View>
+                    </TouchableOpacity>
                 </View>
 
             </View>
 
             <View style={styles.bottom_comment}>
                 <EvilIcons style={{color:'#292B2D', height:20, width:20}} name="exclamation" size={24} color="black" />
-                <Text>
+                <Text style={{color:'#292B2D', fontSize:13, fontWeight:400, marginTop:3}}>
                     Choose the saving plan that best suits your needs
                 </Text>
             </View>
@@ -221,7 +221,7 @@ const styles = StyleSheet.create({
     },
     bottom_comment: {
         width:'100%',
-        height: 25,
+        height: 20,
         flexDirection:'row',
         alignItems:'center',
         gap: 6,
