@@ -85,7 +85,7 @@ const Investment = () => {
 
             <View style={styles.bottom_comment}>
                 <EvilIcons style={{color:'#292B2D', height:20, width:20}} name="exclamation" size={24} color="black" />
-                <Text style={{color:'#292B2D', fontSize:13, fontWeight:400, marginTop:3}}>
+                <Text style={{color:'#292B2D', fontSize:12, fontWeight:400}}>
                     Choose the saving plan that best suits your needs
                 </Text>
             </View>
@@ -93,7 +93,7 @@ const Investment = () => {
         </View>
 
         <TabBar/>
-        
+
     </SafeAreaView>
   )
 }
@@ -112,18 +112,19 @@ const styles = StyleSheet.create({
         backgroundColor:'#442CF5',
         borderRadius: 16,
         padding: 15,
+        justifyContent:'center',
         position:'relative'
     },
     conv_text1: {
         color:'#FFFF',
-        fontSize: 18, 
+        fontSize: 16, 
         fontWeight: 600,
         width: 200,
         lineHeight: 20
     },
     conv_text2: {
         color:'#FFFF',
-        fontSize: 13, 
+        fontSize: 12, 
         fontWeight: 400,
         lineHeight: 18,
         paddingTop: 5
@@ -132,7 +133,7 @@ const styles = StyleSheet.create({
         width: 120,
         height: 120,
         position:'absolute',
-        right: 15,
+        right: 10,
         top: -8
     },
     balance: {
@@ -149,14 +150,14 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems:'center',
         paddingHorizontal: 12,
-        gap: 12
+        gap:8
     },
     bal_text1: {
-        fontSize: 13,
+        fontSize: 12,
         color:'#6C727F'
     },
     bal_text2: {
-        fontSize: 15,
+        fontSize: 14,
         fontWeight: 600,
         color:'#131313'
     },
@@ -170,7 +171,7 @@ const styles = StyleSheet.create({
     },
     plans_text: {
         color:'#292B2D',
-        fontSize: 17,
+        fontSize: 16,
         fontWeight: 400,
         marginBottom: 5
     },
@@ -189,7 +190,7 @@ const styles = StyleSheet.create({
         backgroundColor:'#E5F6F0'
     },
     plans_text1: {
-        fontSize: 16,
+        fontSize: 14,
         fontWeight: 500,
         color:'#292B2D',
         marginTop: 10
@@ -198,7 +199,8 @@ const styles = StyleSheet.create({
         fontSize: 11,
         fontWeight: 400,
         color:'#6C727F',
-        marginTop: 5
+        marginTop: 4,
+        width: 120
     },
     plans_box2: {
         flex: 1,
