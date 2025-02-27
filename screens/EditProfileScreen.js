@@ -1,7 +1,8 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, TextInput, Image, Button } from 'react-native'
 import React from 'react'
 import Entypo from '@expo/vector-icons/Entypo';
 import { StatusBar } from 'expo-status-bar';
+
 
 const EditProfileScreen = () => {
   return (
@@ -14,9 +15,22 @@ const EditProfileScreen = () => {
            </View>
         </View>
 
-        <View style={styles.image_section}></View>
+        <View style={styles.image_section}>
+        <Image source={require('../assets/Group 20474.png')} style={styles.image}/>
+        </View>
+
         
-      <Text>EditProfileScreen</Text>
+         <View style={styles.container_input}>
+          <TextInput style={styles.inputs} placeholder="Full Name" />
+          <TextInput style={styles.inputs} placeholder="Phone Number" keyboardType="Number" />
+         <TextInput style={styles.inputs} placeholder="Email" keyboardType="email-address" />
+         <TextInput style={styles.inputs} placeholder="BVN" keyboardType="Number" />
+         <Text>! You cannot edit your bvn</Text>
+          {/* <Button title="Sign Up" onPress={() => alert('Signup pressed')} />
+          <Button title="Already have an account? Login" onPress={() => navigation.navigate('Login')} /> */}
+       </View> 
+        
+      <Button title="Sign Up" onPress={() => alert('Signup pressed')} />
     </View>
   )
 }
@@ -24,7 +38,7 @@ const EditProfileScreen = () => {
 export default EditProfileScreen
 
 const styles = StyleSheet.create({
-    container: { flex: 1, width:'100%', alignItems: 'center' , backgroundColor: 'white', },
+    container: { flex: 1, width:'100%', alignItems: 'center' , backgroundColor: '#F5F7FF' },
     top_container:{
         width:'100%',
         height:100,
@@ -62,4 +76,19 @@ const styles = StyleSheet.create({
        lineHeight:20,
        alignContent:'center'
     },
+    image_section:{
+        width:181,
+        height:150,
+        // backgroundColor:'red',
+        flexDirection:'column',
+        alignItems:'center',
+        justifyContent:'center',
+    },
+    image:{
+        width:90,
+        height:90,
+    },
+    container_input: { width:'100%',  justifyContent: 'center', padding: 20 },
+    inputs: { borderWidth: 1, padding: 10, marginBottom: 10, borderRadius: 10 ,},
+    //  title: { fontSize: 24, fontWeight: 'bold', marginBottom: 20 },
 })
