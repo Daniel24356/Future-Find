@@ -13,6 +13,7 @@ import LoanLandingScreen from '../screens/LoanLandingScreen';
 import profileScreen from '../screens/profileScreen';
 import RepayLoan from '../screens/RepayLoan';
 import FixPlanScreen from '../screens/FixplanScreen';
+import FinalWithdrawal from '../screens/FinalWithdrawal';
 
 const Stack = createStackNavigator();
 
@@ -31,6 +32,7 @@ const AppNavigator = () => {
         <Stack.Screen name="profile" component={profileScreen} />
         <Stack.Screen name="repayLoan" component={RepayLoan} />
         <Stack.Screen name="fixPlan" component={FixPlanScreen} />
+        <Stack.Screen name="finalwithdrawal" component={FinalWithdrawal} />
       </Stack.Navigator>
     </NavigationContainer>
   );

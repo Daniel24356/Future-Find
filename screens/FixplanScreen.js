@@ -7,12 +7,13 @@ import {
   TouchableOpacity,
   Image
 } from "react-native";
-import { Ionicons } from "@expo/vector-icons"; // Ensure you have vector icons installed
+import { Ionicons } from "@expo/vector-icons"; 
 import Slider from "@react-native-community/slider";
+import { useNavigation } from '@react-navigation/native';
 
 const FixPlanScreen = () => {
   const [days, setDays] = useState(5);
-
+    const navigation = useNavigation();
   return (
     <SafeAreaView style={styles.container}>
       {/* Header */}
@@ -82,7 +83,7 @@ const FixPlanScreen = () => {
         </View>
 
         <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Request withdrawal</Text>
+          <Text style={styles.buttonText} onPress={() => navigation.navigate('finalwithdrawal')}>Request withdrawal</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
