@@ -4,7 +4,7 @@ import SplashScreen from '../screens/SplashScreen';
 import OnBoardingScreen from '../screens/OnBoardingScreen';
 import LoginScreen from '../screens/LoginScreen';
 import SignupScreen from '../screens/SignUpScreen';
-import profileScreen from '../screens/profileScreen';
+
 
 const Stack = createStackNavigator();
 
@@ -12,11 +12,11 @@ const AppNavigator = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="profile" component={profileScreen} />
-        {/* <Stack.Screen name="Splash" component={SplashScreen} /> */}
-        {/* <Stack.Screen name="OnBoarding" component={OnBoardingScreen} /> */}
-        {/* <Stack.Screen name="Login" component={LoginScreen} /> */}
-        {/* <Stack.Screen name="Signup" component={SignupScreen} /> */}
+      <Stack.Screen name="Repayloan" component={RepayLoan} />
+      <Stack.Screen name="Splash" component={SplashScreen}/>
+      <Stack.Screen name="OnBoarding" component={OnBoardingScreen} />
+      <Stack.Screen name="Login" component={LoginScreen} />
+      <Stack.Screen name="Signup" component={SignupScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
