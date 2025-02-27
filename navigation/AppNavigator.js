@@ -1,10 +1,10 @@
 import { createStackNavigator } from '@react-navigation/stack';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native'; 
 import SplashScreen from '../screens/SplashScreen';
 import OnBoardingScreen from '../screens/OnBoardingScreen';
 import LoginScreen from '../screens/LoginScreen';
 import SignupScreen from '../screens/SignUpScreen';
-import RepayLoan from '../screens/RepayLoan';
+
 
 const Stack = createStackNavigator();
 
