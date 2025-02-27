@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, SafeAreaView } from "react-native";
 import { Checkbox } from "react-native-paper";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from '@react-navigation/native';
@@ -20,7 +20,7 @@ export default function SignUpForm() {
   const [confirmSecureTextEntry, setConfirmSecureTextEntry] = useState(true);
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       {/* Header */}
       <View style={styles.minicontainer}>
          <View style={styles.innerdiv}>
@@ -110,11 +110,11 @@ export default function SignUpForm() {
         <Text style={styles.buttonText}>Sign up</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity   onPress={() => navigation.navigate('home')}  style={styles.secButton}>
+      <TouchableOpacity   onPress={() => navigation.navigate('Login')}  style={styles.secButton}>
         <Text style={styles.buttonTexttwo}>Sign In</Text>
       </TouchableOpacity>
      </View>
-    </View>
+    </SafeAreaView>
   );
 }
 
