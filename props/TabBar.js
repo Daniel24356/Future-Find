@@ -1,24 +1,41 @@
 import { Image, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 
 
-const TabBar = () => {
+const TabBar = ({home, loan, investment, contribution}) => {
+
   return (
     <View style={styles.tab_bar}>
         <View style={styles.tab}>
-            <Image source={require("../assets/homePage/tab_home.png")}/>
+            {
+                home?
+                <Image source={require("../assets/homePage/tab_home.png")}/> :
+                <Image source={require("../assets/investing/home_null.png")}/>
+            }
             <Text style={styles.tab_text}>Home</Text>
         </View>
         <View style={styles.tab}>
-            <Image source={require("../assets/homePage/tab_loan.png")}/>
+            {
+                loan?
+                <Image source={require("../assets/investing/loan_active.png")}/> :
+                <Image source={require("../assets/homePage/tab_loan.png")}/>
+            }
             <Text style={styles.tab_text}>Loan</Text>
         </View>
         <View style={styles.tab}>
-            <Image source={require("../assets/homePage/tab_inv.png")}/>
+            {
+                investment?
+                <Image source={require("../assets/investing/target.png")}/> :
+                <Image source={require("../assets/homePage/tab_inv.png")}/>
+            }
             <Text style={styles.tab_text}>Investment</Text>
         </View>
         <View style={styles.tab}>
-            <Image source={require("../assets/homePage/tab_contribution.png")}/>
+            {
+                contribution?
+                <Image source={require("../assets/investing/contribution_active.png")}/> :
+                <Image source={require("../assets/homePage/tab_contribution.png")}/> 
+            }
             <Text style={styles.tab_text}>Contribution</Text>
         </View>
     </View>
