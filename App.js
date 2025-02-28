@@ -1,9 +1,7 @@
-import { NavigationContainer, StackActions } from '@react-navigation/native';
-// import AppNavigator from './navigation/AppNavigator';
-import { createStackNavigator } from '@react-navigation/stack';
-import LoanApplication from './screens/LoanApplication';
 
-const Stack = createStackNavigator()
+import AppNavigator from './navigation/AppNavigator';
+import Withdrawal from './screens/Withdrawal';
+import HomeScreen from './screens/HomeScreen';
 
 export default function App() {
   return (
