@@ -1,11 +1,12 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
 import EvilIcons from '@expo/vector-icons/EvilIcons';
 import TabBar from '../props/TabBar';
 
+
 const Investment = () => {
+
   return (
     <SafeAreaView style={{flex: 1, backgroundColor:'#F5F7FF'}}>
         <StatusBar backgroundColor='#F5F7FF' style='dark' />
@@ -91,6 +92,7 @@ const Investment = () => {
             </View>
 
         </View>
+
 
         <TabBar/>
 
