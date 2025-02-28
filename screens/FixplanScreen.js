@@ -179,7 +179,7 @@ const styles = StyleSheet.create({
       padding: 10,
       marginVertical: 10,
       borderRadius: 5,
-      width: "100%",
+      // width: "100%",
       flexDirection: "row",
     },
     warningText: {
