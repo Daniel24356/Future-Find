@@ -2,6 +2,8 @@ import { StyleSheet, Text, View, TextInput, Image, Button } from 'react-native'
 import React from 'react'
 import Entypo from '@expo/vector-icons/Entypo';
 import { StatusBar } from 'expo-status-bar';
+import CustomButton from '../props/CustomButton';
+import EvilIcons from '@expo/vector-icons/EvilIcons';
 
 
 const EditProfileScreen = () => {
@@ -25,12 +27,24 @@ const EditProfileScreen = () => {
           <TextInput style={styles.inputs} placeholder="Phone Number" keyboardType="Number" />
          <TextInput style={styles.inputs} placeholder="Email" keyboardType="email-address" />
          <TextInput style={styles.inputs} placeholder="BVN" keyboardType="Number" />
-         <Text>! You cannot edit your bvn</Text>
+          <View style={styles.bottom_comment}>
+                <EvilIcons style={{color:'#292B2D', height:20, width:20}} name="exclamation" size={24} color="black" />
+                <Text style={{color:'#292B2D', fontSize:12, fontWeight:400}}>
+                    You can not edit your BVN
+                </Text>
+            </View>
           {/* <Button title="Sign Up" onPress={() => alert('Signup pressed')} />
           <Button title="Already have an account? Login" onPress={() => navigation.navigate('Login')} /> */}
        </View> 
         
-      <Button title="Sign Up" onPress={() => alert('Signup pressed')} />
+        <View style={{width:'100%', paddingHorizontal:13}}>
+       <CustomButton
+        backgroundColor={'blue'}
+        title={'Button'}
+
+       />
+       </View>
+
     </View>
   )
 }
@@ -59,8 +73,8 @@ const styles = StyleSheet.create({
     },
     
     icon:{
-        width:28,
-        height:28,
+        width:25,
+        height:25,
         backgroundColor:'white',
         borderRadius:9,  
         flexDirection:'row',
@@ -72,7 +86,7 @@ const styles = StyleSheet.create({
     icon_text:{
     //    fontWeight:600,
        color:'white',
-       fontSize:16,
+       fontSize:15,
        lineHeight:20,
        alignContent:'center'
     },
@@ -88,7 +102,16 @@ const styles = StyleSheet.create({
         width:90,
         height:90,
     },
-    container_input: { width:'100%',  justifyContent: 'center', padding: 20 },
-    inputs: { borderWidth: 1, padding: 10, marginBottom: 10, borderRadius: 10 ,},
-    //  title: { fontSize: 24, fontWeight: 'bold', marginBottom: 20 },
+    container_input: { width:'100%',  justifyContent: 'center', padding: 20, paddingTop:6,},
+    inputs: {  padding: 10, marginBottom: 10, borderRadius: 10 , backgroundColor:'white', height:47},
+    bottom_comment: {
+        width:'100%',
+        height: 20,
+        flexDirection:'row',
+        alignItems:'center',
+        gap: 6,
+        marginBottom:130
+        
+    }
+   
 })
