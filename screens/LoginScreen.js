@@ -14,7 +14,7 @@ const LoginScreen = () => {
       <CustomButton 
         title="Sign Up" 
         backgroundColor="#28A745" 
-        onPress={() => navigation.navigate('TransactionDetails')} 
+        onPress={() => navigation.navigate('Signup')} 
       />
     </View>
   );
