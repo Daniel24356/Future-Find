@@ -7,6 +7,8 @@ import OnboardingScreen2 from '../screens/OnboardingScreen2';
 import OnboardingScreen3 from '../screens/OnboardingScreen3';
 import LoginScreen from '../screens/LoginScreen';
 import SignupScreen from '../screens/SignUpScreen';
+import TransactionDetails from '../screens/TransactionDetails';
+import BetAccount from '../screens/BetAccount';
 import SignUpForm from '../screens/Signupform';
 import HomeScreen from '../screens/HomeScreen';
 import LoanLandingScreen from '../screens/LoanLandingScreen';
@@ -26,6 +28,9 @@ const AppNavigator = () => {
         <Stack.Screen name="Setting" component={Settings} />
         <Stack.Screen name="Resetpassword" component={ResetPassword} />
         <Stack.Screen name="Splash" component={SplashScreen} />
+        <Stack.Screen name="OnBoarding" component={OnBoardingScreen} />
+        <Stack.Screen name="TransactionDetails" component={TransactionDetails} />
+        <Stack.Screen name="BetAccount" component={BetAccount} />
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Signup" component={SignUpForm} />
         <Stack.Screen name="onboarding1" component={OnboardingScreen1} />
