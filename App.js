@@ -7,9 +7,9 @@ import HomeScreen from './screens/HomeScreen';
 import Group_Details from './screens/Group_Details';
 
 export default function App() {
-  // return <AppNavigator/>
+  return <AppNavigator/>
   // return <Investment/>
   // return <Contribution_Active/>
-  return <Group_Details/>
+  // return <Group_Details/>
 }
 
