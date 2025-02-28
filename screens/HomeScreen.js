@@ -116,9 +116,10 @@ const HomeScreen = () => {
             </TouchableOpacity>
           </View>
             
-
         </SafeAreaView>
-          <TabBar/>
+
+        <TabBar home={true}/>
+
       </View>
     </>
   );

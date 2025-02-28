@@ -94,7 +94,7 @@ const Investment = () => {
         </View>
 
 
-        <TabBar/>
+        <TabBar investment={true}/>
 
     </SafeAreaView>
   )

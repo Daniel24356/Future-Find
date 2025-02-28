@@ -6,9 +6,9 @@ import Contribution_Active from './screens/Contribution_Active';
 import HomeScreen from './screens/HomeScreen';
 
 export default function App() {
-  // return <AppNavigator/>
+  return <AppNavigator/>
   // return <Investment/>
-  return <Contribution_Active/>
+  // return <Contribution_Active/>
   // return <HomeScreen/>
 }
 

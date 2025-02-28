@@ -80,7 +80,7 @@ const Contribution_Active = () => {
 
         </SafeAreaView>
 
-        <TabBar/>
+        <TabBar contribution={true}/>
         
     </View>
   )
