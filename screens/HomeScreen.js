@@ -61,7 +61,7 @@ const HomeScreen = () => {
               <Text onPress={() => navigation.navigate('repayLoan')} style={styles.small_text}>Repay loan</Text>
             </View>
           </View>
-
+              
           <View style={styles.loanContainer2}>
             <View style={styles.loan2}>
               <View style={styles.small_logo}>
