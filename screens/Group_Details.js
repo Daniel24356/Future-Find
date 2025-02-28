@@ -117,7 +117,20 @@ const Group_Details = () => {
                         <Text style={{fontSize:12,fontWeight:400,color:'#292B2D'}}>paying member</Text>
 
                         <View style={styles.member_info}>
+                            <View style={styles.profile_img}>
+                                <Image
+                                    source={require('../assets/investing/profile_pic.png')}
+                                />
+                            </View>
 
+                            <View>
+                                <Text style={{fontSize:14,fontWeight:500,color:'#292B2D'}}>King Alex Ade</Text>
+                                <Text style={{fontSize:10,fontWeight:400,color:'#6C727F'}}>kingalexade@gmail.com</Text>
+                            </View>
+
+                            <View style={styles.status_div}>
+                                <Text style={{fontSize:10,fontWeight:400,color:'#FFC93D'}}>Pending</Text>
+                            </View>
                         </View>
                     </View>
 
@@ -260,6 +273,31 @@ const styles = StyleSheet.create({
         paddingHorizontal:10
     },
     member_info: {
+        height:45,
         flexDirection:'row',
+        alignItems:'center',
+        paddingHorizontal:10,
+        borderWidth:1,
+        borderColor:'#6C727F1A',
+        borderRadius:10,
+        gap:10,
+        position:'relative'
+    },
+    status_div: {
+        height:16,
+        justifyContent:'center',
+        alignItems:'center',
+        borderRadius:10,
+        backgroundColor:'#FFC93D1A',
+        paddingHorizontal:5,
+        position:'absolute',
+        right:10
+    },
+    profile_img: {
+        width:28,
+        height:28,
+        borderRadius:'50%',
+        justifyContent:'center',
+        alignItems:'center'
     }
 })
