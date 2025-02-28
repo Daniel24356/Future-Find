@@ -9,7 +9,7 @@ import EvilIcons from '@expo/vector-icons/EvilIcons';
 const EditProfileScreen = () => {
   return (
     <View style={styles.container}>
-        <StatusBar backgroundColor='blue' />
+        <StatusBar backgroundColor='blue' style='light'/>
         <View style={styles.top_container}>
            <View style={styles.profile_1}> 
             <View style={styles.icon}><Entypo name="chevron-small-left" size={24} color="black" /></View>
@@ -40,7 +40,7 @@ const EditProfileScreen = () => {
         <View style={{width:'100%', paddingHorizontal:13}}>
        <CustomButton
         backgroundColor={'blue'}
-        title={'Button'}
+        title={'Save changes'}
 
        />
        </View>
