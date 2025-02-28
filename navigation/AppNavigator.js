@@ -13,6 +13,8 @@ import LoanLandingScreen from '../screens/LoanLandingScreen';
 import profileScreen from '../screens/profileScreen';
 import RepayLoan from '../screens/RepayLoan';
 import ResetPassword from '../screens/ResetPassword';
+import Settings from '../screens/Settings';
+
 
 const Stack = createStackNavigator();
 
@@ -20,6 +22,7 @@ const AppNavigator = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="Setting" component={Settings} />
         <Stack.Screen name="Resetpassword" component={ResetPassword} />
         <Stack.Screen name="Splash" component={SplashScreen} />
         <Stack.Screen name="Login" component={LoginScreen} />

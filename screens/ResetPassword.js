@@ -31,7 +31,7 @@ const ResetPassword = () => {
                         onChange={(text) => setForm({ ...form, email: text })}
                     />
                     <View style={styles.exist}>
-                        <Text style={{color:'red'}}>
+                        <Text style={{ color: 'red' }}>
                             This email doesn't exist
                         </Text>
                     </View>
