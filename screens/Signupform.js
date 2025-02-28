@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, SafeAreaView, ScrollView } from "react-native";
 import { Checkbox } from "react-native-paper";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from '@react-navigation/native';
@@ -20,9 +20,9 @@ export default function SignUpForm() {
   const [secureTextEntry, setSecureTextEntry] = useState(true);
   const [confirmSecureTextEntry, setConfirmSecureTextEntry] = useState(true);
 
-  return (
-    <View style={styles.container}>
-      <StatusBar backgroundColor="#442CF5" style="light"/>
+  return (   
+    <SafeAreaView style={styles.container}>
+       <StatusBar backgroundColor="#442CF5" style="light"/>
       <ScrollView>
       {/* Header */}
       <View style={styles.minicontainer}>
@@ -104,7 +104,7 @@ export default function SignUpForm() {
         />
         <Text style={styles.termsText}>
           By signing up, you agree to the{" "}
-          <Text style={styles.link}>Terms of Service</Text> and <Text style={styles.link}>Privacy Policy</Text>
+          <Text style={styles.link}> Terms of Service</Text> and <Text style={styles.link}> Privacy Policy</Text>
         </Text>
       </View>
 
@@ -113,12 +113,12 @@ export default function SignUpForm() {
         <Text style={styles.buttonText}>Sign up</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity   onPress={() => navigation.navigate('home')}  style={styles.secButton}>
+      <TouchableOpacity   onPress={() => navigation.navigate('Login')}  style={styles.secButton}>
         <Text style={styles.buttonTexttwo}>Sign In</Text>
       </TouchableOpacity>
      </View>
      </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -201,13 +201,13 @@ const styles = StyleSheet.create({
   checkboxContainer: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 20,
-    marginTop: 15
+    marginBottom: 25,
   },
   termsText: {
     flex: 1,
     fontSize: 14,
     color: "#5e5e5e",
+  
   },
   link: {
     color: "#4a3aff",
