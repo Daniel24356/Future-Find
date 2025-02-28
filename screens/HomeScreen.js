@@ -93,7 +93,7 @@ const HomeScreen = () => {
             <View style={styles.invest}>
               <Image source={require("../assets/homePage/invest.png")}/>
               <View>
-                <Text style={styles.invest_text1}>Invest your money</Text>
+                <Text style={styles.invest_text1} onPress={() => navigation.navigate('fixPlan')}>Invest your money</Text>
                 <Text style={styles.invest_text2}>Earn interest on your invested money</Text>
               </View>
               <EvilIcons style={styles.chevron} name="chevron-right" size={24} color="black" />
