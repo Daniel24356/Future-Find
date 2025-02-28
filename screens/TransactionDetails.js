@@ -105,6 +105,8 @@ const TransactionDetails = () => {
                 backgroundColor="#2C14DD" 
                 width={328}
                 height={50}
+                borderRadius={16}
+                padding={8}
                 onPress={() => navigation.navigate('TransactionDetails')} 
             />
 
@@ -114,6 +116,8 @@ const TransactionDetails = () => {
                 backgroundColor="rgba(44, 20, 221, 0.05)" 
                 width={328}
                 height={50}
+                borderRadius={16}
+                padding={8}
                 onPress={() => navigation.navigate('TransactionDetails')} 
             />
         </View>
