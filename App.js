@@ -6,7 +6,6 @@ import ResetPassword from './screens/ResetPassword';
 import Settings from './screens/Settings';
 
 export default function App() {
-  return <Settings/>
-  // return <HomeScreen/>
+  return <AppNavigator/>
 }
 
