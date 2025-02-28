@@ -1,12 +1,12 @@
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 
-const CustomButton = ({ title, onPress, backgroundColor = '#007BFF', textColor = '#fff'}) => {
+const Custom2Button = ({ title, onPress, backgroundColor = '#007BFF', textColor = '#fff', textFont = 17, borderRadius = 21, height = 65 }) => {
   return (
     <TouchableOpacity 
-      style={[styles.button, { backgroundColor }]} 
+      style={[styles.button, { backgroundColor }, { borderRadius }, { height }]} 
       onPress={onPress}
     >
-      <Text style={[styles.text, { color: textColor }]}>{title}</Text>
+      <Text style={[styles.text, { color: textColor, fontSize: textFont }]}>{title}</Text>
     </TouchableOpacity>
   );
 };
@@ -14,7 +14,6 @@ const CustomButton = ({ title, onPress, backgroundColor = '#007BFF', textColor =
 const styles = StyleSheet.create({
   button: {
     padding: 15,
-    borderRadius: 8,
     alignItems: 'center',
     justifyContent: 'center',
     marginVertical: 10,
@@ -25,4 +24,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CustomButton;
+export default Custom2Button;
