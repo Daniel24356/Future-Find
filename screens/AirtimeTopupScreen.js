@@ -1,55 +1,88 @@
 import React from "react";
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  TouchableOpacity,
+  Image,
+} from "react-native";
 import { Ionicons } from "@expo/vector-icons"; // For icons
+import { MaterialIcons } from "@expo/vector-icons"; 
 
 const AirtimeTopupScreen = () => {
   return (
     <>
-         {/* Top Section */}
-         <View style={styles.topPart}>
+      {/* Top Section */}
+      <View style={styles.topPart}>
         <Ionicons name="arrow-back" size={24} color="white" />
         <Text style={styles.appTitle}>Airtime topup</Text>
       </View>
 
-    <View style={styles.container}>
- 
-      {/* Input Section */}
-      <View style={styles.card}>
-        <View style={styles.row}>
-          <Image source={{ uri: "https://via.placeholder.com/30" }} style={styles.logo} />
-          <TextInput style={styles.input} placeholder="Phone number" placeholderTextColor="#aaa" />
-          <Ionicons name="person-circle-outline" size={20} color="#aaa" />
+      <View style={styles.container}>
+        {/* Input Section */}
+        <View style={styles.smallSelect}>
+          <Image
+            source={require("../assets/9MOBILE.png")}
+            style={styles.logo}
+          />
+          <MaterialIcons name="keyboard-arrow-down" size={24} color="#666" />
         </View>
-      </View>
 
-      {/* Airtime Amount Section */}
-      <Text style={styles.label}>Airtime amount</Text>
-      <View style={styles.row}>
-        <Ionicons name="wallet-outline" size={18} color="#442CF5" />
-        <Text style={styles.balanceText}>+ N160</Text>
-      </View>
-
-      <View style={styles.grid}>
-        {["N100", "N200", "N300", "N400", "N500", "N600", "N700", "N1000"].map((amount, index) => (
-          <TouchableOpacity key={index} style={styles.amountBox}>
-            <Text style={styles.amountText}>{amount}</Text>
-          </TouchableOpacity>
-        ))}
-      </View>
-
-      {/* Custom Amount Input */}
-      <View style={styles.card}>
-        <View style={styles.row}>
-          <TextInput style={styles.input} placeholder="Amount" placeholderTextColor="#aaa" keyboardType="numeric" />
-          <Ionicons name="cash-outline" size={20} color="#aaa" />
+        <View style={styles.card}>
+          <View style={styles.row}>
+            <TextInput
+              style={styles.input}
+              placeholder="Phone number"
+              placeholderTextColor="#aaa"
+            />
+            <Image
+              source={require("../assets/contact-icon.png")}
+              style={styles.logo}
+            />
+          </View>
         </View>
-      </View>
 
-      {/* Continue Button */}
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>Continue</Text>
-      </TouchableOpacity>
-    </View>
+        {/* Airtime Amount Section */}
+        <Text style={styles.label}>Airtime amount</Text>
+        <View style={styles.row}>
+          <Ionicons name="wallet-outline" size={18} color="#442CF5" />
+          <Text style={styles.balanceText}>+ N160</Text>
+        </View>
+
+        <View style={styles.grid}>
+          {[
+            "N100",
+            "N200",
+            "N300",
+            "N400",
+            "N500",
+            "N600",
+            "N700",
+            "N1000",
+          ].map((amount, index) => (
+            <TouchableOpacity key={index} style={styles.amountBox}>
+              <Text style={styles.amountText}>{amount}</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+
+        <View style={styles.card}>
+          <View style={styles.row}>
+            <TextInput
+              style={styles.input}
+              placeholder="Amount"
+              placeholderTextColor="#aaa"
+              keyboardType="numeric"
+            />
+            <Ionicons name="cash-outline" size={20} color="#aaa" />
+          </View>
+        </View>
+
+        <TouchableOpacity style={styles.button}>
+          <Text style={styles.buttonText}>Continue</Text>
+        </TouchableOpacity>
+      </View>
     </>
   );
 };
@@ -79,7 +112,7 @@ const styles = StyleSheet.create({
   card: {
     backgroundColor: "#FFF",
     borderRadius: 10,
-    padding: 15,
+    padding: 5,
     marginTop: 20,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
@@ -106,7 +139,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#FFF",
     borderRadius: 10,
-    paddingHorizontal: 15,
+    paddingHorizontal: 12,
     paddingVertical: 12,
     fontSize: 16,
     color: "#333",
@@ -133,7 +166,7 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   amountText: {
-    fontSize: 16,
+    fontSize: 13,
     fontWeight: "600",
   },
   button: {
@@ -148,9 +181,18 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "600",
   },
-  logo: {
-    width: 25,
-    height: 25,
-    marginRight: 10,
+  smallSelect: {
+    backgroundColor: "#FFF",
+    borderRadius: 10,
+    padding: 5,
+    marginTop: 20,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2,
+    width: 59,
+    flexDirection:"row",
+    gap: 10,
   },
 });
