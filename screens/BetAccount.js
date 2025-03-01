@@ -12,7 +12,7 @@ import wgb from '../assets/wgb.png';
 import surebet from '../assets/surebet.png';
 import merrybet from '../assets/merrybet.png';
 import betway from '../assets/betway.png';
-import CustomButton from '../props/CustomButton';
+import CustomButton2 from '../props/CustomButton2';
 
 const platforms = [
   { id: 'bet9ja', image: bet9ja },
@@ -87,7 +87,7 @@ const BetAccount = () => {
         </View>
 
         {/* Continue Button */}
-        <CustomButton
+        <CustomButton2
           title="Continue"
           textColor="white"
           backgroundColor={selectedPlatform ? "#442CF5" : "rgba(44, 20, 221, 0.3)"}

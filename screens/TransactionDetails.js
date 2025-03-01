@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, ImageBackground, TouchableOpacity } from 'react-native'
 import { useNavigation } from '@react-navigation/native';
 import React from 'react'
-import CustomButton from '../props/CustomButton'
+import CustomButton2 from '../props/CustomButton2'
 import back from '../assets/back.png'
 import Vector from '../assets/Vector.png'
 import vectorBg from '../assets/vectorBg.png'
@@ -100,7 +100,7 @@ const TransactionDetails = () => {
 
 
         <View style={styles.transacBtns}>
-            <CustomButton 
+            <CustomButton2 
                 title="Download receipt" 
                 backgroundColor="#2C14DD" 
                 width={328}
@@ -110,7 +110,7 @@ const TransactionDetails = () => {
                 onPress={() => navigation.navigate('TransactionDetails')} 
             />
 
-            <CustomButton 
+            <CustomButton2 
                 title="Report this transaction" 
                 textColor="rgba(36, 15, 81, 1)"
                 backgroundColor="rgba(44, 20, 221, 0.05)" 
