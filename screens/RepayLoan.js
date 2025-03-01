@@ -60,19 +60,14 @@ const styles = StyleSheet.create({
 
 
     con_two: {
-        //   flex: 1,
-        //   justifyContent: 'center',
-        //   alignItems: 'center',
         backgroundColor: "#442cf5",
         height: 150,
     },
     smallBox: {
-        // width: 40, // Small div width
-        // height: 40, // Small div height
-        backgroundColor: 'blue', // Background color
-        justifyContent: 'center', // Center icon vertically
-        alignItems: 'center', // Center icon horizontally
-        borderRadius: 8, // Rounded corners
+        backgroundColor: 'blue',
+        justifyContent: 'center', 
+        alignItems: 'center', 
+        borderRadius: 8, 
         backgroundColor: "white",
         padding: 5
     },
