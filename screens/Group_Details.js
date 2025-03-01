@@ -140,7 +140,7 @@ const Group_Details = () => {
 
 
         </SafeAreaView>
-        <PopUpScreen otpVerified={true} />
+        <PopUpScreen contributionGroupCreated={true} />
     </View>
   )
 }

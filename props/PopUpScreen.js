@@ -2,10 +2,12 @@ import { Image, StyleSheet, Text, View } from 'react-native'
 import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import CustomButton from './CustomButton'
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 const PopUpScreen = ({
     otpResent, forgotPassword, accountSaved, resetPassword, logout, confirmSubmit,
-    otpVerified, confirmLoanYes, confirmLoanNo
+    otpVerified, confirmLoanYes, confirmLoanNo, withdrawalSuccess, savingsPlanCreated,
+    contributionGroupCreated
 }) => {
 
   return (
@@ -13,11 +15,12 @@ const PopUpScreen = ({
         <SafeAreaView style={{flex:1, justifyContent:'flex-end', paddingBottom:30}}>
             <View style={styles.pop_up}>
                 {
-                    otpResent || forgotPassword || accountSaved || resetPassword||otpVerified||confirmLoanYes?
+                    otpResent || forgotPassword || accountSaved || resetPassword||otpVerified||
+                    confirmLoanYes||withdrawalSuccess||savingsPlanCreated||contributionGroupCreated?
                     <Image 
                         source={require('../assets/popups/success.png')}
                     /> :
-                    logout||confirmSubmit?
+                    logout||confirmSubmit||confirmLoanNo?
                     <Image 
                         source={require('../assets/popups/caution.png')}
                     /> : ''
@@ -29,8 +32,9 @@ const PopUpScreen = ({
                     accountSaved? <Text style={styles.big_text}>Saved</Text> :
                     logout? <Text style={styles.big_text}>Log out</Text> :
                     confirmSubmit? <Text style={styles.big_text}>Submit application</Text> :
-                    otpVerified? <Text style={styles.big_text}>Successful</Text> :
-                    confirmLoanYes? <Text style={styles.big_text}>Awesome!</Text> : ''
+                    otpVerified||withdrawalSuccess||contributionGroupCreated? <Text style={styles.big_text}>Successful</Text> :
+                    confirmLoanYes||savingsPlanCreated? <Text style={styles.big_text}>Awesome!</Text> :
+                    confirmLoanNo? <Text style={styles.big_text}>Oh No!</Text> : ''
                 }
 
                 {
@@ -65,13 +69,40 @@ const PopUpScreen = ({
                     confirmLoanYes?
                     <Text style={styles.small_text}>
                         Thank you for letting us know that this loan has been disbursed to you
+                    </Text> :
+                    confirmLoanNo?
+                    <Text style={styles.small_text}>
+                        We recommend you check your internet status or restart your phone to be sure of this transaction
+                    </Text> :
+                    withdrawalSuccess?
+                    <Text style={styles.small_text}>
+                        Your transaction has been successful
+                    </Text> :
+                    savingsPlanCreated?
+                    <Text style={styles.small_text}>
+                        Your have successfully created your savings plan
+                    </Text> :
+                    contributionGroupCreated?
+                    <Text style={styles.small_text}>
+                        Your have successfully created your contribution group, you can invite members using the 
+                        invitation link below
                     </Text> : ''
+                }
+
+                {
+                    contributionGroupCreated &&
+                    <View style={styles.copy}>
+                        <Text style={{fontSize:14,color:'#292B2D',fontWeight:500}}>Invitation/link-here</Text>
+                        <Ionicons name="copy" size={13} color="#442CF5" />
+                    </View>
                 }
 
                 <View style={{width:'100%'}}>
                     <CustomButton 
                         title={
-                            otpResent||accountSaved||resetPassword||otpVerified? 'Okay' : forgotPassword? 'Done' : 
+                            otpResent||accountSaved||resetPassword||otpVerified||confirmLoanYes||confirmLoanNo||
+                            withdrawalSuccess||savingsPlanCreated||contributionGroupCreated? 'Okay' : 
+                            forgotPassword? 'Done' : 
                             logout? 'Log out' : confirmSubmit? 'Submit application': ''
                         }
                         backgroundColor={'#2C14DD'}
@@ -113,9 +144,10 @@ const styles = StyleSheet.create({
         backgroundColor:'#FFFF',
         borderRadius:15,
         padding:20,
+        paddingTop:30,
         justifyContent:'flex-end',
         alignItems:'center',
-        gap:10
+        gap:12
     },
     big_text: {
         fontSize:24,
@@ -129,5 +161,15 @@ const styles = StyleSheet.create({
         color:'#292B2D',
         textAlign:'center',
         lineHeight:24
+    },
+    copy: {
+        flexDirection:'row',
+        alignItems:'center',
+        justifyContent:'center',
+        height:28,
+        backgroundColor:'#F5F7FF',
+        borderRadius:10,
+        paddingHorizontal:10,
+        gap:5,
     }
 })
