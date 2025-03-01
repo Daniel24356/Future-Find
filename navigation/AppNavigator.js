@@ -10,9 +10,11 @@ import SignupScreen from '../screens/SignUpScreen';
 import SignUpForm from '../screens/Signupform';
 import HomeScreen from '../screens/HomeScreen';
 import LoanLandingScreen from '../screens/LoanLandingScreen';
-import profileScreen from '../screens/profileScreen';
 import RepayLoan from '../screens/RepayLoan';
 import EditProfileScreen from '../screens/EditProfileScreen';
+import ProfileScreen from '../screens/profileScreen';
+
+
 
 
 
@@ -22,17 +24,18 @@ const AppNavigator = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-        {/* <Stack.Screen name="Splash" component={SplashScreen} /> */}
-        {/* <Stack.Screen name="Login" component={LoginScreen} /> */}
-        {/* <Stack.Screen name="Signup" component={SignUpForm} /> */}
-        {/* <Stack.Screen name="onboarding1" component={OnboardingScreen1} /> */}
-        {/* <Stack.Screen name="onboarding2" component={OnboardingScreen2} /> */}
-        {/* <Stack.Screen name="onboarding3" component={OnboardingScreen3} /> */}
-        {/* <Stack.Screen name="home" component={HomeScreen} /> */}
-        {/* <Stack.Screen name="loanLandingScreen" component={LoanLandingScreen} /> */}
-        {/* <Stack.Screen name="profile" component={profileScreen} /> */}
+        <Stack.Screen name="Splash" component={SplashScreen} />
+        <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen name="Signup" component={SignUpForm} />
+        <Stack.Screen name="onboarding1" component={OnboardingScreen1} />
+        <Stack.Screen name="onboarding2" component={OnboardingScreen2} />
+        <Stack.Screen name="onboarding3" component={OnboardingScreen3} />
+        <Stack.Screen name="home" component={HomeScreen} />
+        <Stack.Screen name="loanLandingScreen" component={LoanLandingScreen} />
+        {/* <Stack.Screen name="profileScreen" component={profileScreen} /> */}
+        <Stack.Screen name="Profile" component={ProfileScreen} />
         <Stack.Screen name="EditProfile" component={EditProfileScreen} />
-        {/* <Stack.Screen name="repayLoan" component={RepayLoan} /> */}
+        <Stack.Screen name="repayLoan" component={RepayLoan} />
       </Stack.Navigator>
     </NavigationContainer>
   );
