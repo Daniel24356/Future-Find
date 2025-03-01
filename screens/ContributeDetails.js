@@ -1,9 +1,11 @@
 import { StyleSheet, View, Text, TextInput, Image} from "react-native"
 import Ionicons from '@expo/vector-icons/Ionicons';
 import Custom2Button from "../props/Custom2Button";
+import { useNavigation } from "@react-navigation/native";
 
 
 const ContributeDetails = () => {
+   const navigate = useNavigation()
    return (
      <View style = {styles.conContainer}>
        <View style={styles.header}>
@@ -61,6 +63,7 @@ const ContributeDetails = () => {
               <Custom2Button
               backgroundColor = "#2C14DD"
               title = "Continue"
+            onPress={() => navigate.navigate("ContributeScreen2")}
               />
               </View>
               
