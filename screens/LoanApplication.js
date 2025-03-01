@@ -9,9 +9,9 @@ const LoanApplication = () => {
     <View style = {styles.container}>
       <View style = {styles.topDiv}>
         <View style = {styles.overlay}>
-          <Image style = {styles.image} source={require('../assets/Coint.png')}/>
-          <Image style = {styles.image2} source={require('../assets/Coint.png')}/>
-          <Image style = {styles.image3} source={require('../assets/Coint.png')}/>
+          <Image style = {styles.image} source={require('../assets/applyLoan/Coint.png')}/>
+          <Image style = {styles.image2} source={require('../assets/applyLoan/Coint.png')}/>
+          <Image style = {styles.image3} source={require('../assets/applyLoan/Coint.png')}/>
         </View>
       </View>
       <View style ={styles.easyLoan}>
@@ -22,17 +22,17 @@ const LoanApplication = () => {
         </View>
         <View style = {styles.easyTextFlex}>
           <EasyLoanProps
-          easyImage= {require('../assets/easyLoan 1.png')}
+          easyImage= {require('../assets/applyLoan/easyLoan 1.png')}
           easyText = "Easy loan"
           easyPrice = "N50k - N2.5M"
           />
           <EasyLoanProps
-          easyImage= {require('../assets/easyLoan 2.png')}
+          easyImage= {require('../assets/applyLoan/easyLoan 2.png')}
           easyText = "Low interest"
           easyPrice = "5% - 10%"
           />
           <EasyLoanProps
-          easyImage= {require('../assets/easyLoan 3.png')}
+          easyImage= {require('../assets/applyLoan/easyLoan 3.png')}
           easyText = "Pay in bit"
           easyPrice = "Monthly/quaterly"
           />
@@ -44,17 +44,17 @@ const LoanApplication = () => {
           </View>
         <View style = {styles.apply}>
           <ApplyLoanProps
-          applyImage = {require('../assets/apply 1.png')}
+          applyImage = {require('../assets/applyLoan/apply 1.png')}
           applyText= "Apply for loan"
           applyPrice= "Enter the required information about you and your financial status"
           />
           <ApplyLoanProps
-          applyImage = {require('../assets/apply 2.png')}
+          applyImage = {require('../assets/applyLoan/apply 2.png')}
           applyText= "Enter your desired amount"
           applyPrice= "Upon approval, enter the amount of loan suitable for you"
           />
           <ApplyLoanProps
-          applyImage = {require('../assets/apply 3.png')}
+          applyImage = {require('../assets/applyLoan/apply 3.png')}
           applyText= "That’s it!"
           applyPrice= "Once you been credited your loan, you can then withdraw to your desired bank account"
           />
