@@ -140,7 +140,7 @@ const Group_Details = () => {
 
 
         </SafeAreaView>
-        <PopUpScreen paymentConfirmed={true} />
+        <PopUpScreen betAccFunded={true} />
     </View>
   )
 }

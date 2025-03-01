@@ -8,7 +8,7 @@ const PopUpScreen = ({
     otpResent, forgotPassword, accountSaved, resetPassword, logout, confirmSubmit,
     otpVerified, confirmLoanYes, confirmLoanNo, withdrawalSuccess, savingsPlanCreated,
     contributionGroupCreated, joinedSavingsGroup, declinedSavingsGroup, contributionDone,
-    paymentConfirmed
+    paymentConfirmed, airtimeTopup, dataTopup, electicityTopup, betAccFunded, onPress, onPressCancel
 }) => {
 
   return (
@@ -18,7 +18,8 @@ const PopUpScreen = ({
                 {
                     otpResent || forgotPassword || accountSaved || resetPassword||otpVerified||
                     confirmLoanYes||withdrawalSuccess||savingsPlanCreated||contributionGroupCreated||
-                    joinedSavingsGroup||contributionDone||paymentConfirmed?
+                    joinedSavingsGroup||contributionDone||paymentConfirmed||airtimeTopup||dataTopup||
+                    electicityTopup||betAccFunded?
                     <Image 
                         source={require('../assets/popups/success.png')}
                         style={{marginBottom:5}}
@@ -37,7 +38,7 @@ const PopUpScreen = ({
                     logout? <Text style={styles.big_text}>Log out</Text> :
                     confirmSubmit? <Text style={styles.big_text}>Submit application</Text> :
                     otpVerified||withdrawalSuccess||contributionGroupCreated||joinedSavingsGroup||
-                    contributionDone? 
+                    contributionDone||airtimeTopup||dataTopup||electicityTopup||betAccFunded? 
                     <Text style={styles.big_text}>Successful</Text> :
                     confirmLoanYes||savingsPlanCreated||paymentConfirmed? <Text style={styles.big_text}>Awesome!</Text> :
                     confirmLoanNo? <Text style={styles.big_text}>Oh No!</Text> : 
@@ -109,15 +110,36 @@ const PopUpScreen = ({
                     paymentConfirmed?
                     <Text style={styles.small_text}>
                         Thank you for confirming your payment
+                    </Text> : 
+                    airtimeTopup?
+                    <Text style={styles.small_text}>
+                        Your airtime top-up has been successful
+                    </Text> : 
+                    dataTopup?
+                    <Text style={styles.small_text}>
+                        Your data top-up has been successful, we've also sent to your email
+                    </Text> : 
+                    electicityTopup?
+                    <Text style={styles.small_text}>
+                        Your electricity top-up has been successful
+                    </Text> : 
+                    betAccFunded?
+                    <Text style={styles.small_text}>
+                        Your bet account funding has been successful
                     </Text> : ''
                 }
 
                 {
-                    contributionGroupCreated &&
+                    contributionGroupCreated?
                     <View style={styles.copy}>
                         <Text style={{fontSize:14,color:'#292B2D',fontWeight:500}}>Invitation/link-here</Text>
                         <Ionicons name="copy" size={13} color="#442CF5" />
-                    </View>
+                    </View> :
+                    dataTopup?
+                    <View style={styles.copy}>
+                        <Text style={{fontSize:14,color:'#292B2D',fontWeight:500}}>8474-9843-9909-0034-1234</Text>
+                        <Ionicons name="copy" size={13} color="#442CF5" /> 
+                    </View> : ''
                 }
 
                 <View style={{width:'100%'}}>
@@ -125,12 +147,14 @@ const PopUpScreen = ({
                         title={
                             otpResent||accountSaved||resetPassword||otpVerified||confirmLoanYes||confirmLoanNo||
                             withdrawalSuccess||savingsPlanCreated||contributionGroupCreated||joinedSavingsGroup||
-                            contributionDone||paymentConfirmed? 'Okay' : 
+                            contributionDone||paymentConfirmed||airtimeTopup||dataTopup||electicityTopup||
+                            betAccFunded? 'Okay' : 
                             forgotPassword? 'Done' : 
                             logout? 'Log out' : confirmSubmit? 'Submit application':
                             declinedSavingsGroup? 'Decline' : ''
                         }
                         backgroundColor={'#2C14DD'}
+                        onPress={onPress}
                     />
 
                     {
@@ -140,6 +164,7 @@ const PopUpScreen = ({
                             backgroundColor={'#EBECFD'}
                             mtop={10}
                             textColor='#240F51'
+                            onPress={onPressCancel}
                         /> :''
                     }
                 </View>
