@@ -18,6 +18,7 @@ import ResetPassword from '../screens/ResetPassword';
 import Settings from '../screens/Settings';
 import FixPlanScreen from '../screens/FixplanScreen';
 import FinalWithdrawal from '../screens/FinalWithdrawal';
+import OTPScreen from '../screens/OTPScreen';
 
 const Stack = createStackNavigator();
 
@@ -25,6 +26,7 @@ const AppNavigator = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name='OTPScreen' component={OTPScreen}/>
         <Stack.Screen name="Setting" component={Settings} />
         <Stack.Screen name="Resetpassword" component={ResetPassword} />
         <Stack.Screen name="Splash" component={SplashScreen} />

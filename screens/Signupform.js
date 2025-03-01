@@ -126,7 +126,7 @@ export default function SignUpForm() {
 const styles = StyleSheet.create({
    minicontainer: {
     backgroundColor: "#442CF5",
-    height: 100,
+    height: 120,
    },
     container: {
     flex: 1,
