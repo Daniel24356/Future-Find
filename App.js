@@ -7,9 +7,10 @@ import HomeScreen from './screens/HomeScreen';
 import PopUpScreen from './props/PopUpScreen';
 import Group_Details from './screens/Group_Details';
 import VerificationPopup from './props/VerificationPopup';
+import FilterPopup from './screens/FilterPopup';
 
 export default function App() {
   // return <AppNavigator/>
-  return <Group_Details/>
+  return <FilterPopup/>
 }
 
