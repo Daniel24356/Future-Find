@@ -5,6 +5,7 @@ import { StatusBar } from 'expo-status-bar';
 import EvilIcons from '@expo/vector-icons/EvilIcons';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import PopUpScreen from '../props/PopUpScreen';
+import VerificationPopup from '../props/VerificationPopup';
 
 const Group_Details = () => {
   return (
@@ -140,7 +141,6 @@ const Group_Details = () => {
 
 
         </SafeAreaView>
-        <PopUpScreen betAccFunded={true} />
     </View>
   )
 }
