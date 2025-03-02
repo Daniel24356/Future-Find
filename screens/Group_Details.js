@@ -6,6 +6,7 @@ import EvilIcons from '@expo/vector-icons/EvilIcons';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import PopUpScreen from '../props/PopUpScreen';
 import VerificationPopup from '../props/VerificationPopup';
+import DropdownMenus from '../props/DropdownMenus';
 
 const Group_Details = () => {
   return (
@@ -139,8 +140,9 @@ const Group_Details = () => {
                 </View>
             </View>
 
-
         </SafeAreaView>
+
+            <DropdownMenus sourceOfIncome={true} />
     </View>
   )
 }
