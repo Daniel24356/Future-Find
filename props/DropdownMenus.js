@@ -1,10 +1,12 @@
-import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import React from 'react'
+import { Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import Feather from '@expo/vector-icons/Feather';
 
-const DropdownMenus = ({maritalStatus, sourceOfIncome, employmentStatus,selectBank}) => {
+const DropdownMenus = ({maritalStatus, sourceOfIncome, employmentStatus, selectBank, savingPeriod}) => {
+    const [ranges, setRanges] = useState('range1');
+
     const banksList = [
         {name:'Access Bank', image: require('../assets/popups/access_bank.png')},
         {name:'FCMB', image: require('../assets/popups/fcmb_logo.png')},
@@ -35,6 +37,10 @@ const DropdownMenus = ({maritalStatus, sourceOfIncome, employmentStatus,selectBa
                         selectBank?
                         <Text style={{fontSize:18,fontWeight:500,color:'#121826'}}>
                             Select bank
+                        </Text> :
+                        savingPeriod?
+                        <Text style={{fontSize:18,fontWeight:500,color:'#121826'}}>
+                            Saving period
                         </Text> : ''
                     }
                 </View>
@@ -51,6 +57,36 @@ const DropdownMenus = ({maritalStatus, sourceOfIncome, employmentStatus,selectBa
                     </View>
                 }
 
+                {
+                    savingPeriod &&
+                    <View style={{gap:15}}>
+                        <View style={{flexDirection:'row',gap:10}}>
+                            <TouchableOpacity style={[styles.ranges, {borderColor: ranges==='range1'? '#442CF5':'#6C727F'}]} 
+                                onPress={()=> setRanges('range1')}>
+                                <Text style={{fontSize:10,color: ranges==='range1'? '#442CF5':'#6C727F'}}>7-60</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={[styles.ranges, {borderColor: ranges==='range2'? '#442CF5':'#6C727F'}]} 
+                                onPress={()=> setRanges('range2')}>
+                                <Text style={{fontSize:10,color:ranges==='range2'? '#442CF5':'#6C727F'}}>61-180</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={[styles.ranges, {borderColor: ranges==='range3'? '#442CF5':'#6C727F'}]} 
+                                onPress={()=> setRanges('range3')}>
+                                <Text style={{fontSize:10,color:ranges==='range3'? '#442CF5':'#6C727F'}}>181-364</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={[styles.ranges, {borderColor: ranges==='range4'? '#442CF5':'#6C727F'}]} 
+                                onPress={()=> setRanges('range4')}>
+                                <Text style={{fontSize:10,color:ranges==='range4'? '#442CF5':'#6C727F'}}>365-1000</Text>
+                            </TouchableOpacity>
+                        </View>
+
+                        <ScrollView>
+                            <View style={styles.days_option}>
+
+                            </View>
+                        </ScrollView>
+                    </View>
+                }
+                
                 <View>
                     {
                         maritalStatus?
@@ -172,5 +208,19 @@ const styles = StyleSheet.create({
         // backgroundColor:'red',
         fontSize:14,
         color:'#6C727F'
+    },
+    ranges: {
+        flex:1,
+        height:22,
+        justifyContent:'center',
+        alignItems:'center',
+        borderWidth:1,
+        // borderColor:'#6C727F',
+        borderRadius:10,
+        paddingHorizontal:5
+    },
+    days_option: {
+        height:40,
+        flexDirection:'row',
     }
 })

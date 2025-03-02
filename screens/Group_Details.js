@@ -142,7 +142,7 @@ const Group_Details = () => {
 
         </SafeAreaView>
 
-            <DropdownMenus selectBank={true} />
+            <DropdownMenus savingPeriod={true} />
     </View>
   )
 }
