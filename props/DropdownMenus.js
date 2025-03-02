@@ -1,9 +1,16 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import Feather from '@expo/vector-icons/Feather';
 
-const DropdownMenus = ({maritalStatus, sourceOfIncome}) => {
+const DropdownMenus = ({maritalStatus, sourceOfIncome, employmentStatus,selectBank}) => {
+    const banksList = [
+        {name:'Access Bank', image: require('../assets/popups/access_bank.png')},
+        {name:'FCMB', image: require('../assets/popups/fcmb_logo.png')},
+        {name:'Opay microfinance bank', image: require('../assets/popups/opay.png')},
+        {name:'United bank for Africa', image: require('../assets/popups/uba_group.png')},
+    ]
   return (
     <View style={styles.background}>
         <SafeAreaView style={{flex:1, justifyContent:'flex-end', paddingBottom:30}}>
@@ -20,9 +27,29 @@ const DropdownMenus = ({maritalStatus, sourceOfIncome}) => {
                         sourceOfIncome?
                         <Text style={{fontSize:18,fontWeight:500,color:'#121826'}}>
                             Source of income
+                        </Text> : 
+                        employmentStatus?
+                        <Text style={{fontSize:18,fontWeight:500,color:'#121826'}}>
+                            Employment status
+                        </Text> : 
+                        selectBank?
+                        <Text style={{fontSize:18,fontWeight:500,color:'#121826'}}>
+                            Select bank
                         </Text> : ''
                     }
                 </View>
+
+                {
+                    selectBank &&
+                    <View style={styles.input_wrapper}>
+                        <Feather name="search" size={16} color="black" />
+
+                        <TextInput
+                            style={styles.input}
+                            placeholder='Search banks'
+                        />
+                    </View>
+                }
 
                 <View>
                     {
@@ -33,6 +60,10 @@ const DropdownMenus = ({maritalStatus, sourceOfIncome}) => {
                         sourceOfIncome?
                         <TouchableOpacity style={styles.option}>
                             <Text style={{fontSize:14,color:'#292B2D'}}>Business</Text>
+                        </TouchableOpacity> :
+                        employmentStatus?
+                        <TouchableOpacity style={styles.option}>
+                            <Text style={{fontSize:14,color:'#292B2D'}}>Employed</Text>
                         </TouchableOpacity> : ''
                     }
 
@@ -44,6 +75,10 @@ const DropdownMenus = ({maritalStatus, sourceOfIncome}) => {
                         sourceOfIncome?
                         <TouchableOpacity style={styles.option}>
                             <Text style={{fontSize:14,color:'#292B2D'}}>Freelance</Text>
+                        </TouchableOpacity> :
+                        employmentStatus?
+                        <TouchableOpacity style={styles.option}>
+                            <Text style={{fontSize:14,color:'#292B2D'}}>Self employed</Text>
                         </TouchableOpacity> : ''
                     }
 
@@ -55,14 +90,30 @@ const DropdownMenus = ({maritalStatus, sourceOfIncome}) => {
                         sourceOfIncome?
                         <TouchableOpacity style={styles.option}>
                             <Text style={{fontSize:14,color:'#292B2D'}}>E-commerce</Text>
+                        </TouchableOpacity> : 
+                        employmentStatus?
+                        <TouchableOpacity style={styles.option}>
+                            <Text style={{fontSize:14,color:'#292B2D'}}>Business owner</Text>
                         </TouchableOpacity> : ''
                     }
 
                     {
-                        maritalStatus||sourceOfIncome?
+                        maritalStatus||sourceOfIncome||employmentStatus?
                         <TouchableOpacity style={styles.option}>
                             <Text style={{fontSize:14,color:'#292B2D'}}>Student</Text>
                         </TouchableOpacity> : ''
+                    }
+
+
+                    {
+                        selectBank &&
+                        banksList.map((bank, index)=>(
+                            <TouchableOpacity style={styles.option}>
+                                <Image source={bank.image} />
+                                <Text style={{fontSize:14,color:'#292B2D'}}>{bank.name}</Text>
+                            </TouchableOpacity>
+
+                        ))
                     }
                 </View>
 
@@ -96,8 +147,30 @@ const styles = StyleSheet.create({
     },
     option: {
         height:44,
-        justifyContent:'center',
+        flexDirection:'row',
+        alignItems:'center',
+        gap:10,
         paddingHorizontal:10,
         borderRadius:10
+    },
+    input_wrapper: {
+        width:'100%',
+        height:46,
+        borderRadius:15,
+        borderWidth:1,
+        borderColor:'#EBEFFF',
+        backgroundColor:'#FAFBFF',
+        flexDirection:'row',
+        alignItems:'center',
+        paddingHorizontal:18,
+        gap:5
+    },
+    input: {
+        borderWidth:0,
+        height:'100%',
+        width:'100%',
+        // backgroundColor:'red',
+        fontSize:14,
+        color:'#6C727F'
     }
 })

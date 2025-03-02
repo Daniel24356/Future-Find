@@ -142,7 +142,7 @@ const Group_Details = () => {
 
         </SafeAreaView>
 
-            <DropdownMenus sourceOfIncome={true} />
+            <DropdownMenus selectBank={true} />
     </View>
   )
 }
