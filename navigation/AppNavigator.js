@@ -14,6 +14,9 @@ import profileScreen from '../screens/profileScreen';
 import RepayLoan from '../screens/RepayLoan';
 import ResetPassword from '../screens/ResetPassword';
 import Settings from '../screens/Settings';
+import Payment from '../screens/Payments';
+import Payments from '../screens/Payments';
+import Investment from '../screens/Investment';
 
 
 const Stack = createStackNavigator();
@@ -22,6 +25,9 @@ const AppNavigator = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="Notifications" component={Notification} />
+        <Stack.Screen name="Investments" component={Investment} />
+        <Stack.Screen name="Payment" component={Payments} />
         <Stack.Screen name="Setting" component={Settings} />
         <Stack.Screen name="Resetpassword" component={ResetPassword} />
         <Stack.Screen name="Splash" component={SplashScreen} />

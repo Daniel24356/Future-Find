@@ -4,9 +4,12 @@ import Withdrawal from './screens/Withdrawal';
 import HomeScreen from './screens/HomeScreen';
 import ResetPassword from './screens/ResetPassword';
 import Settings from './screens/Settings';
+import Payments from './screens/Payments';
+import Investment from './screens/Investment';
+import Notification from './screens/Notification';
 
 export default function App() {
-  return <Settings/>
+  return <Notification/>
   // return <HomeScreen/>
 }
 
