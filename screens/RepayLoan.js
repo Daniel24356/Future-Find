@@ -1,18 +1,21 @@
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Image } from 'react-native'
 import React from 'react'
 import Ionicons from '@expo/vector-icons/Ionicons';
+import TopHeader from '../props/TopHeader';
 
 const RepayLoan = () => {
     return (
         <View style={styles.container}>
-            <View style={styles.con_two}>
+            {/* <View style={styles.con_two}>
                 <View style={styles.innerconttwo}>
                     <View style={styles.smallBox}>
                         <Ionicons name="chevron-back" size={20} color="black" />
                     </View>
                     <Text style={styles.pay}>RepayLoan</Text>
                 </View>
-            </View>
+            </View> */}
+
+<TopHeader title="Repay loan" />
 
             <View style={styles.contpartTwoo}>
                 <View style={styles.contpartTwo}>
@@ -60,19 +63,14 @@ const styles = StyleSheet.create({
 
 
     con_two: {
-        //   flex: 1,
-        //   justifyContent: 'center',
-        //   alignItems: 'center',
         backgroundColor: "#442cf5",
         height: 150,
     },
     smallBox: {
-        // width: 40, // Small div width
-        // height: 40, // Small div height
-        backgroundColor: 'blue', // Background color
-        justifyContent: 'center', // Center icon vertically
-        alignItems: 'center', // Center icon horizontally
-        borderRadius: 8, // Rounded corners
+        backgroundColor: 'blue',
+        justifyContent: 'center', 
+        alignItems: 'center', 
+        borderRadius: 8, 
         backgroundColor: "white",
         padding: 5
     },

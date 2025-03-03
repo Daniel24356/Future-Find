@@ -8,50 +8,44 @@ import {
 } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons"; 
 import CustomButton from "../props/CustomButton";
+import TopHeader from "../props/TopHeader";
 
 export default function LoanLandingScreen() {
   return (
+    
     <View contentContainerStyle={styles.container}>
-      {/* Top Header Bar */}
-      <View style={styles.topPart}>
+      {/* <View style={styles.topPart}>
         <Text style={styles.appTitle}>Loan Application</Text>
-        
-      </View>
+      </View> */}
+      <TopHeader title="Take loan" />
 
-      {/* Body Section */}
       <View style={styles.body}>
         <Text style={styles.header}>Let's know you better</Text>
         <Text style={styles.smallText}>Provide your accurate information</Text>
 
-        {/* Loan Amount Input */}
         <TextInput
           style={styles.input}
           placeholder="Amount of loan"
           keyboardType="numeric"
         />
 
-        {/* Employment Status (Dropdown) */}
         <TouchableOpacity style={styles.select}>
           <Text style={styles.selectText}>Employment status</Text>
           <MaterialIcons name="keyboard-arrow-down" size={24} color="#666" />
         </TouchableOpacity>
 
-        {/* Upload Account Statement */}
         <TouchableOpacity style={styles.uploadButton}>
           <Text style={styles.uploadText}>Upload account statement</Text>
           <MaterialIcons name="attach-file" size={20} color="#666" />
         </TouchableOpacity>
 
-        {/* Marital Status (Dropdown) */}
         <TouchableOpacity style={styles.select}>
           <Text style={styles.selectText}>Marital status</Text>
           <MaterialIcons name="keyboard-arrow-down" size={24} color="#666" />
         </TouchableOpacity>
 
-        {/* Home Address Input */}
         <TextInput style={styles.input} placeholder="Home address" />
 
-        {/* Terms & Conditions Checkbox */}
         <View style={styles.termsContainer}>
           <TouchableOpacity style={styles.checkbox} />
           <Text style={styles.termsText}>
@@ -68,7 +62,7 @@ export default function LoanLandingScreen() {
   );
 }
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   container: { paddingBottom: 20 },
   topPart: {
     backgroundColor: "#442CF5",
@@ -83,7 +77,7 @@ const styles = StyleSheet.create({
     marginTop: 30,
     marginBottom: -20,
   },
-  body: { padding: 15, backgroundColor: "#f0f0f0", height: 1000 },
+  body: { padding: 15, backgroundColor: "rgb(245,247,255)", height: 1000 },
   header: { fontSize: 26, fontWeight: "900", marginTop: 20 },
   smallText: { marginTop: 9, fontSize: 14 },
 

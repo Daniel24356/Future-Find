@@ -1,5 +1,5 @@
 import { createStackNavigator } from '@react-navigation/stack';
-import { NavigationContainer } from '@react-navigation/native'; 
+import { NavigationContainer } from '@react-navigation/native';
 import SplashScreen from '../screens/SplashScreen';
 import OnBoardingScreen from '../screens/OnBoardingScreen';
 import OnboardingScreen1 from '../screens/OnboardingScreen1';
@@ -7,14 +7,24 @@ import OnboardingScreen2 from '../screens/OnboardingScreen2';
 import OnboardingScreen3 from '../screens/OnboardingScreen3';
 import LoginScreen from '../screens/LoginScreen';
 import SignupScreen from '../screens/SignUpScreen';
+import TransactionDetails from '../screens/TransactionDetails';
+import BetAccount from '../screens/BetAccount';
 import SignUpForm from '../screens/Signupform';
 import HomeScreen from '../screens/HomeScreen';
 import LoanLandingScreen from '../screens/LoanLandingScreen';
-import profileScreen from '../screens/profileScreen';
+import ProfileScreen from '../screens/profileScreen';
 import RepayLoan from '../screens/RepayLoan';
 import ContributeDetails from '../screens/ContributeDetails';
 import ContributeScreen2 from '../screens/ContributeScreen2';
 import InviteScreen from '../screens/InviteScreen';
+import ResetPassword from '../screens/ResetPassword';
+import Settings from '../screens/Settings';
+import FixPlanScreen from '../screens/FixplanScreen';
+import FinalWithdrawal from '../screens/FinalWithdrawal';
+import AirtimeTopupScreen from '../screens/AirtimeTopupScreen'
+import Contribution_Active from '../screens/Contribution_Active';
+import Group_Details from '../screens/Group_Details';
+import Investment from '../screens/Investment';
 
 const Stack = createStackNavigator();
 
@@ -30,11 +40,21 @@ const AppNavigator = () => {
         <Stack.Screen name="onboarding3" component={OnboardingScreen3} />
         <Stack.Screen name="home" component={HomeScreen} />
         <Stack.Screen name="loanLandingScreen" component={LoanLandingScreen} />
-        <Stack.Screen name="profile" component={profileScreen} />
+        <Stack.Screen name="profile" component={ProfileScreen} />
         <Stack.Screen name="repayLoan" component={RepayLoan} />
         <Stack.Screen name="Contribute" component={ContributeDetails}/>
         <Stack.Screen name="ContributeScreen" component={ContributeScreen2}/>
         <Stack.Screen name="InviteScreen1" component={InviteScreen}/>
+        <Stack.Screen name="fixPlan" component={FixPlanScreen} />
+        <Stack.Screen name="finalwithdrawal" component={FinalWithdrawal} />
+        <Stack.Screen name="airtime" component={AirtimeTopupScreen} />
+        <Stack.Screen name="TransactionDetails" component={TransactionDetails} />
+        <Stack.Screen name="BetAccount" component={BetAccount} />
+        <Stack.Screen name="contributionActive" component={Contribution_Active} />
+        <Stack.Screen name="groupDetails" component={Group_Details} />
+        <Stack.Screen name="investment" component={Investment} />
+        <Stack.Screen name="Resetpassword" component={ResetPassword} />
+        <Stack.Screen name="Setting" component={Settings} />
       </Stack.Navigator>
     </NavigationContainer>
   );

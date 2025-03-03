@@ -1,26 +1,45 @@
-import { Image, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { Image, StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+import React, { useState } from 'react'
+import { useNavigation } from '@react-navigation/native';
 
+const TabBar = ({home, loan, investment, contribution}) => {
 
-const TabBar = () => {
+     const navigation = useNavigation();
+      
   return (
     <View style={styles.tab_bar}>
-        <View style={styles.tab}>
-            <Image source={require("../assets/homePage/tab_home.png")}/>
+        <TouchableOpacity onPress={() => navigation.navigate('home')} style={styles.tab}>
+            {
+                home?
+                <Image source={require("../assets/homePage/tab_home.png")}/> :
+                <Image source={require("../assets/investing/home_null.png")}/>
+            }
             <Text style={styles.tab_text}>Home</Text>
-        </View>
-        <View style={styles.tab}>
-            <Image source={require("../assets/homePage/tab_loan.png")}/>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.tab}>
+            {
+                loan?
+                <Image source={require("../assets/investing/loan_active.png")}/> :
+                <Image source={require("../assets/homePage/tab_loan.png")}/>
+            }
             <Text style={styles.tab_text}>Loan</Text>
-        </View>
-        <View style={styles.tab}>
-            <Image source={require("../assets/homePage/tab_inv.png")}/>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('investment')} style={styles.tab}>
+            {
+                investment?
+                <Image source={require("../assets/investing/target.png")}/> :
+                <Image source={require("../assets/homePage/tab_inv.png")}/>
+            }
             <Text style={styles.tab_text}>Investment</Text>
-        </View>
-        <View style={styles.tab}>
-            <Image source={require("../assets/homePage/tab_contribution.png")}/>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('contributionActive')} style={styles.tab}>
+            {
+                contribution?
+                <Image source={require("../assets/investing/contribution_active.png")}/> :
+                <Image source={require("../assets/homePage/tab_contribution.png")}/> 
+            }
             <Text style={styles.tab_text}>Contribution</Text>
-        </View>
+        </TouchableOpacity>
     </View>
   )
 }
