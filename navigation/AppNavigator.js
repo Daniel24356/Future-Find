@@ -19,6 +19,7 @@ import Notification from '../screens/Notification';
 
 import FixPlanScreen from '../screens/FixplanScreen';
 import FinalWithdrawal from '../screens/FinalWithdrawal';
+import Transaction from '../screens/Transaction';
 
 const Stack = createStackNavigator();
 
@@ -26,6 +27,7 @@ const AppNavigator = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Transaction"component={Transaction} />
         <Stack.Screen name="Notifications" component={Notification} />
         <Stack.Screen name="Investments" component={Investment} />
         <Stack.Screen name="Payment" component={Payments} />

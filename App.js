@@ -7,8 +7,9 @@ import Settings from './screens/Settings';
 import Payments from './screens/Payments';
 import Investment from './screens/Investment';
 import Notification from './screens/Notification';
+import Transaction from './screens/Transaction';
 
 export default function App() {
-  return <Notification/>
+  return <Transaction/>
 }
 
