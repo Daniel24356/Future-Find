@@ -18,6 +18,7 @@ import ResetPassword from '../screens/ResetPassword';
 import Settings from '../screens/Settings';
 import FixPlanScreen from '../screens/FixplanScreen';
 import FinalWithdrawal from '../screens/FinalWithdrawal';
+import Notification from '../screens/Notification';
 
 const Stack = createStackNavigator();
 
@@ -25,12 +26,13 @@ const AppNavigator = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="BetAccount" component={BetAccount} />
+        <Stack.Screen name="Notification" component={Notification} />
         <Stack.Screen name="Setting" component={Settings} />
         <Stack.Screen name="Resetpassword" component={ResetPassword} />
         <Stack.Screen name="Splash" component={SplashScreen} />
         <Stack.Screen name="OnBoarding" component={OnBoardingScreen} />
         <Stack.Screen name="TransactionDetails" component={TransactionDetails} />
-        <Stack.Screen name="BetAccount" component={BetAccount} />
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Signup" component={SignUpForm} />
         <Stack.Screen name="onboarding1" component={OnboardingScreen1} />
