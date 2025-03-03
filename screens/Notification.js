@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image } from 'react-native'
+import { StyleSheet, Text, View, Image, ScrollView } from 'react-native'
 import React from 'react'
 import Ionicons from '@expo/vector-icons/Ionicons'
 import Entypo from '@expo/vector-icons/Entypo';
@@ -20,7 +20,7 @@ const Notification = () => {
                     </View>
                 </View>
             </View>
-            <View style={styles.partTwo}>
+            <ScrollView style={styles.partTwo}>
                 <View style={styles.today}>
                     <Text> Today</Text>
                     <View style={styles.todayText}>
@@ -88,12 +88,37 @@ const Notification = () => {
                         />
                         <View>
                             <Text style={{fontWeight: "bold" }}>Withdrawal</Text>
-                            <Text>We'll get back to you regarding your loan</Text>
+                            <Text>-20,000</Text>
                         </View>
                         <Entypo name="chevron-small-right" size={24} color="black" />
                     </View>
                 </View>
-            </View>
+                <View style={styles.today}>
+                    <Text>last 7 days</Text>
+                    <View style={styles.todayText}>
+                        <Image
+                            source={require('../assets/rename.png')}
+                            style={styles.centeredImage}
+                        />
+                        <View>
+                            <Text style={{fontWeight: "bold" }}>Loan Ap </Text>
+                            <Text>Get 50% cashback for Bet account funding</Text>
+                        </View>
+                        <Entypo name="chevron-small-right" size={24} color="black" />
+                    </View>
+                    <View style={styles.todayText}>
+                        <Image
+                            source={require('../assets/rename.png')}
+                            style={styles.centeredImage}
+                        />
+                        <View>
+                            <Text style={{fontWeight: "bold" }}>50% Cashback </Text>
+                            <Text>Get 50% cashback for Bet account funding</Text>
+                        </View>
+                        <Entypo name="chevron-small-right" size={24} color="black" />
+                    </View>
+                </View>
+            </ScrollView>
         </View>
     )
 }
