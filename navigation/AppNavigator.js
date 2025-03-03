@@ -6,7 +6,6 @@ import OnboardingScreen1 from '../screens/OnboardingScreen1';
 import OnboardingScreen2 from '../screens/OnboardingScreen2';
 import OnboardingScreen3 from '../screens/OnboardingScreen3';
 import LoginScreen from '../screens/LoginScreen';
-import SignupScreen from '../screens/SignUpScreen';
 import SignUpForm from '../screens/Signupform';
 import HomeScreen from '../screens/HomeScreen';
 import LoanLandingScreen from '../screens/LoanLandingScreen';
@@ -14,10 +13,12 @@ import profileScreen from '../screens/profileScreen';
 import RepayLoan from '../screens/RepayLoan';
 import ResetPassword from '../screens/ResetPassword';
 import Settings from '../screens/Settings';
-import Payment from '../screens/Payments';
 import Payments from '../screens/Payments';
 import Investment from '../screens/Investment';
+import Notification from '../screens/Notification';
 
+import FixPlanScreen from '../screens/FixplanScreen';
+import FinalWithdrawal from '../screens/FinalWithdrawal';
 
 const Stack = createStackNavigator();
 
@@ -40,6 +41,8 @@ const AppNavigator = () => {
         <Stack.Screen name="loanLandingScreen" component={LoanLandingScreen} />
         <Stack.Screen name="profile" component={profileScreen} />
         <Stack.Screen name="repayLoan" component={RepayLoan} />
+        <Stack.Screen name="fixPlan" component={FixPlanScreen} />
+        <Stack.Screen name="finalwithdrawal" component={FinalWithdrawal} />
       </Stack.Navigator>
     </NavigationContainer>
   );
