@@ -1,6 +1,6 @@
-import AirtimeTopupScreen from "./screens/AirtimeTopupScreen";
+import ElectricityTopupScreen from "./screens/ElectricityTopupScreen";
 
 
 export default function App() {
-  return <AirtimeTopupScreen />;
+  return <ElectricityTopupScreen />;
 }
