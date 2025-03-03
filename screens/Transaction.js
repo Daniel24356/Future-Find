@@ -3,13 +3,13 @@ import React from 'react';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import Entypo from '@expo/vector-icons/Entypo';
 
-const TransactionItem = ({ imageSource, title, amount, amountStyle, time }) => {
+const TransactionItem = ({ imageSource, title, amount, amountColor, time }) => {
     return (
         <View style={styles.transactionItem}>
             <Image source={imageSource} style={styles.transactionImage} />
             <View style={styles.textContainer}>
                 <Text style={styles.transactionTitle}>{title}</Text>
-                <Text style={[styles.transactionAmount, amountStyle]}>{amount}</Text>
+                <Text style={[styles.transactionAmount, { color: amountColor }]}>{amount}</Text>
             </View>
             <Text style={styles.transactionTime}>{time}</Text>
         </View>
@@ -19,7 +19,6 @@ const TransactionItem = ({ imageSource, title, amount, amountStyle, time }) => {
 const Transactions = () => {
     return (
         <View style={styles.container}>
-            {/* Header Section */}
             <View style={styles.header}>
                 <View style={styles.headerContent}>
                     <View style={styles.wrapper}>
@@ -34,13 +33,11 @@ const Transactions = () => {
                         </View>
                     </View>
                 </View>
-                <View style={styles.searchBox}>
-                    <Ionicons name="search" size={20} color="#6C727F" />
-                    <TextInput placeholder="Search transactions" style={styles.searchInput} />
+                <View style={styles.searchBoxWrapper}>
+                    <TextInput style={styles.searchBox} placeholder="Search transactions" />
                 </View>
             </View>
 
-            {/* Transactions List */}
             <ScrollView style={styles.transactionList}>
                 <View style={styles.section}>
                     <Text style={styles.sectionTitle}>Today</Text>
@@ -48,53 +45,53 @@ const Transactions = () => {
                         imageSource={require('../assets/greenircle.png')}
                         title="Loan Payment"
                         amount="+ N23000"
-                        amountStyle={styles.positiveAmount}
+                        amountColor="green"
                         time="3:40 PM"
                     />
                     <TransactionItem 
                         imageSource={require('../assets/homePage/repay.png')}
                         title="Repaid Loan"
                         amount="- N23000"
-                        amountStyle={styles.negativeAmount}
+                        amountColor="red"
                         time="3:40 PM"
                     />
                     <TransactionItem 
                         imageSource={require('../assets/rename.png')}
                         title="Withdrawal"
                         amount="- N23000"
-                        amountStyle={styles.negativeAmount}
+                        amountColor="red"
                         time="3:40 PM"
                     />
                 </View>
-
+                
                 <View style={styles.section}>
                     <Text style={styles.sectionTitle}>Yesterday</Text>
                     <TransactionItem 
                         imageSource={require('../assets/homePage/contribute.png')}
                         title="Electricity Bill"
                         amount="- N23000"
-                        amountStyle={styles.negativeAmount}
+                        amountColor="red"
                         time="3:40 PM"
                     />
                     <TransactionItem 
                         imageSource={require('../assets/greenbabe.png')}
                         title="Cashback"
                         amount="+ N160"
-                        amountStyle={styles.positiveAmount}
+                        amountColor="green"
                         time="3:40 PM"
                     />
                     <TransactionItem 
                         imageSource={require('../assets/homePage/repay.png')}
                         title="Repaid Loan"
                         amount="- N23000"
-                        amountStyle={styles.negativeAmount}
+                        amountColor="red"
                         time="3:40 PM"
                     />
                     <TransactionItem 
                         imageSource={require('../assets/rename.png')}
                         title="Withdrawal"
                         amount="- N23000"
-                        amountStyle={styles.negativeAmount}
+                        amountColor="red"
                         time="3:40 PM"
                     />
                 </View>
@@ -112,9 +109,9 @@ const styles = StyleSheet.create({
     },
     header: {
         backgroundColor: "#442cf5",
-        height: 140,
-        paddingTop: 50,
+        paddingTop: 70,
         paddingHorizontal: 20,
+        paddingBottom: 20,
     },
     headerContent: {
         flexDirection: "row",
@@ -130,22 +127,20 @@ const styles = StyleSheet.create({
         color: "white",
         fontSize: 18,
         fontWeight: "bold",
+        marginLeft: 10,
     },
     wrapper: {
         flexDirection: "row",
         alignItems: "center",
     },
-    searchBox: {
-        flexDirection: "row",
-        alignItems: "center",
-        backgroundColor: "white",
-        padding: 10,
-        borderRadius: 10,
+    searchBoxWrapper: {
         marginTop: 10,
     },
-    searchInput: {
-        marginLeft: 10,
-        flex: 1,
+    searchBox: {
+        backgroundColor: "white",
+        borderRadius: 10,
+        padding: 10,
+        fontSize: 14,
     },
     transactionList: {
         padding: 15,
@@ -170,7 +165,7 @@ const styles = StyleSheet.create({
     transactionImage: {
         width: 40,
         height: 40,
-        marginRight: 10,
+        marginRight: 15,
     },
     textContainer: {
         flex: 1,
@@ -181,13 +176,6 @@ const styles = StyleSheet.create({
     },
     transactionAmount: {
         fontSize: 14,
-        fontWeight: "bold",
-    },
-    positiveAmount: {
-        color: "green",
-    },
-    negativeAmount: {
-        color: "red",
     },
     transactionTime: {
         fontSize: 12,
