@@ -7,6 +7,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import LoanApplication from './screens/LoanApplication';
 import ContributeScreen2 from './screens/ContributeScreen2';
 import InviteScreen from './screens/InviteScreen';
+import ReviewLoan from './screens/ReviewLoan';
 
 export default function App() {
   return (
@@ -14,7 +15,8 @@ export default function App() {
          {/* <LoanApplication/> */}
           {/* <ContributeDetails/> */}
           {/* <ContributeScreen2/> */}
-          <InviteScreen/>
+          {/* <InviteScreen/> */}
+          <ReviewLoan/>
     </NavigationContainer>
   )
 }
