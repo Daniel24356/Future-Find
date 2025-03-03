@@ -1,6 +1,5 @@
-import ElectricityTopupScreen from "./screens/ElectricityTopupScreen";
-
+import SavingsPlanScreen from "./screens/SavingsPlanScreen";
 
 export default function App() {
-  return <ElectricityTopupScreen />;
+  return <SavingsPlanScreen />;
 }
