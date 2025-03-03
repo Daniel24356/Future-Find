@@ -19,6 +19,7 @@ import FixPlanScreen from '../screens/FixplanScreen';
 import FinalWithdrawal from '../screens/FinalWithdrawal';
 import EditProfileScreen from '../screens/EditProfileScreen';
 import ProfileScreen from '../screens/profileScreen';
+import Group_members from '../screens/Group_members';
 
 
 
@@ -43,7 +44,7 @@ const AppNavigator = () => {
         <Stack.Screen name="onboarding3" component={OnboardingScreen3} />
         <Stack.Screen name="home" component={HomeScreen} />
         <Stack.Screen name="loanLandingScreen" component={LoanLandingScreen} />
-        {/* <Stack.Screen name="profileScreen" component={profileScreen} /> */}
+        <Stack.Screen name="Group_members" component={Group_members} />
         <Stack.Screen name="Profile" component={ProfileScreen} />
         <Stack.Screen name="EditProfile" component={EditProfileScreen} />
         <Stack.Screen name="repayLoan" component={RepayLoan} />

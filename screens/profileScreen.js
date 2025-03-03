@@ -46,11 +46,11 @@ const ProfileScreen = () => {
                 <Text style={styles.textprof}>Settings</Text>
                 </View>
                 <View style={styles.account}>
-                <Image source={require("../assets/Group 11(1).png")}/>
+                <Image source={require("../assets/headphone.png")}/>
                 <Text style={styles.textprof}>Help center</Text>
                 </View>
                 <View style={styles.account}>
-                <Image source={require("../assets/Group 11(2).png")}/>
+                <Image source={require("../assets/call.png")}/>
                 <Text style={styles.textprof}>Contact us</Text>
                 </View>
             </View>
