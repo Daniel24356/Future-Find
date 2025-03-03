@@ -8,7 +8,7 @@ import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 // import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 
 
-const profileScreen = () => {
+const ProfileScreen = () => {
   return (
     <View style={styles.container}>
         <StatusBar backgroundColor='blue' />
@@ -211,4 +211,4 @@ const styles = StyleSheet.create({
 
   });
   
-  export default profileScreen
+  export default ProfileScreen

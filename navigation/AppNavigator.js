@@ -12,7 +12,7 @@ import BetAccount from '../screens/BetAccount';
 import SignUpForm from '../screens/Signupform';
 import HomeScreen from '../screens/HomeScreen';
 import LoanLandingScreen from '../screens/LoanLandingScreen';
-import profileScreen from '../screens/profileScreen';
+import profileScreen from '../screens/ProfileScreen';
 import RepayLoan from '../screens/RepayLoan';
 import ResetPassword from '../screens/ResetPassword';
 import Settings from '../screens/Settings';

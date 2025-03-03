@@ -142,7 +142,6 @@ const Group_Details = () => {
 
         </SafeAreaView>
 
-            <DropdownMenus savingPeriod={true} />
     </View>
   )
 }

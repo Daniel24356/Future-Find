@@ -4,9 +4,12 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import Feather from '@expo/vector-icons/Feather';
 
-const DropdownMenus = ({maritalStatus, sourceOfIncome, employmentStatus, selectBank, savingPeriod}) => {
+const DropdownMenus = ({maritalStatus, sourceOfIncome, employmentStatus, selectBank, savingPeriod, paymentInterval, selectProvider,
+    exportAs, selectDate
+}) => {
     const [ranges, setRanges] = useState('range1');
     const [checked, setChecked] = useState(0);
+    const [checkedDate, setCheckedDate] = useState('');
 
     const rangeOne = Array.from({length:60-7+1}, (_,i)=> i + 7);
     const rangeTwo = Array.from({length:180-61+1}, (_,i)=> i + 61);
@@ -18,6 +21,13 @@ const DropdownMenus = ({maritalStatus, sourceOfIncome, employmentStatus, selectB
         {name:'FCMB', image: require('../assets/popups/fcmb_logo.png')},
         {name:'Opay microfinance bank', image: require('../assets/popups/opay.png')},
         {name:'United bank for Africa', image: require('../assets/popups/uba_group.png')},
+    ]
+    const providerList = [
+        {name:'PHEDC'}, {name:'AEDC'}, {name:'BEDC'}, {name:'EKEDC'}, {name:'IBEDC'}, {name:'IKEDC'}, {name:'JEDC'}
+    ]
+    const months = [
+        "January, 2025","February, 2025","March, 2025","April, 2025","May, 2025","June, 2025","July, 2025","August, 2025",
+        "September, 2025","October, 2025","November, 2025","December, 2025"
     ]
   return (
     <View style={styles.background}>
@@ -47,6 +57,22 @@ const DropdownMenus = ({maritalStatus, sourceOfIncome, employmentStatus, selectB
                         savingPeriod?
                         <Text style={{fontSize:18,fontWeight:500,color:'#121826'}}>
                             Saving period
+                        </Text> :
+                        paymentInterval?
+                        <Text style={{fontSize:18,fontWeight:500,color:'#121826'}}>
+                            Payment interval
+                        </Text> :
+                        selectProvider?
+                        <Text style={{fontSize:18,fontWeight:500,color:'#121826'}}>
+                            Select provider
+                        </Text> :
+                        exportAs?
+                        <Text style={{fontSize:18,fontWeight:500,color:'#121826'}}>
+                            Export as
+                        </Text> : 
+                        selectDate?
+                        <Text style={{fontSize:18,fontWeight:500,color:'#121826'}}>
+                            Select date
                         </Text> : ''
                     }
                 </View>
@@ -85,8 +111,7 @@ const DropdownMenus = ({maritalStatus, sourceOfIncome, employmentStatus, selectB
                             </TouchableOpacity>
                         </View>
 
-                        <ScrollView style={{height:360}}>
-                            <FlatList 
+                            <FlatList style={{height:360}}
                                 
                                 data={
                                     ranges==='range1'? rangeOne : ranges==='range2'? rangeTwo :
@@ -94,7 +119,7 @@ const DropdownMenus = ({maritalStatus, sourceOfIncome, employmentStatus, selectB
                                 }
                                 keyExtractor={(day)=>day.name}
                                 renderItem={(day)=>(
-                                    <View style={styles.days_option}>
+                                    <View style={styles.days_option} key={day.index}>
                                         <Pressable onPress={()=> setChecked(day.item)}>
                                             <View style={[styles.check_box, {backgroundColor: checked===day.item? '#2C14DD':'#FFFF'}]}></View>
                                         </Pressable>
@@ -102,8 +127,23 @@ const DropdownMenus = ({maritalStatus, sourceOfIncome, employmentStatus, selectB
                                     </View>
                                 )}
                             /> 
-                        </ScrollView>
                     </View>
+                }
+
+                {
+                    selectDate &&
+                    <FlatList style={{height:360}}
+                        data={months}
+                        keyExtractor={(month)=>month}
+                        renderItem={(month)=>(
+                            <View style={styles.days_option} key={month.index}>
+                                <Pressable onPress={()=> setCheckedDate(month)}>
+                                    <View style={[styles.check_box, {backgroundColor: checkedDate===month? '#2C14DD':'#FFFF'}]}></View>
+                                </Pressable>
+                                <Text style={{fontSize:14,color:'#292B2D'}}>{month.item}</Text>
+                            </View>
+                        )}
+                    />
                 }
                 
                 <View>
@@ -119,7 +159,15 @@ const DropdownMenus = ({maritalStatus, sourceOfIncome, employmentStatus, selectB
                         employmentStatus?
                         <TouchableOpacity style={styles.option}>
                             <Text style={{fontSize:14,color:'#292B2D'}}>Employed</Text>
-                        </TouchableOpacity> : ''
+                        </TouchableOpacity> :
+                         paymentInterval?
+                         <TouchableOpacity style={styles.option}>
+                             <Text style={{fontSize:14,color:'#292B2D'}}>Weekly</Text>
+                         </TouchableOpacity> :
+                         exportAs?
+                         <TouchableOpacity style={styles.option}>
+                             <Text style={{fontSize:14,color:'#292B2D'}}>PDF</Text>
+                         </TouchableOpacity> : ''
                     }
 
                     {
@@ -134,7 +182,15 @@ const DropdownMenus = ({maritalStatus, sourceOfIncome, employmentStatus, selectB
                         employmentStatus?
                         <TouchableOpacity style={styles.option}>
                             <Text style={{fontSize:14,color:'#292B2D'}}>Self employed</Text>
-                        </TouchableOpacity> : ''
+                        </TouchableOpacity> :
+                         paymentInterval?
+                         <TouchableOpacity style={styles.option}>
+                             <Text style={{fontSize:14,color:'#292B2D'}}>Monthly</Text>
+                         </TouchableOpacity> :
+                         exportAs?
+                         <TouchableOpacity style={styles.option}>
+                             <Text style={{fontSize:14,color:'#292B2D'}}>Excel</Text>
+                         </TouchableOpacity> : ''
                     }
 
                     {
@@ -149,6 +205,10 @@ const DropdownMenus = ({maritalStatus, sourceOfIncome, employmentStatus, selectB
                         employmentStatus?
                         <TouchableOpacity style={styles.option}>
                             <Text style={{fontSize:14,color:'#292B2D'}}>Business owner</Text>
+                        </TouchableOpacity> :
+                        exportAs?
+                        <TouchableOpacity style={styles.option}>
+                            <Text style={{fontSize:14,color:'#292B2D'}}>Word</Text>
                         </TouchableOpacity> : ''
                     }
 
@@ -161,14 +221,22 @@ const DropdownMenus = ({maritalStatus, sourceOfIncome, employmentStatus, selectB
 
 
                     {
-                        selectBank &&
+                        selectBank?
                         banksList.map((bank, index)=>(
                             <TouchableOpacity style={styles.option}>
                                 <Image source={bank.image} />
                                 <Text style={{fontSize:14,color:'#292B2D'}}>{bank.name}</Text>
                             </TouchableOpacity>
 
-                        ))
+                        )) :
+                        selectProvider?
+                        providerList.map((provider, index)=>(
+                            <TouchableOpacity style={styles.option}>
+                                {/* <Image source={provider.image} /> */}
+                                <Text style={{fontSize:14,color:'#292B2D'}}>{provider.name}</Text>
+                            </TouchableOpacity>
+
+                        )) : []
                     }
                 </View>
 
