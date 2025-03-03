@@ -8,9 +8,10 @@ import PopUpScreen from './props/PopUpScreen';
 import Group_Details from './screens/Group_Details';
 import VerificationPopup from './props/VerificationPopup';
 import FilterPopup from './screens/FilterPopup';
+import ConfirmPaymentPopup from './props/ConfirmPaymentPopup';
 
 export default function App() {
   // return <AppNavigator/>
-  return <Contribution_Active/>
+  return <Group_Details/>
 }
 

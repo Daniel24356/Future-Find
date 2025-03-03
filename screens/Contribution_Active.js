@@ -78,6 +78,7 @@ const Contribution_Active = () => {
                     </View>
                 </View>
 
+                {/* NEW MEMBERS */}
                 <View style={{alignItems:'center',paddingHorizontal:10,paddingBottom:10,gap:15}}>
                     <Text style={{fontSize:16,fontWeight:600,color:'#131313'}}>Groups invitation</Text>
                     <Text style={{fontSize:12,color:'#292B2D'}}>You have been invited to join this contribution</Text>
@@ -90,6 +91,8 @@ const Contribution_Active = () => {
                         </TouchableOpacity>
                     </View>
                 </View>
+
+                {/* JOINED */}
             </View>
 
             <CustomButton 

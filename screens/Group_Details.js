@@ -7,6 +7,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import PopUpScreen from '../props/PopUpScreen';
 import VerificationPopup from '../props/VerificationPopup';
 import DropdownMenus from '../props/DropdownMenus';
+import ConfirmPaymentPopup from '../props/ConfirmPaymentPopup';
 
 const Group_Details = () => {
   return (
@@ -141,6 +142,8 @@ const Group_Details = () => {
             </View>
 
         </SafeAreaView>
+
+        <ConfirmPaymentPopup confirmPayment={true} />
 
     </View>
   )
