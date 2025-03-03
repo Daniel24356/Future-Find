@@ -11,6 +11,6 @@ import FilterPopup from './screens/FilterPopup';
 
 export default function App() {
   // return <AppNavigator/>
-  return <Group_Details/>
+  return <Contribution_Active/>
 }
 
