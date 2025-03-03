@@ -8,6 +8,7 @@ import LoanApplication from './screens/LoanApplication';
 import ContributeScreen2 from './screens/ContributeScreen2';
 import InviteScreen from './screens/InviteScreen';
 import ReviewLoan from './screens/ReviewLoan';
+import CurrentLoan from './screens/CurrentLoan';
 
 export default function App() {
   return (
@@ -16,7 +17,8 @@ export default function App() {
           {/* <ContributeDetails/> */}
           {/* <ContributeScreen2/> */}
           {/* <InviteScreen/> */}
-          <ReviewLoan/>
+          {/* <ReviewLoan/> */}
+          <CurrentLoan/>
     </NavigationContainer>
   )
 }
