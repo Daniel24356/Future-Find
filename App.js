@@ -9,6 +9,6 @@ import Investment from './screens/Investment';
 import Notification from './screens/Notification';
 
 export default function App() {
-  return <AppNavigator/>
+  return <Notification/>
 }
 
