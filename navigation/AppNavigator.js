@@ -12,6 +12,9 @@ import HomeScreen from '../screens/HomeScreen';
 import LoanLandingScreen from '../screens/LoanLandingScreen';
 import profileScreen from '../screens/profileScreen';
 import RepayLoan from '../screens/RepayLoan';
+import ContributeDetails from '../screens/ContributeDetails';
+import ContributeScreen2 from '../screens/ContributeScreen2';
+import InviteScreen from '../screens/InviteScreen';
 
 const Stack = createStackNavigator();
 
@@ -29,6 +32,9 @@ const AppNavigator = () => {
         <Stack.Screen name="loanLandingScreen" component={LoanLandingScreen} />
         <Stack.Screen name="profile" component={profileScreen} />
         <Stack.Screen name="repayLoan" component={RepayLoan} />
+        <Stack.Screen name="Contribute" component={ContributeDetails}/>
+        <Stack.Screen name="ContributeScreen" component={ContributeScreen2}/>
+        <Stack.Screen name="InviteScreen1" component={InviteScreen}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
