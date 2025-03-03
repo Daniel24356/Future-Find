@@ -183,10 +183,17 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         backgroundColor: "white",
-        padding: 30,
+        paddingTop: 8,
+        paddingRight: 12,
+        paddingBottom: 8,
+        paddingLeft: 12,
         borderRadius: 18,
         marginBottom: 10,
-        fontSize: 20
+        fontSize: 20,
+        height: 60,
+        width: 70,
+        textAlign: "center", 
+        fontWeight: "bold"
       },
       contain: {
         position: "relative",

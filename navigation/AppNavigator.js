@@ -27,8 +27,8 @@ const AppNavigator = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name='OTPScreen' component={OTPScreen}/>
       <Stack.Screen name='BVNScreen' component={BVNScreen}/>
-        <Stack.Screen name='OTPScreen' component={OTPScreen}/>
         <Stack.Screen name="Setting" component={Settings} />
         <Stack.Screen name="Resetpassword" component={ResetPassword} />
         <Stack.Screen name="Splash" component={SplashScreen} />

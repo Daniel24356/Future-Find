@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, SafeAreaView, Image } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { useNavigation } from '@react-navigation/native';
-import Svg, { Circle } from "react-native-svg";
+
 const BVNScreen = () => {
     return (
         <SafeAreaView>
@@ -34,7 +33,7 @@ const BVNScreen = () => {
                                      <Text style={styles.errormessage}><Image source={require("../assets/Danger-Circle.png")}/> The verification code is not correct</Text>
 
                                      <Text style={styles.errormessagegreen}>MALVIN YABAARI</Text>
-
+ 
                                      <TouchableOpacity style={styles.button}>
                                            <Text style={styles.buttonText}>Verify</Text>
                                      </TouchableOpacity>
