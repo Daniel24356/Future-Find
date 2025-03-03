@@ -1,4 +1,4 @@
-import { Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { FlatList, Image, Pressable, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Ionicons from '@expo/vector-icons/Ionicons';
@@ -6,6 +6,12 @@ import Feather from '@expo/vector-icons/Feather';
 
 const DropdownMenus = ({maritalStatus, sourceOfIncome, employmentStatus, selectBank, savingPeriod}) => {
     const [ranges, setRanges] = useState('range1');
+    const [checked, setChecked] = useState(0);
+
+    const rangeOne = Array.from({length:60-7+1}, (_,i)=> i + 7);
+    const rangeTwo = Array.from({length:180-61+1}, (_,i)=> i + 61);
+    const rangeThree = Array.from({length:364-181+1}, (_,i)=> i + 181);
+    const rangeFour = Array.from({length:1000-365+1}, (_,i)=> i + 365);
 
     const banksList = [
         {name:'Access Bank', image: require('../assets/popups/access_bank.png')},
@@ -59,8 +65,8 @@ const DropdownMenus = ({maritalStatus, sourceOfIncome, employmentStatus, selectB
 
                 {
                     savingPeriod &&
-                    <View style={{gap:15}}>
-                        <View style={{flexDirection:'row',gap:10}}>
+                    <View style={{gap:10}}>
+                        <View style={{flexDirection:'row',gap:10,marginTop:10}}>
                             <TouchableOpacity style={[styles.ranges, {borderColor: ranges==='range1'? '#442CF5':'#6C727F'}]} 
                                 onPress={()=> setRanges('range1')}>
                                 <Text style={{fontSize:10,color: ranges==='range1'? '#442CF5':'#6C727F'}}>7-60</Text>
@@ -79,10 +85,23 @@ const DropdownMenus = ({maritalStatus, sourceOfIncome, employmentStatus, selectB
                             </TouchableOpacity>
                         </View>
 
-                        <ScrollView>
-                            <View style={styles.days_option}>
-
-                            </View>
+                        <ScrollView style={{height:360}}>
+                            <FlatList 
+                                
+                                data={
+                                    ranges==='range1'? rangeOne : ranges==='range2'? rangeTwo :
+                                    ranges==='range3'? rangeThree : ranges==='range4'? rangeFour : []
+                                }
+                                keyExtractor={(day)=>day.name}
+                                renderItem={(day)=>(
+                                    <View style={styles.days_option}>
+                                        <Pressable onPress={()=> setChecked(day.item)}>
+                                            <View style={[styles.check_box, {backgroundColor: checked===day.item? '#2C14DD':'#FFFF'}]}></View>
+                                        </Pressable>
+                                        <Text style={{fontSize:14,color:'#292B2D'}}>{day.item} days</Text>
+                                    </View>
+                                )}
+                            /> 
                         </ScrollView>
                     </View>
                 }
@@ -222,5 +241,15 @@ const styles = StyleSheet.create({
     days_option: {
         height:40,
         flexDirection:'row',
+        alignItems:'center',
+        paddingHorizontal:8,
+        gap:10
+    },
+    check_box: {
+        width:18,
+        height:18,
+        borderRadius:5,
+        borderWidth:1,
+        borderColor:'#6C727F1A'
     }
 })
