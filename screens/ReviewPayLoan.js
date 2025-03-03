@@ -56,11 +56,11 @@ const ReviewPayLoan = () => {
       <View style = {styles.receive}>
             <View style = {styles.receiveSub}>
                 <Image style={styles.img} source={require('../assets/applyLoan/repay.png')}/>
-                <Text style ={{color: "#292B2D"}}>Repay Loan</Text>
+                <Text style ={{color: "#292B2D", fontSize: 16.5}}>Repay Loan</Text>
             </View>
             <View style = {styles.receiveSub}>
                 <Image style={styles.img} source={require('../assets/applyLoan/withdraw.png')}/>
-                <Text style ={{color: "#292B2D"}}>Withdraw</Text>
+                <Text style ={{color: "#292B2D", fontSize: 16.5}}>Withdraw</Text>
             </View>
         </View>
         <View style = {styles.review}>
@@ -186,8 +186,8 @@ const styles = StyleSheet.create({
         gap: 7
     },
     img: {
-        width: 40,
-        height: 40,
+        width: 45,
+        height: 45,
         marginBottom: 5
     }
 })
