@@ -14,6 +14,9 @@ import HomeScreen from '../screens/HomeScreen';
 import LoanLandingScreen from '../screens/LoanLandingScreen';
 import ProfileScreen from '../screens/profileScreen';
 import RepayLoan from '../screens/RepayLoan';
+import ContributeDetails from '../screens/ContributeDetails';
+import ContributeScreen2 from '../screens/ContributeScreen2';
+import InviteScreen from '../screens/InviteScreen';
 import ResetPassword from '../screens/ResetPassword';
 import Settings from '../screens/Settings';
 import FixPlanScreen from '../screens/FixplanScreen';
@@ -51,6 +54,9 @@ const AppNavigator = () => {
         <Stack.Screen name="EditProfile" component={EditProfileScreen} />
         <Stack.Screen name="profile" component={ProfileScreen} />
         <Stack.Screen name="repayLoan" component={RepayLoan} />
+        <Stack.Screen name="Contribute" component={ContributeDetails}/>
+        <Stack.Screen name="ContributeScreen" component={ContributeScreen2}/>
+        <Stack.Screen name="InviteScreen1" component={InviteScreen}/>
         <Stack.Screen name="fixPlan" component={FixPlanScreen} />
         <Stack.Screen name="finalwithdrawal" component={FinalWithdrawal} />
         <Stack.Screen name="airtime" component={AirtimeTopupScreen} />
