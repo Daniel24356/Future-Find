@@ -18,6 +18,8 @@ import ResetPassword from '../screens/ResetPassword';
 import Settings from '../screens/Settings';
 import FixPlanScreen from '../screens/FixplanScreen';
 import FinalWithdrawal from '../screens/FinalWithdrawal';
+import OTPScreen from '../screens/OTPScreen';
+import BVNScreen from '../screens/BVNScreen';
 import AirtimeTopupScreen from '../screens/AirtimeTopupScreen'
 import Contribution_Active from '../screens/Contribution_Active';
 import Group_Details from '../screens/Group_Details';
@@ -29,6 +31,10 @@ const AppNavigator = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name='OTPScreen' component={OTPScreen}/>
+      <Stack.Screen name='BVNScreen' component={BVNScreen}/>
+        <Stack.Screen name="Setting" component={Settings} />
+        <Stack.Screen name="Resetpassword" component={ResetPassword} />
         <Stack.Screen name="Splash" component={SplashScreen} />
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Signup" component={SignUpForm} />

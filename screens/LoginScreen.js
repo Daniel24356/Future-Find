@@ -49,7 +49,7 @@ color="black"
       onChangeText={(text) => setForm({ ...form, email: text })}
     />
     <View>
-       <Text style={styles.errormessage}><Image source={require("../assets/Vector.png")}/> This email doesnt exist</Text>
+       <Text style={styles.errormessage}><Image source={require("../assets/Danger-Circle.png")}/> This email doesnt exist</Text>
     </View>
 
     {/* Password Fields */}
@@ -66,6 +66,10 @@ color="black"
       </TouchableOpacity>
     </View>
     </View>
+
+
+    <View>
+       <Text style={styles.errormessage}><Image source={require("../assets/Danger-Circle.png")}/> Youve entered an incorrect password</Text>
 
     <View >
        <Text style={styles.errormessage}><Image source={require("../assets/Vector.png")}/> Youve entered an incorrect password</Text>
