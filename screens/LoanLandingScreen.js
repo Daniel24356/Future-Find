@@ -134,7 +134,7 @@ export const styles = StyleSheet.create({
   uploadText: { fontSize: 16, color: "#666" },
 
   button:{
-    marginTop: 200
+    marginTop: 90
   },
 
   termsContainer: { flexDirection: "row", alignItems: "center", marginTop: 20 },
