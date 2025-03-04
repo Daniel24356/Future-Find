@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View } from 'react-native'
+import { Image, StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
@@ -6,16 +6,19 @@ import { StatusBar } from 'expo-status-bar';
 import Entypo from '@expo/vector-icons/Entypo';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 // import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import { useNavigation } from '@react-navigation/native';
 
-
-const profileScreen = () => {
+const ProfileScreen = () => {
+  
+const navigation = useNavigation();
+  
   return (
     <View style={styles.container}>
         <StatusBar backgroundColor='blue' />
-        <SafeAreaView style={styles.safe_view} >
+        <SafeAreaView style={styles.safe_view}>
         <View style={styles.top_container}>
            <View style={styles.profile_1}> 
-            <View style={styles.icon}><Entypo name="chevron-small-left" size={24} color="black" /></View>
+            <TouchableOpacity onPress={() => navigation.navigate('home')} style={styles.icon}><Entypo name="chevron-small-left" size={24} color="black" /></TouchableOpacity>
             <Text style={styles.icon_text}>Profile</Text>
            </View>
 
@@ -42,16 +45,16 @@ const profileScreen = () => {
                 <Text style={styles.textprof}>My account</Text>
                 </View>
                 <View style={styles.account}>
-                <Image source={require("../assets/prof.png")}/>
-                <Text style={styles.textprof}>My account</Text>
+                <Image source={require("../assets/Group 11.png")}/>
+                <Text style={styles.textprof}>Settings</Text>
                 </View>
                 <View style={styles.account}>
-                <Image source={require("../assets/prof.png")}/>
-                <Text style={styles.textprof}>My account</Text>
+                <Image source={require("../assets/headphone.png")}/>
+                <Text style={styles.textprof}>Help center</Text>
                 </View>
                 <View style={styles.account}>
-                <Image source={require("../assets/prof.png")}/>
-                <Text style={styles.textprof}>My account</Text>
+                <Image source={require("../assets/call.png")}/>
+                <Text style={styles.textprof}>Contact us</Text>
                 </View>
             </View>
 
@@ -78,7 +81,7 @@ const styles = StyleSheet.create({
 
     top_container:{
         width:'100%',
-        height:90,
+        height:70,
         backgroundColor:'blue',
         flexDirection:'row',
         alignItems:'center',
@@ -201,9 +204,7 @@ const styles = StyleSheet.create({
         marginTop:100,
         lineHeight: 23
     },
-    //  text_div:{
-    //   marginTop: 80
-    //  }
+   
 
 
    
@@ -211,4 +212,4 @@ const styles = StyleSheet.create({
 
   });
   
-  export default profileScreen
+  export default ProfileScreen

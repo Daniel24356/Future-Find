@@ -17,6 +17,8 @@ import betway from '../assets/betway.png';
 import naira from '../assets/naira.png'
 import erroricon from '../assets/DangerCircle.png'
 import CustomButton2 from '../props/CustomButton2';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import TopHeader from '../props/TopHeader';
 
 const platforms = [
   { id: 'bet9ja', image: bet9ja },
@@ -104,13 +106,19 @@ const BetAccount = () => {
   };
 
   return (
-    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      <View style={styles.BetAccount}>
+
+//     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+    <>
+    <TopHeader title="Bet Account" />
+
+     <TouchableWithoutFeedback onPress={handleDeselectPlatform}>
+      <SafeAreaView style={styles.BetAccount}>
         {/* Header */}
-        <View style={styles.header}>
+        {/* <View style={styles.header}>
           <ImageBackground source={back} resizeMode="cover" style={styles.back} />
           <Text style={styles.headTxt}>Bet account</Text>
-        </View>
+        </View> */}
+        
 
         {/* Betting Platforms */}
         <ScrollView>
@@ -207,7 +215,7 @@ const BetAccount = () => {
           title="Continue"
           textColor="white"
           backgroundColor={selectedPlatform ? "#442CF5" : "rgba(44, 20, 221, 0.3)"}
-          width={328}
+          width="93%"
           height={50}
           borderRadius={16}
           padding={8}
@@ -280,7 +288,12 @@ const BetAccount = () => {
 
 
       </View>
+          onPress={() => navigation.navigate('TransactionDetails')}
+        />
+      </SafeAreaView>
     </TouchableWithoutFeedback>
+    </>
+   
   );
 };
 
@@ -292,7 +305,7 @@ const styles = StyleSheet.create({
     flex: 1,
     gap: 40,
     alignItems: 'center',
-    width: 360,
+    width: "100%",
     height: 812,
   },
   header: {
@@ -301,7 +314,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingTop: 50,
     paddingLeft: 16,
-    width: 360,
+    width: "100%",
     height: 115,
     gap: 10,
     paddingBottom: 12,
@@ -312,7 +325,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   BetAccountBody: {
-    width: 328,
+    width: "100%",
     height: 'auto',
     alignItems: 'center',
     gap: 30,
@@ -322,7 +335,7 @@ const styles = StyleSheet.create({
     height: 28,
   },
   betPlatformsBox: {
-    width: 328,
+    width: "93%",
     backgroundColor: '#FFFFFF',
     padding: 10,
     borderRadius: 16,
@@ -352,7 +365,8 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   accountInfoBox: {
-    width: 328,
+    width: "93%",
+    height: 140,
     padding: 10,
     gap: 20,
     borderRadius: 16,
@@ -360,7 +374,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   accountInfo: {
-    width: 308,
+    width: "93%",
     height: 29.22,
     gap: 20,
     flexDirection: 'row',
@@ -381,7 +395,7 @@ const styles = StyleSheet.create({
     
   },
   input: {
-    width: 308,
+    width: "93%",
     height: 50,
     borderWidth: 1,
     borderColor: 'rgba(108, 114, 127, 0.1)',
