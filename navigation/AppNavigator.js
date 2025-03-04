@@ -19,8 +19,12 @@ import ContributeScreen2 from '../screens/ContributeScreen2';
 import InviteScreen from '../screens/InviteScreen';
 import ResetPassword from '../screens/ResetPassword';
 import Settings from '../screens/Settings';
+import Payments from '../screens/Payments';
+import Investment from '../screens/Investment';
+import Notification from '../screens/Notification';
 import FixPlanScreen from '../screens/FixplanScreen';
 import FinalWithdrawal from '../screens/FinalWithdrawal';
+import Transaction from '../screens/Transaction';
 import EditProfileScreen from '../screens/EditProfileScreen';
 import ProfileScreen from '../screens/profileScreen';
 import Group_members from '../screens/Group_members';
@@ -38,6 +42,10 @@ const AppNavigator = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Transaction"component={Transaction} />
+        <Stack.Screen name="Notifications" component={Notification} />
+        <Stack.Screen name="Investments" component={Investment} />
+        <Stack.Screen name="Payment" component={Payments} />
       <Stack.Screen name='OTPScreen' component={OTPScreen}/>
       <Stack.Screen name='BVNScreen' component={BVNScreen}/>
         <Stack.Screen name="Setting" component={Settings} />

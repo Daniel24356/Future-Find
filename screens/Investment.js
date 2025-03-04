@@ -1,238 +1,212 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { StatusBar } from 'expo-status-bar';
-import EvilIcons from '@expo/vector-icons/EvilIcons';
-import TabBar from '../props/TabBar';
-import { useNavigation } from '@react-navigation/native';
+import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity } from 'react-native'
+import React from 'react'
+import Ionicons from '@expo/vector-icons/Ionicons'
+import SimpleLineIcons from '@expo/vector-icons/SimpleLineIcons';
+
 
 const Investment = () => {
-
- const navigation = useNavigation();
-
-  return (
-    <SafeAreaView style={{flex: 1, backgroundColor:'#F5F7FF'}}>
-        <StatusBar backgroundColor='#F5F7FF' style='dark' />
+    return (
         <View style={styles.container}>
-            <View style={styles.convenience}>
-                <Text style={styles.conv_text1}>
-                    Convenient way to grow your money
-                </Text>
-                <Text style={styles.conv_text2}>
-                    Earn interest on all your savings
-                </Text>
-                <Image 
-                    source={require('../assets/onboarding/Illustrations1.png')}
-                    style={styles.conv_img}
-                />
+            <View style={styles.con_two}>
+                <View style={styles.innerconttwo}>
+                    <View style={styles.smallBox}>
+                        <Ionicons name="chevron-back" size={20} color="black" />
+                    </View>
+                    <Text style={styles.pay}>Fix plan</Text>
+                </View>
             </View>
+            <View style={styles.contpartTwoo}>
+                <View style={styles.compartTwo}>
+                    <View style={styles.fixPlan}>
+                        <View style={styles.fix}>
+                            <Image
+                                source={require('../assets/homePage/invest.png')}
+                                style={styles.centeredImage}
+                            />
+                        </View>
+                        <View style={styles.plan}>
+                            <Text style={{ color: "black", fontWeight: "bold" }}>fix plan</Text>
+                            <Text style={{ color: "black", font: "18" }}>Deposite a fix amount and earn massive return</Text>
+                        </View>
+                    </View>
+                    <View style={styles.partTwo}>
+                        <Text style={styles.general}>Plan details</Text>
+                        <View style={styles.green}>
+                            <ScrollView contentContainerStyle={{ alignItems: 'flex-start' }}>
+                                <View style={styles.loanAmount}>
+                                    <View style={styles.interest}>
+                                        <Text style={{ fontSize: 16 }}>Minimum Amount</Text>
+                                        <Text style={{ fontSize: 16, }}>N5,000</Text>
+                                    </View>
+                                    <View style={styles.interest}>
+                                        <Text style={{ fontSize: 16 }}>Tenor </Text>
+                                        <Text style={{ fontSize: 16 }}> 30 days</Text>
+                                    </View>
+                                    <View style={styles.interest}>
+                                        <Text style={{ fontSize: 16 }}>Saving duration</Text>
+                                        <Text style={{ fontSize: 16 }}>7-100 days</Text>
+                                    </View>
+                                </View>
+                            </ScrollView>
+                        </View>
 
-            <View style={styles.balance}>
-                <View style={styles.bal_box}>
-                    <Image 
-                        source={require('../assets/investing/wallet.png')}
-                    />
-                    <View>
-                        <Text style={styles.bal_text1}>Total balance</Text>
-                        <Text style={styles.bal_text2}>N120,500,000</Text>
                     </View>
                 </View>
-                <View style={styles.bal_box}>
-                    <Image 
-                        source={require('../assets/investing/interest.png')}
-                    />
-                    <View>
-                        <Text style={styles.bal_text1}>Total interest</Text>
-                        <Text style={styles.bal_text2}>NO</Text>
-                    </View>
-                </View>
             </View>
-
-            <View style={styles.plans}>
-                <Text style={styles.plans_text}>Investment plans</Text>
-
-                <View style={styles.plans_pack}>
-                    <TouchableOpacity onPress={() => navigation.navigate('fixPlan')} style={styles.plans_box1}>
-                        <Image 
-                            source={require('../assets/investing/fixed_plan.png')}
-                        />
-                        <Text style={styles.plans_text1}>Fixed plan</Text>
-                        <Text style={styles.plans_text2}>Earn 10% interest in return yearly</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.plans_box2}>
-                        <Image 
-                            source={require('../assets/investing/spend_save.png')}
-                        />
-                        <Text style={styles.plans_text1}>Spend & save</Text>
-                        <Text style={styles.plans_text2}>Earn 8% interest in return yearly</Text>
-                    </TouchableOpacity>
+            <View style={styles.withdraw}>
+                <View style={styles.fixx}>
+                    <SimpleLineIcons name="exclamation" size={15} color="black" />
                 </View>
-
-                <View style={styles.plans_pack}>
-                    <TouchableOpacity style={styles.plans_box3}>
-                        <Image 
-                            source={require('../assets/investing/safe_box.png')}
-                        />
-                        <Text style={styles.plans_text1}>SafeBox</Text>
-                        <Text style={styles.plans_text2}>Earn 8% interest in return yearly</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.plans_box4}>
-                        <Image 
-                            source={require('../assets/investing/target.png')}
-                        />
-                        <Text style={styles.plans_text1}>Target</Text>
-                        <Text style={styles.plans_text2}>Save up money daily as you spend</Text>
-                    </TouchableOpacity>
+                <View style={styles.plann}>
+                    <Text style={{ color: "black", font: "18" }}>You can withdraw anytime you want, but withdrawal without the maturity period means losing the interest and being charged a fee. </Text>
                 </View>
 
             </View>
-
-            <View style={styles.bottom_comment}>
-                <EvilIcons style={{color:'#292B2D', height:20, width:20}} name="exclamation" size={24} color="black" />
-                <Text style={{color:'#292B2D', fontSize:12, fontWeight:400}}>
-                    Choose the saving plan that best suits your needs
-                </Text>
+            <View style={styles.bottonCon}>
+                <TouchableOpacity style={styles.button}>
+                    <Text style={styles.buttonText}>Repay Loan</Text>
+                </TouchableOpacity>
             </View>
-
         </View>
-
-
-        <TabBar investment={true}/>
-          
-    </SafeAreaView>
-  )
+    )
 }
 
-export default Investment;
+export default Investment
 
 const styles = StyleSheet.create({
     container: {
+        backgroundColor: "#F5F7FF",
         flex: 1,
-        padding: 15,
-        gap:15
     },
-    convenience: {
-        width: '100%',
-        height: 105,
-        backgroundColor:'#442CF5',
-        borderRadius: 16,
-        padding: 15,
-        justifyContent:'center',
-        position:'relative'
-    },
-    conv_text1: {
-        color:'#FFFF',
-        fontSize: 16, 
-        fontWeight: 600,
-        width: 200,
-        lineHeight: 20
-    },
-    conv_text2: {
-        color:'#FFFF',
-        fontSize: 12, 
-        fontWeight: 400,
-        lineHeight: 18,
-        paddingTop: 5
-    },
-    conv_img: {
-        width: 120,
-        height: 120,
-        position:'absolute',
-        right: 10,
-        top: -8
-    },
-    balance: {
-        width: '100%',
-        height: 55,
-        flexDirection:'row',
-        // backgroundColor:'red',
-        gap: 10
-    },
-    bal_box: {
-        flex: 1,
-        backgroundColor:'#FFFF',
-        borderRadius: 10,
-        flexDirection: 'row',
-        alignItems:'center',
-        paddingHorizontal: 12,
-        gap:8
-    },
-    bal_text1: {
-        fontSize: 12,
-        color:'#6C727F'
-    },
-    bal_text2: {
-        fontSize: 14,
-        fontWeight: 600,
-        color:'#131313'
-    },
-    plans: {
-        width: '100%',
-        height: 330,
-        backgroundColor:'#FFFF',
-        gap: 12,
-        borderRadius: 15,
-        padding: 12
-    },
-    plans_text: {
-        color:'#292B2D',
-        fontSize: 16,
-        fontWeight: 400,
-        marginBottom: 5
-    },
-    plans_pack: {
-        width:'100%',
+
+
+    con_two: {
+        backgroundColor: "#442cf5",
         height: 125,
-        flexDirection:'row',
-        gap: 12,
-        // backgroundColor:'pink'
+        marginBottom: 20
     },
-    plans_box1: {
+    smallBox: {
+        backgroundColor: 'blue',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 8,
+        backgroundColor: "white",
+        padding: 5
+    },
+    innerconttwo: {
         flex: 1,
+        flexDirection: "row",
+        alignItems: "center",
+        paddingLeft: 15,
+        gap: 10,
+        paddingTop: 75,
+    },
+    compartTwo: {
+        backgroundColor: "#FFFFFF",
+        padding: 15,
+        marginLeft: 20,
+        marginRight: 20,
+        // marginTop: 50,
+        borderRadius: 15,
+        gap: 10,
+
+    },
+    pay: {
+        color: "white"
+    },
+    fixPlan: {
+        padding: 10,
+        gap: 10,
+        backgroundColor: "#FDF9B7",
+        display: "flex",
+        flexDirection: "row",
+        borderRadius: 10
+    },
+    fix: {
+        width: 50,
+        // backgroundColor: "blue",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center"
+    },
+    plan: {
+        // backgroundColor: "red",
+        width: '80%',
+        flexDirection: 'column'
+
+    },
+    centeredImage: {
+        width: 40,
+        height: 40,
+
+    },
+    partTwo: {
         borderRadius: 10,
-        paddingHorizontal: 12,
-        paddingTop: 20,
-        backgroundColor:'#E5F6F0'
+        alignItems: "start",
+        gap: 15,
+        backgroundColor: "#FFFFFF",
+
     },
-    plans_text1: {
-        fontSize: 14,
-        fontWeight: 500,
-        color:'#292B2D',
-        marginTop: 10
+    green: {
+        backgroundColor: "white",
+        display: "flex",
+        flexDirection: "row",
+        gap: 10,
+        alignItems: "flex-start",
+        // paddingTop: 30,
+        position: "relative",
+        borderRadius: 10
     },
-    plans_text2: {
-        fontSize: 11,
-        fontWeight: 400,
-        color:'#6C727F',
-        marginTop: 4,
-        width: 120
+    loanAmount: {
+        width: "100%",
+        backgroundColor: "#f5f7ff",
+        borderRadius: 10,
     },
-    plans_box2: {
+    interest: {
         flex: 1,
-        borderRadius: 10,
-        paddingHorizontal: 12,
-        paddingTop: 20,
-        backgroundColor:'#FEFDE9'
+        flexDirection: "row",
+        justifyContent: "space-between",
+        marginBottom: 10
     },
-    plans_box3: {
-        flex: 1,
+    withdraw: {
+        padding: 15,
+        // marginLeft: 20,
+        // marginRight: 20,
         borderRadius: 10,
-        paddingHorizontal: 12,
-        paddingTop: 20,
-        backgroundColor:'#FFEBED'
+        idth: "268px",
+        height: "94px",
+        padding: 10,
+        gap: 10,
+        display: "flex",
+        flexDirection: "row"
     },
-    plans_box4: {
-        flex: 1,
-        borderRadius: 10,
-        paddingHorizontal: 12,
-        paddingTop: 20,
-        backgroundColor:'#ECEAFE'
+    bottonCon: {
+        padding: 20,
+        color: "white"
     },
-    bottom_comment: {
-        width:'100%',
-        height: 20,
-        flexDirection:'row',
-        alignItems:'center',
-        gap: 6,
-        // backgroundColor:'red'
-    }
+    button: {
+        backgroundColor: "#4a3aff",
+        padding: 15,
+        borderRadius: 15,
+        alignItems: "center",
+        marginTop: 260,
+    },
+    buttonText: {
+        color: "#FFFFFF",
+        fontSize: 16,
+        fontWeight: "bold"
+    },
+    fixx: {
+        width: 30,
+        display: "flex",
+        justifyContent: "start",
+        alignItems: "flex-end"
+    },
+    plann: {
+        width: '90%',
+        justifyContent: "start",
+        flexDirection: 'column',
+        paddingRight: 11 
+
+    },
 })
