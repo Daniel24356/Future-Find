@@ -1,6 +1,4 @@
-
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import { Image, StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
@@ -82,8 +80,8 @@ const Contribution_Active = () => {
                             <Text style={styles.small_text}>690,000/member</Text>
                         </View>
                     </View>
+                    </TouchableOpacity>
                 </View>
-
                 {/* NEW MEMBERS */}
                 <View style={{alignItems:'center',paddingHorizontal:10,paddingBottom:10,gap:15}}>
                     <Text style={{fontSize:16,fontWeight:600,color:'#131313'}}>Groups invitation</Text>
@@ -99,12 +97,14 @@ const Contribution_Active = () => {
                 </View>
 
                 {/* JOINED */}
-                </TouchableOpacity>
-            </View>
-
+                
+                {/* </TouchableOpacity>
+            </View> */}
+             
             <CustomButton 
                 backgroundColor={'#2C14DD'}
                 title={'Create my own group'}
+                onPress={() => navigation.navigate('Contribute')}
             />
 
         </SafeAreaView>

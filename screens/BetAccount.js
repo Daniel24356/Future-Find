@@ -111,7 +111,7 @@ const BetAccount = () => {
     <>
     <TopHeader title="Bet Account" />
 
-     <TouchableWithoutFeedback onPress={handleDeselectPlatform}>
+     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <SafeAreaView style={styles.BetAccount}>
         {/* Header */}
         {/* <View style={styles.header}>
@@ -287,9 +287,9 @@ const BetAccount = () => {
         </Modal>
 
 
-      </View>
+      {/* </View>
           onPress={() => navigation.navigate('TransactionDetails')}
-        />
+        /> */}
       </SafeAreaView>
     </TouchableWithoutFeedback>
     </>

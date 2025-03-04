@@ -70,7 +70,7 @@ color="black"
 
     <View>
        <Text style={styles.errormessage}><Image source={require("../assets/Danger-Circle.png")}/> Youve entered an incorrect password</Text>
-
+      </View>
     <View >
        <Text style={styles.errormessage}><Image source={require("../assets/Vector.png")}/> Youve entered an incorrect password</Text>
     </View>
@@ -93,13 +93,16 @@ color="black"
     <TouchableOpacity   onPress={() => navigation.navigate('Signup')}  style={styles.secButton}>
       <Text style={styles.buttonTexttwo}>Register</Text>
     </TouchableOpacity>
+  
    </View>
   </SafeAreaView>
     </>
   );
 };
 
-// Styles
+
+export default LoginScreen;
+
 const styles = StyleSheet.create({
   minicontainer: {
    backgroundColor: "#442CF5",
@@ -259,4 +262,3 @@ const styles = StyleSheet.create({
  }
 });
 
-export default LoginScreen;

@@ -16,7 +16,7 @@ const TabBar = ({home, loan, investment, contribution}) => {
             }
             <Text style={styles.tab_text}>Home</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.tab}>
+        <TouchableOpacity onPress={() => navigation.navigate('loan')} style={styles.tab}>
             {
                 loan?
                 <Image source={require("../assets/investing/loan_active.png")}/> :

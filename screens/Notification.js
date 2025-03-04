@@ -1,38 +1,40 @@
 
-import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity } from 'react-native';
 import React from 'react';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import Entypo from '@expo/vector-icons/Entypo';
+import { useNavigation } from '@react-navigation/native';
 
 const NotificationItem = ({ imageSource, title, description, time }) => {
     return (
-        <View style={styles.todayText}>
+        <TouchableOpacity  style={styles.todayText}>
             <Image source={imageSource} style={styles.centeredImage} />
             <View style={styles.textContainer}>
                 <Text style={styles.boldText}>{title}</Text>
                 <Text style={styles.descriptionText}>{description}</Text>
             </View>
             {time ? <Text style={styles.timeText}>{time}</Text> : <Entypo name="chevron-small-right" size={24} color="black" />}
-        </View>
+        </TouchableOpacity>
     );
 };
 
 const Notification = () => {
+     const navigation = useNavigation();
     return (
         <View style={styles.container}>
             <View style={styles.con_two}>
                 <View style={styles.innerconttwo}>
                     <View style={styles.wrapper}>
-                        <View style={styles.smallBox}>
+                        <TouchableOpacity onPress={() => navigation.navigate('home')} style={styles.smallBox}>
                             <Ionicons name="chevron-back" size={20} color="black" />
-                        </View>
+                        </TouchableOpacity>
                         <Text style={styles.pay}>Notifications</Text>
                     </View>
-                    <View style={styles.wrapper}>
+                    <TouchableOpacity onPress={() => navigation.navigate('Setting')} style={styles.wrapper}>
                         <View style={styles.smallBox}>
                             <Ionicons name="settings-sharp" size={24} color="#6C727F" />
                         </View>
-                    </View>
+                    </TouchableOpacity>
                 </View>
             </View>
 
@@ -108,7 +110,7 @@ const styles = StyleSheet.create({
     },
     con_two: {
         backgroundColor: "#442cf5",
-        height: 125,
+        height: 115,
         marginBottom: 20
     },
     innerconttwo: {

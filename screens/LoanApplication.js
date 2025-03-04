@@ -1,8 +1,9 @@
 import React from 'react'
-import { View, Text, StyleSheet, Image } from 'react-native'
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native'
 import EasyLoanProps from '../props/EasyLoanProps'
 import ApplyLoanProps from '../props/ApplyLoanProps'
 import Custom2Button from '../props/Custom2Button'
+import TabBar from '../props/TabBar'
 
 const LoanApplication = () => {
   return (
@@ -60,12 +61,14 @@ const LoanApplication = () => {
           />
         </View>
         
-        <View style = {styles.applyButton}>
+        <TouchableOpacity onPress={() => navigation.navigate('loanLandingScreen')} style = {styles.applyButton}>
         <Custom2Button 
         backgroundColor = "#2C14DD"
         title = "Apply for loan"
         />
-        </View>
+        </TouchableOpacity>
+
+         <TabBar loan={true}/>
     </View>
   )
 }
@@ -129,7 +132,7 @@ const styles = StyleSheet.create({
       textAlign: "center"
     },
     h3: {
-       fontSize: 35,
+       fontSize: 31,
        fontWeight: "bold",
        color: "#131313",
     },

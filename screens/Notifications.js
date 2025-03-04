@@ -83,7 +83,7 @@ const Notifications = () => {
         gap: 40,
         flexDirection: 'column',
         alignItems: 'center',
-        width: 360,
+        width: "100%",
         height: 812,
       },
       header: {
@@ -92,7 +92,7 @@ const Notifications = () => {
         alignItems: 'center',
         paddingTop: 50,
         paddingLeft: 16,
-        width: 360,
+        width: "100%",
         height: 115,
         gap: 10,
         paddingBottom: 12
@@ -107,7 +107,7 @@ const Notifications = () => {
         fontSize: 16
       },
       setNotiBox: {
-        width: 328,
+        width: "90%",
         height: 192,
         flexDirection: 'column',
         gap: 20,
@@ -121,13 +121,13 @@ const Notifications = () => {
         lineHeight: 20
       },
       notiSettings: {
-        width: 328,
+        width: "100%",
         height: 152,
         flexDirection: 'column',
         gap: 10,
       },
       settings: {
-        width: 328,
+        width: "100%",
         height: 44,
         borderRadius: 16,
         flexDirection: 'row',

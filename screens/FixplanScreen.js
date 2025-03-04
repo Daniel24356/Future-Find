@@ -82,8 +82,8 @@ const FixPlanScreen = () => {
           </Text>
         </View>
 
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText} onPress={() => navigation.navigate('finalwithdrawal')}>Request withdrawal</Text>
+        <TouchableOpacity onPress={() => navigation.navigate('finalwithdrawal')} style={styles.button}>
+          <Text style={styles.buttonText}>Request withdrawal</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>

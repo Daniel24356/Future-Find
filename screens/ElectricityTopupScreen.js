@@ -7,16 +7,19 @@ import {
   TextInput,
 } from "react-native";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
+import TopHeader from "../props/TopHeader";
 
 export default function ElectricityTopupScreen() {
   const [activeTab, setActiveTab] = useState("Prepaid");
 
   return (
     <>
-      <View style={styles.header}>
+      {/* <View style={styles.header}>
         <Ionicons name="arrow-back" size={24} color="#FFF" />
         <Text style={styles.headerTitle}>Electricity topup</Text>
-      </View>
+      </View> */}
+
+      <TopHeader title="Electricity"/>
 
       <View style={styles.container}>
         <View style={styles.tabRow}>

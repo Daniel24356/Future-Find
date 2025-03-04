@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View } from 'react-native'
+import { Image, StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
@@ -8,8 +8,11 @@ import PopUpScreen from '../props/PopUpScreen';
 import VerificationPopup from '../props/VerificationPopup';
 import DropdownMenus from '../props/DropdownMenus';
 import ConfirmPaymentPopup from '../props/ConfirmPaymentPopup';
+import { useNavigation } from '@react-navigation/native';
 
 const Group_Details = () => {
+ const navigation = useNavigation();
+
   return (
     <View style={{flex:1, position:'relative'}}>
         <StatusBar backgroundColor='#442CF5' style='light'/>
@@ -35,11 +38,11 @@ const Group_Details = () => {
                             Group info
                         </Text>
                     </View>
-                    <View style={styles.options_butn}>
+                    <TouchableOpacity onPress={() => navigation.navigate('Group_members')} style={styles.options_butn}>
                         <Text style={{fontSize:12,fontWeight:400,color:'#6C727F'}}>
                             All members
                         </Text>
-                    </View>
+                    </TouchableOpacity>
                 </View>
 
                 
@@ -143,7 +146,7 @@ const Group_Details = () => {
 
         </SafeAreaView>
 
-        <ConfirmPaymentPopup confirmPayment={true} />
+        {/* <ConfirmPaymentPopup confirmPayment={true} /> */}
 
     </View>
   )

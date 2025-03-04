@@ -8,15 +8,18 @@ import {
   TextInput,
 } from "react-native";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
+import TopHeader from "../props/TopHeader";
 
 export default function DataTopupScreen() {
   return (
     <>
       {/* Top Header */}
-      <View style={styles.topPart}>
+      {/* <View style={styles.topPart}>
         <Ionicons name="arrow-back" size={24} color="#FFF" />
         <Text style={styles.appTitle}>Data topup</Text>
-      </View>
+      </View> */}
+
+      <TopHeader title="Data topup"/>
 
       <View style={styles.container}>
         <View style={styles.phoneContainer}>

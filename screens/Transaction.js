@@ -1,30 +1,33 @@
-import { StyleSheet, Text, View, Image, ScrollView, TextInput } from 'react-native';
+import { StyleSheet, Text, View, Image, ScrollView, TextInput, TouchableOpacity } from 'react-native';
 import React from 'react';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import Entypo from '@expo/vector-icons/Entypo';
+import { useNavigation } from '@react-navigation/native';
 
 const TransactionItem = ({ imageSource, title, amount, amountColor, time }) => {
+    const navigation = useNavigation();
     return (
-        <View style={styles.transactionItem}>
+        <TouchableOpacity onPress={() => navigation.navigate('TransactionDetails')} style={styles.transactionItem}>
             <Image source={imageSource} style={styles.transactionImage} />
             <View style={styles.textContainer}>
                 <Text style={styles.transactionTitle}>{title}</Text>
                 <Text style={[styles.transactionAmount, { color: amountColor }]}>{amount}</Text>
             </View>
             <Text style={styles.transactionTime}>{time}</Text>
-        </View>
+        </TouchableOpacity>
     );
 };
 
 const Transactions = () => {
+    const navigation = useNavigation();
     return (
         <View style={styles.container}>
             <View style={styles.header}>
                 <View style={styles.headerContent}>
                     <View style={styles.wrapper}>
-                        <View style={styles.iconBox}>
+                        <TouchableOpacity onPress={() => navigation.navigate('home')} style={styles.iconBox}>
                             <Ionicons name="chevron-back" size={20} color="black" />
-                        </View>
+                        </TouchableOpacity>
                         <Text style={styles.headerTitle}>Transactions</Text>
                     </View>
                     <View style={styles.wrapper}>

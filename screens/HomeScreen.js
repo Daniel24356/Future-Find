@@ -29,7 +29,7 @@ const HomeScreen = () => {
                 <Text style={styles.regText}>Good morning</Text>
               </View>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate('Setting')}  style={styles.notification}>
+            <TouchableOpacity onPress={() => navigation.navigate('Notification')}  style={styles.notification}>
               <Image source={require("../assets/homePage/bell.png")}/>
             </TouchableOpacity>
           </View>
@@ -41,7 +41,7 @@ const HomeScreen = () => {
             <Text style={styles.text2}>N20,983</Text>
             <Text style={styles.text3}>Repayment due: 28 March, 2025</Text>
 
-            <TouchableOpacity  style={styles.transactions}>
+            <TouchableOpacity onPress={() => navigation.navigate('Transaction')} style={styles.transactions}>
               <Text style={styles.trans_text}>Transactions</Text>
               <Image source={require("../assets/homePage/chevron_img.png")}/>
             </TouchableOpacity>
@@ -69,13 +69,13 @@ const HomeScreen = () => {
               </View>
               <Text style={styles.small_text}>Airtime</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.loan2}>
+            <TouchableOpacity onPress={() => navigation.navigate('data')} style={styles.loan2}>
               <View style={styles.small_logo}>
                 <Image source={require("../assets/homePage/data.png")}/>
               </View>
               <Text style={styles.small_text}>Data</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.loan2}>
+            <TouchableOpacity onPress={() => navigation.navigate('electricity')} style={styles.loan2}>
               <View style={styles.small_logo}>
                 <Image source={require("../assets/homePage/electricity.png")}/>
               </View>
@@ -93,7 +93,7 @@ const HomeScreen = () => {
             <TouchableOpacity onPress={() => navigation.navigate('investment')} style={styles.invest}>
               <Image source={require("../assets/homePage/invest.png")}/>
               <View>
-                <Text style={styles.invest_text1} onPress={() => navigation.navigate('fixPlan')}>Invest your money</Text>
+                <Text style={styles.invest_text1}>Invest your money</Text>
                 <Text style={styles.invest_text2}>Earn interest on your invested money</Text>
               </View>
               <EvilIcons style={styles.chevron} name="chevron-right" size={24} color="black" />

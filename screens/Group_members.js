@@ -1,12 +1,13 @@
-import { Image, StyleSheet, Text, View } from 'react-native'
+import { Image, StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import EvilIcons from '@expo/vector-icons/EvilIcons';
 import Ionicons from '@expo/vector-icons/Ionicons';
-
+import { useNavigation } from '@react-navigation/native';
 
 const Group_members = () => {
+    const navigation = useNavigation();
   return (
     <View style={styles.container}>
         <StatusBar backgroundColor='#442CF5' style='light'/>
@@ -25,12 +26,12 @@ const Group_members = () => {
             </View>
 
             <View style={styles.options}>
-                     <View style={styles.options_butn}>
+                               <TouchableOpacity onPress={() => navigation.navigate('groupDetails')} style={styles.options_butn}>
                                     <Text style={{fontSize:12,fontWeight:400,
                                         color:'#442CF5',}}>
                                         Group info
                                     </Text>
-                                </View>
+                                </TouchableOpacity>
                                 <View style={[styles.options_butn, {borderWidth:1,borderColor:'#442CF5'}]}>
                                     <Text style={{fontSize:12,fontWeight:400,color:'#6C727F'}}>
                                         All members

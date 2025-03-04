@@ -28,11 +28,11 @@ const Settings = () => {
                     <Text>Reset Password</Text>
                     <Entypo name="chevron-right" size={24} color="black" style={{ position: 'absolute', right: 5 }} />
                 </TouchableOpacity>
-                <View style={styles.green}>
+                <TouchableOpacity onPress={() => navigation.navigate('Notifications')} style={styles.green}>
                     <Image source={require('../assets/notification.png')} />
                     <Text>Notifications</Text>
                     <Entypo name="chevron-right" size={24} color="black" style={{ position: 'absolute', right: 5 }} />
-                </View>
+                </TouchableOpacity>
                 <View style={styles.partThree}>
                     <Text style={styles.general}>Policy</Text>
                     <View style={styles.green}>

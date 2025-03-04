@@ -47,7 +47,6 @@ const InviteScreen = () => {
               <Custom2Button
               backgroundColor = "#2C14DD"
               title = "Continue"
-            onPress={() => navigate.navigate("ContributeScreen2")}
               />
               </View>
               
@@ -104,7 +103,7 @@ const styles = StyleSheet.create({
   },
   createT: {
       fontWeight: 700,
-      fontSize: 35
+      fontSize: 29
   },
   detail: {
      fontSize: 18.5,

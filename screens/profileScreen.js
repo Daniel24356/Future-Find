@@ -22,10 +22,10 @@ const navigation = useNavigation();
             <Text style={styles.icon_text}>Profile</Text>
            </View>
 
-           <View style={styles.profile_2}> 
+           <TouchableOpacity onPress={() => navigation.navigate('EditProfile')} style={styles.profile_2}> 
            <MaterialCommunityIcons name="pencil" size={20} color="black" />
            <Text style={styles.icon_text2}>Edit</Text>
-           </View>
+           </TouchableOpacity>
           
         </View>
         <View style={styles.mid_holder}>
@@ -44,10 +44,10 @@ const navigation = useNavigation();
                 <Image source={require("../assets/prof.png")}/>
                 <Text style={styles.textprof}>My account</Text>
                 </View>
-                <View style={styles.account}>
+                <TouchableOpacity onPress={() => navigation.navigate('Setting')} style={styles.account}>
                 <Image source={require("../assets/Group 11.png")}/>
                 <Text style={styles.textprof}>Settings</Text>
-                </View>
+                </TouchableOpacity>
                 <View style={styles.account}>
                 <Image source={require("../assets/headphone.png")}/>
                 <Text style={styles.textprof}>Help center</Text>
