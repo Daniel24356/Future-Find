@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
         padding: 0,
         flexDirection: 'column',
         alignItems: 'center',
-        width: 360,
+        width: "100%",
         height: 812,
     },
     header:{
@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingTop: 50,
         paddingLeft: 16,
-        width: 360,
+        width: "100%",
         height: 115,
         gap: 10,
         paddingBottom: 12
@@ -160,7 +160,7 @@ const styles = StyleSheet.create({
         fontSize: 16
     },
     transacDetailsBody: {
-        width: 328,
+        width: "100%",
         height: 463.28,
         display: 'flex',
         flexDirection: 'column',
@@ -208,7 +208,7 @@ const styles = StyleSheet.create({
         lineHeight: 24
     },
     withdrawNotiBox: {
-        width: 229,
+        width: "100%",
         height: 171.28,
         display: 'flex',
         flexDirection: 'column',
@@ -217,7 +217,7 @@ const styles = StyleSheet.create({
         // backgroundColor: 'red'
     },
     withdrawNoti: {
-        width: 229,
+        width: "100%",
         height: 165,
         display: 'flex',
         flexDirection: 'column',

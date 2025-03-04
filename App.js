@@ -6,9 +6,14 @@ import Contribution_Active from './screens/Contribution_Active';
 import HomeScreen from './screens/HomeScreen';
 import ProfileScreen from './screens/profileScreen';
 import Group_members from './screens/Group_members';
+import PopUpScreen from './props/PopUpScreen';
+import Group_Details from './screens/Group_Details';
+import VerificationPopup from './props/VerificationPopup';
+import FilterPopup from './screens/FilterPopup';
+import ConfirmPaymentPopup from './props/ConfirmPaymentPopup';
 
 
 export default function App() {
-  return <Group_members/>
+  return <AppNavigator/>
 }
 

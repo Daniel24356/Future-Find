@@ -1,12 +1,19 @@
-import { Image, StyleSheet, Text, View } from 'react-native'
+
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Image, StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
 import TabBar from '../props/TabBar';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import CustomButton from '../props/CustomButton';
+import { useNavigation } from '@react-navigation/native';
 
 
 const Contribution_Active = () => {
+
+  const navigation = useNavigation();
+
   return (
     <View style={{flex:1, backgroundColor:'#F5F7FF'}}>
         <StatusBar backgroundColor='#F5F7FF' />
@@ -40,7 +47,7 @@ const Contribution_Active = () => {
                     Created groups
                 </Text>
 
-                <View style={styles.green_group}>
+                <TouchableOpacity onPress={() => navigation.navigate('groupDetails')} style={styles.green_group}>
 
                     <View style={styles.copy}>
                         <Text style={{fontSize:10,color:'#292B2D',fontWeight:400}}>Copy link</Text>
@@ -76,7 +83,29 @@ const Contribution_Active = () => {
                         </View>
                     </View>
                 </View>
+
+                {/* NEW MEMBERS */}
+                <View style={{alignItems:'center',paddingHorizontal:10,paddingBottom:10,gap:15}}>
+                    <Text style={{fontSize:16,fontWeight:600,color:'#131313'}}>Groups invitation</Text>
+                    <Text style={{fontSize:12,color:'#292B2D'}}>You have been invited to join this contribution</Text>
+                    <View style={{flexDirection:'row',gap:20,marginTop:10}}>
+                        <TouchableOpacity style={[styles.invite, {backgroundColor:'#FD3C4A0D'}]}>
+                            <Text style={{fontSize:14,fontWeight:500,color:'#FD3C4A'}}>Decline</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={[styles.invite, {backgroundColor:'#2C14DD0D'}]}>
+                            <Text style={{fontSize:14,fontWeight:500,color:'#442CF5'}}>Join</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+
+                {/* JOINED */}
+                </TouchableOpacity>
             </View>
+
+            <CustomButton 
+                backgroundColor={'#2C14DD'}
+                title={'Create my own group'}
+            />
 
         </SafeAreaView>
 
@@ -135,11 +164,12 @@ const styles = StyleSheet.create({
         borderRadius:14
     },
     groups: {
-        height:156,
+        minHeight:156,
         borderRadius:16,
         backgroundColor:'#FFFF',
         padding:12,
-        justifyContent:'space-between'
+        justifyContent:'space-between',
+        gap:15
     },
     green_group: {
         height:92,
@@ -170,5 +200,12 @@ const styles = StyleSheet.create({
         position:'absolute',
         right:12,
         top:12
+    },
+    invite: {
+        flex:1,
+        height:36,
+        borderRadius:15,
+        justifyContent:'center',
+        alignItems:'center'
     }
 })

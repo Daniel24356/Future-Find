@@ -9,15 +9,18 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons"; // For icons
 import { MaterialIcons } from "@expo/vector-icons"; 
+import TopHeader from "../props/TopHeader";
 
 const AirtimeTopupScreen = () => {
   return (
     <>
       {/* Top Section */}
-      <View style={styles.topPart}>
+      {/* <View style={styles.topPart}>
         <Ionicons name="arrow-back" size={24} color="white" />
         <Text style={styles.appTitle}>Airtime topup</Text>
-      </View>
+      </View> */}
+
+<TopHeader title="Airtime" />
 
       <View style={styles.container}>
         {/* Input Section */}
