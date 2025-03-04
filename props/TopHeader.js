@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     padding: 15,
     backgroundColor: "#4A3AFF",
-    height: 120,
+    height: 110,
   },
   headerTitle: {
     color: "white",

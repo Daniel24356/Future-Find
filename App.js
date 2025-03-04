@@ -1,4 +1,4 @@
-
+import SavingsPlanScreen from "./screens/SavingsPlanScreen";
 import AppNavigator from './navigation/AppNavigator';
 import Withdrawal from './screens/Withdrawal';
 import Investment from './screens/Investment';
@@ -12,8 +12,6 @@ import VerificationPopup from './props/VerificationPopup';
 import FilterPopup from './screens/FilterPopup';
 import ConfirmPaymentPopup from './props/ConfirmPaymentPopup';
 
-
 export default function App() {
-  return <AppNavigator/>
+  return <AppNavigator/>;
 }
-
