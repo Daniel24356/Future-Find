@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View } from 'react-native'
+import { Image, StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
@@ -6,16 +6,19 @@ import { StatusBar } from 'expo-status-bar';
 import Entypo from '@expo/vector-icons/Entypo';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 // import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
-
+import { useNavigation } from '@react-navigation/native';
 
 const ProfileScreen = () => {
+  
+const navigation = useNavigation();
+  
   return (
     <View style={styles.container}>
         <StatusBar backgroundColor='blue' />
         <SafeAreaView style={styles.safe_view} >
         <View style={styles.top_container}>
            <View style={styles.profile_1}> 
-            <View style={styles.icon}><Entypo name="chevron-small-left" size={24} color="black" /></View>
+            <TouchableOpacity onPress={() => navigation.navigate('home')} style={styles.icon}><Entypo name="chevron-small-left" size={24} color="black" /></TouchableOpacity>
             <Text style={styles.icon_text}>Profile</Text>
            </View>
 
@@ -78,7 +81,7 @@ const styles = StyleSheet.create({
 
     top_container:{
         width:'100%',
-        height:90,
+        height:70,
         backgroundColor:'blue',
         flexDirection:'row',
         alignItems:'center',

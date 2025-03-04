@@ -1,13 +1,19 @@
+
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Image, StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
 import TabBar from '../props/TabBar';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import CustomButton from '../props/CustomButton';
+import { useNavigation } from '@react-navigation/native';
 
 
 const Contribution_Active = () => {
+
+  const navigation = useNavigation();
+
   return (
     <View style={{flex:1, backgroundColor:'#F5F7FF'}}>
         <StatusBar backgroundColor='#F5F7FF' />
@@ -41,7 +47,7 @@ const Contribution_Active = () => {
                     Created groups
                 </Text>
 
-                <View style={styles.green_group}>
+                <TouchableOpacity onPress={() => navigation.navigate('groupDetails')} style={styles.green_group}>
 
                     <View style={styles.copy}>
                         <Text style={{fontSize:10,color:'#292B2D',fontWeight:400}}>Copy link</Text>
@@ -93,6 +99,7 @@ const Contribution_Active = () => {
                 </View>
 
                 {/* JOINED */}
+                </TouchableOpacity>
             </View>
 
             <CustomButton 
