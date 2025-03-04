@@ -15,7 +15,7 @@ const navigation = useNavigation();
   return (
     <View style={styles.container}>
         <StatusBar backgroundColor='blue' />
-        <SafeAreaView style={styles.safe_view} >
+        <SafeAreaView style={styles.safe_view}>
         <View style={styles.top_container}>
            <View style={styles.profile_1}> 
             <TouchableOpacity onPress={() => navigation.navigate('home')} style={styles.icon}><Entypo name="chevron-small-left" size={24} color="black" /></TouchableOpacity>
@@ -45,16 +45,16 @@ const navigation = useNavigation();
                 <Text style={styles.textprof}>My account</Text>
                 </View>
                 <View style={styles.account}>
-                <Image source={require("../assets/prof.png")}/>
-                <Text style={styles.textprof}>My account</Text>
+                <Image source={require("../assets/Group 11.png")}/>
+                <Text style={styles.textprof}>Settings</Text>
                 </View>
                 <View style={styles.account}>
-                <Image source={require("../assets/prof.png")}/>
-                <Text style={styles.textprof}>My account</Text>
+                <Image source={require("../assets/headphone.png")}/>
+                <Text style={styles.textprof}>Help center</Text>
                 </View>
                 <View style={styles.account}>
-                <Image source={require("../assets/prof.png")}/>
-                <Text style={styles.textprof}>My account</Text>
+                <Image source={require("../assets/call.png")}/>
+                <Text style={styles.textprof}>Contact us</Text>
                 </View>
             </View>
 
@@ -204,9 +204,7 @@ const styles = StyleSheet.create({
         marginTop:100,
         lineHeight: 23
     },
-    //  text_div:{
-    //   marginTop: 80
-    //  }
+   
 
 
    
