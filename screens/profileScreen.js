@@ -9,9 +9,9 @@ import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { useNavigation } from '@react-navigation/native';
 
 const ProfileScreen = () => {
-
+  
 const navigation = useNavigation();
-
+  
   return (
     <View style={styles.container}>
         <StatusBar backgroundColor='blue' />
