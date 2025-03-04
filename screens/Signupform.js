@@ -4,6 +4,7 @@ import { Checkbox } from "react-native-paper";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from '@react-navigation/native';
 import { StatusBar } from "expo-status-bar";
+import TopHeader from "../props/TopHeader";
 
 export default function SignUpForm() {
  const navigation = useNavigation();
@@ -21,104 +22,111 @@ export default function SignUpForm() {
   const [confirmSecureTextEntry, setConfirmSecureTextEntry] = useState(true);
 
   return (   
+    <>
+    <TopHeader title="SignUp" />
     <SafeAreaView style={styles.container}>
-       <StatusBar backgroundColor="#442CF5" style="light"/>
-      <ScrollView>
-      {/* Header */}
-      <View style={styles.minicontainer}>
-         <View style={styles.innerdiv}>
-           <View>
-           <TouchableOpacity style={styles.backButton}>
-         <Ionicons 
-  name="chevron-back" 
-  size={25} 
-  color="black"  
+     
+     <StatusBar backgroundColor="#442CF5" style="light"/>
+    <ScrollView>
+    {/* Header */}
+    {/* <View style={styles.minicontainer}>
+       <View style={styles.innerdiv}>
+         <View>
+         <TouchableOpacity style={styles.backButton}>
+       <Ionicons 
+name="chevron-back" 
+size={25} 
+color="black"  
 />
-      </TouchableOpacity>
-           </View>
-      <Text style={styles.writeup}>Sign Up</Text>
+    </TouchableOpacity>
          </View>
-      </View>
+    <Text style={styles.writeup}>Sign Up</Text>
+       </View>
+    </View> */}
 
-     <View style={styles.innerCont}>
-     <Text style={styles.title}>Welcome to Future Fund</Text>
-      <Text style={styles.subtitle}>Complete the sign up to get started</Text>
 
-      {/* Input Fields */}
-      <View style={styles.inputDiv}>
+
+
+   <View style={styles.innerCont}>
+   <Text style={styles.title}>Welcome to Future Fund</Text>
+    <Text style={styles.subtitle}>Complete the sign up to get started</Text>
+
+    {/* Input Fields */}
+    <View style={styles.inputDiv}>
+    <TextInput
+      style={styles.input}
+      placeholder="Full name"
+      value={form.name}
+      onChangeText={(text) => setForm({ ...form, name: text })}
+    />
+    <TextInput
+      style={styles.input}
+      placeholder="Enter email"
+      keyboardType="email-address"
+      value={form.email}
+      onChangeText={(text) => setForm({ ...form, email: text })}
+    />
+    <TextInput
+      style={styles.input}
+      placeholder="Phone number"
+      keyboardType="phone-pad"
+      value={form.phone}
+      onChangeText={(text) => setForm({ ...form, phone: text })}
+    />
+
+    {/* Password Fields */}
+    <View style={styles.passwordContainer}>
       <TextInput
-        style={styles.input}
-        placeholder="Full name"
-        value={form.name}
-        onChangeText={(text) => setForm({ ...form, name: text })}
+        style={styles.passwordInput}
+        placeholder="Password"
+        secureTextEntry={secureTextEntry}
+        value={form.password}
+        onChangeText={(text) => setForm({ ...form, password: text })}
       />
-      <TextInput
-        style={styles.input}
-        placeholder="Enter email"
-        keyboardType="email-address"
-        value={form.email}
-        onChangeText={(text) => setForm({ ...form, email: text })}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Phone number"
-        keyboardType="phone-pad"
-        value={form.phone}
-        onChangeText={(text) => setForm({ ...form, phone: text })}
-      />
-
-      {/* Password Fields */}
-      <View style={styles.passwordContainer}>
-        <TextInput
-          style={styles.passwordInput}
-          placeholder="Password"
-          secureTextEntry={secureTextEntry}
-          value={form.password}
-          onChangeText={(text) => setForm({ ...form, password: text })}
-        />
-        <TouchableOpacity onPress={() => setSecureTextEntry(!secureTextEntry)}>
-          <Ionicons name={secureTextEntry ? "eye-off" : "eye"} size={24} color="gray" style={styles.iconstwo}/>
-        </TouchableOpacity>
-      </View>
-
-      <View style={styles.passwordContainer}>
-        <TextInput
-          style={styles.passwordInput}
-          placeholder="Confirm password"
-          secureTextEntry={confirmSecureTextEntry}
-          value={form.confirmPassword}
-          onChangeText={(text) => setForm({ ...form, confirmPassword: text })}
-        />
-        <TouchableOpacity onPress={() => setConfirmSecureTextEntry(!confirmSecureTextEntry)}>
-          <Ionicons name={confirmSecureTextEntry ? "eye-off" : "eye"} size={24} color="gray" style={styles.iconstwo}/>
-        </TouchableOpacity>
-      </View>
-      </View>
-
-      {/* Checkbox */}
-      <View style={styles.checkboxContainer}>
-        <Checkbox
-          status={form.agreed ? "checked" : "unchecked"}
-          onPress={() => setForm({ ...form, agreed: !form.agreed })}
-          color="blue"
-        />
-        <Text style={styles.termsText}>
-          By signing up, you agree to the{" "}
-          <Text style={styles.link}> Terms of Service</Text> and <Text style={styles.link}> Privacy Policy</Text>
-        </Text>
-      </View>
-
-      {/* Sign Up Button */}
-      <TouchableOpacity style={[styles.button, !form.agreed && styles.disabledButton]} disabled={!form.agreed}>
-        <Text style={styles.buttonText}>Sign up</Text>
+      <TouchableOpacity onPress={() => setSecureTextEntry(!secureTextEntry)}>
+        <Ionicons name={secureTextEntry ? "eye-off" : "eye"} size={24} color="gray" style={styles.iconstwo}/>
       </TouchableOpacity>
+    </View>
 
-      <TouchableOpacity   onPress={() => navigation.navigate('Login')}  style={styles.secButton}>
-        <Text style={styles.buttonTexttwo}>Sign In</Text>
+    <View style={styles.passwordContainer}>
+      <TextInput
+        style={styles.passwordInput}
+        placeholder="Confirm password"
+        secureTextEntry={confirmSecureTextEntry}
+        value={form.confirmPassword}
+        onChangeText={(text) => setForm({ ...form, confirmPassword: text })}
+      />
+      <TouchableOpacity onPress={() => setConfirmSecureTextEntry(!confirmSecureTextEntry)}>
+        <Ionicons name={confirmSecureTextEntry ? "eye-off" : "eye"} size={24} color="gray" style={styles.iconstwo}/>
       </TouchableOpacity>
-     </View>
-     </ScrollView>
-    </SafeAreaView>
+    </View>
+    </View>
+
+    {/* Checkbox */}
+    <View style={styles.checkboxContainer}>
+      <Checkbox
+        status={form.agreed ? "checked" : "unchecked"}
+        onPress={() => setForm({ ...form, agreed: !form.agreed })}
+        color="blue"
+      />
+      <Text style={styles.termsText}>
+        By signing up, you agree to the{" "}
+        <Text style={styles.link}> Terms of Service</Text> and <Text style={styles.link}> Privacy Policy</Text>
+      </Text>
+    </View>
+
+    {/* Sign Up Button */}
+    <TouchableOpacity style={[styles.button, !form.agreed && styles.disabledButton]} disabled={!form.agreed}>
+      <Text style={styles.buttonText}>Sign up</Text>
+    </TouchableOpacity>
+
+    <TouchableOpacity   onPress={() => navigation.navigate('Login')}  style={styles.secButton}>
+      <Text style={styles.buttonTexttwo}>Sign In</Text>
+    </TouchableOpacity>
+   </View>
+   </ScrollView>
+  </SafeAreaView>
+    </>
   );
 }
 
@@ -126,11 +134,11 @@ export default function SignUpForm() {
 const styles = StyleSheet.create({
    minicontainer: {
     backgroundColor: "#442CF5",
-    height: 120,
+    height: 75,
    },
     container: {
     flex: 1,
-    backgroundColor: "#f3f3ff",
+    backgroundColor: "rgb(245,247,255)",
   },
   innerCont: {
       padding: 20
