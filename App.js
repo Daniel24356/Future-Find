@@ -1,6 +1,6 @@
-import AppNavigator from './navigation/AppNavigator';
+import Notification from './screens/Notification';
 
 export default function App() {
-  return <AppNavigator/>
+  return <Notification/>
 }
 
