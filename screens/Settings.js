@@ -2,26 +2,32 @@ import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
 import Ionicons from '@expo/vector-icons/Ionicons';
 import Entypo from '@expo/vector-icons/Entypo';
-
+import { useNavigation } from '@react-navigation/native';
+import TopHeader from '../props/TopHeader';
 
 const Settings = () => {
+
+     const navigation = useNavigation();
+
     return (
         <View style={styles.container}>
-            <View style={styles.subContainer}>
+            {/* <View style={styles.subContainer}>
                 <View style={styles.icon}>
                     <View style={styles.iconBox}>
                         <Ionicons name="chevron-back" size={20} color="black" />
                     </View>
                     <Text style={styles.reset}>Settings</Text>
                 </View>
-            </View>
+            </View> */}
+            <TopHeader title="Settings" />
+
             <View style={styles.partTwo}>
                 <Text style={styles.general}>General</Text>
-                <View style={styles.green}>
+                <TouchableOpacity onPress={() => navigation.navigate('Resetpassword')} style={styles.green}>
                     <Image source={require('../assets/key.png')} />
                     <Text>Reset Password</Text>
                     <Entypo name="chevron-right" size={24} color="black" style={{ position: 'absolute', right: 5 }} />
-                </View>
+                </TouchableOpacity>
                 <View style={styles.green}>
                     <Image source={require('../assets/notification.png')} />
                     <Text>Notifications</Text>

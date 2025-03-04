@@ -8,14 +8,16 @@ import {
 } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons"; 
 import CustomButton from "../props/CustomButton";
+import TopHeader from "../props/TopHeader";
 
 export default function LoanLandingScreen() {
   return (
+    
     <View contentContainerStyle={styles.container}>
-      <View style={styles.topPart}>
+      {/* <View style={styles.topPart}>
         <Text style={styles.appTitle}>Loan Application</Text>
-        
-      </View>
+      </View> */}
+      <TopHeader title="Take loan" />
 
       <View style={styles.body}>
         <Text style={styles.header}>Let's know you better</Text>
@@ -75,7 +77,7 @@ export const styles = StyleSheet.create({
     marginTop: 30,
     marginBottom: -20,
   },
-  body: { padding: 15, backgroundColor: "#f0f0f0", height: 1000 },
+  body: { padding: 15, backgroundColor: "rgb(245,247,255)", height: 1000 },
   header: { fontSize: 26, fontWeight: "900", marginTop: 20 },
   smallText: { marginTop: 9, fontSize: 14 },
 
@@ -132,7 +134,7 @@ export const styles = StyleSheet.create({
   uploadText: { fontSize: 16, color: "#666" },
 
   button:{
-    marginTop: 200
+    marginTop: 90
   },
 
   termsContainer: { flexDirection: "row", alignItems: "center", marginTop: 20 },
