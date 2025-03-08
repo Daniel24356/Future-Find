@@ -1,41 +1,47 @@
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import { SafeAreaView } from 'react-native-safe-area-context';
 import CustomButton from './CustomButton';
 
-const ConfirmPaymentPopup = ({}) => {
+const ConfirmSavingsPopup = () => {
   return (
     <View style={styles.background}>
         <SafeAreaView style={{flex:1, justifyContent:'flex-end', paddingBottom:30}}>
             <View style={styles.pop_up}>
+
                 <View style={{alignItems:'center'}}>
-                    <Text style={{fontSize:24,fontWeight:600,color:'#131313',marginBottom:12}}>Confirm payment</Text>
-                    <Text style={{fontSize:14,color:'#292B2D',marginBottom:20}}>You are about to make this transaction</Text>
-                </View> 
+                    <Text style={{fontSize:24,fontWeight:600,color:'#131313',marginBottom:12}}>Confirm savings</Text>
+                    <Text style={{fontSize:14,color:'#292B2D',marginBottom:20}}>You are about to create this savings plan</Text>
+                </View>
 
                 <View style={{backgroundColor:'#F5F7FF',borderRadius:16,padding:10,width:'100%',gap:10}}>
                     <View style={{flexDirection:'row',justifyContent:'space-between',height:18}}>
-                        <Text style={styles.text_1}>Transaction type</Text>
-                        <Text style={styles.text_2}>Contribution</Text>
+                        <Text style={styles.text_1}>Plan name</Text>
+                        <Text style={styles.text_2}>Fixed plan</Text>
                     </View>
                     <View style={{flexDirection:'row',justifyContent:'space-between',height:18}}>
-                        <Text style={styles.text_1}>Contribution name</Text>
-                        <Text style={styles.text_2}>Saving group</Text>
+                        <Text style={styles.text_1}>Plan title</Text>
+                        <Text style={styles.text_2}>My savings 1</Text>
                     </View>
                     <View style={{flexDirection:'row',justifyContent:'space-between',height:18}}>
-                        <Text style={styles.text_1}>Contribution charges</Text>
-                        <Text style={styles.text_2}>₦50</Text>
+                        <Text style={styles.text_1}>Amount</Text>
+                        <Text style={styles.text_2}>₦150,000</Text>
                     </View>
                     <View style={{flexDirection:'row',justifyContent:'space-between',height:18}}>
-                        <Text style={styles.text_1}>Contribution fee</Text>
-                        <Text style={styles.text_2}>₦30,000</Text>
-                    </View>
-                    <View style={{flexDirection:'row',justifyContent:'space-between',height:18}}>
-                        <Text style={styles.text_1}>Total amount</Text>
-                        <Text style={styles.text_2}>₦30,050</Text>
+                        <Text style={styles.text_1}>Duration</Text>
+                        <Text style={styles.text_2}>60days</Text>
                     </View>
                     <View style={{flexDirection:'row',justifyContent:'space-between',height:18}}>
                         <Text style={styles.text_1}>Withdrawal date</Text>
                         <Text style={styles.text_2}>17, July,2025</Text>
+                    </View>
+                    <View style={{flexDirection:'row',justifyContent:'space-between',height:18}}>
+                        <Text style={styles.text_1}>Interest</Text>
+                        <Text style={styles.text_2}>15%/year</Text>
+                    </View>
+                    <View style={{flexDirection:'row',justifyContent:'space-between',height:18}}>
+                        <Text style={styles.text_1}>Total amount in return</Text>
+                        <Text style={styles.text_2}>₦175,000</Text> 
                     </View>
                 </View>
 
@@ -49,7 +55,7 @@ const ConfirmPaymentPopup = ({}) => {
   )
 }
 
-export default ConfirmPaymentPopup;
+export default ConfirmSavingsPopup;
 
 const styles = StyleSheet.create({
     background: {
