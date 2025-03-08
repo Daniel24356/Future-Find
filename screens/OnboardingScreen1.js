@@ -38,6 +38,7 @@ const OnboardingScreen1 = () => {
                 headText={"You ought to know where your money goes"}
                 parText={"Get an overview of how you are performing and motivate yourself to achieve even more"}
                 butnText={"Continue"}
+                page1={true}
             />
         </View>
     </SafeAreaView>

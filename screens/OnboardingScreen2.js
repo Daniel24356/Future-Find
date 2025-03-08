@@ -31,6 +31,7 @@ const OnboardingScreen2 = () => {
                 headText={"Gain total control of your money"}
                 parText={"Track your transaction easily, with categories and financial report"}
                 butnText={"Continue"}
+                page2={true}
             />
         </View>
     </SafeAreaView>

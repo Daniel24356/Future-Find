@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, SafeAreaView, Image } from "react-native";
-import { Checkbox } from "react-native-paper";
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from '@react-navigation/native';
 import TopHeader from "../props/TopHeader";
+import { StatusBar } from "expo-status-bar";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const LoginScreen = () => {
 const [form, setForm] = useState({
@@ -16,87 +17,90 @@ const [form, setForm] = useState({
     const [confirmSecureTextEntry, setConfirmSecureTextEntry] = useState(true);
 
   return (
-    <>
-    <TopHeader title="Login" />
-     <SafeAreaView style={styles.container}>
-    {/* Header */}
-    {/* <View style={styles.minicontainer}>
-       <View style={styles.innerdiv}>
-         <View>
-         <TouchableOpacity style={styles.backButton}>
-       <Ionicons 
-name="chevron-back" 
-size={25} 
-color="black"  
-/>
-    </TouchableOpacity>
-         </View>
-    <Text style={styles.writeup}>Sign In</Text>
-       </View>
-    </View> */}
+    <View style={{flex:1,backgroundColor: "#F5F7FF"}}>
+      <SafeAreaView style={{flex:1,justifyContent:'space-between'}}>
+        <StatusBar backgroundColor="#442CF5" style="light"/>
 
-   <View style={styles.innerCont}>
-   <Text style={styles.title}>We missed you!</Text>
-    <Text style={styles.subtitle}>Enter your account detail to login</Text>
+        <View>
+          <TopHeader title="Sign in" />
 
-    {/* Input Fields */}
-    <View style={styles.inputDiv}>
-    <TextInput
-      style={styles.input}
-      placeholder="Enter email"
-      keyboardType="email-address"
-      value={form.email}
-      onChangeText={(text) => setForm({ ...form, email: text })}
-    />
-    <View>
-       <Text style={styles.errormessage}><Image source={require("../assets/Danger-Circle.png")}/> This email doesnt exist</Text>
+          <View style={styles.innerCont}>
+            <Text style={styles.title}>We missed you!</Text>
+            <Text style={styles.subtitle}>Enter your account detail to login</Text>
+
+            {/* Input Fields */}
+            <View style={styles.inputDiv}>
+              <View style={styles.passwordContainer}>
+                <TextInput
+                  style={styles.input}
+                  placeholder="Enter email"
+                  keyboardType="email-address"
+                  value={form.email}
+                  onChangeText={(text) => setForm({ ...form, email: text })}
+                />
+
+                <View style={styles.errormessage}>
+                  <Image 
+                    source={require("../assets/Danger-Circle.png")}
+                    style={{width:16,height:16}}
+                  />
+                  <Text style={styles.error}> This email doesnt exist</Text>
+                </View>
+              </View>
+
+              {/* Password Fields */}
+              <View style={styles.passwordContainer}>
+                <TextInput
+                  style={styles.input}
+                  placeholder="Password"
+                  secureTextEntry={secureTextEntry}
+                  value={form.password}
+                  onChangeText={(text) => setForm({ ...form, password: text })}
+                />
+                <TouchableOpacity 
+                  style={styles.eye}
+                  onPress={() => setSecureTextEntry(!secureTextEntry)}>
+                  <Ionicons name={secureTextEntry ? "eye-off" : "eye"} size={20} color="gray" style={styles.iconstwo}/>
+                </TouchableOpacity>
+
+                <View style={styles.errormessage}>
+                  <Image 
+                    source={require("../assets/Danger-Circle.png")}
+                    style={{width:16,height:16}}
+                  />
+                  <Text style={styles.error}> You've entered an incorrect password</Text>
+                </View>
+              </View>
+
+            </View>
+
+
+
+            <View style={styles.forgot}>
+            <TouchableOpacity>
+              <Text style={{fontSize:12,color:'#292B2D'}}>Forgotten Password?</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.reset}>
+              <Text style={{fontSize:14,fontWeight:500,color:'#442CF5'}}>Reset</Text>
+            </TouchableOpacity>
+            </View>
+
+          </View>
+        </View>
+
+        <View style={styles.buttons_div}>
+          {/* Sign Up Button */}
+          <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('home')}>
+            <Text style={styles.buttonText}>Sign In</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity   onPress={() => navigation.navigate('Signup')}  style={styles.secButton}>
+            <Text style={styles.buttonTexttwo}>Register</Text>
+          </TouchableOpacity>
+        </View>
+      </SafeAreaView>
     </View>
-
-    {/* Password Fields */}
-    <View style={styles.passwordContainer}>
-      <TextInput
-        style={styles.passwordInput}
-        placeholder="Password"
-        secureTextEntry={secureTextEntry}
-        value={form.password}
-        onChangeText={(text) => setForm({ ...form, password: text })}
-      />
-      <TouchableOpacity onPress={() => setSecureTextEntry(!secureTextEntry)}>
-        <Ionicons name={secureTextEntry ? "eye-off" : "eye"} size={24} color="gray" style={styles.iconstwo}/>
-      </TouchableOpacity>
-    </View>
-    </View>
-
-
-    <View>
-       <Text style={styles.errormessage}><Image source={require("../assets/Danger-Circle.png")}/> Youve entered an incorrect password</Text>
-      </View>
-    <View >
-       <Text style={styles.errormessage}><Image source={require("../assets/Vector.png")}/> Youve entered an incorrect password</Text>
-    </View>
-
-    <View style={styles.forgot}>
-    <TouchableOpacity>
-      <Text>Forgotten Password?</Text>
-    </TouchableOpacity>
-
-    <TouchableOpacity>
-      <Text style={styles.reset}>Reset</Text>
-    </TouchableOpacity>
-    </View>
-
-    {/* Sign Up Button */}
-    <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('home')}>
-      <Text style={styles.buttonText}>Sign In</Text>
-    </TouchableOpacity>
-
-    <TouchableOpacity   onPress={() => navigation.navigate('Signup')}  style={styles.secButton}>
-      <Text style={styles.buttonTexttwo}>Register</Text>
-    </TouchableOpacity>
-  
-   </View>
-  </SafeAreaView>
-    </>
   );
 };
 
@@ -104,25 +108,18 @@ color="black"
 export default LoginScreen;
 
 const styles = StyleSheet.create({
-  minicontainer: {
-   backgroundColor: "#442CF5",
-   height: 80,
-  },
-   container: {
-   flex: 1,
-   backgroundColor: "#f3f3ff",
- },
- quick:{
+  container: {
   flex: 1,
-  alignItems:"center",
-  flexDirection: "column"
  },
  innerCont: {
-     padding: 20
+  padding: 15,
+  // backgroundColor:'red'
  }, 
 
  inputDiv: {
-    paddingTop: 5
+    paddingTop: 5,
+    gap:12,
+    // backgroundColor:'red'
  },
 
  innerdiv: {
@@ -133,61 +130,36 @@ const styles = StyleSheet.create({
      gap: 110,
      paddingLeft: 13
  },
- writeup: {
-      color: "#fff",
-      fontWeight: "bold",
-      fontSize: 18,
-      paddingBottom: 15
- },
- backButton: {
-    marginTop: 50,
-   marginBottom: 10,
-   // padding: 10,
-   // borderRadius: 50,
-   // marginBottom: 20,
-   // flex: 1,
-   // flexDirection: "row",
-   width: 30,
-   height: 30,
-   justifyContent: "center",
-   alignItems: "center",
-   backgroundColor: "white",
-   borderRadius: 10,
- },
  title: {
-   fontSize: 30,
-   fontWeight: 900,
-   color: "navy",
-   marginTop: 15,
- },
- subtitle: {
-   fontSize: 16,
-   color: "#5e5e5e",
-   marginBottom: 20,
-   marginTop: 10
- },
- input: {
-   backgroundColor: "white",
-   padding: 17,
-   borderRadius: 18,
-   marginBottom: 10,
- },
- passwordContainer: {
-   flexDirection: "row",
-   alignItems: "center",
-   backgroundColor: "white",
-   padding: 15,
-   borderRadius: 18,
-   marginBottom: 10,
- },
- passwordInput: {
-   flex: 1,
- },
- checkboxContainer: {
-   flexDirection: "row",
-   alignItems: "center",
-   marginBottom: 25,
- },
+  fontSize: 24,
+  fontWeight: 700,
+  color: "#240F51",
+  marginTop: 10,
+},
+subtitle: {
+  fontSize: 14,
+  color: "#292B2D",
+  marginBottom: 20,
+  marginTop: 10
+},
+input: {
+  height:50,
+  width:'100%',
+  backgroundColor: "white",
+  paddingHorizontal:12,
+  borderRadius: 16,
+},
+passwordContainer: {
+  justifyContent:'center',
+  // backgroundColor: "red",
+  gap:5,
+  position:'relative'
+},
+eye: {
+  position:'absolute',
+  right:12,
+  top:15
+},
  termsText: {
    flex: 1,
    fontSize: 14,
@@ -199,16 +171,17 @@ const styles = StyleSheet.create({
    fontWeight: "bold",
  },
  button: {
-   backgroundColor: "#4a3aff",
-   padding: 15,
+  height:50,
+   backgroundColor: "#2C14DD",
    borderRadius: 15,
    alignItems: "center",
+   justifyContent:'center',
    marginTop: 37
  },
  buttonText: {
-   color: "white",
-   fontSize: 16,
-   fontWeight: "bold",
+   color: "#FCFCFC",
+   fontSize: 14,
+   fontWeight: 600,
  },
  disabledButton: {
    backgroundColor: "#c3b3ff",
@@ -227,7 +200,7 @@ const styles = StyleSheet.create({
    color: "navy"
  },
  secButton: {
-   backgroundColor: "#e9e9fe",
+   backgroundColor: "#2C14DD0D",
    padding: 15,
    borderRadius: 15,
    alignItems: "center",
@@ -235,30 +208,42 @@ const styles = StyleSheet.create({
  },
 
  buttonTexttwo:{
-    color: "navy"
+    color: "#240F51",
+    fontSize:14,
+    fontWeight: 600
  }, 
 
  reset: {
-  color: "#2C14DD",
-  fontWeight: "bold",
-  fontSize: 17,
+  height:32,
+  width:64,
   backgroundColor: "#2C14DD08",
-  padding: 13,
-  borderRadius: 10
+  borderRadius: 10,
+  justifyContent:'center',
+  alignItems:'center'
  },
  forgot: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    paddingTop: 15,
-    paddingBottom: 100
+    // backgroundColor:'red',
+    marginTop:20
  },
  errormessage: {
-   color: "red",
-   backgroundColor: "#FD3C4A12",
-   padding: 7,
-   borderRadius: 10,
-   marginBottom: 25
+  flexDirection:'row',
+  gap:3,
+  color: "red",
+  backgroundColor: "#FD3C4A12",
+  paddingHorizontal:6,
+  paddingVertical:4,
+  borderRadius: 10,
+ },
+ error: {
+  fontSize:12,
+  color:'#FD3C4A'
+ },
+ buttons_div: {
+  paddingHorizontal:15,
+  paddingVertical:30
  }
 });
 
