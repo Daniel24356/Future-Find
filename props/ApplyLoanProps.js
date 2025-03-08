@@ -5,8 +5,8 @@ const ApplyLoanProps = ({applyText, applyPrice, applyImage}) => {
         <View style = {styles.applyContainer}>
             <Image style = {styles.applyImg} source = {applyImage}/>
             <View style = {styles.applyTesx}>
-            <Text style = {styles.apply}>{applyText}</Text>
-            <Text style = {styles.applyT}>{applyPrice}</Text>
+               <Text style = {styles.apply}>{applyText}</Text>
+               <Text style = {styles.applyT}>{applyPrice}</Text>
             </View>
         </View>
     )
@@ -14,27 +14,31 @@ const ApplyLoanProps = ({applyText, applyPrice, applyImage}) => {
 
 const styles = StyleSheet.create({
      applyContainer: {
-        height: 50,
+      width:'100%',
+        height: 46,
         flexDirection: "row",
         alignItems: "center",
         gap: 10,
+      //   backgroundColor:'red'
      },
      apply: {
-        fontWeight: 400,
+        fontWeight: 500,
+        fontSize:12,
+        color:'#292B2D'
      },
      applyTesx: {
-       flexDirection: "column",
-       gap: 3
+      width:265,
+       gap: 3,
+       paddingRight:20
+      // backgroundColor:'red'
      },
      applyImg: {
-        width: 42,
-        height: 40.73,
+        width: 34,
+        height: 34,
      },
      applyT: {
-        width: 300,
-        fontSize: 13,
-        fontWeight: 200,
-        textAlign: "left",
+        fontSize: 10,
+        color:'#6C727F'
      }
 })
 
