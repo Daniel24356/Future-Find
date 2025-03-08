@@ -3,6 +3,7 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet, SafeAreaView, Imag
 import { Checkbox } from "react-native-paper";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from '@react-navigation/native';
+import TopHeader from "../props/TopHeader";
 
 const LoginScreen = () => {
 const [form, setForm] = useState({
@@ -15,9 +16,11 @@ const [form, setForm] = useState({
     const [confirmSecureTextEntry, setConfirmSecureTextEntry] = useState(true);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <>
+    <TopHeader title="Login" />
+     <SafeAreaView style={styles.container}>
     {/* Header */}
-    <View style={styles.minicontainer}>
+    {/* <View style={styles.minicontainer}>
        <View style={styles.innerdiv}>
          <View>
          <TouchableOpacity style={styles.backButton}>
@@ -30,7 +33,7 @@ color="black"
          </View>
     <Text style={styles.writeup}>Sign In</Text>
        </View>
-    </View>
+    </View> */}
 
    <View style={styles.innerCont}>
    <Text style={styles.title}>We missed you!</Text>
@@ -46,7 +49,7 @@ color="black"
       onChangeText={(text) => setForm({ ...form, email: text })}
     />
     <View>
-       <Text style={styles.errormessage}><Image source={require("../assets/Vector.png")}/> This email doesnt exist</Text>
+       <Text style={styles.errormessage}><Image source={require("../assets/Danger-Circle.png")}/> This email doesnt exist</Text>
     </View>
 
     {/* Password Fields */}
@@ -64,7 +67,11 @@ color="black"
     </View>
     </View>
 
+
     <View>
+       <Text style={styles.errormessage}><Image source={require("../assets/Danger-Circle.png")}/> Youve entered an incorrect password</Text>
+      </View>
+    <View >
        <Text style={styles.errormessage}><Image source={require("../assets/Vector.png")}/> Youve entered an incorrect password</Text>
     </View>
 
@@ -86,20 +93,29 @@ color="black"
     <TouchableOpacity   onPress={() => navigation.navigate('Signup')}  style={styles.secButton}>
       <Text style={styles.buttonTexttwo}>Register</Text>
     </TouchableOpacity>
+  
    </View>
   </SafeAreaView>
+    </>
   );
 };
 
-// Styles
+
+export default LoginScreen;
+
 const styles = StyleSheet.create({
   minicontainer: {
    backgroundColor: "#442CF5",
-   height: 115,
+   height: 80,
   },
    container: {
    flex: 1,
    backgroundColor: "#f3f3ff",
+ },
+ quick:{
+  flex: 1,
+  alignItems:"center",
+  flexDirection: "column"
  },
  innerCont: {
      padding: 20
@@ -246,4 +262,3 @@ const styles = StyleSheet.create({
  }
 });
 
-export default LoginScreen;

@@ -9,17 +9,12 @@ import {
   ScrollView
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons"; 
+import TopHeader from "../props/TopHeader";
 const FinalWithdrawal =()=> {
     return (
         <ScrollView style={styles.container}>
-         <View style={styles.header}>
-                <View style={{flexDirection: "row", gap: 20, alignItems: "center"}}>
-                <TouchableOpacity>
-                  <Ionicons name="chevron-back" size={24} color="black" style={{backgroundColor: "white", borderRadius: 10, padding: 5}} />
-                </TouchableOpacity>
-                <Text style={styles.headerTitle}>Withdrawal</Text>
-                </View>
-              </View>
+        
+               <TopHeader title="Withdrawal" onRightPress={() => console.log("Settings Pressed")} />
 
                <View style={{padding: 10}}>
                     <View style={styles.card}>

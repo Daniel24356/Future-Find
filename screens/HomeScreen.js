@@ -17,21 +17,21 @@ const HomeScreen = () => {
         <StatusBar style="dark" />
         <SafeAreaView style={styles.safeArea}>
           <View style={styles.user_info}>
-            <View style={styles.user_div}>
+            <TouchableOpacity onPress={() => navigation.navigate('profile')} style={styles.user_div}>
               <Image 
                 source={require("../assets/homePage/Group_20105.png")}
               />
               <View>
                 <View style={styles.greeting}>
-                  <Text onPress={() => navigation.navigate('profile')} style={styles.greetTxt1} >Hello </Text>
-                  <Text onPress={() => navigation.navigate('profile')} style={styles.greetTxt2}>Malvin</Text>
+                  <Text style={styles.greetTxt1} >Hello </Text>
+                  <Text style={styles.greetTxt2}>Malvin</Text>
                 </View>
                 <Text style={styles.regText}>Good morning</Text>
               </View>
-            </View>
-            <View style={styles.notification}>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('Notification')}  style={styles.notification}>
               <Image source={require("../assets/homePage/bell.png")}/>
-            </View>
+            </TouchableOpacity>
           </View>
 
           <View style={styles.user_below}>
@@ -41,10 +41,10 @@ const HomeScreen = () => {
             <Text style={styles.text2}>N20,983</Text>
             <Text style={styles.text3}>Repayment due: 28 March, 2025</Text>
 
-            <View style={styles.transactions}>
+            <TouchableOpacity onPress={() => navigation.navigate('Transaction')} style={styles.transactions}>
               <Text style={styles.trans_text}>Transactions</Text>
               <Image source={require("../assets/homePage/chevron_img.png")}/>
-            </View>
+            </TouchableOpacity>
           </View>
 
           <View style={styles.loanContainer}>
@@ -52,7 +52,7 @@ const HomeScreen = () => {
               <Image  source={require("../assets/homePage/get_loan.png")} style={styles.loan_icon} />
               <Text style={styles.small_text}>Take loan</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.loan1}>
+            <TouchableOpacity style={styles.loan1} onPress={() => navigation.navigate('finalwithdrawal')}>
               <Image source={require("../assets/homePage/withdraw.png")}/>
               <Text style={styles.small_text}>Withdraw</Text>
             </TouchableOpacity>
@@ -61,44 +61,44 @@ const HomeScreen = () => {
               <Text style={styles.small_text}>Repay loan</Text>
             </TouchableOpacity>
           </View>
-
+              
           <View style={styles.loanContainer2}>
-            <View style={styles.loan2}>
+            <TouchableOpacity onPress={() => navigation.navigate('airtime')} style={styles.loan2}>
               <View style={styles.small_logo}>
                 <Image source={require("../assets/homePage/airtime.png")}/>
               </View>
               <Text style={styles.small_text}>Airtime</Text>
-            </View>
-            <View style={styles.loan2}>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('data')} style={styles.loan2}>
               <View style={styles.small_logo}>
                 <Image source={require("../assets/homePage/data.png")}/>
               </View>
               <Text style={styles.small_text}>Data</Text>
-            </View>
-            <View style={styles.loan2}>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('electricity')} style={styles.loan2}>
               <View style={styles.small_logo}>
                 <Image source={require("../assets/homePage/electricity.png")}/>
               </View>
               <Text style={styles.small_text}>Electricity</Text>
-            </View>
-            <View style={styles.loan2}>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('BetAccount')} style={styles.loan2}>
               <View style={styles.small_logo}>
                 <Image source={require("../assets/homePage/bet_acc.png")}/>
               </View>
               <Text style={styles.small_text}>Bet account</Text>
-            </View>
+            </TouchableOpacity>
           </View>
 
           <View style={styles.investMain}>
-            <TouchableOpacity style={styles.invest}>
+            <TouchableOpacity onPress={() => navigation.navigate('investment')} style={styles.invest}>
               <Image source={require("../assets/homePage/invest.png")}/>
               <View>
-                <Text style={styles.invest_text1} onPress={() => navigation.navigate('fixPlan')}>Invest your money</Text>
+                <Text style={styles.invest_text1}>Invest your money</Text>
                 <Text style={styles.invest_text2}>Earn interest on your invested money</Text>
               </View>
               <EvilIcons style={styles.chevron} name="chevron-right" size={24} color="black" />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.invest}>
+            <TouchableOpacity onPress={() => navigation.navigate('contributionActive')}  style={styles.invest}>
             <Image source={require("../assets/homePage/contribute.png")}/>
             <View>
               <Text style={styles.invest_text1}>Start a contribution</Text>
@@ -106,7 +106,7 @@ const HomeScreen = () => {
             </View>
             <EvilIcons style={styles.chevron} name="chevron-right" size={24} color="black" />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.invest}>
+            <TouchableOpacity onPress={() => navigation.navigate('loanLandingScreen')}  style={styles.invest}>
             <Image source={require("../assets/homePage/loan.png")}/>
             <View>
               <Text style={styles.invest_text1}>Easy loan</Text>
