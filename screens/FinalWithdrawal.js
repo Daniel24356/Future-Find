@@ -13,6 +13,7 @@ import CustomButton from "../props/CustomButton";
 
 const FinalWithdrawal =()=> {
   const [activeButton, setActiveButton] = useState(false);
+  const [bank, setBank] = useState(null);
     return (
       <View style={{flex:1,backgroundColor:'#F5F7FF'}}>
         <SafeAreaView style={{flex:1}}>
@@ -97,7 +98,11 @@ const FinalWithdrawal =()=> {
 
                 <View style={{gap:10,marginTop:10}}>
                   <TouchableOpacity style={styles.select_div}>
-                    <Text style={{fontSize:14,color:'#6C727F'}}>Select bank</Text>
+                    {
+                      bank?
+                      <Text style={{fontSize:14,color:'#6C727F'}}>{bank}</Text> :
+                      <Text style={{fontSize:14,color:'#6C727F'}}>Select bank</Text>
+                    }
                     <Image source={require("../assets/arrow.png")}/>
                   </TouchableOpacity>
 
