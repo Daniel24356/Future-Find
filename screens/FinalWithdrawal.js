@@ -3,16 +3,19 @@ import {
   View,
   Text,
   StyleSheet,
-  SafeAreaView,
   TouchableOpacity,
   Image, TextInput,
   ScrollView
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons"; 
 import TopHeader from "../props/TopHeader";
+import { SafeAreaView } from "react-native-safe-area-context";
+
 const FinalWithdrawal =()=> {
     return (
+
         <ScrollView style={styles.container}>
+          <SafeAreaView>
         
                <TopHeader title="Withdrawal" onRightPress={() => console.log("Settings Pressed")} />
 
@@ -104,6 +107,7 @@ const FinalWithdrawal =()=> {
                                   <Text style={styles.buttonText}>Continue</Text>
                                 </TouchableOpacity>
                 </View>
+          </SafeAreaView>
     </ScrollView>
     )
 }
