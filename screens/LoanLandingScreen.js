@@ -9,10 +9,13 @@ import {
 import { MaterialIcons } from "@expo/vector-icons"; 
 import CustomButton from "../props/CustomButton";
 import TopHeader from "../props/TopHeader";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { StatusBar } from "expo-status-bar";
 
 export default function LoanLandingScreen() {
   return (
-    
+    <SafeAreaView>
+      <StatusBar style="light" backgroundColor="#442CF5"/>
     <View contentContainerStyle={styles.container}>
       {/* <View style={styles.topPart}>
         <Text style={styles.appTitle}>Loan Application</Text>
@@ -59,6 +62,7 @@ export default function LoanLandingScreen() {
         </View>
       </View>
     </View>
+    </SafeAreaView>
   );
 }
 
@@ -137,7 +141,11 @@ export const styles = StyleSheet.create({
     marginTop: 90
   },
 
-  termsContainer: { flexDirection: "row", alignItems: "center", marginTop: 20 },
+  termsContainer: { 
+    flexDirection: "row", 
+    alignItems: "center", 
+    marginTop: 20,
+  },
   checkbox: {
     width: 18,
     height: 18,
@@ -146,6 +154,6 @@ export const styles = StyleSheet.create({
     borderRadius: 4,
     marginRight: 10,
   },
-  termsText: { fontSize: 14, color: "#666" },
+  termsText: { fontSize: 12, color: "#666" },
   linkText: { color: "#442CF5", textDecorationLine: "underline" },
 });

@@ -9,24 +9,30 @@ const TopHeader = ({ title, rightIcon, onRightPress }) => {
   return (
     <View style={styles.header}>
       {/* Left: Back Button + Title */}
-      <View style={{ flexDirection: "row", gap: 20, alignItems: "center" }}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
+      <View style={styles.group}>
+        <TouchableOpacity 
+          style={styles.icon}
+          onPress={() => navigation.goBack()}>
           <Ionicons 
             name="chevron-back" 
-            size={24} 
-            color="black" 
-            style={styles.icon} 
+            size={18} 
+            color="#240F51" 
           />
         </TouchableOpacity>
+      </View>
+
+      <View style={[styles.group, {alignItems:'center'}]}>
         <Text style={styles.headerTitle}>{title}</Text>
       </View>
 
       {/* Right: Optional Icon */}
-      {rightIcon && (
-        <TouchableOpacity onPress={onRightPress}>
-          <Ionicons name={rightIcon} size={24} color="white" />
-        </TouchableOpacity>
-      )}
+      <View style={[styles.group, {alignItems:'flex-end'}]}>
+        {rightIcon &&
+          <TouchableOpacity onPress={onRightPress}>
+            <Ionicons name={rightIcon} size={24} color="white" />
+          </TouchableOpacity>
+        }
+      </View>
     </View>
   );
 };
@@ -36,20 +42,28 @@ export default TopHeader;
 const styles = StyleSheet.create({
   header: {
     flexDirection: "row",
-    alignItems: "flex-end",
     justifyContent: "space-between",
-    padding: 15,
-    backgroundColor: "#4A3AFF",
-    height: 100,
+    paddingHorizontal: 15,
+    backgroundColor: "#442CF5",
+    height: 60,
+    width:'100%'
+  },
+  group: {
+    flex:1,
+    // backgroundColor:'yellow',
+    justifyContent:'center'
   },
   headerTitle: {
     color: "white",
-    fontSize: 18,
-    fontWeight: "bold",
+    fontSize: 16,
+    fontWeight: 600,
   },
   icon: {
     backgroundColor: "white",
     borderRadius: 10,
-    padding: 5,
+    width:28,
+    height:28,
+    justifyContent:'center',
+    alignItems:'center'
   }
 });

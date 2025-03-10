@@ -13,23 +13,26 @@ const EasyLoanProps = ({easyText, easyPrice, easyImage}) => {
 
 const styles = StyleSheet.create({
     contain:{
-        width: 110,
-        height: 85,
+        flex:1,
         // backgroundColor: "red",
-        flexDirection: "column",
-        alignItems: "center"
+        alignItems: "center",
+        justifyContent:'center',
     },
     easy: {
         fontWeight: 400,
+        fontSize:12,
+        color:'#292B2D',
+        lineHeight:18
     },
     easyImg: {
-        width: 42,
-        height: 40.73,
+        width: 34,
+        height: 34,
         marginBottom: 8
     },
     easyT: {
-        fontSize: 13,
-        fontWeight: 200
+        fontSize: 10,
+        fontWeight: 400,
+        color:'#6C727F'
     }
 })
 

@@ -14,7 +14,7 @@ const OnboardingScreen2 = () => {
         <View style={styles.image_container}>
             <View style={styles.skip}>
                 <TouchableOpacity style={styles.skip_opacity}>
-                    <Text style={styles.text} onPress={()=> navigate.navigate("onboarding3")}>
+                    <Text style={styles.text} onPress={()=> navigate.navigate("Signup")}>
                         Skip
                     </Text>
                 </TouchableOpacity>
@@ -31,6 +31,8 @@ const OnboardingScreen2 = () => {
                 headText={"Gain total control of your money"}
                 parText={"Track your transaction easily, with categories and financial report"}
                 butnText={"Continue"}
+                page2={true}
+                onPress={()=> navigate.navigate("onboarding3")}
             />
         </View>
     </SafeAreaView>
