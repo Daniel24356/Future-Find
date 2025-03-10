@@ -32,6 +32,7 @@ const OnboardingScreen3 = () => {
                 parText={"Setup your budget for each category, so you're in control. Track categories you spend the most money on"}
                 butnText={"Get started"}
                 page3={true}
+                onPress={()=> navigate.navigate("Signup")}
             />
         </View>
     </SafeAreaView>

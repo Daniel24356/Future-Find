@@ -4,7 +4,7 @@ import CustomButton from './CustomButton'
 import { ActivityIndicator } from 'react-native'
 
 
-const OnboardingCard = ({headText, parText, butnText, page1, page2, page3}) => {
+const OnboardingCard = ({headText, parText, butnText, onPress, page1, page2, page3}) => {
   return (
     <View style={styles.container}>
       <Text style={styles.head}>
@@ -23,6 +23,7 @@ const OnboardingCard = ({headText, parText, butnText, page1, page2, page3}) => {
       <CustomButton
         title={butnText}
         backgroundColor={'#2C14DD'}
+        onPress={onPress}
       />
     </View>
   )
