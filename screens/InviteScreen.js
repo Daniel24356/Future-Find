@@ -22,7 +22,7 @@ const InviteScreen = () => {
                   <View style = {styles.bar}></View>
                   <View style = {styles.bar}></View>
                </View>
-              <View>
+              <View style= {styles.cr}>
               <Text style={styles.createT}>Invite members to join</Text>
               <Text style = {styles.detail}>Invite members via email or group link</Text>
               </View>
@@ -35,18 +35,20 @@ const InviteScreen = () => {
                   placeholderTextColor= "#6C727F"
                ></TextInput>
                </View>
-                  
-             </View>
-             <View style = {styles.link}>
-              <Text>0 members</Text>
+
+               <View style = {styles.link}>
+              <Text style={{fontSize: 14, fontWeight: 400, height: 24}}>0 members</Text>
               <Text style = {styles.textCopy}>Copy group link <Image style ={styles.Img} source={require('../assets/applyLoan/Copy.png')}/></Text>
              </View>
              </View>
             
+             </View>
+
                <View style = {styles.conButton}>
               <Custom2Button
               backgroundColor = "#2C14DD"
               title = "Continue"
+              opacity= "30"
             onPress={() => navigate.navigate("ContributeScreen2")}
               />
               </View>
@@ -82,40 +84,47 @@ const styles = StyleSheet.create({
   },
   create: {
       color: "white",
-      fontSize: 18
+      fontSize: 16,
+      fontWeight: 600
   },
   contribute:{
-      width: 392,
-      height: 570,
-      gap: 13,
-      marginTop: 40,
-      marginLeft: 17,
-      paddingLeft: 5,
-      paddingRight: 6
+    width: 328,
+    height: 355,
+    gap: 20,
+    marginTop: 40,
+    marginLeft: 16,
   },
   progress:{
      flexDirection: "row",
-     gap: 20
+    justifyContent: "space-between"
   },
   bar: {
-    width: 180,
-    height: 3,
+    width: 154,
+    height: 2,
     backgroundColor: "#442CF5"
+  },
+  cr:{
+    width: 328,
+    height: 61,
+    gap: 6
   },
   createT: {
       fontWeight: 700,
-      fontSize: 35
+      fontSize: 24
   },
   detail: {
-     fontSize: 18.5,
-     marginTop: 8
+    fontSize: 14,
+    fontWeight: 400
   },
   form: {
-   marginTop: 15,
-   gap: 20
+    width: 328,
+    height: 372,
+    marginTop: 20,
+    gap: 16
   },
   inputDiv: {
-   height: 370,
+    width: 328,
+   height: 334,
    flexDirection: "row",
    backgroundColor: "#fff",
    borderRadius: 16,
@@ -125,36 +134,48 @@ const styles = StyleSheet.create({
    paddingTop: 8,
    gap: 10
   },
+
   input: {
-   width: 340,
-   height: 340,
+   width: 290,
+   height: 318,
    flex: 1,
    paddingLeft: 5,
    paddingTop: 8,
-   fontSize: 16,
-  textAlignVertical: "top"
-   
+   fontSize: 12,
+   fontWeight: 400,
+  textAlignVertical: "top" 
   },
   link: {
-    height: 30,
+    width: 328,
+    height: 28,
     flexDirection: "row",
     justifyContent: "space-between"
   },
   textCopy: {
-    paddingRight: 12,
-    paddingLeft: 12,
-    paddingTop: 5,
+    width: 141,
+    height: 28,
+    paddingRight: 10,
+    paddingLeft: 10,
+    paddingTop: 2,
     paddingBottom: 2,
     backgroundColor: "#FAFBFF",
     borderRadius: 10,
     borderWidth: 1,
     borderColor: "#6C727F1A",
+    gap: 5,
+    fontSize: 14, 
+    fontWeight: 400,
+    color: "#292B2D"
 
   },
+  Img: {
+    width: 12,
+    height: 13.33
+  },
   conButton: {
-   width: 392,
-   marginLeft: 17,
-   marginTop: 65,
+   width: 328,
+   marginLeft: 16,
+   top: 727,
    marginBottom: 55
   }
 })

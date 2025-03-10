@@ -105,37 +105,36 @@ const styles = StyleSheet.create({
       left: 2
     },
     easyLoan: {
-      width: 392,
-      height: 315,
+      width: 328,
+      height: 291.73,
       backgroundColor: "#FFFFFF",
       marginTop: -76,
       borderRadius: 16,
-      marginLeft: 17,
+      marginLeft: 16,
       padding: 20
     },
     easyText: {
-      width: 350,
-      height: 100,
-      paddingLeft: 40,
-      paddingRight: 40,
+      width: 288,
+      height: 79,
       flex: 1,
       alignItems: "center",
-      gap: 18
+      gap: 10
     },
     get: {
-      width: 120,
+      width: 103,
+      height: 21,
       borderRadius: 12,
       backgroundColor: "#F5F7FF",
       textAlign: "center"
     },
     h3: {
-       fontSize: 35,
-       fontWeight: "bold",
+       fontSize: 28,
+       fontWeight: 800,
        color: "#131313",
     },
     easyTextFlex: {
-      width: 350,
-      height: 105,
+      width: 288,
+      height: 100.73,
       flexDirection: "row",
       borderRadius: 16,
       paddingBottom: 12,
@@ -145,15 +144,14 @@ const styles = StyleSheet.create({
       backgroundColor: "#F5F7FF"
     },
     easySteps: {
-      width: 80,
+      width: 74.41,
       height: 25,
-      flexDirection: "row",
-      paddingLeft: 10,
-      paddingRight: 10,
+      paddingLeft: 14,
+      paddingRight: 14,
       paddingTop: 4,
       paddingBottom: 4,
       backgroundColor: "#240F51",
-      borderRadius: 10,
+      borderRadius: 8,
       color: "white",
       marginLeft: 30,
       marginTop: 20,
@@ -162,23 +160,23 @@ const styles = StyleSheet.create({
       textAlign: "center"
     },
     apply: {
-      width: 392,
-      height: 220,
+      width: 328,
+      height: 199,
       backgroundColor: "#FFFFFF",
       borderRadius: 16,
       flexDirection: "column",
-      gap: 10,
-      marginLeft: 17,
+      gap: 12,
+      marginLeft: 16,
       paddingBottom: 10,
       paddingTop: 30,
       paddingLeft: 10,
-      paddingRight: 15
+      paddingRight: 10
     },
     applyButton: {
-      width: 392,
-      height: 100,
-      marginLeft: 17,
-      marginTop: 35
+      width: 328,
+      height: 50,
+      marginLeft: 16,
+      top: 617.73
     }
 })
 

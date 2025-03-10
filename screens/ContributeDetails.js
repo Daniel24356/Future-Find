@@ -22,7 +22,7 @@ const ContributeDetails = () => {
                   <View style = {[styles.bar, {backgroundColor: "#442CF5"}]}></View>
                   <View style = {[styles.bar, {backgroundColor: "#dad5fd"}]}></View>
                </View>
-              <View>
+              <View style={styles.cr}>
               <Text style={styles.createT}>Create contribution group</Text>
               <Text style = {styles.detail}>Enter your contribution details</Text>
               </View>
@@ -62,6 +62,7 @@ const ContributeDetails = () => {
                <View style = {styles.conButton}>
               <Custom2Button
               backgroundColor = "#2C14DD"
+              opacity= "30"
               title = "Continue"
             onPress={() => navigate.navigate("ContributeScreen2")}
               />
@@ -98,39 +99,46 @@ const styles = StyleSheet.create({
   },
   create: {
       color: "white",
-      fontSize: 18
+      fontSize: 16,
+      fontWeight: 600
   },
   contribute:{
-      width: 392,
-      height: 450,
+      width: 328,
+      height: 355,
       gap: 20,
       marginTop: 40,
-      marginLeft: 17,
-      paddingLeft: 5,
-      paddingRight: 6
+      marginLeft: 16,
   },
   progress:{
      flexDirection: "row",
-     gap: 20
+     justifyContent: "space-between"
   },
   bar: {
-    width: 180,
-    height: 3
+    width: 154,
+    height: 2
+  },
+  cr:{
+    width: 328,
+    height: 61,
+    gap: 6
   },
   createT: {
       fontWeight: 700,
-      fontSize: 35
+      fontSize: 24
   },
   detail: {
-     fontSize: 18.5,
-     marginTop: 8
+     fontSize: 14,
+     fontWeight: 400
   },
   form: {
+   width: 328,
+   height: 248,
    marginTop: 20,
-   gap: 20
+   gap: 16
   },
   inputDiv: {
-   height: 55,
+   width: 328,
+   height: 50,
    flexDirection: "row",
    backgroundColor: "#fff",
    alignItems: "center",
@@ -139,19 +147,20 @@ const styles = StyleSheet.create({
    paddingRight: 12,
    paddingLeft: 12,
    paddingTop: 8,
-   gap: 10
+   justifyContent: "space-between"
   },
   input: {
-   width: 325,
+   width: 285,
    height: 40,
    paddingLeft: 5,
    paddingTop: 8,
-   fontSize: 18
+   fontSize: 14,
+   fontWeight: 500
   },
   conButton: {
-   width: 392,
-   marginLeft: 17,
-   marginTop: 170,
+   width: 328,
+   marginLeft: 16,
+   top: 727,
    marginBottom: 55
   }
 })

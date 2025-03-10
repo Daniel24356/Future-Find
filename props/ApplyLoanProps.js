@@ -14,27 +14,34 @@ const ApplyLoanProps = ({applyText, applyPrice, applyImage}) => {
 
 const styles = StyleSheet.create({
      applyContainer: {
-        height: 50,
+        width: 308,
+        height: 45,
         flexDirection: "row",
         alignItems: "center",
         gap: 10,
      },
      apply: {
-        fontWeight: 400,
+        fontWeight: 500,
+        fontSize: 12,
+        lineHeight: 18,
+        color: "#292B2D"
      },
      applyTesx: {
+      width: 264,
+      height: 45,
        flexDirection: "column",
        gap: 3
      },
      applyImg: {
-        width: 42,
-        height: 40.73,
+        width: 34,
+        height: 34.73,
      },
      applyT: {
-        width: 300,
+        width: 264,
         fontSize: 13,
-        fontWeight: 200,
+        fontWeight: 400,
         textAlign: "left",
+        color: "#6C727F"
      }
 })
 
