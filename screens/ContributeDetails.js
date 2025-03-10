@@ -64,7 +64,7 @@ const ContributeDetails = () => {
               backgroundColor = "#2C14DD"
               opacity= "30"
               title = "Continue"
-            onPress={() => navigate.navigate("ContributeScreen2")}
+              onPress = {() => navigate.navigate("InviteScreen1")}
               />
               </View>
               
