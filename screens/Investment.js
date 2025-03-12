@@ -3,9 +3,11 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
 import EvilIcons from '@expo/vector-icons/EvilIcons';
 import TabBar from '../props/TabBar';
-
+import { useNavigation } from '@react-navigation/native';
 
 const Investment = () => {
+
+ const navigation = useNavigation();
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor:'#F5F7FF'}}>
@@ -49,7 +51,7 @@ const Investment = () => {
                 <Text style={styles.plans_text}>Investment plans</Text>
 
                 <View style={styles.plans_pack}>
-                    <TouchableOpacity style={styles.plans_box1}>
+                    <TouchableOpacity onPress={() => navigation.navigate('fixPlan')} style={styles.plans_box1}>
                         <Image 
                             source={require('../assets/investing/fixed_plan.png')}
                         />
@@ -95,7 +97,7 @@ const Investment = () => {
 
 
         <TabBar investment={true}/>
-
+          
     </SafeAreaView>
   )
 }
