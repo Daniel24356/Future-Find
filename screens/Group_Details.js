@@ -5,6 +5,7 @@ import { StatusBar } from 'expo-status-bar';
 import EvilIcons from '@expo/vector-icons/EvilIcons';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
+import PopUpScreen from '../props/PopUpScreen';
 
 const Group_Details = () => {
  const navigation = useNavigation();
@@ -141,7 +142,7 @@ const Group_Details = () => {
             </View>
 
         </SafeAreaView>
-
+        <PopUpScreen logout={true}/>
     </View>
   )
 }

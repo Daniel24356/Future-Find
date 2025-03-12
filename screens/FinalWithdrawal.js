@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -10,12 +10,72 @@ import {
 import TopHeader from "../props/TopHeader";
 import { SafeAreaView } from "react-native-safe-area-context";
 import CustomButton from "../props/CustomButton";
+import DropdownMenus from "../props/DropdownMenus";
+import { StatusBar } from "expo-status-bar";
+import axios from "axios";
+import VerificationPopup from "../props/VerificationPopup";
+import { useNavigation } from "@react-navigation/native";
+import PopUpScreen from "../props/PopUpScreen";
+const URL = "http://192.168.188.225:5000/api/v1/wallet/"
+const userID = '12208cd0-2e23-42ef-ac42-1c2ed9041104'
 
 const FinalWithdrawal =()=> {
+  const navigation = useNavigation();
   const [activeButton, setActiveButton] = useState(false);
   const [bank, setBank] = useState(null);
+  const [selectBank, setSelectBank] = useState(false);
+  const [amount, setAmount] = useState(0);
+  const [accNumber, setAccNumber] = useState(0);
+  const [accBalance, setAccBalance] = useState(0);
+  const [verification, setVerification] = useState(false);
+  const [success, setSuccess] = useState(false);
+
+  useEffect(()=>{
+    const getBalance = async ()=>{
+      axios.get(`${URL}getUserBalance/${userID}`)
+      .then((response)=>{
+        setAccBalance(response.data.balance);
+      })
+    };
+    getBalance();
+  },[success]);
+
+  useEffect(()=>{
+    if(amount.toString().length > 2 && bank && accNumber.toString().length === 10){
+      if(!activeButton){
+        setActiveButton(true);
+      }
+    }else{
+      if(activeButton){
+        setActiveButton(false);
+      }
+    }
+  },[amount, bank, accNumber]);
+
+  const handleSelect = (selectedBank)=>{
+    setBank(selectedBank);
+    setSelectBank(false);
+  };
+
+  const handleWithdrawal = async ()=>{
+    console.log('withdrawing...');
+    try {
+      axios.post(`${URL}withdrawal`, {userId: userID, amount: Number(amount)})
+      .then((response)=>{
+        console.log(response.data);
+        setSuccess(true);
+        setAmount(0);
+        setBank(null);
+        setAccNumber(0);
+      })
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
     return (
       <View style={{flex:1,backgroundColor:'#F5F7FF'}}>
+        <StatusBar style="light" backgroundColor="#442CF5"/>
         <SafeAreaView style={{flex:1}}>
           <TopHeader title="Withdrawal" onRightPress={() => console.log("Settings Pressed")} />
 
@@ -31,7 +91,7 @@ const FinalWithdrawal =()=> {
 
                 <View style={{alignItems:'center'}}>
                   <Text style={styles.totalInterest}>Total available amount</Text>
-                  <Text style={styles.amount}>N150,000</Text>
+                  <Text style={styles.amount}>{`N${accBalance.toLocaleString()}`}</Text>
                 </View>
 
                 <View style={{flexDirection: "row", gap: 10}}>
@@ -77,11 +137,15 @@ const FinalWithdrawal =()=> {
                     <Text style={{fontSize:12,color:'#FD3C4A'}}>- N10.00</Text>
                 </View>
 
+                {/* AMOUNT INPUT */}
                 <View style={styles.passwordContainer}>
                   <TextInput
                     style={styles.passwordInput}
                     placeholder="Amount"
                     placeholderTextColor={'#6C727F'}
+                    keyboardType="numeric"
+                    value={amount}
+                    onChangeText={(text)=> setAmount(text)}
                   />
                   <Image source={require("../assets/NairaImg.png")}/>
                 </View>
@@ -97,20 +161,25 @@ const FinalWithdrawal =()=> {
                 </View>
 
                 <View style={{gap:10,marginTop:10}}>
-                  <TouchableOpacity style={styles.select_div}>
+                  <TouchableOpacity style={styles.select_div} onPress={()=>setSelectBank(true)}>
                     {
                       bank?
-                      <Text style={{fontSize:14,color:'#6C727F'}}>{bank}</Text> :
+                      <Text style={{fontSize:14,color:'#6C727F'}}>{bank.name}</Text> :
                       <Text style={{fontSize:14,color:'#6C727F'}}>Select bank</Text>
                     }
                     <Image source={require("../assets/arrow.png")}/>
                   </TouchableOpacity>
 
+                  {/* ACCOUNT NUMBER INPUT */}
                   <View style={styles.passwordContainer}>
                     <TextInput
                       style={styles.passwordInput}
                       placeholder="Account number"
                       placeholderTextColor={'#6C727F'}
+                      keyboardType="numeric"
+                      maxLength={10}
+                      value={accNumber}
+                      onChangeText={(text)=> setAccNumber(text)}
                     />
                   </View>
                 </View>
@@ -126,6 +195,7 @@ const FinalWithdrawal =()=> {
               <CustomButton
                 backgroundColor={'#2C14DD'}
                 title={'Continue'}
+                onPress={handleWithdrawal}
               /> 
               :
               <View style={styles.button}>
@@ -135,6 +205,23 @@ const FinalWithdrawal =()=> {
           </View>
 
         </SafeAreaView>
+        {
+          selectBank ?
+          <DropdownMenus 
+            selectBank={true}
+            onClose={()=> setSelectBank(false)}
+            selectedBank={handleSelect}
+          /> :
+          verification ?
+          <VerificationPopup
+            confirmVerification={true}
+          /> :
+          success?
+          <PopUpScreen
+            withdrawalSuccess={true}
+            onPress={()=> setSuccess(false)}
+          /> :''
+        }
       </View>
   )
 }
