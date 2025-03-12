@@ -18,10 +18,16 @@ import ResetPassword from '../screens/ResetPassword';
 import Settings from '../screens/Settings';
 import FixPlanScreen from '../screens/FixplanScreen';
 import FinalWithdrawal from '../screens/FinalWithdrawal';
+import EditProfileScreen from '../screens/EditProfileScreen';
+import ProfileScreen from '../screens/profileScreen';
+import Group_members from '../screens/Group_members';
+import OTPScreen from '../screens/OTPScreen';
+import BVNScreen from '../screens/BVNScreen';
 import AirtimeTopupScreen from '../screens/AirtimeTopupScreen'
 import Contribution_Active from '../screens/Contribution_Active';
 import Group_Details from '../screens/Group_Details';
 import Investment from '../screens/Investment';
+
 
 const Stack = createStackNavigator();
 
@@ -29,6 +35,10 @@ const AppNavigator = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name='OTPScreen' component={OTPScreen}/>
+      <Stack.Screen name='BVNScreen' component={BVNScreen}/>
+        <Stack.Screen name="Setting" component={Settings} />
+        <Stack.Screen name="Resetpassword" component={ResetPassword} />
         <Stack.Screen name="Splash" component={SplashScreen} />
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Signup" component={SignUpForm} />
@@ -37,6 +47,8 @@ const AppNavigator = () => {
         <Stack.Screen name="onboarding3" component={OnboardingScreen3} />
         <Stack.Screen name="home" component={HomeScreen} />
         <Stack.Screen name="loanLandingScreen" component={LoanLandingScreen} />
+        <Stack.Screen name="Group_members" component={Group_members} />
+        <Stack.Screen name="EditProfile" component={EditProfileScreen} />
         <Stack.Screen name="profile" component={ProfileScreen} />
         <Stack.Screen name="repayLoan" component={RepayLoan} />
         <Stack.Screen name="fixPlan" component={FixPlanScreen} />
