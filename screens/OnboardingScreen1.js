@@ -13,8 +13,8 @@ const OnboardingScreen1 = () => {
         <StatusBar style='light' />
         <View style={styles.image_container}>
             <View style={styles.skip}>
-                <TouchableOpacity style={styles.skip_opacity}>
-                    <Text style={styles.text} onPress={()=> navigate.navigate("onboarding2")}>
+                <TouchableOpacity style={styles.skip_opacity} onPress={()=> navigate.navigate("Signup")}>
+                    <Text style={styles.text}>
                         Skip
                     </Text>
                 </TouchableOpacity>
@@ -38,6 +38,8 @@ const OnboardingScreen1 = () => {
                 headText={"You ought to know where your money goes"}
                 parText={"Get an overview of how you are performing and motivate yourself to achieve even more"}
                 butnText={"Continue"}
+                page1={true}
+                onPress={()=> navigate.navigate("onboarding2")}
             />
         </View>
     </SafeAreaView>

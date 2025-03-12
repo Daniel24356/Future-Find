@@ -4,10 +4,6 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
 import EvilIcons from '@expo/vector-icons/EvilIcons';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import PopUpScreen from '../props/PopUpScreen';
-import VerificationPopup from '../props/VerificationPopup';
-import DropdownMenus from '../props/DropdownMenus';
-import ConfirmPaymentPopup from '../props/ConfirmPaymentPopup';
 import { useNavigation } from '@react-navigation/native';
 
 const Group_Details = () => {
@@ -145,8 +141,6 @@ const Group_Details = () => {
             </View>
 
         </SafeAreaView>
-
-        {/* <ConfirmPaymentPopup confirmPayment={true} /> */}
 
     </View>
   )

@@ -1,70 +1,101 @@
-import { StyleSheet, View, Text, TextInput, Image} from "react-native"
+import { StyleSheet, View, Text, TextInput, Image, TouchableOpacity} from "react-native"
 import Ionicons from '@expo/vector-icons/Ionicons';
 import Custom2Button from "../props/Custom2Button";
 import { useNavigation } from "@react-navigation/native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { StatusBar } from "expo-status-bar";
+import EvilIcons from '@expo/vector-icons/EvilIcons';
+import CustomButton from "../props/CustomButton";
 
 
 const InviteScreen = () => {
    const navigate = useNavigation()
    return (
-     <View style = {styles.conContainer}>
-       <View style={styles.header}>
-                <View style={styles.innercont}>
-                    <View style={styles.smallBox}>
-                        <Ionicons name="chevron-back" size={20} color="black" />
-                    </View>
-                    <Text style={styles.create}>Create group</Text>
-                </View>
+    <View style = {styles.conContainer}>
+      <SafeAreaView style={{flex:1,justifyContent:'space-between'}}>
+        <StatusBar style="light" backgroundColor="#442CF5"/>
+
+        <View>
+          <View style={styles.header}>
+            <View style={{flexDirection:'row', alignItems:'center',gap:10}}>
+                <TouchableOpacity style={styles.back} onPress={()=> navigate.goBack()}>
+                  <EvilIcons name="chevron-left" size={30} color="black" />
+                </TouchableOpacity>
+                <Text style={{color:'#FFFF',fontSize:16,fontWeight:600}}>Create group</Text>
+            </View>
+          </View>
+
+          <View style = {styles.contribute}>
+
+            <View style = {styles.progress}>
+              <View style = {[styles.bar]}></View>
+              <View style = {[styles.bar]}></View>
             </View>
 
-             <View style = {styles.contribute}>
-               <View style = {styles.progress}>
-                  <View style = {styles.bar}></View>
-                  <View style = {styles.bar}></View>
-               </View>
-              <View style= {styles.cr}>
+            <View>
               <Text style={styles.createT}>Invite members to join</Text>
               <Text style = {styles.detail}>Invite members via email or group link</Text>
-              </View>
+            </View>
 
-              <View style = {styles.form}>
-               <View style = {styles.inputDiv}>
-               <TextInput style = {styles.input}
-               multiline = {true}
+            <View style = {styles.form}>
+
+              <View style = {styles.inputDiv}>
+                <TextInput style = {styles.input}
+                  multiline = {true}
                   placeholder= "Enter email addresses"
-                  placeholderTextColor= "#6C727F"
-               ></TextInput>
-               </View>
-
-               <View style = {styles.link}>
-              <Text style={{fontSize: 14, fontWeight: 400, height: 24}}>0 members</Text>
-              <Text style = {styles.textCopy}>Copy group link <Image style ={styles.Img} source={require('../assets/applyLoan/Copy.png')}/></Text>
-             </View>
-             </View>
-            
-             </View>
-
-               <View style = {styles.conButton}>
-              <Custom2Button
-              backgroundColor = "#2C14DD"
-              title = "Continue"
-              opacity= "30"
-            onPress={() => navigate.navigate("ContributeScreen2")}
-              />
+                  placeholderTextColor= "#8F94A3"
+                />
               </View>
-              
-     </View>
+                
+            </View>
+
+            <View style = {styles.link}>
+              <Text style={{fontSize:14,color:'#292B2D'}}>0 members</Text>
+              <View style = {styles.textCopy}>
+                <Text style={{fontSize:14,color:'#292B2D'}}>Copy group link</Text>
+                <Image 
+                  style ={styles.Img} 
+                  source={require('../assets/applyLoan/Copy.png')}
+                />
+              </View>
+            </View>
+
+          </View>
+        </View>
+
+        <View style={styles.conButton}>
+          <CustomButton
+            title={'Continue'}
+            backgroundColor={'#b9b3f5'}
+          />
+        </View>
+
+      </SafeAreaView>
+    </View> 
    )
 }
 
 
 const styles = StyleSheet.create({
-     conContainer: {
-        backgroundColor: "#f5f7ff",
-     },
-     header: {
-      backgroundColor: "#442cf5",
-      height: 150,
+  conContainer: {
+    flex:1,
+    backgroundColor: "#f5f7ff",
+  },
+  header: {
+    height:55,
+    backgroundColor:'#442CF5',
+    paddingHorizontal:15,
+    flexDirection:'row',
+    alignItems:'center',
+    justifyContent:'space-between'
+  },
+  back: {
+    backgroundColor:'#FFFF',
+    width:28,
+    height:28,
+    borderRadius:10,
+    justifyContent:'center',
+    alignItems:'center'
   },
   smallBox: {
       backgroundColor: 'blue', 
@@ -88,84 +119,71 @@ const styles = StyleSheet.create({
       fontWeight: 600
   },
   contribute:{
-    width: 328,
-    height: 355,
-    gap: 20,
+    width: '100%',
+    height: 450,
+    gap: 15,
+    paddingHorizontal:15,
     marginTop: 40,
-    marginLeft: 16,
-  },
+    // backgroundColor:'red'
+},
   progress:{
-     flexDirection: "row",
-    justifyContent: "space-between"
-  },
-  bar: {
-    width: 154,
-    height: 2,
-    backgroundColor: "#442CF5"
-  },
-  cr:{
-    width: 328,
-    height: 61,
-    gap: 6
-  },
-  createT: {
-      fontWeight: 700,
-      fontSize: 24
-  },
-  detail: {
+    flexDirection: "row",
+    gap: 20,
+  //   backgroundColor:'red'
+ },
+ bar: {
+   flex:1,
+   height: 3,
+   backgroundColor:'#442CF5',
+ },
+ createT: {
+     fontWeight: 700,
+     fontSize: 24,
+     color:'#131313'
+ },
+ detail: {
     fontSize: 14,
-    fontWeight: 400
-  },
+    color:'#292B2D',
+    marginTop: 6
+ },
   form: {
-    width: 328,
-    height: 372,
-    marginTop: 20,
-    gap: 16
+   marginTop: 15,
   },
   inputDiv: {
-    width: 328,
-   height: 334,
-   flexDirection: "row",
-   backgroundColor: "#fff",
+   height: 335,
+   backgroundColor: "#FFFF",
    borderRadius: 16,
-   paddingBottom: 8,
-   paddingRight: 12,
-   paddingLeft: 12,
-   paddingTop: 8,
-   gap: 10
+   paddingHorizontal:12,
+  //  paddingVertical: 8,
   },
 
   input: {
-   width: 290,
-   height: 318,
-   flex: 1,
-   paddingLeft: 5,
-   paddingTop: 8,
-   fontSize: 12,
-   fontWeight: 400,
-  textAlignVertical: "top" 
+    flex: 1,
+    fontSize: 12,
+    fontWeight:500,
+    color:'#292B2D',
+    lineHeight:20,
+    textAlignVertical: "top",
+    //  backgroundColor:'red',
+   
   },
   link: {
     width: 328,
     height: 28,
     flexDirection: "row",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
+    alignItems:'center'
   },
   textCopy: {
-    width: 141,
-    height: 28,
-    paddingRight: 10,
-    paddingLeft: 10,
-    paddingTop: 2,
-    paddingBottom: 2,
-    backgroundColor: "#FAFBFF",
+    flexDirection:'row',
+    backgroundColor: "##FAFBFF",
+    paddingHorizontal:10,
+    paddingVertical:2,
     borderRadius: 10,
     borderWidth: 1,
     borderColor: "#6C727F1A",
-    gap: 5,
-    fontSize: 14, 
-    fontWeight: 400,
-    color: "#292B2D"
+    alignItems:'center',
+    gap:5
 
   },
   Img: {
@@ -173,11 +191,9 @@ const styles = StyleSheet.create({
     height: 13.33
   },
   conButton: {
-   width: 328,
-   marginLeft: 16,
-   top: 727,
-   marginBottom: 55
-  }
+    paddingHorizontal:15,
+    paddingBottom:20
+   }
 })
 
 export default InviteScreen

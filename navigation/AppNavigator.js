@@ -1,4 +1,5 @@
 import { createStackNavigator } from '@react-navigation/stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import SplashScreen from '../screens/SplashScreen';
 import OnBoardingScreen from '../screens/OnBoardingScreen';
@@ -40,7 +41,7 @@ import LoanApplication from '../screens/LoanApplication';
 
 
 
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 
 const AppNavigator = () => {
   return (
@@ -51,41 +52,41 @@ const AppNavigator = () => {
          animationEnabled: false,
          gestureEnabled: false,
         }}>
-        <Stack.Screen name="Splash" component={SplashScreen} />
-      <Stack.Screen name="Transaction"component={Transaction} />
-        <Stack.Screen name="Notifications" component={Notifications} />
-        <Stack.Screen name="Investments" component={Investment} />
-        <Stack.Screen name="Payment" component={Payments} />
-      <Stack.Screen name='OTPScreen' component={OTPScreen}/>
-      <Stack.Screen name='BVNScreen' component={BVNScreen}/>
-        <Stack.Screen name="Resetpassword" component={ResetPassword} />
-        <Stack.Screen name="Login" component={LoginScreen} />
-        <Stack.Screen name="Signup" component={SignUpForm} />
-        <Stack.Screen name="onboarding1" component={OnboardingScreen1} />
-        <Stack.Screen name="onboarding2" component={OnboardingScreen2} />
-        <Stack.Screen name="onboarding3" component={OnboardingScreen3} />
-        <Stack.Screen name="home" component={HomeScreen} />
-        <Stack.Screen name="loanLandingScreen" component={LoanLandingScreen} />
-        <Stack.Screen name="Group_members" component={Group_members} />   
-        <Stack.Screen name="profile" component={ProfileScreen} />
-        <Stack.Screen name="EditProfile" component={EditProfileScreen} />
-        <Stack.Screen name="repayLoan" component={RepayLoan} />
-        <Stack.Screen name="Contribute" component={ContributeDetails}/>
-        <Stack.Screen name="ContributeScreen" component={ContributeScreen2}/>
-        <Stack.Screen name="InviteScreen1" component={InviteScreen}/>
-        <Stack.Screen name="fixPlan" component={FixPlanScreen} />
-        <Stack.Screen name="finalwithdrawal" component={FinalWithdrawal} />
-        <Stack.Screen name="airtime" component={AirtimeTopupScreen} />
-        <Stack.Screen name="TransactionDetails" component={TransactionDetails} />
-        <Stack.Screen name="BetAccount" component={BetAccount} />
-        <Stack.Screen name="contributionActive" component={Contribution_Active} />
-        <Stack.Screen name="groupDetails" component={Group_Details} />
-        <Stack.Screen name="investment" component={Investments} />
-        <Stack.Screen name="Setting" component={Settings} />
-        <Stack.Screen name="Notification" component={Notification} />
-        <Stack.Screen name="electricity" component={ElectricityTopupScreen} />
-        <Stack.Screen name="data" component={DataTopupScreen} />
-        <Stack.Screen name="loan" component={LoanApplication} />
+        <Stack.Screen name="Splash" component={SplashScreen}  options={{ animation: "none" }}  />
+      <Stack.Screen name="Transaction"component={Transaction}  options={{ animation: "none" }}  />
+        <Stack.Screen name="Notifications" component={Notifications}  options={{ animation: "none" }}  />
+        <Stack.Screen name="Investments" component={Investment}  options={{ animation: "none" }}  />
+        <Stack.Screen name="Payment" component={Payments}  options={{ animation: "none" }}  />
+      <Stack.Screen name='OTPScreen' component={OTPScreen}  options={{ animation: "none" }} />
+      <Stack.Screen name='BVNScreen' component={BVNScreen}  options={{ animation: "none" }} />
+        <Stack.Screen name="Resetpassword" component={ResetPassword}  options={{ animation: "none" }}  />
+        <Stack.Screen name="Login" component={LoginScreen}  options={{ animation: "none" }}  />
+        <Stack.Screen name="Signup" component={SignUpForm}  options={{ animation: "none" }}  />
+        <Stack.Screen name="onboarding1" component={OnboardingScreen1}  options={{ animation: "none" }}  />
+        <Stack.Screen name="onboarding2" component={OnboardingScreen2}  options={{ animation: "none" }}  />
+        <Stack.Screen name="onboarding3" component={OnboardingScreen3}  options={{ animation: "none" }}  />
+        <Stack.Screen name="home" component={HomeScreen}  options={{ animation: "none" }}  />
+        <Stack.Screen name="loanLandingScreen" component={LoanLandingScreen}  options={{ animation: "none" }}  />
+        <Stack.Screen name="Group_members" component={Group_members}  options={{ animation: "none" }}  />   
+        <Stack.Screen name="profile" component={ProfileScreen}  options={{ animation: "none" }}  />
+        <Stack.Screen name="EditProfile" component={EditProfileScreen}  options={{ animation: "none" }}  />
+        <Stack.Screen name="repayLoan" component={RepayLoan}  options={{ animation: "none" }}  />
+        <Stack.Screen name="Contribute" component={ContributeDetails}  options={{ animation: "none" }} />
+        <Stack.Screen name="ContributeScreen" component={ContributeScreen2}  options={{ animation: "none" }} />
+        <Stack.Screen name="InviteScreen1" component={InviteScreen}  options={{ animation: "none" }} />
+        <Stack.Screen name="fixPlan" component={FixPlanScreen}  options={{ animation: "none" }}  />
+        <Stack.Screen name="finalwithdrawal" component={FinalWithdrawal}  options={{ animation: "none" }}  />
+        <Stack.Screen name="airtime" component={AirtimeTopupScreen}  options={{ animation: "none" }}  />
+        <Stack.Screen name="TransactionDetails" component={TransactionDetails}  options={{ animation: "none" }}  />
+        <Stack.Screen name="BetAccount" component={BetAccount}  options={{ animation: "none" }}  />
+        <Stack.Screen name="contributionActive" component={Contribution_Active}  options={{ animation: "none" }}  />
+        <Stack.Screen name="groupDetails" component={Group_Details}  options={{ animation: "none" }}  />
+        <Stack.Screen name="investment" component={Investments}  options={{ animation: "none" }}  />
+        <Stack.Screen name="Setting" component={Settings}  options={{ animation: "none" }}  />
+        <Stack.Screen name="Notification" component={Notification}  options={{ animation: "none" }}  />
+        <Stack.Screen name="electricity" component={ElectricityTopupScreen}  options={{ animation: "none" }}  />
+        <Stack.Screen name="data" component={DataTopupScreen}  options={{ animation: "none" }}  />
+        <Stack.Screen name="loan" component={LoanApplication}  options={{ animation: "none" }}  />
       </Stack.Navigator>
     </NavigationContainer>
   );
