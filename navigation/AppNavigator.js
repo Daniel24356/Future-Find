@@ -53,6 +53,7 @@ const AppNavigator = () => {
          gestureEnabled: false,
         }}>
         <Stack.Screen name="Splash" component={SplashScreen}  options={{ animation: "none" }}  />
+        <Stack.Screen name="Signup" component={SignUpForm}  options={{ animation: "none" }}  />
       <Stack.Screen name="Transaction"component={Transaction}  options={{ animation: "none" }}  />
         <Stack.Screen name="Notifications" component={Notifications}  options={{ animation: "none" }}  />
         <Stack.Screen name="Investments" component={Investment}  options={{ animation: "none" }}  />
@@ -61,7 +62,6 @@ const AppNavigator = () => {
       <Stack.Screen name='BVNScreen' component={BVNScreen}  options={{ animation: "none" }} />
         <Stack.Screen name="Resetpassword" component={ResetPassword}  options={{ animation: "none" }}  />
         <Stack.Screen name="Login" component={LoginScreen}  options={{ animation: "none" }}  />
-        <Stack.Screen name="Signup" component={SignUpForm}  options={{ animation: "none" }}  />
         <Stack.Screen name="onboarding1" component={OnboardingScreen1}  options={{ animation: "none" }}  />
         <Stack.Screen name="onboarding2" component={OnboardingScreen2}  options={{ animation: "none" }}  />
         <Stack.Screen name="onboarding3" component={OnboardingScreen3}  options={{ animation: "none" }}  />
