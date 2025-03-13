@@ -16,7 +16,14 @@ import Group_Details from './screens/Group_Details';
 import VerificationPopup from './props/VerificationPopup';
 import FilterPopup from './screens/FilterPopup';
 import ConfirmPaymentPopup from './props/ConfirmPaymentPopup';
+import { NavigationContainer } from "@react-navigation/native";
+import ContributeDetails from "./screens/ContributeDetails";
 
 export default function App() {
-  return <AppNavigator/>;
+  // return <AppNavigator/>;
+  
+  return <NavigationContainer>
+  {/* <Contribution_Active/> */}
+  <ContributeDetails/>
+  </NavigationContainer>
 }
