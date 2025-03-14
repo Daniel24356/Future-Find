@@ -1,5 +1,4 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import React from "react";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Ionicons from "@expo/vector-icons/Ionicons";
@@ -7,9 +6,38 @@ import { Image } from "react-native";
 import TabBar from "../props/TabBar";
 import EvilIcons from '@expo/vector-icons/EvilIcons';
 import { useNavigation } from '@react-navigation/native';
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { ActivityIndicator } from "react-native-paper";
+// import AsyncStorage from "@react-native-async-storage/async-storage";
+const userID = "31417bb4-e6b1-4775-bb6e-d33e5d65b6d2"
 
 const HomeScreen = () => {
  const navigation = useNavigation();
+
+ const [balance, setBalance] = useState(0);
+ const [loading, setLoading] = useState(true);
+
+ const showBalance = async () => {
+   try {
+    //  const token = await AsyncStorage.getItem("token"); // Retrieve token
+    //  if (!token) throw new Error("No token found");
+
+     const response = await axios.get(`http://192.168.145.144:5000/api/v1/wallet/getUserBalance/${userID}`)
+      setBalance(response.data.balance);
+      
+     setBalance(response.data.balance); // Assuming API returns { balance: 20983 }
+   } catch (error) {
+     console.log("Error fetching balance:", error);
+     setBalance(0); // Set balance to null if error
+   } finally {
+     setLoading(false);
+   }
+ };
+
+ useEffect(() => {
+   showBalance();
+ }, []);
 
   return (
     <>
@@ -38,7 +66,14 @@ const HomeScreen = () => {
             <View>
               <Text style={styles.text1}>Your loan balance</Text>
             </View>
-            <Text style={styles.text2}>N20,983</Text>
+            
+            {loading ? (
+              <ActivityIndicator size="large" color="white" />
+            ) : (
+              <Text style={styles.text2}>
+                {balance !== null ? `N${balance.toLocaleString()}` : "Error fetching balance"}
+              </Text>
+            )}
             <Text style={styles.text3}>Repayment due: 28 March, 2025</Text>
 
             <TouchableOpacity onPress={() => navigation.navigate('Transaction')} style={styles.transactions}>
