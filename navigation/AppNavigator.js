@@ -77,7 +77,7 @@ const AppNavigator = () => {
         <Stack.Screen name="InviteScreen1" component={InviteScreen}  options={{ animation: "none" }} />
         <Stack.Screen name="fixPlan" component={FixPlanScreen}  options={{ animation: "none" }}  />
         <Stack.Screen name="finalwithdrawal" component={FinalWithdrawal}  options={{ animation: "none" }}  />
-        {/* <Stack.Screen name="withdrawalPage" component={Withdrawal}  options={{ animation: "none" }}  /> */}
+        <Stack.Screen name="withdrawalPage" component={Withdrawal}  options={{ animation: "none" }}  />
         <Stack.Screen name="airtime" component={AirtimeTopupScreen}  options={{ animation: "none" }}  />
         <Stack.Screen name="TransactionDetails" component={TransactionDetails}  options={{ animation: "none" }}  />
         <Stack.Screen name="BetAccount" component={BetAccount}  options={{ animation: "none" }}  />
