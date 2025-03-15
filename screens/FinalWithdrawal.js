@@ -1,21 +1,119 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   View,
   Text,
   StyleSheet,
   TouchableOpacity,
   Image, TextInput,
-  ScrollView
+  ScrollView,
+  Animated
 } from "react-native";
 import TopHeader from "../props/TopHeader";
 import { SafeAreaView } from "react-native-safe-area-context";
 import CustomButton from "../props/CustomButton";
+import DropdownMenus from "../props/DropdownMenus";
+import { StatusBar } from "expo-status-bar";
+import axios from "axios";
+import VerificationPopup from "../props/VerificationPopup";
+import { useNavigation } from "@react-navigation/native";
+import PopUpScreen from "../props/PopUpScreen";
+import EvilIcons from '@expo/vector-icons/EvilIcons';
+const URL = "http://192.168.145.225:5000/api/v1/wallet/"
+const userID = '12208cd0-2e23-42ef-ac42-1c2ed9041104'
 
 const FinalWithdrawal =()=> {
+  const navigation = useNavigation();
   const [activeButton, setActiveButton] = useState(false);
   const [bank, setBank] = useState(null);
+  const [selectBank, setSelectBank] = useState(false);
+  const [amount, setAmount] = useState(0);
+  const [accNumber, setAccNumber] = useState(0);
+  const [accBalance, setAccBalance] = useState(0);
+  const [verification, setVerification] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [errorPrompt, setErrorPrompt] = useState(false);
+  const bars = [useRef(new Animated.Value(1)).current, useRef(new Animated.Value(1)).current, useRef(new Animated.Value(1)).current, useRef(new Animated.Value(1)).current];
+
+  useEffect(() => {
+    const animateBar = (bar, delay) => {
+      Animated.loop(
+        Animated.sequence([
+          Animated.timing(bar, { toValue: 2.5, duration: 200, useNativeDriver: true }),
+          Animated.timing(bar, { toValue: 1, duration: 200, useNativeDriver: true }),
+        ]),
+        { delay }
+      ).start();
+    };
+    bars.forEach((bar, index) => {
+      animateBar(bar, index * 100);
+    });
+  }, []);
+
+  useEffect(()=>{
+    const getBalance = async ()=>{
+      try {
+        axios.get(`${URL}getUserBalance/${userID}`)
+        .then((response)=>{
+          setAccBalance(response.data.balance);
+          setLoading(false);
+        })
+      } catch (error) {
+        
+      }
+    };
+    getBalance();
+  },[success]);
+
+  useEffect(()=>{
+    if(amount.toString().length > 2 && bank && accNumber.toString().length === 10){
+      if(!activeButton){
+        setActiveButton(true);
+      }
+    }else{
+      if(activeButton){
+        setActiveButton(false);
+      }
+    }
+  },[amount, bank, accNumber]);
+
+ useEffect(()=>{
+  if(amount > accBalance) {
+    if(errorPrompt){
+      null
+    }else{
+      setErrorPrompt(true);
+    }
+  }else{
+    if(errorPrompt){
+      setErrorPrompt(false);
+    }
+  }
+ },[amount])
+
+  const handleSelect = (selectedBank)=>{
+    setBank(selectedBank);
+    setSelectBank(false);
+  };
+
+  const handleWithdrawal = async ()=>{
+    try {
+      axios.post(`${URL}withdrawal`, {userId: userID, amount: Number(amount)})
+      .then((response)=>{
+        console.log(response.data);
+        setSuccess(true);
+        setAmount(0);
+        setBank(null);
+        setAccNumber(0);
+      })
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
     return (
       <View style={{flex:1,backgroundColor:'#F5F7FF'}}>
+        <StatusBar style="light" backgroundColor="#442CF5"/>
         <SafeAreaView style={{flex:1}}>
           <TopHeader title="Withdrawal" onRightPress={() => console.log("Settings Pressed")} />
 
@@ -31,59 +129,46 @@ const FinalWithdrawal =()=> {
 
                 <View style={{alignItems:'center'}}>
                   <Text style={styles.totalInterest}>Total available amount</Text>
-                  <Text style={styles.amount}>N150,000</Text>
+                  {
+                    loading?
+                    <View style={styles.loader}>
+                      {bars.map((bar, index) => (
+                        <Animated.View key={index} style={[styles.bar, { transform: [{ scaleY: bar }] }]} />
+                      ))}
+                    </View>
+                    :
+                    <Text style={styles.amount}>{`N${accBalance.toLocaleString()}`}</Text>
+                  }
                 </View>
 
-                <View style={{flexDirection: "row", gap: 10}}>
-                  <View style={styles.info}>
-                    <View style={styles.lock}>
-                        <Image source={require("../assets/Wallet.png")}/>
-                    </View>
-                    <View>
-                      <Text style={styles.capital}>Your Capital</Text>
-                      <Text style={styles.number}>N150,000</Text>
-                    </View>
-                  </View>
-
-                    <View style={styles.info}>
-                      <View style={styles.lock}>
-                          <Image source={require("../assets/Dolls.png")}/>
-                      </View>
-                      <View>
-                        <Text style={styles.capital}>Total Interest</Text>
-                        <Text style={styles.number}>N50.00</Text>
-                      </View>
-                    </View>
-                </View>
-
-                <View style={styles.warningBox}>
-                  <Image 
-                    source={require("../assets/Danger.png")}
-                    style={{width:14,height:14}}
-                  />
-                  <View style={{flex:1,paddingRight:15}}>
-                    <Text style={styles.warningText}>
-                      You cannot withdraw your interest since your durations has not been completed
-                    </Text>
-                  </View>
-                </View>
 
               </View>
 
               <View>
 
-                <View style={{flexDirection: "row", justifyContent: "space-between",marginBottom:5,paddingHorizontal:6}}>
-                    <Text style={{fontSize:12,color:'#292B2D'}}>Early Withdrawal Fee</Text>
-                    <Text style={{fontSize:12,color:'#FD3C4A'}}>- N10.00</Text>
-                </View>
-
-                <View style={styles.passwordContainer}>
-                  <TextInput
-                    style={styles.passwordInput}
-                    placeholder="Amount"
-                    placeholderTextColor={'#6C727F'}
-                  />
-                  <Image source={require("../assets/NairaImg.png")}/>
+                {/* AMOUNT INPUT */}
+                <View>
+                  <View style={[styles.passwordContainer, errorPrompt && {borderWidth:1,borderColor:'red'}]}>
+                    <TextInput
+                      style={styles.passwordInput}
+                      placeholder="Amount"
+                      placeholderTextColor={'#6C727F'}
+                      keyboardType="numeric"
+                      value={amount}
+                      onChangeText={(text)=> setAmount(text)}
+                    />
+                    <Image source={require("../assets/NairaImg.png")}/>
+                  </View>
+                  {
+                    errorPrompt &&
+                    <View style={styles.error}>
+                      <Image
+                        source={require("../assets/Danger-Circle.png")}
+                        style={{width:14,height:14}}
+                      />
+                      <Text style={{fontSize:12,color:'#FD3C4A'}}>Insufficient balance</Text>
+                    </View>
+                  }
                 </View>
 
                 <View style={{flexDirection: "row",height:25,justifyContent: "flex-end", gap: 20,marginTop:10}}>
@@ -97,20 +182,25 @@ const FinalWithdrawal =()=> {
                 </View>
 
                 <View style={{gap:10,marginTop:10}}>
-                  <TouchableOpacity style={styles.select_div}>
+                  <TouchableOpacity style={styles.select_div} onPress={()=>setSelectBank(true)}>
                     {
                       bank?
-                      <Text style={{fontSize:14,color:'#6C727F'}}>{bank}</Text> :
+                      <Text style={{fontSize:14,color:'#6C727F'}}>{bank.name}</Text> :
                       <Text style={{fontSize:14,color:'#6C727F'}}>Select bank</Text>
                     }
                     <Image source={require("../assets/arrow.png")}/>
                   </TouchableOpacity>
 
+                  {/* ACCOUNT NUMBER INPUT */}
                   <View style={styles.passwordContainer}>
                     <TextInput
                       style={styles.passwordInput}
                       placeholder="Account number"
                       placeholderTextColor={'#6C727F'}
+                      keyboardType="numeric"
+                      maxLength={10}
+                      value={accNumber}
+                      onChangeText={(text)=> setAccNumber(text)}
                     />
                   </View>
                 </View>
@@ -126,6 +216,7 @@ const FinalWithdrawal =()=> {
               <CustomButton
                 backgroundColor={'#2C14DD'}
                 title={'Continue'}
+                onPress={handleWithdrawal}
               /> 
               :
               <View style={styles.button}>
@@ -135,6 +226,23 @@ const FinalWithdrawal =()=> {
           </View>
 
         </SafeAreaView>
+        {
+          selectBank ?
+          <DropdownMenus 
+            selectBank={true}
+            onClose={()=> setSelectBank(false)}
+            selectedBank={handleSelect}
+          /> :
+          verification ?
+          <VerificationPopup
+            confirmVerification={true}
+          /> :
+          success?
+          <PopUpScreen
+            withdrawalSuccess={true}
+            onPress={()=> setSuccess(false)}
+          /> :''
+        }
       </View>
   )
 }
@@ -156,7 +264,7 @@ const styles = StyleSheet.create({
       fontWeight: "bold",
     },
     card: {
-      backgroundColor: "white",
+      // backgroundColor: "white",
       borderRadius: 16,
       paddingTop: 20,
       paddingBottom:10,
@@ -277,6 +385,29 @@ const styles = StyleSheet.create({
         backgroundColor:'white',
         borderRadius:16,
         paddingHorizontal:15
+      },
+      loader: {
+        flexDirection: "row",
+        justifyContent: "center",
+        alignItems: "center",
+        paddingVertical:12
+      },
+      bar: {
+        width: 3,
+        height: 6,
+        marginHorizontal: 9,
+        borderRadius: 10,
+        backgroundColor: "#442CF5",
+      },
+      error: {
+        height:26,
+        flexDirection:'row',
+        alignItems:'center',
+        gap:5,
+        backgroundColor:'#FD3C4A12',
+        paddingHorizontal:6,
+        borderRadius:10,
+        marginTop:5
       }
   });
   

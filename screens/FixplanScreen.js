@@ -124,7 +124,7 @@ const FixPlanScreen = () => {
         
         <View style={{paddingHorizontal:15,paddingBottom:20}}>
           <CustomButton 
-            onPress={() => navigation.navigate('finalwithdrawal')}
+            onPress={() => navigation.navigate('withdrawalPage')}
             backgroundColor={'#2C14DD'}
             title={'Request withdrawal'}
           />

@@ -1,15 +1,17 @@
 import { FlatList, Image, Pressable, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import Feather from '@expo/vector-icons/Feather';
 
-const DropdownMenus = ({maritalStatus, sourceOfIncome, employmentStatus, selectBank, savingPeriod, paymentInterval, selectProvider,
-    exportAs, selectDate
+const DropdownMenus = ({maritalStatus, sourceOfIncome, employmentStatus, selectBank, selectedBank, savingPeriod, paymentInterval, selectProvider,
+    exportAs, selectDate, onClose
 }) => {
     const [ranges, setRanges] = useState('range1');
     const [checked, setChecked] = useState(0);
     const [checkedDate, setCheckedDate] = useState('');
+    const [searchValue, setSearchValue] = useState('');
+    const [bankSearch, setBankSearch] = useState([]);
 
     const rangeOne = Array.from({length:60-7+1}, (_,i)=> i + 7);
     const rangeTwo = Array.from({length:180-61+1}, (_,i)=> i + 61);
@@ -29,13 +31,24 @@ const DropdownMenus = ({maritalStatus, sourceOfIncome, employmentStatus, selectB
         "January, 2025","February, 2025","March, 2025","April, 2025","May, 2025","June, 2025","July, 2025","August, 2025",
         "September, 2025","October, 2025","November, 2025","December, 2025"
     ]
+
+    useEffect(()=>{
+        const runSearch =()=>{
+            if(searchValue){
+                const searching = banksList.filter((bank)=> bank.name.toLowerCase().includes(searchValue.toLowerCase()) );
+                setBankSearch(searching);
+            }
+        }
+        runSearch();
+    },[searchValue]);
+
   return (
     <View style={styles.background}>
         <SafeAreaView style={{flex:1, justifyContent:'flex-end', paddingBottom:30}}>
             <View style={styles.pop_up}>
 
                 <View style={{height:68,justifyContent:'space-between'}}>
-                    <Ionicons name="close-outline" size={24} color="black" />
+                    <Ionicons name="close-outline" size={24} color="black" onPress={onClose}/>
 
                     {
                         maritalStatus?
@@ -85,6 +98,8 @@ const DropdownMenus = ({maritalStatus, sourceOfIncome, employmentStatus, selectB
                         <TextInput
                             style={styles.input}
                             placeholder='Search banks'
+                            value={searchValue}
+                            onChangeText={ (text)=>{ setSearchValue(text); }}
                         />
                     </View>
                 }
@@ -221,9 +236,17 @@ const DropdownMenus = ({maritalStatus, sourceOfIncome, employmentStatus, selectB
 
 
                     {
-                        selectBank?
+                        selectBank && searchValue.length < 1?
                         banksList.map((bank, index)=>(
-                            <TouchableOpacity style={styles.option}>
+                            <TouchableOpacity style={styles.option} key={index} onPress={()=>selectedBank(bank)}>
+                                <Image source={bank.image} />
+                                <Text style={{fontSize:14,color:'#292B2D'}}>{bank.name}</Text>
+                            </TouchableOpacity>
+
+                        )) :
+                        selectBank && searchValue.length > 0?
+                        bankSearch.map((bank, index)=>(
+                            <TouchableOpacity style={styles.option} key={index} onPress={()=>selectedBank(bank)}>
                                 <Image source={bank.image} />
                                 <Text style={{fontSize:14,color:'#292B2D'}}>{bank.name}</Text>
                             </TouchableOpacity>
@@ -231,7 +254,7 @@ const DropdownMenus = ({maritalStatus, sourceOfIncome, employmentStatus, selectB
                         )) :
                         selectProvider?
                         providerList.map((provider, index)=>(
-                            <TouchableOpacity style={styles.option}>
+                            <TouchableOpacity style={styles.option} key={index}>
                                 {/* <Image source={provider.image} /> */}
                                 <Text style={{fontSize:14,color:'#292B2D'}}>{provider.name}</Text>
                             </TouchableOpacity>

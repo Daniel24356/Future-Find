@@ -1,8 +1,34 @@
 import { StyleSheet, Text, TextInput, View } from 'react-native'
-import React from 'react'
+import React, { useRef, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context';
+import axios from 'axios';
 
 const VerificationPopup = ({accountVerification, confirmVerification}) => {
+    const [code, setCode] = useState([0, 0, 0, 0]);
+    const inputs = useRef([]);
+
+    const handleChangeText = (text, index) => {
+        const newCode = [...code];
+        newCode[index] = text? Number(text) : null;
+        setCode(newCode);
+
+        if (text && index < 3) {
+            inputs.current[index + 1].focus();
+        }
+
+        if (index === 3 && text) {
+            // call api for otp verification
+        }
+    };
+
+    const handleKeyPress = (event, index) => {
+        if (event.nativeEvent.key === 'Backspace' && !code[index] && index > 0) {
+          inputs.current[index - 1].focus();
+        }
+    };
+
+    const verifyCode = Number(code.join(""));
+
   return (
     <View style={styles.background}>
       <SafeAreaView style={{flex:1, justifyContent:'flex-end', paddingBottom:30}}>
@@ -21,7 +47,22 @@ const VerificationPopup = ({accountVerification, confirmVerification}) => {
             }
 
             <View style={{height:60,flexDirection:'row',gap:15,marginVertical:15}}>
-                <View style={styles.input_div}>
+                {
+                    [0,1,2,3].map((index)=>(
+                        <View style={styles.input_div} key={index}>
+                            <TextInput
+                                ref={(ref) => (inputs.current[index] = ref)}
+                                style={styles.input}
+                                maxLength={1}
+                                inputMode='numeric'
+                                value={code[index]}
+                                onChangeText={(text) => handleChangeText(text, index)}
+                                onKeyPress={(event) => handleKeyPress(event, index)}
+                            />
+                        </View>
+                    ))
+                }
+                {/* <View style={styles.input_div}>
                     <TextInput
                         style={styles.input}
                         maxLength={1}
@@ -48,7 +89,7 @@ const VerificationPopup = ({accountVerification, confirmVerification}) => {
                         maxLength={1}
                         inputMode='numeric'
                     />
-                </View>
+                </View> */}
             </View>
 
             <View style={{alignItems:'center',gap:10}}>

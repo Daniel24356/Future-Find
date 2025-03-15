@@ -13,7 +13,7 @@ const OnboardingScreen1 = () => {
         <StatusBar style='light' />
         <View style={styles.image_container}>
             <View style={styles.skip}>
-                <TouchableOpacity style={styles.skip_opacity} onPress={()=> navigate.navigate("Signup")}>
+                <TouchableOpacity style={styles.skip_opacity} onPress={()=> navigate.navigate("Login")}>
                     <Text style={styles.text}>
                         Skip
                     </Text>
