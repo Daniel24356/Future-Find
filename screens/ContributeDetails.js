@@ -7,7 +7,6 @@ import { StatusBar } from "expo-status-bar";
 import EvilIcons from '@expo/vector-icons/EvilIcons';
 import CustomButton from "../props/CustomButton";
 import { CREATE_CONTRIBUTION } from "../API_URL";
-import { AsyncStorage } from "react-native";
 
 
 const ContributeDetails = () => {
@@ -18,19 +17,12 @@ const ContributeDetails = () => {
 
    const createContribution = async () => {
       try{
-         // const token = await AsyncStorage.getItem("userToken")
-         // if(!token){
-         //    console.error("User not authenticated")
-         // }
          const response = await axios.post(CREATE_CONTRIBUTION, {
             groupName,
             amount,
             paymentInterval,
             maxMembers
          }, 
-         // {
-         //    headers: {Authorization: `Bearer ${token}`}
-         // }
          )
          if(response.status === 201){
             Alert.alert("Success", "Contribution group created.")

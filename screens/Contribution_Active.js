@@ -1,14 +1,34 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React from 'react'
+import { Alert, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import React, { useEffect, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
 import TabBar from '../props/TabBar';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import CustomButton from '../props/CustomButton';
 import { useNavigation } from '@react-navigation/native';
+import { ALL_CONTRIBUTION } from '../API_URL';
 
 
 const Contribution_Active = () => {
+
+     const [total, setTotal] = useState("")
+     const [joinedContribution, setJoinedContribution] = useState(false)
+     const [contributions, setContributions] = useState([])
+
+     useEffect(() =>{
+        const getUserContribution = async () => {
+            try{
+              const response = await axios.get(`${ALL_CONTRIBUTION}/${id}`)
+              if(response.status === 201){
+               setContributions(response.data)
+              }
+    
+            }catch(error){
+                Alert.alert("Error", error.response?.data?.message || "Something went wrong")
+            }
+         }
+     }, [])
+     
 
   const navigation = useNavigation();
 
@@ -18,17 +38,17 @@ const Contribution_Active = () => {
         <SafeAreaView style={{padding: 15, gap:12}}>
             <View style={styles.convenience}>
                 <Text style={styles.conv_text1}>
-                    Convenient way to grow your money
+                Start your group contributions today!
                 </Text>
                 <Text style={styles.conv_text2}>
-                    Earn interest on all your savings
+                 Invite people to join your contribution
                 </Text>
                 <Image 
                     source={require('../assets/investing/Illustration_small.png')}
                     style={styles.conv_img}
                 />
             </View>
-
+               {/* {contribution.length > 0 ?  } */}
             <View style={styles.info}>
                 <View style={styles.info_1}>
                     <Text style={{fontSize:12,fontWeight:400,color:'#6C727F'}}>Groups:</Text>
@@ -56,7 +76,7 @@ const Contribution_Active = () => {
                         source={require('../assets/investing/green_comm.png')}
                     />
                     <Text style={{fontSize:14,color:'#292B2D',fontWeight:500}}>
-                        Saving groups
+                        Saving groups {groupName}
                     </Text>
 
                     <View style={styles.green_group_info}>
@@ -65,19 +85,19 @@ const Contribution_Active = () => {
                                 source={require('../assets/homePage/tab_contribution.png')}
                                 style={{width:12,height:10}}
                             />
-                            <Text style={styles.small_text}>23/23 members</Text>
+                            <Text style={styles.small_text}>23/23{members} members</Text>
                         </View>
                         <View style={{flexDirection:'row',alignItems:'center',gap:2}}>
                             <Image
                                 source={require('../assets/investing/naira.png')}
                             />
-                            <Text style={styles.small_text}>30,000/m</Text>
+                            <Text style={styles.small_text}>{amount}30,000/m</Text>
                         </View>
                         <View style={{flexDirection:'row',alignItems:'center',gap:2}}>
                             <Image
                                 source={require('../assets/investing/naira.png')}
                             />
-                            <Text style={styles.small_text}>690,000/member</Text>
+                            <Text style={styles.small_text}>{totalRevenue}690,000/member</Text>
                         </View>
                     </View>
                     </TouchableOpacity>
