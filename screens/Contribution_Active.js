@@ -11,7 +11,6 @@ import { ALL_CONTRIBUTION } from '../API_URL';
 
 const Contribution_Active = () => {
 
-     const [total, setTotal] = useState("")
      const [joinedContribution, setJoinedContribution] = useState(false)
      const [contributions, setContributions] = useState([])
 
@@ -19,7 +18,7 @@ const Contribution_Active = () => {
         const getUserContribution = async () => {
             try{
               const response = await axios.get(`${ALL_CONTRIBUTION}/${id}`)
-              if(response.status === 201){
+              if(response.status === 200){
                setContributions(response.data)
               }
     
@@ -27,6 +26,7 @@ const Contribution_Active = () => {
                 Alert.alert("Error", error.response?.data?.message || "Something went wrong")
             }
          }
+         getUserContribution()
      }, [])
      
 
@@ -48,62 +48,59 @@ const Contribution_Active = () => {
                     style={styles.conv_img}
                 />
             </View>
-               {/* {contribution.length > 0 ?  } */}
+               {contribution.length > 0 ? (
+            <>
             <View style={styles.info}>
-                <View style={styles.info_1}>
-                    <Text style={{fontSize:12,fontWeight:400,color:'#6C727F'}}>Groups:</Text>
-                    <Text style={{fontSize:14,fontWeight:600,color:'#131313'}}>1</Text>
-                </View>
+                      <View style={styles.info_1}>
+                          <Text style={{ fontSize: 12, fontWeight: 400, color: '#6C727F' }}>Groups:</Text>
+                          <Text style={{ fontSize: 14, fontWeight: 600, color: '#131313' }}>1</Text>
+                      </View>
 
-                <View style={styles.create}>
-                    <Text style={{color:'#442CF5'}}>+ Create</Text>
-                </View>
-            </View>
+                      <View style={styles.create}>
+                          <Text style={{ color: '#442CF5' }}>+ Create</Text>
+                      </View>
+                  </View><View style={styles.groups}>
+                          <Text style={{ fontSize: 16, fontWeight: 400, color: '#292B2D' }}>
+                              Created groups
+                          </Text>
 
-            <View style={styles.groups}>
-                <Text style={{fontSize:16,fontWeight:400,color:'#292B2D'}}>
-                    Created groups
-                </Text>
-
-                <TouchableOpacity onPress={() => navigation.navigate('groupDetails')} style={styles.green_group}>
-
-                    <View style={styles.copy}>
-                        <Text style={{fontSize:10,color:'#292B2D',fontWeight:400}}>Copy link</Text>
-                        <Ionicons name="copy" size={11} color="#442CF5" />
-                    </View>
-
-                    <Image 
-                        source={require('../assets/investing/green_comm.png')}
-                    />
-                    <Text style={{fontSize:14,color:'#292B2D',fontWeight:500}}>
-                        Saving groups {groupName}
-                    </Text>
-
-                    <View style={styles.green_group_info}>
-                        <View style={{flexDirection:'row',alignItems:'center', gap:5}}>
-                            <Image 
-                                source={require('../assets/homePage/tab_contribution.png')}
-                                style={{width:12,height:10}}
-                            />
-                            <Text style={styles.small_text}>23/23{members} members</Text>
-                        </View>
-                        <View style={{flexDirection:'row',alignItems:'center',gap:2}}>
-                            <Image
-                                source={require('../assets/investing/naira.png')}
-                            />
-                            <Text style={styles.small_text}>{amount}30,000/m</Text>
-                        </View>
-                        <View style={{flexDirection:'row',alignItems:'center',gap:2}}>
-                            <Image
-                                source={require('../assets/investing/naira.png')}
-                            />
-                            <Text style={styles.small_text}>{totalRevenue}690,000/member</Text>
-                        </View>
-                    </View>
-                    </TouchableOpacity>
-                </View>
+                          <TouchableOpacity onPress={() => navigation.navigate('groupDetails')} style={styles.green_group}>
+                               {contributions.map((contribution) => (
+                                    <>
+                                    <View style={styles.copy}>
+                                       <Text style={{ fontSize: 10, color: '#292B2D', fontWeight: 400 }}>Copy link</Text>
+                                       <Ionicons name="copy" size={11} color="#442CF5" />
+                                   </View><Image
+                                           source={require('../assets/investing/green_comm.png')} /><Text style={{ fontSize: 14, color: '#292B2D', fontWeight: 500 }}>
+                                           Saving groups {contribution.name}
+                                       </Text><View style={styles.green_group_info} key={contribution.id}>
+                                           <View style={{ flexDirection: 'row', alignItems: 'center', gap: 5 }}>
+                                               <Image
+                                                   source={require('../assets/homePage/tab_contribution.png')}
+                                                   style={{ width: 12, height: 10 }} />
+                                               <Text style={styles.small_text}>{contribution.members.length}23/23{contribution.maxMembers} members</Text>
+                                           </View>
+                                           <View style={{ flexDirection: 'row', alignItems: 'center', gap: 2 }}>
+                                               <Image
+                                                   source={require('../assets/investing/naira.png')} />
+                                               <Text style={styles.small_text}>{contribution.amountPerUser}30,000/m</Text>
+                                           </View>
+                                           <View style={{ flexDirection: 'row', alignItems: 'center', gap: 2 }}>
+                                               <Image
+                                                   source={require('../assets/investing/naira.png')} />
+                                               <Text style={styles.small_text}>{contribution.amount * contribution.members.length}690,000/member</Text>
+                                           </View>
+                                       </View>
+                                       </>
+                               ))}
+                              
+                          </TouchableOpacity>
+                      </View>
+                      </> ) : (
+                        <Text>You have no contributions</Text>
+                      )}
                 {/* NEW MEMBERS */}
-                <View style={{alignItems:'center',paddingHorizontal:10,paddingBottom:10,gap:15}}>
+                {/* <View style={{alignItems:'center',paddingHorizontal:10,paddingBottom:10,gap:15}}>
                     <Text style={{fontSize:16,fontWeight:600,color:'#131313'}}>Groups invitation</Text>
                     <Text style={{fontSize:12,color:'#292B2D'}}>You have been invited to join this contribution</Text>
                     <View style={{flexDirection:'row',gap:20,marginTop:10}}>
@@ -114,7 +111,7 @@ const Contribution_Active = () => {
                             <Text style={{fontSize:14,fontWeight:500,color:'#442CF5'}}>Join</Text>
                         </TouchableOpacity>
                     </View>
-                </View>
+                </View> */}
 
                 {/* JOINED */}
                 

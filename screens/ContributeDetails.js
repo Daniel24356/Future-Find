@@ -10,7 +10,7 @@ import { CREATE_CONTRIBUTION } from "../API_URL";
 
 
 const ContributeDetails = () => {
-   const [groupName, setGroupName] = useState("")
+   const [name, setName] = useState("")
    const [amount, setAmount] = useState("")
    const [paymentInterval, setPaymentInterval] = useState("")
    const [maxMembers, setMaxMembers] = useState("")
@@ -18,7 +18,7 @@ const ContributeDetails = () => {
    const createContribution = async () => {
       try{
          const response = await axios.post(CREATE_CONTRIBUTION, {
-            groupName,
+            name,
             amount,
             paymentInterval,
             maxMembers
@@ -65,8 +65,8 @@ const ContributeDetails = () => {
                         <TextInput style = {styles.input}
                            placeholder= "Group name"
                            placeholderTextColor= "#6C727F"
-                           value= {groupName}
-                           onChangeText={setGroupName}
+                           value= {name}
+                           onChangeText={setName}
                         />
                      </View>
 

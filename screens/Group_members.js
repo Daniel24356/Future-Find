@@ -1,12 +1,30 @@
-import { Image, StyleSheet, Text, View, TouchableOpacity } from 'react-native'
-import React from 'react'
+import { Image, StyleSheet, Text, View, TouchableOpacity, Alert } from 'react-native'
+import React, { useEffect, useState } from 'react'
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import EvilIcons from '@expo/vector-icons/EvilIcons';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
+import axios from 'axios';
+import { ALL_MEMBERS } from '../API_URL';
 
 const Group_members = () => {
+
+    const [members, setMembers] = useState([])
+
+    useEffect(() => {
+        const getContributionMembers = async () =>{
+            try{
+                const response = await axios.get(`${ALL_MEMBERS}/${id}`)
+                if(response.status === 200){
+                    setMembers(response.data.members)
+                }
+            }catch(error){
+                Alert.alert("Error, Something went wrong", error.response.data.message)
+            }
+        }
+    }, [])
+
     const navigation = useNavigation();
   return (
     <View style={styles.container}>
@@ -42,7 +60,7 @@ const Group_members = () => {
             
             <View style={styles.third_section}>
                <View style={styles.first}>
-                   <Text style={{fontSize:12,fontWeight:400,paddingLeft:10}}>23 members</Text>
+                   <Text style={{fontSize:12,fontWeight:400,paddingLeft:10}}>23 {members.length}members</Text>
                  <View style={styles.export}>
                       <View style={styles.inner}>
                           <Image source={require("../assets/calendar.png")}/>

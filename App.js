@@ -18,12 +18,15 @@ import FilterPopup from './screens/FilterPopup';
 import ConfirmPaymentPopup from './props/ConfirmPaymentPopup';
 import { NavigationContainer } from "@react-navigation/native";
 import ContributeDetails from "./screens/ContributeDetails";
+import LoginScreen from "./screens/LoginScreen";
 
 export default function App() {
   // return <AppNavigator/>;
   
   return <NavigationContainer>
+    <LoginScreen/>
   {/* <Contribution_Active/> */}
-  <ContributeDetails/>
+  {/* <ContributeDetails/> */}
+  <Group_members/>
   </NavigationContainer>
 }
