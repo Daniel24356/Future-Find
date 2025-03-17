@@ -17,12 +17,10 @@ const HomeScreen = () => {
 
  const [balance, setBalance] = useState(0);
  const [loading, setLoading] = useState(true);
+ 
 
  const showBalance = async () => {
    try {
-    //  const token = await AsyncStorage.getItem("token"); // Retrieve token
-    //  if (!token) throw new Error("No token found");
-
      const response = await axios.get(`http://192.168.145.144:5000/api/v1/wallet/getUserBalance/${userID}`)
       setBalance(response.data.balance);
       
@@ -34,6 +32,22 @@ const HomeScreen = () => {
      setLoading(false);
    }
  };
+
+
+ const fetchTransactions = async () => {
+  try {
+    setLoading(true);
+    const response = await axios.get(`http://192.168.145.144:5000/api/v1/wallet/getUserTransactions/${userID}`);
+    const transactions = response.data.transactions; // Ensure your API returns an array of transactions
+    
+    navigation.navigate('Transaction', { transactions });
+  } catch (error) {
+    console.log("Error fetching transactions:", error);
+  } finally {
+    setLoading(false);
+  }
+};
+
 
  useEffect(() => {
    showBalance();
@@ -76,10 +90,18 @@ const HomeScreen = () => {
             )}
             <Text style={styles.text3}>Repayment due: 28 March, 2025</Text>
 
-            <TouchableOpacity onPress={() => navigation.navigate('Transaction')} style={styles.transactions}>
+            <TouchableOpacity onPress={fetchTransactions} style={styles.transactions}>
+              {loading ? (
+              <ActivityIndicator size="small" color="white" />
+              ) : (
+              <>
               <Text style={styles.trans_text}>Transactions</Text>
-              <Image source={require("../assets/homePage/chevron_img.png")}/>
-            </TouchableOpacity>
+             <Image source={require("../assets/homePage/chevron_img.png")} />
+              </>
+               )}
+           </TouchableOpacity>
+
+
           </View>
 
           <View style={styles.loanContainer}>
