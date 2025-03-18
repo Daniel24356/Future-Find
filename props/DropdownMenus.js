@@ -4,8 +4,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import Feather from '@expo/vector-icons/Feather';
 
-const DropdownMenus = ({maritalStatus, sourceOfIncome, employmentStatus, selectBank, selectedBank, savingPeriod, paymentInterval, selectProvider,
-    exportAs, selectDate, onClose
+const DropdownMenus = ({maritalStatus, sourceOfIncome, employmentStatus, selectBank, savingPeriod, paymentInterval, selectProvider,
+    exportAs, selectDate, onClose, maritalSelect, employmentSelect
 }) => {
     const [ranges, setRanges] = useState('range1');
     const [checked, setChecked] = useState(0);
@@ -48,6 +48,7 @@ const DropdownMenus = ({maritalStatus, sourceOfIncome, employmentStatus, selectB
             <View style={styles.pop_up}>
 
                 <View style={{height:68,justifyContent:'space-between'}}>
+                    <Ionicons name="close-outline" size={24} color="black" onPress={onClose}/>
                     <Ionicons name="close-outline" size={24} color="black" onPress={onClose}/>
 
                     {
@@ -164,7 +165,7 @@ const DropdownMenus = ({maritalStatus, sourceOfIncome, employmentStatus, selectB
                 <View>
                     {
                         maritalStatus?
-                        <TouchableOpacity style={styles.option}>
+                        <TouchableOpacity style={styles.option} onPress={()=>maritalSelect('Married')}>
                             <Text style={{fontSize:14,color:'#292B2D'}}>Married</Text>
                         </TouchableOpacity> : 
                         sourceOfIncome?
@@ -172,7 +173,7 @@ const DropdownMenus = ({maritalStatus, sourceOfIncome, employmentStatus, selectB
                             <Text style={{fontSize:14,color:'#292B2D'}}>Business</Text>
                         </TouchableOpacity> :
                         employmentStatus?
-                        <TouchableOpacity style={styles.option}>
+                        <TouchableOpacity style={styles.option} onPress={()=>employmentSelect('Employed')}>
                             <Text style={{fontSize:14,color:'#292B2D'}}>Employed</Text>
                         </TouchableOpacity> :
                          paymentInterval?
@@ -187,7 +188,7 @@ const DropdownMenus = ({maritalStatus, sourceOfIncome, employmentStatus, selectB
 
                     {
                         maritalStatus?
-                        <TouchableOpacity style={styles.option}>
+                        <TouchableOpacity style={styles.option} onPress={()=>maritalSelect('Single')}>
                             <Text style={{fontSize:14,color:'#292B2D'}}>Single</Text>
                         </TouchableOpacity> : 
                         sourceOfIncome?
@@ -195,7 +196,7 @@ const DropdownMenus = ({maritalStatus, sourceOfIncome, employmentStatus, selectB
                             <Text style={{fontSize:14,color:'#292B2D'}}>Freelance</Text>
                         </TouchableOpacity> :
                         employmentStatus?
-                        <TouchableOpacity style={styles.option}>
+                        <TouchableOpacity style={styles.option} onPress={()=>employmentSelect('Self employed')}>
                             <Text style={{fontSize:14,color:'#292B2D'}}>Self employed</Text>
                         </TouchableOpacity> :
                          paymentInterval?
@@ -210,7 +211,7 @@ const DropdownMenus = ({maritalStatus, sourceOfIncome, employmentStatus, selectB
 
                     {
                         maritalStatus?
-                        <TouchableOpacity style={styles.option}>
+                        <TouchableOpacity style={styles.option}onPress={()=>maritalSelect('Divorced')} >
                             <Text style={{fontSize:14,color:'#292B2D'}}>Divorced</Text>
                         </TouchableOpacity> : 
                         sourceOfIncome?
@@ -218,7 +219,7 @@ const DropdownMenus = ({maritalStatus, sourceOfIncome, employmentStatus, selectB
                             <Text style={{fontSize:14,color:'#292B2D'}}>E-commerce</Text>
                         </TouchableOpacity> : 
                         employmentStatus?
-                        <TouchableOpacity style={styles.option}>
+                        <TouchableOpacity style={styles.option} onPress={()=>employmentSelect('Business owner')}>
                             <Text style={{fontSize:14,color:'#292B2D'}}>Business owner</Text>
                         </TouchableOpacity> :
                         exportAs?
@@ -229,7 +230,12 @@ const DropdownMenus = ({maritalStatus, sourceOfIncome, employmentStatus, selectB
 
                     {
                         maritalStatus||sourceOfIncome||employmentStatus?
-                        <TouchableOpacity style={styles.option}>
+                        <TouchableOpacity style={styles.option} onPress={
+                            maritalSelect?
+                            ()=>maritalSelect('Student') :
+                            employmentStatus?
+                            ()=>employmentSelect('Student') : ''
+                        }>
                             <Text style={{fontSize:14,color:'#292B2D'}}>Student</Text>
                         </TouchableOpacity> : ''
                     }
