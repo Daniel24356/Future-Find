@@ -16,7 +16,10 @@ import Group_Details from './screens/Group_Details';
 import VerificationPopup from './props/VerificationPopup';
 import FilterPopup from './screens/FilterPopup';
 import ConfirmPaymentPopup from './props/ConfirmPaymentPopup';
+import { ProfileProvider } from "./screens/ProfileContext";
 
 export default function App() {
-  return <AppNavigator/>;
+  return <ProfileProvider>
+    <AppNavigator/>;
+  </ProfileProvider>
 }

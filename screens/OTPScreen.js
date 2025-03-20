@@ -9,6 +9,7 @@ const OTPScreen = ({ duration = 40 }) => {
     const [otp, setOtp] = useState(new Array(otpLength).fill(""));
     const [timeLeft, setTimeLeft] = useState(duration);
     const [showResend, setShowResend] = useState(false);
+    const [focusedIndex, setFocusedIndex] = useState(null);
 
     const inputs = useRef([]);
 
@@ -30,6 +31,14 @@ const OTPScreen = ({ duration = 40 }) => {
       if (e.nativeEvent.key === "Backspace" && index > 0 && otp[index] === "") {
         inputs.current[index - 1].focus();
       }
+    };
+
+    const handleFocus = (index) => {
+      setFocusedIndex(index);
+    };
+  
+    const handleBlur = () => {
+      setFocusedIndex(null);
     };
 
     useEffect(() => {
@@ -76,12 +85,17 @@ const OTPScreen = ({ duration = 40 }) => {
         <TextInput
           key={index}
           ref={(ref) => (inputs.current[index] = ref)}
-          style={styles.passwordInput}
+          style={[
+            styles.passwordInput,
+            focusedIndex === index && { borderColor: "blue" }, // Change border color on focus
+          ]}
           keyboardType="numeric"
           maxLength={1}
           value={digit}
           onChangeText={(text) => handleChange(text, index)}
           onKeyPress={(e) => handleKeyPress(e, index)}
+          onFocus={() => handleFocus(index)}
+          onBlur={handleBlur}
         />
       ))}
     </View>
@@ -193,7 +207,9 @@ const styles = StyleSheet.create({
         height: 60,
         width: 70,
         textAlign: "center", 
-        fontWeight: "bold"
+        fontWeight: "bold",
+        borderWidth: 1,  // Ensure there's a border
+        borderColor: "white",  // Default border color
       },
       contain: {
         position: "relative",
