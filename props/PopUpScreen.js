@@ -8,7 +8,7 @@ const PopUpScreen = ({
     otpResent, forgotPassword, accountSaved, resetPassword, logout, confirmSubmit,
     otpVerified, confirmLoanYes, confirmLoanNo, withdrawalSuccess, savingsPlanCreated,
     contributionGroupCreated, joinedSavingsGroup, declinedSavingsGroup, contributionDone,
-    paymentConfirmed, airtimeTopup, dataTopup, electicityTopup, betAccFunded, onPress, onPressCancel
+    paymentConfirmed, airtimeTopup, dataTopup, electicityTopup, betAccFunded, onPress, onPressCancel, email
 }) => {
 
   return (
@@ -48,7 +48,7 @@ const PopUpScreen = ({
                 {
                     otpResent?
                     <Text style={styles.small_text}>
-                        Check your email (malvindesigner@gmail.com) and use the sent OTP for your account verification
+                        Check your email {email} and use the sent OTP for your account verification
                     </Text> :
                     forgotPassword? 
                     <Text style={styles.small_text}>
@@ -60,7 +60,7 @@ const PopUpScreen = ({
                     </Text> :
                     resetPassword?
                     <Text style={styles.small_text}>
-                        Check your email (malvindesigner@gmail.com) we've sent you the password reset link
+                        Check your email  we've sent you the password reset link
                     </Text> :
                     logout?
                     <Text style={styles.small_text}>
@@ -185,8 +185,6 @@ const styles = StyleSheet.create({
         backgroundColor:'#00000080',
         paddingHorizontal:15,
         position:'absolute',
-        top:0,
-        left:0,
         zIndex:10
     },
     pop_up: {

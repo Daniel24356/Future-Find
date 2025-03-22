@@ -38,6 +38,7 @@ import ElectricityTopupScreen from '../screens/ElectricityTopupScreen';
 import DataTopupScreen from '../screens/DataTopup';
 import Investments from '../screens/Investments';
 import LoanApplication from '../screens/LoanApplication';
+import Withdrawal from '../screens/Withdrawal';
 
 
 
@@ -53,6 +54,7 @@ const AppNavigator = () => {
          gestureEnabled: false,
         }}>
         <Stack.Screen name="Splash" component={SplashScreen}  options={{ animation: "none" }}  />
+        <Stack.Screen name="Signup" component={SignUpForm}  options={{ animation: "none" }}  />
       <Stack.Screen name="Transaction"component={Transaction}  options={{ animation: "none" }}  />
         <Stack.Screen name="Notifications" component={Notifications}  options={{ animation: "none" }}  />
         <Stack.Screen name="Investments" component={Investment}  options={{ animation: "none" }}  />
@@ -61,7 +63,6 @@ const AppNavigator = () => {
       <Stack.Screen name='BVNScreen' component={BVNScreen}  options={{ animation: "none" }} />
         <Stack.Screen name="Resetpassword" component={ResetPassword}  options={{ animation: "none" }}  />
         <Stack.Screen name="Login" component={LoginScreen}  options={{ animation: "none" }}  />
-        <Stack.Screen name="Signup" component={SignUpForm}  options={{ animation: "none" }}  />
         <Stack.Screen name="onboarding1" component={OnboardingScreen1}  options={{ animation: "none" }}  />
         <Stack.Screen name="onboarding2" component={OnboardingScreen2}  options={{ animation: "none" }}  />
         <Stack.Screen name="onboarding3" component={OnboardingScreen3}  options={{ animation: "none" }}  />
@@ -76,6 +77,7 @@ const AppNavigator = () => {
         <Stack.Screen name="InviteScreen1" component={InviteScreen}  options={{ animation: "none" }} />
         <Stack.Screen name="fixPlan" component={FixPlanScreen}  options={{ animation: "none" }}  />
         <Stack.Screen name="finalwithdrawal" component={FinalWithdrawal}  options={{ animation: "none" }}  />
+        <Stack.Screen name="withdrawalPage" component={Withdrawal}  options={{ animation: "none" }}  />
         <Stack.Screen name="airtime" component={AirtimeTopupScreen}  options={{ animation: "none" }}  />
         <Stack.Screen name="TransactionDetails" component={TransactionDetails}  options={{ animation: "none" }}  />
         <Stack.Screen name="BetAccount" component={BetAccount}  options={{ animation: "none" }}  />
