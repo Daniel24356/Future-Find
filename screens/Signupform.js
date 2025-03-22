@@ -193,20 +193,23 @@ export default function SignUpForm() {
             <TouchableOpacity style={[styles.button, (!form.agreed || !form.firstName || !form.lastName || !form.email ||!form.phoneNumber || !form.password || !form.confirmPassword) && styles.disabledButton]} onPress={handleSignUp}  disabled={!form.agreed || !form.firstName || !form.lastName || !form.email || !form.phoneNumber || !form.password || !form.confirmPassword}>
               <Text style={styles.buttonText}>Sign up</Text>
             </TouchableOpacity>
+            
+          </View>
+        </ScrollView>
+      </SafeAreaView>
+      {/* <PopUpScreen otpResent={true}/> */}
+      {popupVisible && (
             <TouchableOpacity   onPress={() => navigation.navigate('Login')}  style={styles.secButton}>
                         <Text style={styles.buttonTexttwo}>Sign In</Text>
                       </TouchableOpacity>
             {popupVisible && (
+
         <PopUpScreen 
           accountSaved={popupType === "success"}
           forgotPassword={popupType === "caution"}
           onPress={() => setPopupVisible(false)} // Hide popup when clicking "Okay"
         />
       )}
-          </View>
-        </ScrollView>
-      </SafeAreaView>
-      {/* <PopUpScreen otpResent={true}/> */}
     </View>
   );
 }
