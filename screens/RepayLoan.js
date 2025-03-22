@@ -1,9 +1,81 @@
-import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Image } from 'react-native'
-import React from 'react'
-import Ionicons from '@expo/vector-icons/Ionicons';
+import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Image, Alert } from 'react-native'
+import React, { useState, useEffect } from 'react'
 import TopHeader from '../props/TopHeader';
+import axios from 'axios';
+
+const API_BASE_URL = 'http://localhost:5000'
 
 const RepayLoan = () => {
+    const [loanDetails, setLoansDetails] = useState({
+
+        totalAmount: 0, 
+        loanAmount: 0,
+        interestRate: 0,
+        interestAmount: 0,
+        repaymentDue: "", 
+        loading: true,
+        error: null
+
+    }); 
+
+    const fetchLoanDetails = async () => {
+        try {
+            const response = await axios.get(`${API_BASE_URL}/api/v1/loan/getUserActiveLoan`);
+            const data = response.data;
+            console.log(data);
+            setLoansDetails({
+                totalAmount: data.totalAmount,
+                loanAmount: data.loanAmount,
+                interestRate: data.interestRate,
+                interestAmount: data.interestAmount,
+                repaymentDue: data.repaymentDue,
+                loading: false,
+                error: null
+            });
+        } catch (error) {
+            setLoansDetails(prev => ({
+                ...prev,
+                loading: false,
+                error: 'failed to fetch loan details'
+            }));
+            Alert.alert('Error', 'Failed to fetch loan details');
+        }
+    };
+
+    const handleRepayLoan = async () => {
+        try {
+            await axios.post(`${API_BASE_URL}/api/loans/repay`);
+            Alert.alert('Success', 'loan repayment initiated successfully');
+            fetchLoanDetails();
+        } catch (error) {
+            Alert.alert('Error', 'Failed to process loan payment');
+        }
+    };
+
+    useEffect(() => {
+        fetchLoanDetails();
+    }, []);
+
+    if (loanDetails.loading) {
+        return (
+            <View style={styles.container}>
+                <TopHeader title="Repay loan" />
+                <View style={[styles.contpartTwo, { justifyContent: 'center'}]}>
+                    <Text>Loading loan details...</Text>
+                </View>
+            </View>
+        );
+    }
+    if (loanDetails.error) {
+        return (
+            <View style={styles.container}>
+                <TopHeader title="Repay loan" />
+                <View style={[styles.contpartTwo, { justifyContent: 'center'}]}>
+                    <Text>Error: {loanDetails.error}</Text>
+                </View>
+            </View>
+        );
+    }
     return (
         <View style={styles.container}>
             {/* <View style={styles.con_two}>
@@ -21,31 +93,33 @@ const RepayLoan = () => {
                 <View style={styles.contpartTwo}>
                     <Image source={require('../assets/group.png')} />
                     <Text style={{ textAlign: 'center', fontSize: 17 }}>Total Loan Amount</Text>
-                    <Text style={{ fontSize: 39, fontWeight: 'bold', textAlign: 'center', paddingTop: 15 }}>N8,500,000</Text>
+                    <Text style={{ fontSize: 39, fontWeight: 'bold', textAlign: 'center', paddingTop: 15 }}>
+                        N{loanDetails.totalAmount.toLocaleString()}
+                    </Text>
                     <ScrollView>
                         <View style={styles.loanAmount}>
                             <View style={styles.interest}>
                                 <Text style={{ fontSize: 18 }}>Loan amount</Text>
-                                <Text style={{ fontSize: 18, }}>N2,500,00</Text>
+                                <Text style={{ fontSize: 18, }}>N{loanDetails.loanAmount.toLocaleString()}</Text>
                             </View>
                             <View style={styles.interest}>
                                 <Text style={{ fontSize: 18 }}>Interest</Text>
-                                <Text style={{ fontSize: 18 }}>10% (250,000)</Text>
+                                <Text style={{ fontSize: 18 }}> {loanDetails.interestRate}% ({loanDetails.interestAmount.toLocaleString()})</Text>
                             </View>
                             <View style={styles.interest}>
                                 <Text style={{ fontSize: 18 }}>Total amount</Text>
-                                <Text style={{ fontSize: 18 }}>2,750,000</Text>
+                                <Text style={{ fontSize: 18 }}>{loanDetails.totalAmount.toLocaleString()}</Text>
                             </View>
                             <View style={styles.interest}>
                                 <Text style={{ fontSize: 18 }}>Repayment due</Text>
-                                <Text style={{ fontSize: 18 }}>28, Mar, 2027</Text>
+                                <Text style={{ fontSize: 18 }}>{new Date(loanDetails.repaymentDue).toLocaleDateString()}</Text>
                             </View>
                         </View>
                     </ScrollView>
                 </View>
             </View>
             <View style={styles.bottonCon}>
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity style={styles.button} onPress={handleRepayLoan}> 
                     <Text style={styles.buttonText}>Repay Loan</Text>
                 </TouchableOpacity>
             </View>

@@ -1,68 +1,108 @@
-import React from "react";
-import {
+import React, { useState } from "react"; import {
   View,
   Text,
   TextInput,
   TouchableOpacity,
   StyleSheet,
 } from "react-native";
-import { MaterialIcons } from "@expo/vector-icons"; 
+import { MaterialIcons } from "@expo/vector-icons";
 import CustomButton from "../props/CustomButton";
 import TopHeader from "../props/TopHeader";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
+import DropdownMenus from "../props/DropdownMenus";
 
 export default function LoanLandingScreen() {
+  const [amount, setAmount] = useState(0);
+  const [employmentSatus, setEmploymentStatus] = useState(false)
+  const [empStatus, setEmpStatus] = useState(null)
+  const [maritalStatus, setMaritalStatus] = useState(false)
+  const [marStatus, setMarStatus] = useState(null)
+
+
+
+
+  const handleEmploymentSelect = (selection) => {
+    setEmpStatus(selection);
+    setEmploymentStatus(false);
+  }
+
+  const handleMaritalSelect = (selection) => {
+    setMarStatus(selection);
+    setMaritalStatus(false);
+  }
+
+
   return (
-    <SafeAreaView>
-      <StatusBar style="light" backgroundColor="#442CF5"/>
-    <View contentContainerStyle={styles.container}>
-      {/* <View style={styles.topPart}>
+    <View style={{ flex: 1 }}>
+      {
+        employmentSatus ?
+          <DropdownMenus employmentStatus={true} onClose={() => setEmploymentStatus(false)} employmentSelect={handleEmploymentSelect} /> :
+          maritalStatus ?
+            <DropdownMenus maritalStatus={true} onClose={() => setMaritalStatus(false)} maritalSelect={handleMaritalSelect} /> : ''
+      }
+      <SafeAreaView>
+
+        <StatusBar style="light" backgroundColor="#442CF5" />
+        <View contentContainerStyle={styles.container}>
+          {/* <View style={styles.topPart}>
         <Text style={styles.appTitle}>Loan Application</Text>
       </View> */}
-      <TopHeader title="Take loan" />
+          <TopHeader title="Take loan" />
 
-      <View style={styles.body}>
-        <Text style={styles.header}>Let's know you better</Text>
-        <Text style={styles.smallText}>Provide your accurate information</Text>
+          <View style={styles.body}>
+            <Text style={styles.header}>Let's know you better</Text>
+            <Text style={styles.smallText}>Provide your accurate information</Text>
 
-        <TextInput
-          style={styles.input}
-          placeholder="Amount of loan"
-          keyboardType="numeric"
-        />
+            <TextInput
+              style={styles.input}
+              placeholder="Amount of loan"
+              keyboardType="numeric"
+              value={amount}
+              onChangeText={(Text) => setAmount(Text)}
+            />
 
-        <TouchableOpacity style={styles.select}>
-          <Text style={styles.selectText}>Employment status</Text>
-          <MaterialIcons name="keyboard-arrow-down" size={24} color="#666" />
-        </TouchableOpacity>
+            <TouchableOpacity style={styles.select} onPress={() => setEmploymentStatus(true)}>
+              {
+                empStatus ?
+                  <Text style={styles.selectText}>{empStatus}</Text> :
+                  <Text style={styles.selectText}>Employment status</Text>
+              }
+              <MaterialIcons name="keyboard-arrow-down" size={24} color="#666" />
+            </TouchableOpacity>
 
-        <TouchableOpacity style={styles.uploadButton}>
-          <Text style={styles.uploadText}>Upload account statement</Text>
-          <MaterialIcons name="attach-file" size={20} color="#666" />
-        </TouchableOpacity>
+            <TouchableOpacity style={styles.uploadButton}>
+              <Text style={styles.uploadText}>Upload account statement</Text>
+              <MaterialIcons name="attach-file" size={20} color="#666" />
+            </TouchableOpacity>
 
-        <TouchableOpacity style={styles.select}>
-          <Text style={styles.selectText}>Marital status</Text>
-          <MaterialIcons name="keyboard-arrow-down" size={24} color="#666" />
-        </TouchableOpacity>
+            <TouchableOpacity style={styles.select} onPress={() => setMaritalStatus(true)}>
+             {
+              empStatus?
+              <Text style={styles.selectText}>{marStatus}</Text>:
+              <Text style={styles.selectText}>Marital status</Text>
+             }
+              <MaterialIcons name="keyboard-arrow-down" size={24} color="#666" />
+            </TouchableOpacity>
 
-        <TextInput style={styles.input} placeholder="Home address" />
+            <TextInput style={styles.input} placeholder="Home address" />
 
-        <View style={styles.termsContainer}>
-          <TouchableOpacity style={styles.checkbox} />
-          <Text style={styles.termsText}>
-            By signing up, you agree to the{" "}
-            <Text style={styles.linkText}>Terms of Service</Text> and{" "}
-            <Text style={styles.linkText}>Privacy Policy</Text>
-          </Text>
+            <View style={styles.termsContainer}>
+              <TouchableOpacity style={styles.checkbox} />
+              <Text style={styles.termsText}>
+                By signing up, you agree to the{" "}
+                <Text style={styles.linkText}>Terms of Service</Text> and{" "}
+                <Text style={styles.linkText}>Privacy Policy</Text>
+              </Text>
+            </View>
+            <View style={styles.button}>
+              <CustomButton title="Continue" backgroundColor="#2C14DD" />
+            </View>
+          </View>
         </View>
-        <View style={styles.button}>
-          <CustomButton title="Continue" backgroundColor="#2C14DD" />
-        </View>
-      </View>
+
+      </SafeAreaView>
     </View>
-    </SafeAreaView>
   );
 }
 
@@ -109,11 +149,6 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 15,
     paddingVertical: 12,
     fontSize: 16,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
     marginTop: 20,
   },
 
@@ -128,22 +163,17 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 15,
     paddingVertical: 12,
     marginTop: 20,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
   },
 
   uploadText: { fontSize: 16, color: "#666" },
 
-  button:{
+  button: {
     marginTop: 90
   },
 
-  termsContainer: { 
-    flexDirection: "row", 
-    alignItems: "center", 
+  termsContainer: {
+    flexDirection: "row",
+    alignItems: "center",
     marginTop: 20,
   },
   checkbox: {
@@ -157,3 +187,9 @@ export const styles = StyleSheet.create({
   termsText: { fontSize: 12, color: "#666" },
   linkText: { color: "#442CF5", textDecorationLine: "underline" },
 });
+
+
+
+
+
+
