@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -6,36 +6,117 @@ import {
   TextInput,
   TouchableOpacity,
   Image,
+  Modal,
+  FlatList,
 } from "react-native";
-import { Ionicons } from "@expo/vector-icons"; // For icons
-import { MaterialIcons } from "@expo/vector-icons";
+import { MaterialIcons, Ionicons } from "@expo/vector-icons";
 import TopHeader from "../props/TopHeader";
+import axios from "axios";
+
+export const providerIcons = {
+  MTN: require("../assets/mtn.png"),
+  GLO: require("../assets/glo.png"),
+  Airtel: require("../assets/airtel.png"),
+  "9Mobile": require("../assets/9MOBILE.png"),
+};
 
 const AirtimeTopupScreen = () => {
+  const [showProviderModal, setShowProviderModal] = useState(false);
+  const [selectedProvider, setSelectedProvider] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [airtimeAmount, setAirtimeAmount] = useState("");
+  const [isFormValid, setIsFormValid] = useState(false);
+
+  const providerList = [
+    { id: "1", name: "MTN" },
+    { id: "2", name: "GLO" },
+    { id: "3", name: "Airtel" },
+    { id: "4", name: "9Mobile" },
+  ];
+
+  const validateForm = () => {
+    const isValid =
+      selectedProvider &&
+      phoneNumber.length >= 10 &&
+      !isNaN(phoneNumber) &&
+      airtimeAmount &&
+      !isNaN(airtimeAmount) &&
+      parseFloat(airtimeAmount) > 0;
+    setIsFormValid(isValid);
+  };
+
+  const onSelectProvider = (providerName) => {
+    setSelectedProvider(providerName);
+    setShowProviderModal(false);
+    validateForm();
+  };
+
+  const currentProviderIcon = selectedProvider
+    ? providerIcons[selectedProvider]
+    : require("../assets/NairaImg.png"); 
+
+    
+  const handleContinue = async () => {
+    try {
+      const ref = `airtime-${Date.now()}`;
+      const response = await axios.post(
+        "http://localhost:5000/api/v1/transactions/buy-airtime",
+        {
+          network: selectedProvider,
+          phone: parseInt(phoneNumber, 10),
+          amount: parseFloat(airtimeAmount),
+          ref: ref,
+        }
+      );
+      console.log("Transaction successful:", response.data);
+    } catch (error) {
+      console.error("Transaction failed:", error);
+      alert("Transaction failed");
+    }
+  };
+
+  const renderProvider = ({ item }) => {
+    const isSelected = item.name === selectedProvider;
+    return (
+      <TouchableOpacity
+        style={styles.providerRow}
+        onPress={() => onSelectProvider(item.name)}
+      >
+        <Image source={providerIcons[item.name]} style={styles.providerIcon} />
+        <View style={isSelected}>{isSelected}</View>
+        <Text style={styles.providerName}>{item.name}</Text>
+      </TouchableOpacity>
+    );
+  };
+
   return (
     <>
-      {/* Top Section */}
-      {/* <View style={styles.topPart}>
-        <Ionicons name="arrow-back" size={24} color="white" />
-        <Text style={styles.appTitle}>Airtime topup</Text>
-      </View> */}
-
       <TopHeader title="Airtime topup" />
 
       <View style={styles.container}>
-        {/* Input Section */}
+        {/* Phone + Provider Section */}
         <View style={styles.phoneContainer}>
-          <View style={styles.selectContainer}>
-            <Image source={require("../assets/9MOBILE.png")} />
+        
+          <TouchableOpacity
+            style={styles.selectContainer}
+            onPress={() => setShowProviderModal(true)}
+          >
+            <Image source={currentProviderIcon} style={styles.networkIcon} />
             <MaterialIcons name="keyboard-arrow-down" size={24} color="#666" />
-          </View>
+          </TouchableOpacity>
 
+          {/* Phone Input */}
           <View style={styles.phoneInfo}>
             <TextInput
               style={styles.phoneInput}
               placeholder="Phone number"
               placeholderTextColor="#aaa"
               keyboardType="phone-pad"
+              value={phoneNumber}
+              onChangeText={(text) => {
+                setPhoneNumber(text);
+                validateForm();
+              }}
             />
             <TouchableOpacity>
               <Image
@@ -47,7 +128,6 @@ const AirtimeTopupScreen = () => {
         </View>
 
         {/* Airtime Amount Section */}
-
         <View style={styles.lowerBody}>
           <View style={styles.row}>
             <Text style={styles.label}>Airtime amount</Text>
@@ -59,6 +139,8 @@ const AirtimeTopupScreen = () => {
               <Text style={styles.balanceText}>+ N160</Text>
             </View>
           </View>
+
+          {/* Preset amounts */}
           <View style={styles.grid}>
             {[
               "N100",
@@ -70,124 +152,108 @@ const AirtimeTopupScreen = () => {
               "N700",
               "N1000",
             ].map((amount, index) => (
-              <TouchableOpacity key={index} style={styles.amountBox}>
+              <TouchableOpacity
+                key={index}
+                style={styles.amountBox}
+                onPress={() => {
+                  setAirtimeAmount(amount.replace("N", ""));
+                  validateForm();
+                }}
+              >
                 <Text style={styles.amountText}>{amount}</Text>
               </TouchableOpacity>
             ))}
           </View>
+
+          {/* Custom amount input */}
           <View style={styles.amountInfo}>
-  <TextInput
-    style={styles.amountInput}
-    placeholder="Amount"
-    placeholderTextColor="#aaa"
-    keyboardType="numeric"
-  />
-  <TouchableOpacity>
-    <Image
-      source={require("../assets/contact-icon.png")}
-      style={styles.contactIcon}
-    />
-  </TouchableOpacity>
-</View>
-
+            <TextInput
+              style={styles.amountInput}
+              placeholder="Amount"
+              placeholderTextColor="#aaa"
+              keyboardType="numeric"
+              value={airtimeAmount}
+              onChangeText={(text) => {
+                setAirtimeAmount(text);
+                validateForm();
+              }}
+            />
+            <TouchableOpacity>
+              <Image
+                source={require("../assets/contact-icon.png")}
+                style={styles.contactIcon}
+              />
+            </TouchableOpacity>
+          </View>
         </View>
-        <TouchableOpacity style={styles.button}>
-            <Text style={styles.buttonText}>Continue</Text>
-          </TouchableOpacity>
 
+        {/* Continue button */}
+        <TouchableOpacity
+          style={[styles.button, !isFormValid && styles.buttonDisabled]}
+          onPress={handleContinue}
+          disabled={!isFormValid}
+        >
+          <Text style={styles.buttonText}>Continue</Text>
+        </TouchableOpacity>
       </View>
+
+      {/* Provider selection modal */}
+      <Modal
+        visible={showProviderModal}
+        animationType="fade"
+        transparent
+        onRequestClose={() => setShowProviderModal(false)}
+      >
+        <View style={styles.modalBackground}>
+          <View style={styles.modalContainer}>
+            {/* Close & Title */}
+            <View style={styles.modalHeader}>
+              <TouchableOpacity
+                onPress={() => setShowProviderModal(false)}
+                style={styles.closeButton}
+              >
+                <Ionicons name="close-outline" size={24} color="#000" />
+              </TouchableOpacity>
+              <Text style={styles.modalTitle}>Select provider</Text>
+            </View>
+
+            {/* Provider list */}
+            <FlatList
+              data={providerList}
+              keyExtractor={(item) => item.id}
+              renderItem={renderProvider}
+              style={{ marginTop: 10 }}
+            />
+          </View>
+        </View>
+      </Modal>
     </>
   );
 };
 
 export default AirtimeTopupScreen;
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#F4F6FE",
     paddingHorizontal: 20,
   },
-  appTitle: {
-    color: "#FFF",
-    fontSize: 18,
-    fontWeight: "bold",
-    marginLeft: 10,
-  },
-  label: {
-    fontSize: 16,
-    fontWeight: "500",
-  },
-  balanceContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  balanceText: {
-    color: "#00A86B",
-    marginLeft: 5,
-    fontSize: 16,
-  },
-  row: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    marginTop: 4,
-    marginBottom: 20,
-  },
-  grid: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "space-between",
-    marginTop: 10,
-  },
-  amountBox: {
-    backgroundColor: "#FFF",
-    borderRadius: 10,
-    paddingVertical: 15,
-    paddingHorizontal: 16,
-    marginBottom: 10,
-    width: "22%",
-    alignItems: "center",
-    justifyContent: "center",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 2,
-  },
-  amountText: {
-    fontSize: 13,
-    fontWeight: "600",
-  },
-  button: {
-    backgroundColor: "#C2B8FC",
-    paddingVertical: 15,
-    borderRadius: 10,
-    alignItems: "center",
-    marginTop: 30,
-  },
-  buttonText: {
-    color: "#FFF",
-    fontSize: 16,
-    fontWeight: "600",
-  },
   phoneContainer: {
     flexDirection: "row",
     gap: 10,
     marginTop: 30,
-    marginBottom: 0,
   },
   selectContainer: {
     flexDirection: "row",
     height: 50,
     gap: 5,
     alignItems: "center",
-    backgroundColor: "#EFEFEF",
+    backgroundColor: "#FFFFFF",
     borderRadius: 8,
     paddingHorizontal: 10,
     paddingVertical: 8,
     marginRight: 10,
-    backgroundColor: "#FFFFFF",
   },
   networkIcon: {
     width: 24,
@@ -205,10 +271,10 @@ const styles = StyleSheet.create({
     padding: 5,
     paddingHorizontal: 8,
   },
-  phoneNumber: {
+  phoneInput: {
+    flex: 1,
     fontSize: 16,
     color: "#333",
-    fontWeight: "600",
   },
   contactIcon: {
     width: 24,
@@ -220,19 +286,51 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFF",
     borderRadius: 10,
     padding: 15,
-    marginTop: 10,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 2,
     marginTop: 20,
   },
-  phoneInput: {
-    flex: 1,
+  row: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginTop: 4,
+    marginBottom: 20,
+  },
+  label: {
     fontSize: 16,
-    color: "#333",
-    height: 90,
+    fontWeight: "500",
+  },
+  balanceContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  logoIcon: {
+    width: 24,
+    height: 24,
+  },
+  balanceText: {
+    color: "#00A86B",
+    marginLeft: 5,
+    fontSize: 16,
+  },
+  grid: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+    marginTop: 10,
+  },
+  amountBox: {
+    backgroundColor: "#F5F7FF",
+    borderRadius: 10,
+    paddingVertical: 15,
+    paddingHorizontal: 16,
+    marginBottom: 10,
+    width: "22%",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  amountText: {
+    fontSize: 13,
+    fontWeight: "600",
   },
   amountInfo: {
     flexDirection: "row",
@@ -241,7 +339,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     borderRadius: 8,
     borderWidth: 1,
-    borderColor: "gainsboro",
+    borderColor: "whitesmoke",
     padding: 4,
   },
   amountInput: {
@@ -250,5 +348,79 @@ const styles = StyleSheet.create({
     color: "#333",
     height: 50,
   },
-  
+  button: {
+    backgroundColor: "#2C14DD",
+    paddingVertical: 15,
+    borderRadius: 10,
+    alignItems: "center",
+    marginTop: 30,
+  },
+  buttonDisabled: {
+    backgroundColor: "#b8b2f4",
+  },
+  buttonText: {
+    color: "#FFF",
+    fontSize: 16,
+    fontWeight: "600",
+  },
+  modalBackground: {
+    flex: 1,
+    backgroundColor: "rgba(0,0,0,0.3)",
+    justifyContent: "flex-end",
+    paddingVertical: 20,
+    paddingHorizontal: 16,
+  },
+  modalContainer: {
+    backgroundColor: "#FFF",
+    borderRadius: 12,
+    padding: 20,
+    height: "auto",
+  },
+  modalHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 10,
+  },
+  closeButton: {
+    marginRight: 10,
+  },
+  modalTitle: {
+    fontSize: 16,
+    fontWeight: "600",
+  },
+  providerRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingVertical: 8,
+  },
+  providerName: {
+    fontSize: 16,
+    color: "#292B2D",
+    lineHeight: 30,
+  },
+  providerIcon: {
+    width: 24,
+    height: 24,
+    marginRight: 10,
+  },
+  checkbox: {
+    width: 20,
+    height: 20,
+    borderWidth: 1,
+    borderColor: "#ddd",
+    borderRadius: 4,
+    marginRight: 10,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  checkboxSelected: {
+    borderColor: "#2C14DD",
+    backgroundColor: "#F4F6FE",
+  },
+  checkboxInner: {
+    width: 10,
+    height: 10,
+    backgroundColor: "#2C14DD",
+    borderRadius: 2,
+  },
 });

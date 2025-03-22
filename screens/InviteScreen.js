@@ -115,7 +115,8 @@ const styles = StyleSheet.create({
   },
   create: {
       color: "white",
-      fontSize: 18
+      fontSize: 16,
+      fontWeight: 600
   },
   contribute:{
     width: '100%',
@@ -155,6 +156,7 @@ const styles = StyleSheet.create({
    paddingHorizontal:12,
   //  paddingVertical: 8,
   },
+
   input: {
     flex: 1,
     fontSize: 12,
@@ -166,7 +168,8 @@ const styles = StyleSheet.create({
    
   },
   link: {
-    height: 30,
+    width: 328,
+    height: 28,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems:'center'
@@ -182,6 +185,10 @@ const styles = StyleSheet.create({
     alignItems:'center',
     gap:5
 
+  },
+  Img: {
+    width: 12,
+    height: 13.33
   },
   conButton: {
     paddingHorizontal:15,
