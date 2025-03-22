@@ -8,6 +8,7 @@ import TopHeader from "../props/TopHeader";
 import { SafeAreaView } from "react-native-safe-area-context";
 import axios from "axios" 
 import PopUpScreen from "../props/PopUpScreen";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function SignUpForm() {
   const navigation = useNavigation();
@@ -15,6 +16,7 @@ export default function SignUpForm() {
     firstName: "",
     lastName: "",
     email: "",
+    phoneNumber: "",
     password: "",
     confirmPassword: "",
     agreed: false,
@@ -32,7 +34,7 @@ export default function SignUpForm() {
   };
 
   const handleSignUp = async () => {
-    if (!form.firstName || !form.lastName || !form.email || !form.password || !form.confirmPassword) {
+    if (!form.firstName  || !form.email || !form.password || !form.confirmPassword) {
       setPopupMessage("All fields are required");
       setPopupType("caution");
       setPopupVisible(true);
@@ -64,32 +66,52 @@ export default function SignUpForm() {
     }
 
     try {
-      const response = await axios.post("http://192.168.160.138:5000/api/v1/users/", {
-        firstName: form.firstName,
-        lastName: form.lastName,
-        email: form.email,
-        password: form.password,
-      });
-
-      // setPopupMessage("Registration successful!, We have sent an OTP to your Email");
-      // setPopupType("success");
-      // setPopupVisible(true);
-      setForm({
-        firstName: "",
-        lastName: "",
-        email: "",
-        password: "",
-        confirmPassword: "",
-        agreed: false,
-      });
-      navigation.navigate("home");
+        // Step 1: Register the user
+        const response = await axios.post("http://192.168.160.138:5000/api/v1/users/", {
+            firstName: form.firstName,
+            lastName: form.lastName,
+            email: form.email,
+            phoneNumber: form.phoneNumber,
+            password: form.password,
+        });
+    
+        // ✅ Store the token from response
+        // const token = response.data.token; // Ensure your API returns a token
+        // if (token) {
+        //     await AsyncStorage.setItem("userToken", token);
+        //     console.log("Token stored successfully!");
+        // } else {
+        //     console.error("No token received from API.");
+        // }
+    
+        // // Step 2: Send OTP
+        // await axios.post("http://192.168.160.138:5000/api/v1/otp/send-otp", {
+        //     applicationId: "A162193AA2D4A4D38D6B55FB9F5B5BC2", // Replace with actual value
+        //     messageId: "E894D7141D7C8CB717B24656511D0697", // Replace with actual value
+        //     phoneNumber: form.phoneNumber,
+        // });
+    
+        // Step 3: Reset the form and navigate to OTP screen
+        setForm({
+            firstName: "",
+            lastName: "",
+            email: "",
+            phoneNumber: "",
+            password: "",
+            confirmPassword: "",
+            agreed: false,
+        });
+    
+        navigation.navigate("home");
+    
     } catch (error) {
-      console.error("Error:", error.response ? error.response.data : error.message);
-      // setPopupMessage("Registration failed. Please try again.");
-      // setPopupType("caution");
-      setPopupVisible(true);
+        console.error("Error:", error.response ? error.response.data : error.message);
+        setPopupMessage("Registration failed. Please try again.");
+        setPopupType("caution");
+        setPopupVisible(true);
     }
   };
+  
 
   return (
     <View style={{ flex: 1, backgroundColor: "#F5F7FF" }}>
@@ -109,18 +131,26 @@ export default function SignUpForm() {
                 value={form.firstName}
                 onChangeText={(text) => setForm({ ...form, firstName: text })}
               />
-              <TextInput
+               <TextInput
                 style={styles.input}
                 placeholder="Last name"
                 value={form.lastName}
                 onChangeText={(text) => setForm({ ...form, lastName: text })}
-              />
+              /> 
               <TextInput
                 style={styles.input}
                 placeholder="Enter email"
                 keyboardType="email-address"
                 value={form.email}
                 onChangeText={(text) => setForm({ ...form, email: text })}
+              />
+
+              <TextInput
+                style={styles.input}
+                placeholder="Enter Phone Number"
+                keyboardType="phone-pad"
+                value={form.phoneNumber}
+                onChangeText={(text) => setForm({ ...form, phoneNumber: text })}
               />
               <View style={styles.passwordContainer}>
                 <TextInput
@@ -160,9 +190,12 @@ export default function SignUpForm() {
             </View>
 
             {/* Sign Up Button */}
-            <TouchableOpacity style={[styles.button, (!form.agreed || !form.firstName || !form.lastName || !form.email || !form.password || !form.confirmPassword) && styles.disabledButton]} onPress={handleSignUp}  disabled={!form.agreed || !form.firstName || !form.lastName || !form.email || !form.password || !form.confirmPassword}>
+            <TouchableOpacity style={[styles.button, (!form.agreed || !form.firstName || !form.lastName || !form.email ||!form.phoneNumber || !form.password || !form.confirmPassword) && styles.disabledButton]} onPress={handleSignUp}  disabled={!form.agreed || !form.firstName || !form.lastName || !form.email || !form.phoneNumber || !form.password || !form.confirmPassword}>
               <Text style={styles.buttonText}>Sign up</Text>
             </TouchableOpacity>
+            <TouchableOpacity   onPress={() => navigation.navigate('Login')}  style={styles.secButton}>
+                        <Text style={styles.buttonTexttwo}>Sign In</Text>
+                      </TouchableOpacity>
             {popupVisible && (
         <PopUpScreen 
           accountSaved={popupType === "success"}
@@ -314,5 +347,18 @@ const styles = StyleSheet.create({
      color: "#240F51",
      fontSize:14,
      fontWeight:600
-  }
+  },
+  secButton: {
+    backgroundColor: "#2C14DD0D",
+    padding: 15,
+    borderRadius: 15,
+    alignItems: "center",
+    marginTop: 15
+  },
+ 
+  buttonTexttwo:{
+     color: "#240F51",
+     fontSize:14,
+     fontWeight: 600
+  }, 
 });

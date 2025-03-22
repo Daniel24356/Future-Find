@@ -149,11 +149,6 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 15,
     paddingVertical: 12,
     fontSize: 16,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
     marginTop: 20,
   },
 
@@ -168,11 +163,6 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 15,
     paddingVertical: 12,
     marginTop: 20,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
   },
 
   uploadText: { fontSize: 16, color: "#666" },

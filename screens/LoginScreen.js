@@ -6,6 +6,8 @@ import TopHeader from "../props/TopHeader";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaView } from "react-native-safe-area-context";
 import axios from "axios";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { jwtDecode } from "jwt-decode";
 
 const LoginScreen = () => {
 const [form, setForm] = useState({
@@ -39,44 +41,66 @@ const [form, setForm] = useState({
     return valid;
   };
   const handleLogin = async () => {
-    setErrors({ email: "", password: "" }); // Reset errors initially
+      setErrors({ email: "", password: "" });
   
-    if (!form.email) {
-      setErrors((prev) => ({ ...prev, email: "Please enter your email" }));
-      return;
-    }
-    if (!form.password) {
-      setErrors((prev) => ({ ...prev, password: "Please enter your password" }));
-      return;
-    }
+      if (!form.email) {
+          setErrors((prev) => ({ ...prev, email: "Please enter your email" }));
+          return;
+      }
+      if (!form.password) {
+          setErrors((prev) => ({ ...prev, password: "Please enter your password" }));
+          return;
+      }
   
+   
     try {
-      const response = await axios.post("http://192.168.160.138:5000/api/v1/login/", {
+      const response = await axios.post("http://192.168.7.174:5000/api/v1/login/", {
         email: form.email,
         password: form.password,
       });
+      
+       console.log("API Response:", response.data);
   
-      setForm({ email: "", password: "" });
-      navigation.navigate("home");
+          const { accessToken, refreshToken } = response.data;
+          if (!accessToken) {
+              console.error("Login successful but no token received.");
+              return;
+          }
   
-    } catch (error) {
-      console.log("Login Error:", error.response?.data); // Debugging: Log API response
+          await AsyncStorage.setItem("userToken", accessToken);
+          console.log("Token stored successfully!");
   
-      if (error.response && error.response.data) {
-        const errorMsg = error.response.data.error; // Fix: Extract "error" instead of "message"
+          console.log("jwtDecode function:", jwtDecode); // Debugging
   
-        if (errorMsg.toLowerCase().includes("email")) {
-          setErrors((prev) => ({ ...prev, email: "This email doesn't exist" }));
-        } else if (errorMsg.toLowerCase().includes("password")) {
-          setErrors((prev) => ({ ...prev, password: "You've entered an incorrect password" }));
-        } else {
-          alert(errorMsg || "Login failed. Please try again.");
-        }
-      } else {
-        alert("Network error. Please try again later.");
+          const decodedToken = jwtDecode(accessToken);
+          console.log("Decoded Token:", decodedToken);
+  
+          const userId = decodedToken?.id || decodedToken?.userId;
+          if (userId) {
+              await AsyncStorage.setItem("userId", userId);
+              console.log("User ID stored successfully!", userId);
+          } else {
+              console.error("User ID not found in token.");
+          }
+  
+          setForm({ email: "", password: "" });
+          navigation.navigate("home");
+  
+      } catch (error) {
+          console.log("Login Error:", error.response?.data || error.message);
+  
+          const errorMsg = error.response?.data?.error || error.response?.data?.message || "Login failed. Please try again.";
+          if (errorMsg.toLowerCase().includes("email")) {
+              setErrors((prev) => ({ ...prev, email: "This email doesn't exist" }));
+          } else if (errorMsg.toLowerCase().includes("password")) {
+              setErrors((prev) => ({ ...prev, password: "You've entered an incorrect password" }));
+          } else {
+              alert(errorMsg);
+          }
       }
-    }
   };
+  
+
   
   return (
     <View style={{flex:1,backgroundColor: "#F5F7FF"}}>

@@ -7,11 +7,43 @@ import Entypo from '@expo/vector-icons/Entypo';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 // import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { useNavigation } from '@react-navigation/native';
+import { ProfileContext } from './ProfileContext';
+import { useContext } from 'react';
+import { useState, useEffect } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
 
 const ProfileScreen = () => {
-  
+    const [user, setUser] = useState({ firstName: "", lastName: "", email: "" });
+  const { profilePic } = useContext(ProfileContext);
 const navigation = useNavigation();
   
+useEffect(() => {
+    const fetchUserData = async () => {
+        try {
+            const token = await AsyncStorage.getItem("userToken");
+            const userId = await AsyncStorage.getItem("userId");
+
+            if (!token || !userId) {
+                console.error("Authentication failed.");
+                return;
+            }
+
+            const response = await axios.get(`http://192.168.160.138:5000/api/v1/users/${userId}`, {
+                headers: { Authorization: `Bearer ${token}` },
+            });
+
+            if (response.status === 200) {
+                const { firstName, lastName, email } = response.data;
+                setUser({ firstName, lastName, email });
+            }
+        } catch (error) {
+            console.error("Error fetching user data:", error.response?.data || error.message);
+        }
+    };
+
+    fetchUserData();
+}, []);
   return (
     <View style={styles.container}>
         <StatusBar backgroundColor='blue' />
@@ -31,9 +63,9 @@ const navigation = useNavigation();
         <View style={styles.mid_holder}>
         <View style={styles.mid_container}>
             <View style={styles.section}>
-              <Image source={require('../assets/Group 20105.png')} style={styles.image}/>
-              <Text style={styles.text_1}>Malvin YaaBari</Text>
-              <Text style={styles.text_2}>malvindesigner@gmail.com</Text>
+              <Image source={profilePic} style={styles.image}/>
+              <Text style={styles.text_1}>{user.firstName} {user.lastName}</Text>
+              <Text style={styles.text_2}>{user.email}</Text>
             </View>
 
             <View style={styles.section_1}>
@@ -162,6 +194,7 @@ const styles = StyleSheet.create({
     image:{
         width:90,
         height:90,
+        borderRadius: 50
     },
     text_1:{
         fontSize:18,
