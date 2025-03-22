@@ -1,12 +1,31 @@
-import { Image, StyleSheet, Text, View, TouchableOpacity } from 'react-native'
-import React from 'react'
+import { Image, StyleSheet, Text, View, TouchableOpacity, Alert } from 'react-native'
+import React, { useEffect, useState } from 'react'
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import EvilIcons from '@expo/vector-icons/EvilIcons';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
+import axios from 'axios';
+import { ALL_MEMBERS } from '../API_URL';
 
 const Group_members = () => {
+
+    const [members, setMembers] = useState([])
+
+    useEffect(() => {
+        const getContributionMembers = async () =>{
+            try{
+                const response = await axios.get(`${ALL_MEMBERS}/${id}`)
+                if(response.status === 200){
+                    setMembers(response.data)
+                }
+            }catch(error){
+                Alert.alert("Error, Something went wrong", error.response.data.message)
+            }
+        }
+        getContributionMembers()
+    }, [])
+
     const navigation = useNavigation();
   return (
     <View style={styles.container}>
@@ -42,7 +61,7 @@ const Group_members = () => {
             
             <View style={styles.third_section}>
                <View style={styles.first}>
-                   <Text style={{fontSize:12,fontWeight:400,paddingLeft:10}}>23 members</Text>
+                   <Text style={{fontSize:12,fontWeight:400,paddingLeft:10}}>23 {members.length}members</Text>
                  <View style={styles.export}>
                       <View style={styles.inner}>
                           <Image source={require("../assets/calendar.png")}/>
@@ -63,9 +82,27 @@ const Group_members = () => {
 
                </View>
             </View>
-
+            {members.length > 0 ? (
             <View style={styles.section}>
+                
                 <View style={styles.sub_sec}>
+                    <View style={styles.box1}>
+                        <View style={styles.img}>
+                            <Image source={require("../assets/Ellipse 814.png")} 
+                            // source = {require(`${members.profilePicture}`)}
+                            />
+                        </View>
+                        <View style={styles.texts}>
+                            <Text style={styles.text1}>{members.firstName} {members.lastName} King Alex Ade</Text>
+                            <Text style={styles.text2}>{members.email}Kingalexade@gmail.com</Text>
+                        </View>
+
+                    </View>
+                    <View style={styles.paid}>
+                    <Text style={{fontSize:12,fontWeight:400,color:'#6C727F'}}>Paid</Text>
+                    </View>
+                </View>
+                {/* <View style={styles.sub_sec}>
                     <View style={styles.box1}>
                         <View style={styles.img}>
                             <Image source={require("../assets/Ellipse 814.png")}/>
@@ -199,23 +236,11 @@ const Group_members = () => {
                     <View style={styles.paid}>
                     <Text style={{fontSize:12,fontWeight:400,color:'#6C727F'}}>Paid</Text>
                     </View>
-                </View>
-                <View style={styles.sub_sec}>
-                    <View style={styles.box1}>
-                        <View style={styles.img}>
-                            <Image source={require("../assets/Ellipse 814.png")}/>
-                        </View>
-                        <View style={styles.texts}>
-                            <Text style={styles.text1}>King Alex Ade</Text>
-                            <Text style={styles.text2}>Kingalexade@gmail.com</Text>
-                        </View>
-
-                    </View>
-                    <View style={styles.paid}>
-                    <Text style={{fontSize:12,fontWeight:400,color:'#6C727F'}}>Paid</Text>
-                    </View>
-                </View>
+                </View> */}
             </View>
+          ): (
+            <Text>Unreachable. No members Found</Text>
+          )}
 
 
 
