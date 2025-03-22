@@ -48,7 +48,7 @@ const Contribution_Active = () => {
                     style={styles.conv_img}
                 />
             </View>
-               {contribution.length > 0 ? (
+               {contributions.length > 0 ? (
             <>
             <View style={styles.info}>
                       <View style={styles.info_1}>
@@ -97,7 +97,16 @@ const Contribution_Active = () => {
                           </TouchableOpacity>
                       </View>
                       </> ) : (
-                        <Text>You have no contributions</Text>
+                        <View style= {styles.noView}>
+                           <Text style={styles.noGroup}>No Groups</Text>
+                           <Text style={styles.notAny}>You don’t have any contribution, use the button below to create a new contribution group</Text>
+                           <CustomButton
+                           backgroundColor="#2C14DD"
+                           title="Create"
+                           onPress={() => navigation.navigate('Contribute')}
+                           mtop= "0"
+                           />
+                        </View>
                       )}
                 {/* NEW MEMBERS */}
                 {/* <View style={{alignItems:'center',paddingHorizontal:10,paddingBottom:10,gap:15}}>
@@ -118,11 +127,11 @@ const Contribution_Active = () => {
                 {/* </TouchableOpacity>
             </View> */}
              
-            <CustomButton 
+            {/* <CustomButton 
                 backgroundColor={'#2C14DD'}
                 title={'Create my own group'}
                 onPress={() => navigation.navigate('Contribute')}
-            />
+            /> */}
 
         </SafeAreaView>
 
@@ -224,5 +233,29 @@ const styles = StyleSheet.create({
         borderRadius:15,
         justifyContent:'center',
         alignItems:'center'
+    },
+    noView:{
+        width: '100%',
+        height: 196,
+        borderRadius: 16,
+        backgroundColor: '#fff',
+        paddingTop: 30,
+        paddingRight: 24,
+        paddingBottom: 20,
+        paddingLeft: 24,
+        gap: 20
+    },
+    noGroup: {
+        fontSize: 16,
+        fontWeight: 600,
+        color: "#131313",
+        textAlign: 'center'
+    },
+    notAny:{
+        fontSize: 12,
+        fontWeight: 400,
+        color: "#6C727F",
+        textAlign: "center",
+        lineHeight: 18
     }
 })
