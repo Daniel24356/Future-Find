@@ -64,7 +64,7 @@ export default function SignUpForm() {
     }
 
     try {
-      const response = await axios.post("http://192.168.160.138:5000/api/v1/users/", {
+      const response = await axios.post("http://192.168.7.174:5000/api/v1/users/", {
         firstName: form.firstName,
         lastName: form.lastName,
         email: form.email,
@@ -163,17 +163,18 @@ export default function SignUpForm() {
             <TouchableOpacity style={[styles.button, (!form.agreed || !form.firstName || !form.lastName || !form.email || !form.password || !form.confirmPassword) && styles.disabledButton]} onPress={handleSignUp}  disabled={!form.agreed || !form.firstName || !form.lastName || !form.email || !form.password || !form.confirmPassword}>
               <Text style={styles.buttonText}>Sign up</Text>
             </TouchableOpacity>
-            {popupVisible && (
+            
+          </View>
+        </ScrollView>
+      </SafeAreaView>
+      {/* <PopUpScreen otpResent={true}/> */}
+      {popupVisible && (
         <PopUpScreen 
           accountSaved={popupType === "success"}
           forgotPassword={popupType === "caution"}
           onPress={() => setPopupVisible(false)} // Hide popup when clicking "Okay"
         />
       )}
-          </View>
-        </ScrollView>
-      </SafeAreaView>
-      {/* <PopUpScreen otpResent={true}/> */}
     </View>
   );
 }
