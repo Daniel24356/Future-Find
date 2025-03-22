@@ -1,14 +1,37 @@
-import { StyleSheet, View, Text, TextInput, Image, TouchableOpacity} from "react-native"
-import Ionicons from '@expo/vector-icons/Ionicons';
-import Custom2Button from "../props/Custom2Button";
+import React, {useEffect, useState} from "react"
+import { StyleSheet, View, Text, TextInput, Image, TouchableOpacity, Alert} from "react-native"
+import axios from "axios"
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
 import EvilIcons from '@expo/vector-icons/EvilIcons';
 import CustomButton from "../props/CustomButton";
+import { CREATE_CONTRIBUTION } from "../API_URL";
 
 
 const ContributeDetails = () => {
+   const [name, setName] = useState("")
+   const [amount, setAmount] = useState("")
+   const [paymentInterval, setPaymentInterval] = useState("")
+   const [maxMembers, setMaxMembers] = useState("")
+
+   const createContribution = async () => {
+      try{
+         const response = await axios.post(CREATE_CONTRIBUTION, {
+            name,
+            amount,
+            paymentInterval,
+            maxMembers
+         }, 
+         )
+         if(response.status === 201){
+            Alert.alert("Success", "Contribution group created.")
+         }
+      }catch(error){
+         Alert.alert("Error", error.response?.data?.message || "Something went wrong")
+      }
+   }
+
    const navigate = useNavigation()
    return (
 
@@ -42,6 +65,8 @@ const ContributeDetails = () => {
                         <TextInput style = {styles.input}
                            placeholder= "Group name"
                            placeholderTextColor= "#6C727F"
+                           value= {name}
+                           onChangeText={setName}
                         />
                      </View>
 
@@ -49,6 +74,8 @@ const ContributeDetails = () => {
                         <TextInput style = {styles.input}
                            placeholder= "Amount per members"
                            placeholderTextColor= "#6C727F"
+                           value={amount}
+                           onChangeText={setAmount}
                         />
                         <Image 
                            style = {styles.inputImage} 
@@ -60,6 +87,8 @@ const ContributeDetails = () => {
                         <TextInput style = {styles.input}
                            placeholder= "Payment interval"
                            placeholderTextColor= "#6C727F"
+                           value={paymentInterval}
+                           onChangeText={setPaymentInterval}
                         />
                         <Image 
                            style = {styles.inputImage} 
@@ -71,6 +100,8 @@ const ContributeDetails = () => {
                         <TextInput style = {styles.input}
                            placeholder= "Maximum members"
                            placeholderTextColor= "#6C727F"
+                           value={maxMembers}
+                           onChangeText={setMaxMembers}
                         />
                         <Image 
                            style = {styles.inputImage} 
@@ -87,7 +118,8 @@ const ContributeDetails = () => {
                <CustomButton 
                   backgroundColor={'#2C14DD'}
                   title={'Continue'}
-                  onPress={() => navigate.navigate("InviteScreen1")}
+                  // onPress={() => navigate.navigate("InviteScreen1")}
+                  onPress={createContribution}
                />
             </View>
          </SafeAreaView>
@@ -135,7 +167,8 @@ const styles = StyleSheet.create({
   },
   create: {
       color: "white",
-      fontSize: 18
+      fontSize: 16,
+      fontWeight: 600
   },
   contribute:{
       width: '100%',
@@ -165,6 +198,8 @@ const styles = StyleSheet.create({
      marginTop: 6
   },
   form: {
+   width: 328,
+   height: 248,
    marginTop: 20,
    gap: 15,
    // backgroundColor:'red'

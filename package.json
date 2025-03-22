@@ -10,6 +10,7 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@react-native-async-storage/async-storage": "^2.1.2",
     "@react-native-community/slider": "^4.5.6",
     "@react-native-picker/picker": "^2.11.0",
     "@react-navigation/native": "^7.0.14",
@@ -19,9 +20,11 @@
     "expo": "~52.0.37",
     "expo-splash-screen": "^0.29.22",
     "expo-status-bar": "~2.0.1",
+    "jwt-decode": "^4.0.0",
     "react": "18.3.1",
     "react-native": "0.76.7",
     "react-native-gesture-handler": "^2.24.0",
+    "react-native-image-picker": "^8.2.0",
     "react-native-is-edge-to-edge": "^1.1.6",
     "react-native-paper": "^5.13.1",
     "react-native-reanimated": "^3.17.0",
@@ -29,7 +32,8 @@
     "react-native-screens": "^4.9.1",
     "react-native-svg": "^15.11.2",
     "react-native-svg-transformer": "^1.5.0",
-    "react-native-vector-icons": "^10.2.0"
+    "react-native-vector-icons": "^10.2.0",
+    "expo-image-picker": "~16.0.6"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

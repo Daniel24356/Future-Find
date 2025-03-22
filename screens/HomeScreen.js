@@ -6,13 +6,22 @@ import { Image } from "react-native";
 import TabBar from "../props/TabBar";
 import EvilIcons from '@expo/vector-icons/EvilIcons';
 import { useNavigation } from '@react-navigation/native';
+
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { ActivityIndicator } from "react-native-paper";
 // import AsyncStorage from "@react-native-async-storage/async-storage";
 const userID = "31417bb4-e6b1-4775-bb6e-d33e5d65b6d2"
 
+import { ProfileContext } from "./ProfileContext";
+import { useContext } from "react";import { useState, useEffect } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
+
+
 const HomeScreen = () => {
+  const [user, setUser] = useState({ firstName: ""});
+  const { profilePic } = useContext(ProfileContext);
  const navigation = useNavigation();
 
  const [balance, setBalance] = useState(0);
@@ -53,6 +62,41 @@ const HomeScreen = () => {
    showBalance();
  }, []);
 
+ useEffect(() => {
+  const fetchUserData = async () => {
+      try {
+          const token = await AsyncStorage.getItem("userToken");
+          const userId = await AsyncStorage.getItem("userId");
+
+          if (!token || !userId) {
+              console.error("Authentication failed.");
+              return;
+          }
+
+          const response = await axios.get(`http://192.168.160.138:5000/api/v1/users/${userId}`, {
+              headers: { Authorization: `Bearer ${token}` },
+          });
+
+          if (response.status === 200) {
+              const { firstName} = response.data;
+              setUser({ firstName});
+          }
+      } catch (error) {
+          console.error("Error fetching user data:", error.response?.data || error.message);
+      }
+  };
+
+  fetchUserData();
+}, []);
+ 
+const getGreeting = () => {
+  const hour = new Date().getHours();
+  if (hour < 12) return "Good morning";
+  if (hour < 18) return "Good afternoon";
+  return "Good evening";
+};
+
+
   return (
     <>
       <View style={styles.container}>
@@ -61,14 +105,15 @@ const HomeScreen = () => {
           <View style={styles.user_info}>
             <TouchableOpacity onPress={() => navigation.navigate('profile')} style={styles.user_div}>
               <Image 
-                source={require("../assets/homePage/Group_20105.png")}
+                source={profilePic}
+                style={styles.image}
               />
               <View>
                 <View style={styles.greeting}>
                   <Text style={styles.greetTxt1} >Hello </Text>
-                  <Text style={styles.greetTxt2}>Malvin</Text>
+                  <Text style={styles.greetTxt2}>{user.firstName}</Text>
                 </View>
-                <Text style={styles.regText}>Good morning</Text>
+                <Text style={styles.regText}>{getGreeting()}</Text>
               </View>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => navigation.navigate('Notification')}  style={styles.notification}>
@@ -192,6 +237,12 @@ const styles = StyleSheet.create({
     position:'relative'
 
   },
+
+  image:{
+    width:40,
+    height:40,
+    borderRadius: 50
+},
   safeArea: {
     flex: 1,
     gap: 15,
