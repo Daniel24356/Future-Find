@@ -1,4 +1,14 @@
 
+
+const DropdownMenus = ({maritalStatus, sourceOfIncome, employmentStatus, selectBank, savingPeriod, paymentInterval, selectProvider,
+    exportAs, selectDate, onClose, maritalSelect, employmentSelect
+}) => {
+    const [ranges, setRanges] = useState('range1');
+    const [checked, setChecked] = useState(0);
+    const [checkedDate, setCheckedDate] = useState('');
+    const [searchValue, setSearchValue] = useState('');
+    const [bankSearch, setBankSearch] = useState([]);
+
 import {
   FlatList,
   Image,
@@ -62,7 +72,9 @@ const DropdownMenus = ({
         runSearch();
     },[searchValue]);
 
-
+               <View style={{height:68,justifyContent:'space-between'}}>
+                    <Ionicons name="close-outline" size={24} color="black" onPress={onClose}/>
+                    <Ionicons name="close-outline" size={24} color="black" onPress={onClose}/>
 
   // Example provider list
   const providerList = [
@@ -280,6 +292,86 @@ const DropdownMenus = ({
                         },
                       ]}
                     />
+                }
+                
+                <View>
+                    {
+                        maritalStatus?
+                        <TouchableOpacity style={styles.option} onPress={()=>maritalSelect('Married')}>
+                            <Text style={{fontSize:14,color:'#292B2D'}}>Married</Text>
+                        </TouchableOpacity> : 
+                        sourceOfIncome?
+                        <TouchableOpacity style={styles.option}>
+                            <Text style={{fontSize:14,color:'#292B2D'}}>Business</Text>
+                        </TouchableOpacity> :
+                        employmentStatus?
+                        <TouchableOpacity style={styles.option} onPress={()=>employmentSelect('Employed')}>
+                            <Text style={{fontSize:14,color:'#292B2D'}}>Employed</Text>
+                        </TouchableOpacity> :
+                         paymentInterval?
+                         <TouchableOpacity style={styles.option}>
+                             <Text style={{fontSize:14,color:'#292B2D'}}>Weekly</Text>
+                         </TouchableOpacity> :
+                         exportAs?
+                         <TouchableOpacity style={styles.option}>
+                             <Text style={{fontSize:14,color:'#292B2D'}}>PDF</Text>
+                         </TouchableOpacity> : ''
+                    }
+
+                    {
+                        maritalStatus?
+                        <TouchableOpacity style={styles.option} onPress={()=>maritalSelect('Single')}>
+                            <Text style={{fontSize:14,color:'#292B2D'}}>Single</Text>
+                        </TouchableOpacity> : 
+                        sourceOfIncome?
+                        <TouchableOpacity style={styles.option}>
+                            <Text style={{fontSize:14,color:'#292B2D'}}>Freelance</Text>
+                        </TouchableOpacity> :
+                        employmentStatus?
+                        <TouchableOpacity style={styles.option} onPress={()=>employmentSelect('Self employed')}>
+                            <Text style={{fontSize:14,color:'#292B2D'}}>Self employed</Text>
+                        </TouchableOpacity> :
+                         paymentInterval?
+                         <TouchableOpacity style={styles.option}>
+                             <Text style={{fontSize:14,color:'#292B2D'}}>Monthly</Text>
+                         </TouchableOpacity> :
+                         exportAs?
+                         <TouchableOpacity style={styles.option}>
+                             <Text style={{fontSize:14,color:'#292B2D'}}>Excel</Text>
+                         </TouchableOpacity> : ''
+                    }
+
+                    {
+                        maritalStatus?
+                        <TouchableOpacity style={styles.option}onPress={()=>maritalSelect('Divorced')} >
+                            <Text style={{fontSize:14,color:'#292B2D'}}>Divorced</Text>
+                        </TouchableOpacity> : 
+                        sourceOfIncome?
+                        <TouchableOpacity style={styles.option}>
+                            <Text style={{fontSize:14,color:'#292B2D'}}>E-commerce</Text>
+                        </TouchableOpacity> : 
+                        employmentStatus?
+                        <TouchableOpacity style={styles.option} onPress={()=>employmentSelect('Business owner')}>
+                            <Text style={{fontSize:14,color:'#292B2D'}}>Business owner</Text>
+                        </TouchableOpacity> :
+                        exportAs?
+                        <TouchableOpacity style={styles.option}>
+                            <Text style={{fontSize:14,color:'#292B2D'}}>Word</Text>
+                        </TouchableOpacity> : ''
+                    }
+
+                    {
+                        maritalStatus||sourceOfIncome||employmentStatus?
+                        <TouchableOpacity style={styles.option} onPress={
+                            maritalSelect?
+                            ()=>maritalSelect('Student') :
+                            employmentStatus?
+                            ()=>employmentSelect('Student') : ''
+                        }>
+                            <Text style={{fontSize:14,color:'#292B2D'}}>Student</Text>
+                        </TouchableOpacity> : ''
+                    }
+                    
                   </Pressable>
                   <Text style={{ fontSize: 14, color: "#292B2D" }}>
                     {month.item}
@@ -332,6 +424,7 @@ const DropdownMenus = ({
 //                                 <Image source={bank.image} />
 //                                 <Text style={{fontSize:14,color:'#292B2D'}}>{bank.name}</Text>
 //                             </TouchableOpacity>
+
 
 //                         )) :
 //                         selectProvider?
