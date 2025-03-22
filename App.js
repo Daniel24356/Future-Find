@@ -21,12 +21,12 @@ import ContributeDetails from "./screens/ContributeDetails";
 import LoginScreen from "./screens/LoginScreen";
 
 export default function App() {
-  // return <AppNavigator/>;
+  return <AppNavigator/>;
   
-  return <NavigationContainer>
-    {/* // <LoginScreen/> */}
-  <Contribution_Active/>
+  // return <NavigationContainer>
+    {/*  <LoginScreen/> */}
+  // <Contribution_Active/>
   {/* <ContributeDetails/> */}
-  {/* // <Group_members/> */}
-  // </NavigationContainer>
+  {/* <Group_members/> */}
+  {/* </NavigationContainer> */}
 }
