@@ -1,10 +1,7 @@
 import axios from "axios";
 
-const API_BASE_URL = "http://192.168.7.174:5000/api/v1/contribution"; // Replace with actual backend URL
+const API_BASE_URL = "https://future-fund-backend-production.up.railway.app/api/v1"; // Replace with actual backend URL
 
-export const inviteUsersToContribution = async (contributionId: string, userIds: string[]) => {
-  return await axios.post(`${API_BASE_URL}/contribution/invite`, { contributionId, userIds });
-};
 
 export const verifyIdentityAndJoin = async (userId: string, contributionId: string, verificationData: any) => {
   return await axios.post(`${API_BASE_URL}/contribution/join`, { userId, contributionId, verificationData });
