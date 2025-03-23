@@ -13,7 +13,8 @@
       "backgroundColor": "#2C14DD"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.dan27.FutureFind"
     },
     "android": {
       "adaptiveIcon": {

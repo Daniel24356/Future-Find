@@ -16,17 +16,11 @@ import Group_Details from './screens/Group_Details';
 import VerificationPopup from './props/VerificationPopup';
 import FilterPopup from './screens/FilterPopup';
 import ConfirmPaymentPopup from './props/ConfirmPaymentPopup';
-import { NavigationContainer } from "@react-navigation/native";
-import ContributeDetails from "./screens/ContributeDetails";
-import LoginScreen from "./screens/LoginScreen";
+import LoanLandingScreen from "./screens/LoanLandingScreen";
+import { ProfileProvider } from "./screens/ProfileContext";
 
 export default function App() {
-  return <AppNavigator/>;
-  
-  // return <NavigationContainer>
-    {/*  <LoginScreen/> */}
-  // <Contribution_Active/>
-  {/* <ContributeDetails/> */}
-  {/* <Group_members/> */}
-  {/* </NavigationContainer> */}
+  return <ProfileProvider>
+    <AppNavigator/>;
+  </ProfileProvider>
 }
