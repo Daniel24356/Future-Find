@@ -12,13 +12,16 @@ import { INVITE_USERS } from "../API_URL";
 
 
 const InviteScreen = () => {
-  const [email, setEmail] = useState("")
+  const [emails, setEmails] = useState([])
 
   const inviteUserToContribution = async () => {
     try{
-      const response = await axios.post(INVITE_USERS, {email})
+      if(emails.length === 0){
+        Alert.alert("Error", "Please enter at least one email")
+      }
+      const response = await axios.post(INVITE_USERS, {contributionId, emails})
       if(response.status === 200){
-        Alert.alert("Success", "Your Invitations to your Contribution has been sent.")
+        Alert.alert("Success", "Invitations successfully sent to the valid emails.")
     }
   }catch(error){
     Alert.alert("Error", error.response?.message || "Something went wrong")
@@ -59,8 +62,8 @@ const InviteScreen = () => {
                   multiline = {true}
                   placeholder= "Enter email addresses"
                   placeholderTextColor= "#8F94A3"
-                  value={email}
-                  onChangeText={setEmail}
+                  value={emails}
+                  onChangeText={setEmails}
                 />
               </View>
                 
