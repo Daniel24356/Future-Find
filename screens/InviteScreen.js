@@ -19,7 +19,7 @@ const InviteScreen = () => {
       if(emails.length === 0){
         Alert.alert("Error", "Please enter at least one email")
       }
-      const response = await axios.post(INVITE_USERS, {contributionId, emails})
+      const response = await axios.post(`${INVITE_USERS}/${id}/invite`, {id, emails})
       if(response.status === 200){
         Alert.alert("Success", "Invitations successfully sent to the valid emails.")
     }

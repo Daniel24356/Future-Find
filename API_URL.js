@@ -4,6 +4,8 @@ export const ALL_CONTRIBUTION = "https://future-fund-backend-production.up.railw
 
 export const ALL_MEMBERS = "https://future-fund-backend-production.up.railway.app/api/v1/contribution/members"
 
-export const INVITE_USERS = "https://future-fund-backend-production.up.railway.app/api/v1/contribution/invite"
+export const INVITE_USERS = "https://future-fund-backend-production.up.railway.app/api/v1/contribution"
 
-export const JOIN_CONTRIBUTION = "https://future-fund-backend-production.up.railway.app/api/v1/contribution/join"
+export const JOIN_CONTRIBUTION = "https://future-fund-backend-production.up.railway.app/api/v1/contribution"
+
+// export const 
