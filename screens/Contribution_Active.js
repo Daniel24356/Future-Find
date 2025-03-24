@@ -6,28 +6,62 @@ import TabBar from '../props/TabBar';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import CustomButton from '../props/CustomButton';
 import { useNavigation } from '@react-navigation/native';
-import { ALL_CONTRIBUTION } from '../API_URL';
+import { ALL_CONTRIBUTION, JOIN_CONTRIBUTION } from '../API_URL';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { verifyIdentityAndJoin } from '../API_SERVICE';
 
 
 const Contribution_Active = () => {
 
+    const [joinContribution, setJoinContribution] = useState("")
      const [joinedContribution, setJoinedContribution] = useState(false)
+     const [userId, setUserId] = useState(null)
      const [contributions, setContributions] = useState([])
 
      useEffect(() =>{
-        const getUserContribution = async () => {
+        const getUserId = async () => {
             try{
-              const response = await axios.get(`${ALL_CONTRIBUTION}/${id}`)
-              if(response.status === 200){
-               setContributions(response.data)
-              }
-    
+                const storedUserId = await AsyncStorage.getItem("UserId")
+                if(storedUserId){
+                    setUserId(storedUserId)
+                    getUserContribution(storedUserId)
+                }else{
+                    Alert.alert("Error", "User not found. Please Log in.")
+                }
             }catch(error){
-                Alert.alert("Error", error.response?.data?.message || "Something went wrong")
+                Alert.alert("Error", "Failed to get user id")
+            }
+        }
+       
+         const verifyIdentityAndJoin = async () => {
+            try{
+                const response = await axios.post(JOIN_CONTRIBUTION, {
+                    userId,
+                    contributionId
+                },
+            )
+            if(response.status === 200){
+                setJoinedContribution(true)
+            }
+            }catch(error){
+                Alert.alert("Error", "Failed to join contribution. Try again.")
             }
          }
-         getUserContribution()
+         getUserId()
      }, [])
+
+     const getUserContribution = async (userId) => {
+        try{
+          const response = await axios.get(`${ALL_CONTRIBUTION}/${userId}`)
+          if(response.status === 200){
+           setContributions(response.data)
+            //  await AsyncStorage.setItem("contributionId", response.status.id)
+          }
+
+        }catch(error){
+            Alert.alert("Error", error.response?.data?.message || "Something went wrong")
+        }
+     }
      
 
   const navigation = useNavigation();
@@ -73,7 +107,8 @@ const Contribution_Active = () => {
                                    </View><Image
                                            source={require('../assets/investing/green_comm.png')} /><Text style={{ fontSize: 14, color: '#292B2D', fontWeight: 500 }}>
                                            Saving groups {contribution.name}
-                                       </Text><View style={styles.green_group_info} key={contribution.id}>
+                                       </Text>
+                                       <View style={styles.green_group_info} key={contribution.id}>
                                            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 5 }}>
                                                <Image
                                                    source={require('../assets/homePage/tab_contribution.png')}
@@ -109,29 +144,30 @@ const Contribution_Active = () => {
                         </View>
                       )}
                 {/* NEW MEMBERS */}
-                {/* <View style={{alignItems:'center',paddingHorizontal:10,paddingBottom:10,gap:15}}>
+                <View style={{alignItems:'center',paddingHorizontal:10,paddingBottom:10,gap:15}}>
                     <Text style={{fontSize:16,fontWeight:600,color:'#131313'}}>Groups invitation</Text>
                     <Text style={{fontSize:12,color:'#292B2D'}}>You have been invited to join this contribution</Text>
                     <View style={{flexDirection:'row',gap:20,marginTop:10}}>
                         <TouchableOpacity style={[styles.invite, {backgroundColor:'#FD3C4A0D'}]}>
                             <Text style={{fontSize:14,fontWeight:500,color:'#FD3C4A'}}>Decline</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={[styles.invite, {backgroundColor:'#2C14DD0D'}]}>
+                        <TouchableOpacity style={[styles.invite, {backgroundColor:'#2C14DD0D'}]}
+                        onPress={verifyIdentityAndJoin}>
                             <Text style={{fontSize:14,fontWeight:500,color:'#442CF5'}}>Join</Text>
                         </TouchableOpacity>
                     </View>
-                </View> */}
+                </View>
 
                 {/* JOINED */}
                 
-                {/* </TouchableOpacity>
-            </View> */}
+                 {/* </TouchableOpacity>  */}
+            {/* </View>  */}
              
-            {/* <CustomButton 
+            <CustomButton 
                 backgroundColor={'#2C14DD'}
                 title={'Create my own group'}
                 onPress={() => navigation.navigate('Contribute')}
-            /> */}
+            />
 
         </SafeAreaView>
 
