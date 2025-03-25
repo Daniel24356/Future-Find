@@ -8,14 +8,12 @@ import {
   Alert,
 } from "react-native";
 import axios from "axios";
-import { Ionicons, MaterialIcons } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
 import TopHeader from "../props/TopHeader";
 import DropdownMenus from "../props/DropdownMenus";
 
-// Replace with your actual API key if required
 const API_KEY = "YOUR_API_KEY_HERE";
 
-// Inline API call functions
 const validateMeterNumber = async (service, smartNo, type) => {
   try {
     const response = await axios.post(
@@ -73,7 +71,6 @@ const generateElectricityToken = async (
 export default function ElectricityTopupScreen() {
   const [activeTab, setActiveTab] = useState("Prepaid");
   const [showDropdown, setShowDropdown] = useState(false);
-  // The selected provider will be used as the service parameter
   const [selectedProvider, setSelectedProvider] = useState("");
   const [meterNumber, setMeterNumber] = useState("");
   const [amount, setAmount] = useState("");
@@ -95,12 +92,9 @@ export default function ElectricityTopupScreen() {
       return;
     }
 
-    // Use the selectedProvider as the service parameter
     const service = selectedProvider;
-    // The type is based on activeTab: "prepaid" or "postpaid"
     const type = activeTab.toLowerCase();
     try {
-      // Validate the meter number first
       const validationResponse = await validateMeterNumber(
         service,
         meterNumber,
@@ -108,15 +102,14 @@ export default function ElectricityTopupScreen() {
       );
 
       if (validationResponse.success) {
-        const vcode = validationResponse.vcode; // extract verification code
-        const ref = `electricity-${Date.now()}`; // generate a unique reference
+        const vcode = validationResponse.vcode;
+        const ref = `electricity-${Date.now()}`;
 
-        // Generate the electricity token
         const tokenResponse = await generateElectricityToken(
           service,
           meterNumber,
           vcode,
-          parseFloat(amount),
+          parseInt(amount),
           ref
         );
 
