@@ -64,8 +64,8 @@ const ReviewPayLoan = () => {
             </View>
         </View>
         <View style = {styles.review}>
-             <Image style= {{width: 28, height: 28}} source = {require('../assets/applyLoan/nullOrange.png')}/>
-            <Text style = {{width: 335, fontSize: 15, lineHeight: 23}}>You will need to repay the current loan before you will be able to apply for another one</Text>
+             <Image style= {{width: 24, height: 24}} source = {require('../assets/applyLoan/nullOrange.png')}/>
+            <Text style = {{width: 274, fontSize: 12, lineHeight: 18}}>You will need to repay the current loan before you will be able to apply for another one</Text>
         </View>
         
     </View>
@@ -73,122 +73,120 @@ const ReviewPayLoan = () => {
 }
 
 const styles = StyleSheet.create({
-    container: {
-       backgroundColor: "#F5F7FF",
-       flex: 1,
-       alignContent: "center"
-    },
+  container: {
+    backgroundColor: "#F5F7FF",
+    flex: 1,
+    alignContent: "center",
+  },
 
-    topDiv: {
-      height: 158,
-    },
-    overlay: {
-      height: 158,
-      backgroundColor: "#442CF5",
-      flex: 1,
-      flexDirection: "row",
-    },  
-    image: {
-      width: 100,
-      height: 75,
-      top: 83,
-      left: -19
-    },
-    image2: {
-      width: 268.75,
-      height: 163.75,
-      opacity: 50,
-      rotation: -10.4
-    },
-    image3: {
-      width: 100,
-      height: 85,
-      top: 72,
-      left: 2
-    },
-    easyLoan: {
-      width: 392,
-      height: 290,
-      backgroundColor: "#FFFFFF",
-      marginTop: -76,
-      borderRadius: 16,
-      marginLeft: 17,
-      padding: 20
-    },
-    easyText: {
-      width: 350,
-      height: 100,
-      paddingLeft: 40,
-      paddingRight: 40,
-      flexDirection: "column",
-      alignItems: "center",
-      gap: 18,
-    },
-    h3: {
-       fontSize: 35,
-       fontWeight: "bold",
-       color: "#240F51",
-    },
-    easyTextFlex: {
-      width: 350,
-      height: 145,
-      flexDirection: "column",
-      borderRadius: 16,
-      paddingBottom: 12,
-      paddingLeft: 15,
-      paddingRight: 15,
-      paddingTop: 12,
-      backgroundColor: "#F5F7FF",
-      gap: 10
-    },
-    current:{
-        height: 21,
-        flexDirection: "row",
-        justifyContent: "space-between",
-        
-    },
-    review:{
-        width: 392,
-        height: 65,
+  topDiv: {
+    height: 158,
+  },
+  overlay: {
+    height: 158,
+    backgroundColor: "#442CF5",
+    flex: 1,
+    flexDirection: "row",
+  },
+  image: {
+    width: 100,
+    height: 75,
+    top: 83,
+    left: -19,
+  },
+  image2: {
+    width: 268.75,
+    height: 163.75,
+    opacity: 50,
+    rotation: -10.4,
+  },
+  image3: {
+    width: 100,
+    height: 85,
+    top: 72,
+    left: 2,
+  },
+  easyLoan: {
+    width: 328,
+    height: 258,
+    backgroundColor: "#FFFFFF",
+    marginTop: -76,
+    borderRadius: 16,
+    marginLeft: 16,
+    padding: 20,
+  },
+  easyText: {
+    width: 288,
+    height: 70,
+    paddingLeft: 40,
+    paddingRight: 40,
+    flexDirection: "column",
+    alignItems: "center",
+    gap: 18,
+  },
+  h3: {
+    fontSize: 28,
+    fontWeight: 800,
+    color: "#240F51",
+  },
+  easyTextFlex: {
+    width: 288,
+    height: 122,
+    flexDirection: "column",
+    borderRadius: 16,
+    padding: 10,
+    backgroundColor: "#F5F7FF",
+    gap: 10,
+  },
+  current: {
+    width: 268,
+    height: 18,
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+      review: {
+        width: 328,
+        height: 56,
         backgroundColor: "#FFFAEC",
         borderRadius: 16,
         flexDirection: "row",
         alignItems: "center",
-        padding: 12,
+        padding: 10,
         gap: 12,
-        marginLeft: 17,
-        marginTop: 15
-    },
+        marginLeft: 16,
+        marginTop: 15,
+      },
     receive: {
-        width: 392,
-        height: 140,
+        width: 328,
+        height: 106,
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "center",
         backgroundColor: "#FFFFFF",
-        marginLeft: 17,
-        gap: 15,
+        marginLeft: 16,
+        padding: 10,
+        gap: 20,
         marginTop: 25,
         borderRadius: 16
     },
     receiveSub: {
-        width: 175,
-        height: 110,
+        width: 144,
+        height: 86,
         backgroundColor: "#F5F7FF",
         borderRadius: 16,
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        paddingLeft: 15,
-        paddingRight: 10,
-        paddingTop: 15,
-        paddingBottom: 12,
+        paddingLeft: 20,
+        paddingRight: 20,
+        paddingTop: 10,
+        paddingBottom: 10,
         gap: 7
     },
     img: {
-        width: 45,
-        height: 45,
-        marginBottom: 5
+        width: 38,
+        height: 38,
+        marginBottom: 4
     }
 })
 

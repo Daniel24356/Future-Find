@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -6,27 +6,70 @@ import {
   TouchableOpacity,
   Image,
   TextInput,
+  Modal,
+  FlatList
 } from "react-native";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import TopHeader from "../props/TopHeader";
 
+const providerIcons = {
+  MTN: require("../assets/mtn.png"),
+  GLO: require("../assets/glo.png"),
+  Airtel: require("../assets/airtel.png"),
+  "9Mobile": require("../assets/9MOBILE.png"),
+};
+
 export default function DataTopupScreen() {
+  const [showProviderModal, setShowProviderModal] = useState(false);
+  const [selectedProvider, setSelectedProvider] = useState("");
+
+  const providerList = [
+    { id: "1", name: "MTN" },
+    { id: "2", name: "GLO" },
+    { id: "3", name: "Airtel" },
+    { id: "4", name: "9Mobile" },
+  ];
+
+  const onSelectProvider = (providerName) => {
+    setSelectedProvider(providerName);
+    setShowProviderModal(false);
+  };
+
+
+  const currentProviderIcon = selectedProvider
+    ? providerIcons[selectedProvider]
+    : require("../assets/9MOBILEs.png");
+
+     
+    const renderProvider = ({ item }) => {
+      const isSelected = item.name === selectedProvider;
+      return (
+        <TouchableOpacity
+          style={styles.providerRow}
+          onPress={() => onSelectProvider(item.name)}
+        >
+          <Image source={providerIcons[item.name]} style={styles.providerIcon} />
+          <View style={isSelected}>{isSelected}</View>
+          <Text style={styles.providerName}>{item.name}</Text>
+        </TouchableOpacity>
+      );
+    };
+  
+
+
   return (
     <>
-      {/* Top Header */}
-      {/* <View style={styles.topPart}>
-        <Ionicons name="arrow-back" size={24} color="#FFF" />
-        <Text style={styles.appTitle}>Data topup</Text>
-      </View> */}
-
-      <TopHeader title="Data topup"/>
+      <TopHeader title="Data topup" />
 
       <View style={styles.container}>
         <View style={styles.phoneContainer}>
-          <View style={styles.selectContainer}>
-            <Image source={require("../assets/9MOBILE.png")} />
+          <TouchableOpacity style={styles.selectContainer} onPress={()=> setShowProviderModal(true)}>
+            <Image
+              source={currentProviderIcon}
+              style={styles.logoIcon}
+            />
             <MaterialIcons name="keyboard-arrow-down" size={24} color="#666" />
-          </View>
+          </TouchableOpacity>
 
           <View style={styles.phoneInfo}>
             <TextInput
@@ -90,6 +133,36 @@ export default function DataTopupScreen() {
           <Text style={styles.buttonText}>Continue</Text>
         </TouchableOpacity>
       </View>
+
+      <Modal
+              visible={showProviderModal}
+              animationType="fade"
+              transparent
+              onRequestClose={() => setShowProviderModal(false)}
+            >
+              <View style={styles.modalBackground}>
+                <View style={styles.modalContainer}>
+                  {/* Close & Title */}
+                  <View style={styles.modalHeader}>
+                    <TouchableOpacity
+                      onPress={() => setShowProviderModal(false)}
+                      style={styles.closeButton}
+                    >
+                      <Ionicons name="close-outline" size={24} color="#000" />
+                    </TouchableOpacity>
+                    <Text style={styles.modalTitle}>Select provider</Text>
+                  </View>
+      
+                  {/* Provider list */}
+                  <FlatList
+                    data={providerList}
+                    keyExtractor={(item) => item.id}
+                    renderItem={renderProvider}
+                    style={{ marginTop: 10 }}
+                  />
+                </View>
+              </View>
+            </Modal>
       
     </>
   );
@@ -280,4 +353,45 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     color: "#333",
   },
+  modalBackground: {
+    flex: 1,
+    backgroundColor: "rgba(0,0,0,0.3)",
+    justifyContent: "flex-end",
+    paddingVertical: 20,
+    paddingHorizontal: 16,
+  },
+  modalContainer: {
+    backgroundColor: "#FFF",
+    borderRadius: 12,
+    padding: 20,
+    height: "auto",
+  },
+  modalHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 10,
+  },
+  closeButton: {
+    marginRight: 10,
+  },
+  modalTitle: {
+    fontSize: 16,
+    fontWeight: "600",
+  },
+  providerRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingVertical: 8,
+  },
+  providerName: {
+    fontSize: 16,
+    color: "#292B2D",
+    lineHeight: 30,
+  },
+  providerIcon: {
+    width: 24,
+    height: 24,
+    marginRight: 10,
+  },
+
 });
