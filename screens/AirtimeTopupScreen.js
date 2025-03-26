@@ -21,23 +21,25 @@ export const providerIcons = {
 };
 // const BASE_URL = "https://future-fund-backend-production.up.railway.app/api/v1";
 
-
 const buyAirtime = async (network, phone, amount) => {
   const payload = { network, phone, amount };
 
   try {
-    const response = await axios.post("https://future-fund-backend-production.up.railway.app/api/v1/vtpass/airtime", payload, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await axios.post(
+      "https://future-fund-backend-production.up.railway.app/api/v1/vtpass/airtime",
+      payload,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
     console.log("Airtime purchase response: ", response.data);
     return response.data;
   } catch (error) {
     console.error("Error purchasing airtime", error);
   }
 };
-
 
 // render area
 const AirtimeTopupScreen = () => {
@@ -54,24 +56,24 @@ const AirtimeTopupScreen = () => {
     { id: "4", name: "9Mobile" },
   ];
 
-const handleContinue = async () =>{
-  try {
-    await buyAirtime(selectedProvider, phoneNumber, airtimeAmount)
-  } catch (error) {
-    console.error("Transaction failed", error)
-  }
-}
+  const handleContinue = async () => {
+    try {
+      await buyAirtime(selectedProvider, phoneNumber, airtimeAmount);
+    } catch (error) {
+      console.error("Transaction failed", error);
+    }
+  };
 
-const validateForm = () => {
-  const isValid =
-    selectedProvider &&
-    phoneNumber.length >= 10 &&
-    !isNaN(phoneNumber) &&
-    airtimeAmount &&
-    !isNaN(airtimeAmount) &&
-    parseFloat(airtimeAmount) > 0;
-  setIsFormValid(isValid);
-};
+  const validateForm = () => {
+    const isValid =
+      selectedProvider &&
+      phoneNumber.length >= 10 &&
+      !isNaN(phoneNumber) &&
+      airtimeAmount &&
+      !isNaN(airtimeAmount) &&
+      parseFloat(airtimeAmount) > 0;
+    setIsFormValid(isValid);
+  };
 
   const onSelectProvider = (providerName) => {
     setSelectedProvider(providerName);
@@ -81,9 +83,7 @@ const validateForm = () => {
 
   const currentProviderIcon = selectedProvider
     ? providerIcons[selectedProvider]
-    : require("../assets/NairaImg.png"); 
-
-    
+    : require("../assets/NairaImg.png");
 
   const renderProvider = ({ item }) => {
     const isSelected = item.name === selectedProvider;
@@ -106,7 +106,6 @@ const validateForm = () => {
       <View style={styles.container}>
         {/* Phone + Provider Section */}
         <View style={styles.phoneContainer}>
-        
           <TouchableOpacity
             style={styles.selectContainer}
             onPress={() => setShowProviderModal(true)}

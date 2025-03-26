@@ -36,14 +36,13 @@ const buyData = async (network, phone, billersCode, variation_code, amount) => {
       { headers: { "Content-Type": "application/json" } }
     );
     console.log(response.data);
-    
+
     return response.data;
   } catch (error) {
     console.error("Error buying data:", error);
     throw error;
   }
 };
-
 
 // render area
 export default function DataTopupScreen() {
@@ -53,10 +52,34 @@ export default function DataTopupScreen() {
   const [selectedPlan, setSelectedPlan] = useState(null);
 
   const dataPlans = [
-    { id: "1", title: "100MB/1d", price: 100, variation_code: "mtn-10mb-100", billersCode: "MTN90" },
-    { id: "2", title: "200mb/d", price: 200, variation_code: "MTN200MB", billersCode: "MTN200" },
-    { id: "3", title: "500mb/d", price: 500, variation_code: "MTN500MB", billersCode: "MTN500" },
-    { id: "4", title: "1gb/d", price: 1000, variation_code: "MTN1GB", billersCode: "MTN1GB" },
+    {
+      id: "1",
+      title: "100MB/1d",
+      price: 100,
+      variation_code: "mtn-10mb-100",
+      billersCode: "MTN90",
+    },
+    {
+      id: "2",
+      title: "200mb/d",
+      price: 200,
+      variation_code: "MTN200MB",
+      billersCode: "MTN200",
+    },
+    {
+      id: "3",
+      title: "500mb/d",
+      price: 500,
+      variation_code: "MTN500MB",
+      billersCode: "MTN500",
+    },
+    {
+      id: "4",
+      title: "1gb/d",
+      price: 1000,
+      variation_code: "MTN1GB",
+      billersCode: "MTN1GB",
+    },
   ];
 
   const providerList = [
@@ -108,7 +131,7 @@ export default function DataTopupScreen() {
       );
       if (response.success) {
         Alert.alert("Success", "Data purchase successful!");
-      } 
+      }
     } catch (error) {
       Alert.alert("Error", error.message || "An error occurred");
     }
@@ -193,7 +216,9 @@ export default function DataTopupScreen() {
               <TouchableOpacity
                 style={[
                   styles.planBox,
-                  selectedPlan && selectedPlan.id === item.id && styles.selectedPlanBox,
+                  selectedPlan &&
+                    selectedPlan.id === item.id &&
+                    styles.selectedPlanBox,
                 ]}
                 onPress={() => setSelectedPlan(item)}
               >

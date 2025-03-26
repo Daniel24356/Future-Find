@@ -216,7 +216,10 @@ export default function ElectricityTopupScreen() {
         </View> */}
 
         {/* Continue Button */}
-        <TouchableOpacity style={styles.continueButton} onPress={handleContinue}>
+        <TouchableOpacity
+          style={styles.continueButton}
+          onPress={handleContinue}
+        >
           <Text style={styles.continueButtonText}>Continue</Text>
         </TouchableOpacity>
       </View>
