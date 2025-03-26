@@ -32,6 +32,8 @@ export default function SignUpForm() {
   };
 
   const handleSignUp = async () => {
+    console.log(form.firstName);
+    
     if (!form.firstName || !form.lastName || !form.email || !form.password || !form.confirmPassword) {
       setPopupMessage("All fields are required");
       setPopupType("caution");
@@ -64,7 +66,7 @@ export default function SignUpForm() {
     }
 
     try {
-      const response = await axios.post("http://192.168.160.138:5000/api/v1/users/", {
+      const response = await axios.post("http://localhost:5000/api/v1/users/", {
         firstName: form.firstName,
         lastName: form.lastName,
         email: form.email,
