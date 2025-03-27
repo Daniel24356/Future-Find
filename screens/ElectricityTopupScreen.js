@@ -6,77 +6,64 @@ import {
   TouchableOpacity,
   TextInput,
   Alert,
+  Image,
 } from "react-native";
 import axios from "axios";
-import { Ionicons, MaterialIcons } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
 import TopHeader from "../props/TopHeader";
 import DropdownMenus from "../props/DropdownMenus";
 
-// Replace with your actual API key if required
-const API_KEY = "YOUR_API_KEY_HERE";
+const verifyMeterNumber = async (meterNumber, disco, type) => {
+  const payload = { meterNumber, disco, type };
 
-// Inline API call functions
-const validateMeterNumber = async (service, smartNo, type) => {
   try {
     const response = await axios.post(
-      "http://localhost:5000/api/v1/transactions/validateMeterNumber",
+      "https://future-fund-backend-production.up.railway.app/api/v1/vtpass/verifyMeter",
+      payload,
       {
-        apiKey: API_KEY,
-        service,
-        smartNo,
-        type,
+        headers: {
+          "Content-Type": "application/json",
+        },
       }
     );
+    console.log("meter number verified successfully", response.data);
     return response.data;
   } catch (error) {
-    if (axios.isAxiosError(error)) {
-      throw new Error(
-        error.response?.data?.description?.response_description ||
-          "Transaction failed"
-      );
-    }
-    throw new Error("An unexpected error occurred");
+    console.error("Error verifying meter number:", error);
+    throw error; // Rethrow so we can catch it in handleContinue
   }
 };
 
-const generateElectricityToken = async (
-  service,
-  accountno,
-  vcode,
-  amount,
-  ref
-) => {
+const payElectricity = async (disco, meterNumber, amount, type, phone) => {
+  const payload = { disco, meterNumber, amount, type, phone };
+
   try {
     const response = await axios.post(
-      "http://localhost:5000/api/v1/transactions/generateElectricityToken",
+      "https://future-fund-backend-production.up.railway.app/api/v1/vtpass/electricity",
+      payload,
       {
-        apiKey: API_KEY,
-        service,
-        accountno,
-        vcode,
-        amount,
-        ref,
+        headers: {
+          "Content-Type": "application/json",
+        },
       }
     );
+    console.log("electricity purchase response: ", response.data);
     return response.data;
   } catch (error) {
-    if (axios.isAxiosError(error)) {
-      throw new Error(
-        error.response?.data?.description?.response_description ||
-          "Transaction failed"
-      );
-    }
-    throw new Error("An unexpected error occurred");
+    console.error("Error purchasing electricity:", error);
+    throw error;
   }
 };
 
 export default function ElectricityTopupScreen() {
   const [activeTab, setActiveTab] = useState("Prepaid");
   const [showDropdown, setShowDropdown] = useState(false);
-  // The selected provider will be used as the service parameter
   const [selectedProvider, setSelectedProvider] = useState("");
   const [meterNumber, setMeterNumber] = useState("");
   const [amount, setAmount] = useState("");
+
+  // Optional: If you want to pass a phone to payElectricity
+  const [phone, setPhone] = useState("");
 
   // Callback when a provider is chosen from the dropdown
   const handleSelectProvider = (providerName) => {
@@ -84,7 +71,7 @@ export default function ElectricityTopupScreen() {
     setShowDropdown(false);
   };
 
-  // Handle the Continue button press
+  // Updated handleContinue
   const handleContinue = async () => {
     if (!selectedProvider) {
       Alert.alert("Error", "Please select a provider");
@@ -95,47 +82,43 @@ export default function ElectricityTopupScreen() {
       return;
     }
 
-    // Use the selectedProvider as the service parameter
-    const service = selectedProvider;
-    // The type is based on activeTab: "prepaid" or "postpaid"
+    // "prepaid" or "postpaid"
     const type = activeTab.toLowerCase();
+
     try {
-      // Validate the meter number first
-      const validationResponse = await validateMeterNumber(
-        service,
+      // 1) Verify meter number
+      const verifyResponse = await verifyMeterNumber(
         meterNumber,
+        selectedProvider,
         type
       );
 
-      if (validationResponse.success) {
-        const vcode = validationResponse.vcode; // extract verification code
-        const ref = `electricity-${Date.now()}`; // generate a unique reference
-
-        // Generate the electricity token
-        const tokenResponse = await generateElectricityToken(
-          service,
-          meterNumber,
-          vcode,
-          parseFloat(amount),
-          ref
-        );
-
-        if (tokenResponse.success) {
-          Alert.alert("Success", "Electricity token: " + tokenResponse.token);
-        } else {
-          Alert.alert(
-            "Error",
-            tokenResponse.message || "Token generation failed"
-          );
-        }
-      } else {
+      if (!verifyResponse?.success) {
+        // If verification fails, show error
         Alert.alert(
           "Error",
-          validationResponse.message || "Meter validation failed"
+          verifyResponse?.message || "Meter validation failed"
         );
+        return;
+      }
+
+      // 2) Pay for electricity if meter is valid
+      // Replace "phone" with actual user phone or remove if not required
+      const payResponse = await payElectricity(
+        selectedProvider,
+        meterNumber,
+        parseInt(amount),
+        type,
+        phone || "08011111111"
+      );
+
+      if (payResponse?.success) {
+        Alert.alert("Success", "Electricity purchase successful!");
+      } else {
+        Alert.alert("Error", payResponse?.message || "Purchase failed");
       }
     } catch (error) {
-      Alert.alert("Error", error.message);
+      Alert.alert("Error", error.message || "An error occurred");
     }
   };
 
@@ -220,6 +203,18 @@ export default function ElectricityTopupScreen() {
           />
         </View>
 
+        {/* Optional: If you need to collect phone */}
+        {/* <View style={styles.inputContainer}>
+          <TextInput
+            style={styles.input}
+            placeholder="Enter phone number"
+            placeholderTextColor="#888"
+            keyboardType="phone-pad"
+            value={phone}
+            onChangeText={setPhone}
+          />
+        </View> */}
+
         {/* Continue Button */}
         <TouchableOpacity
           style={styles.continueButton}
@@ -289,6 +284,10 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 16,
     color: "#333",
+  },
+  contactIcon: {
+    width: 24,
+    height: 24,
   },
   continueButton: {
     backgroundColor: "#C2B8FC",

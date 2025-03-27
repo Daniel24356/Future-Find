@@ -7,9 +7,11 @@ import {
   Image,
   TextInput,
   Modal,
-  FlatList
+  FlatList,
+  Alert,
 } from "react-native";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
+import axios from "axios";
 import TopHeader from "../props/TopHeader";
 
 const providerIcons = {
@@ -19,9 +21,66 @@ const providerIcons = {
   "9Mobile": require("../assets/9MOBILE.png"),
 };
 
+const buyData = async (network, phone, billersCode, variation_code, amount) => {
+  const payload = {
+    network,
+    phone,
+    billersCode,
+    variation_code,
+    amount,
+  };
+  try {
+    const response = await axios.post(
+      "https://future-fund-backend-production.up.railway.app/api/v1/vtpass/data",
+      payload,
+      { headers: { "Content-Type": "application/json" } }
+    );
+    console.log(response.data);
+
+    return response.data;
+  } catch (error) {
+    console.error("Error buying data:", error);
+    throw error;
+  }
+};
+
+// render area
 export default function DataTopupScreen() {
   const [showProviderModal, setShowProviderModal] = useState(false);
   const [selectedProvider, setSelectedProvider] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [selectedPlan, setSelectedPlan] = useState(null);
+
+  const dataPlans = [
+    {
+      id: "1",
+      title: "100MB/1d",
+      price: 100,
+      variation_code: "mtn-10mb-100",
+      billersCode: "MTN90",
+    },
+    {
+      id: "2",
+      title: "200mb/d",
+      price: 200,
+      variation_code: "MTN200MB",
+      billersCode: "MTN200",
+    },
+    {
+      id: "3",
+      title: "500mb/d",
+      price: 500,
+      variation_code: "MTN500MB",
+      billersCode: "MTN500",
+    },
+    {
+      id: "4",
+      title: "1gb/d",
+      price: 1000,
+      variation_code: "MTN1GB",
+      billersCode: "MTN1GB",
+    },
+  ];
 
   const providerList = [
     { id: "1", name: "MTN" },
@@ -33,39 +92,68 @@ export default function DataTopupScreen() {
   const onSelectProvider = (providerName) => {
     setSelectedProvider(providerName);
     setShowProviderModal(false);
+    setSelectedPlan(null);
   };
 
+  const renderProvider = ({ item }) => {
+    const isSelected = item.name === selectedProvider;
+    return (
+      <TouchableOpacity
+        style={styles.providerRow}
+        onPress={() => onSelectProvider(item.name)}
+      >
+        <Image source={providerIcons[item.name]} style={styles.providerIcon} />
+        <Text style={styles.providerName}>{item.name}</Text>
+      </TouchableOpacity>
+    );
+  };
 
-  const currentProviderIcon = selectedProvider
-    ? providerIcons[selectedProvider]
-    : require("../assets/9MOBILEs.png");
-
-     
-    const renderProvider = ({ item }) => {
-      const isSelected = item.name === selectedProvider;
-      return (
-        <TouchableOpacity
-          style={styles.providerRow}
-          onPress={() => onSelectProvider(item.name)}
-        >
-          <Image source={providerIcons[item.name]} style={styles.providerIcon} />
-          <View style={isSelected}>{isSelected}</View>
-          <Text style={styles.providerName}>{item.name}</Text>
-        </TouchableOpacity>
+  const handleContinue = async () => {
+    if (!selectedProvider) {
+      Alert.alert("Error", "Please select a provider");
+      return;
+    }
+    if (!phoneNumber) {
+      Alert.alert("Error", "Please enter a phone number");
+      return;
+    }
+    if (!selectedPlan) {
+      Alert.alert("Error", "Please select a data plan");
+      return;
+    }
+    try {
+      const response = await buyData(
+        selectedProvider.toLowerCase() + "-data",
+        phoneNumber,
+        selectedPlan.billersCode,
+        selectedPlan.variation_code,
+        selectedPlan.price
       );
-    };
-  
-
+      if (response.success) {
+        Alert.alert("Success", "Data purchase successful!");
+      }
+    } catch (error) {
+      Alert.alert("Error", error.message || "An error occurred");
+    }
+  };
 
   return (
     <>
       <TopHeader title="Data topup" />
 
       <View style={styles.container}>
+        {/* Provider & Phone */}
         <View style={styles.phoneContainer}>
-          <TouchableOpacity style={styles.selectContainer} onPress={()=> setShowProviderModal(true)}>
+          <TouchableOpacity
+            style={styles.selectContainer}
+            onPress={() => setShowProviderModal(true)}
+          >
             <Image
-              source={currentProviderIcon}
+              source={
+                selectedProvider
+                  ? providerIcons[selectedProvider]
+                  : require("../assets/9MOBILEs.png")
+              }
               style={styles.logoIcon}
             />
             <MaterialIcons name="keyboard-arrow-down" size={24} color="#666" />
@@ -77,6 +165,8 @@ export default function DataTopupScreen() {
               placeholder="Phone number"
               placeholderTextColor="#aaa"
               keyboardType="phone-pad"
+              value={phoneNumber}
+              onChangeText={setPhoneNumber}
             />
             <TouchableOpacity>
               <Image
@@ -87,7 +177,7 @@ export default function DataTopupScreen() {
           </View>
         </View>
 
-        {/* Tabs (Hot, Daily, Weekly, Monthly) */}
+        {/* Tabs for Data Plans (Hot, Daily, Weekly, Monthly) */}
         <View style={styles.tabRow}>
           <TouchableOpacity style={[styles.tabButton, styles.activeTab]}>
             <Text style={[styles.tabText, styles.activeTabText]}>Hot</Text>
@@ -103,7 +193,7 @@ export default function DataTopupScreen() {
           </TouchableOpacity>
         </View>
 
-        {/* Data Plan Grid */}
+        {/* Data Plan Card */}
         <View style={styles.planCard}>
           <View style={styles.row}>
             <Text style={styles.label}>Data plan</Text>
@@ -116,54 +206,65 @@ export default function DataTopupScreen() {
             </View>
           </View>
 
-          <View style={styles.grid}>
-            {/* Sample data repeated. Replace with dynamic data if needed */}
-            {Array(16)
-              .fill(0)
-              .map((_, index) => (
-                <View style={styles.planBox} key={index}>
-                  <Text style={styles.planTitle}>90mb/d</Text>
-                  <Text style={styles.planPrice}>N100</Text>
-                </View>
-              ))}
-          </View>
+          {/* Data Plans Grid */}
+          <FlatList
+            data={dataPlans}
+            keyExtractor={(item) => item.id}
+            numColumns={4}
+            columnWrapperStyle={{ justifyContent: "space-between" }}
+            renderItem={({ item }) => (
+              <TouchableOpacity
+                style={[
+                  styles.planBox,
+                  selectedPlan &&
+                    selectedPlan.id === item.id &&
+                    styles.selectedPlanBox,
+                ]}
+                onPress={() => setSelectedPlan(item)}
+              >
+                <Text style={styles.planTitle}>{item.title}</Text>
+                <Text style={styles.planPrice}>₦{item.price}</Text>
+              </TouchableOpacity>
+            )}
+          />
         </View>
 
-        <TouchableOpacity style={styles.button}>
+        {/* Continue Button */}
+        <TouchableOpacity style={styles.button} onPress={handleContinue}>
           <Text style={styles.buttonText}>Continue</Text>
         </TouchableOpacity>
       </View>
 
+      {/* Provider Dropdown Modal */}
       <Modal
-              visible={showProviderModal}
-              animationType="fade"
-              transparent
-              onRequestClose={() => setShowProviderModal(false)}
-            >
-              <View style={styles.modalBackground}>
-                <View style={styles.modalContainer}>
-                  {/* Close & Title */}
-                  <View style={styles.modalHeader}>
-                    <TouchableOpacity
-                      onPress={() => setShowProviderModal(false)}
-                      style={styles.closeButton}
-                    >
-                      <Ionicons name="close-outline" size={24} color="#000" />
-                    </TouchableOpacity>
-                    <Text style={styles.modalTitle}>Select provider</Text>
-                  </View>
-      
-                  {/* Provider list */}
-                  <FlatList
-                    data={providerList}
-                    keyExtractor={(item) => item.id}
-                    renderItem={renderProvider}
-                    style={{ marginTop: 10 }}
-                  />
-                </View>
-              </View>
-            </Modal>
-      
+        visible={showProviderModal}
+        animationType="fade"
+        transparent
+        onRequestClose={() => setShowProviderModal(false)}
+      >
+        <View style={styles.modalBackground}>
+          <View style={styles.modalContainer}>
+            {/* Close & Title */}
+            <View style={styles.modalHeader}>
+              <TouchableOpacity
+                onPress={() => setShowProviderModal(false)}
+                style={styles.closeButton}
+              >
+                <Ionicons name="close-outline" size={24} color="#000" />
+              </TouchableOpacity>
+              <Text style={styles.modalTitle}>Select provider</Text>
+            </View>
+
+            {/* Provider List */}
+            <FlatList
+              data={providerList}
+              keyExtractor={(item) => item.id}
+              renderItem={renderProvider}
+              style={{ marginTop: 10 }}
+            />
+          </View>
+        </View>
+      </Modal>
     </>
   );
 }
@@ -174,44 +275,25 @@ export const styles = StyleSheet.create({
     backgroundColor: "#F4F6FE",
     paddingHorizontal: 20,
   },
-
-  topPart: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: "#442CF5",
-    height: 100,
-    paddingTop: 50,
-    paddingHorizontal: 15,
-  },
-  appTitle: {
-    color: "#FFF",
-    fontSize: 18,
-    fontWeight: "bold",
-    marginLeft: 10,
-  },
-
   phoneContainer: {
     flexDirection: "row",
     gap: 10,
     marginTop: 30,
-    marginBottom: 0,
   },
   selectContainer: {
     flexDirection: "row",
     height: 50,
     gap: 5,
     alignItems: "center",
-    backgroundColor: "#EFEFEF",
+    backgroundColor: "#FFFFFF",
     borderRadius: 8,
     paddingHorizontal: 10,
     paddingVertical: 8,
-    marginRight: 10,
-    backgroundColor: "#FFFFFF",
   },
-  networkIcon: {
+  logoIcon: {
     width: 24,
     height: 24,
-    marginRight: 5,
+    marginLeft: 10,
   },
   phoneInfo: {
     flex: 1,
@@ -223,10 +305,10 @@ export const styles = StyleSheet.create({
     borderRadius: 8,
     padding: 5,
   },
-  phoneNumber: {
+  phoneInput: {
+    flex: 1,
     fontSize: 16,
     color: "#333",
-    fontWeight: "600",
   },
   contactIcon: {
     width: 24,
@@ -234,12 +316,6 @@ export const styles = StyleSheet.create({
     tintColor: "#aaa",
     marginLeft: 10,
   },
-  logoIcon: {
-    width: 24,
-    height: 24,
-    marginLeft: 10,
-  },
-  /* Tabs (Hot, Daily, Weekly, Monthly) */
   tabRow: {
     flexDirection: "row",
     alignItems: "center",
@@ -264,13 +340,12 @@ export const styles = StyleSheet.create({
     color: "#333",
   },
   activeTab: {
-    borderBlockColor: "#442CF5",
     borderWidth: 1,
+    borderColor: "#442CF5",
   },
   activeTabText: {
     color: "#442CF5",
   },
-
   row: {
     flexDirection: "row",
     alignItems: "center",
@@ -291,7 +366,6 @@ export const styles = StyleSheet.create({
     fontWeight: "bold",
     marginLeft: 5,
   },
-
   planCard: {
     backgroundColor: "#FFF",
     borderRadius: 10,
@@ -310,17 +384,20 @@ export const styles = StyleSheet.create({
   },
   planBox: {
     width: "20%",
-    borderRadius: 10,
+    borderRadius: 8,
     paddingVertical: 15,
     marginBottom: 10,
     alignItems: "center",
     justifyContent: "center",
     borderWidth: 1,
     borderColor: "gainsboro",
-    borderRadius: 8,
+  },
+  selectedPlanBox: {
+    borderWidth: 2,
+    borderColor: "#442CF5",
   },
   planTitle: {
-    fontSize: 14,
+    fontSize: 12,
     fontWeight: "400",
     color: "#333",
   },
@@ -334,8 +411,6 @@ export const styles = StyleSheet.create({
     backgroundColor: "#F8F9FC",
     borderRadius: 8,
   },
-
-  /* Continue Button */
   button: {
     backgroundColor: "#C2B8FC",
     paddingVertical: 15,
@@ -347,11 +422,6 @@ export const styles = StyleSheet.create({
     color: "#FFF",
     fontSize: 16,
     fontWeight: "600",
-  },
-  phoneInput: {
-    flex: 1,
-    fontSize: 16,
-    color: "#333",
   },
   modalBackground: {
     flex: 1,
@@ -393,5 +463,4 @@ export const styles = StyleSheet.create({
     height: 24,
     marginRight: 10,
   },
-
 });

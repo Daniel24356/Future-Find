@@ -19,7 +19,29 @@ export const providerIcons = {
   Airtel: require("../assets/airtel.png"),
   "9Mobile": require("../assets/9MOBILE.png"),
 };
+// const BASE_URL = "https://future-fund-backend-production.up.railway.app/api/v1";
 
+const buyAirtime = async (network, phone, amount) => {
+  const payload = { network, phone, amount };
+
+  try {
+    const response = await axios.post(
+      "https://future-fund-backend-production.up.railway.app/api/v1/vtpass/airtime",
+      payload,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    console.log("Airtime purchase response: ", response.data);
+    return response.data;
+  } catch (error) {
+    console.error("Error purchasing airtime", error);
+  }
+};
+
+// render area
 const AirtimeTopupScreen = () => {
   const [showProviderModal, setShowProviderModal] = useState(false);
   const [selectedProvider, setSelectedProvider] = useState("");
@@ -33,6 +55,14 @@ const AirtimeTopupScreen = () => {
     { id: "3", name: "Airtel" },
     { id: "4", name: "9Mobile" },
   ];
+
+  const handleContinue = async () => {
+    try {
+      await buyAirtime(selectedProvider, phoneNumber, airtimeAmount);
+    } catch (error) {
+      console.error("Transaction failed", error);
+    }
+  };
 
   const validateForm = () => {
     const isValid =
@@ -53,27 +83,7 @@ const AirtimeTopupScreen = () => {
 
   const currentProviderIcon = selectedProvider
     ? providerIcons[selectedProvider]
-    : require("../assets/NairaImg.png"); 
-
-    
-  const handleContinue = async () => {
-    try {
-      const ref = `airtime-${Date.now()}`;
-      const response = await axios.post(
-        "http://localhost:5000/api/v1/transactions/buy-airtime",
-        {
-          network: selectedProvider,
-          phone: parseInt(phoneNumber, 10),
-          amount: parseFloat(airtimeAmount),
-          ref: ref,
-        }
-      );
-      console.log("Transaction successful:", response.data);
-    } catch (error) {
-      console.error("Transaction failed:", error);
-      alert("Transaction failed");
-    }
-  };
+    : require("../assets/NairaImg.png");
 
   const renderProvider = ({ item }) => {
     const isSelected = item.name === selectedProvider;
@@ -96,7 +106,6 @@ const AirtimeTopupScreen = () => {
       <View style={styles.container}>
         {/* Phone + Provider Section */}
         <View style={styles.phoneContainer}>
-        
           <TouchableOpacity
             style={styles.selectContainer}
             onPress={() => setShowProviderModal(true)}
@@ -191,7 +200,7 @@ const AirtimeTopupScreen = () => {
         <TouchableOpacity
           style={[styles.button, !isFormValid && styles.buttonDisabled]}
           onPress={handleContinue}
-          disabled={!isFormValid}
+          // disabled={!isFormValid}
         >
           <Text style={styles.buttonText}>Continue</Text>
         </TouchableOpacity>
@@ -357,6 +366,10 @@ export const styles = StyleSheet.create({
   },
   buttonDisabled: {
     backgroundColor: "#b8b2f4",
+    paddingVertical: 15,
+    borderRadius: 10,
+    alignItems: "center",
+    marginTop: 30,
   },
   buttonText: {
     color: "#FFF",
