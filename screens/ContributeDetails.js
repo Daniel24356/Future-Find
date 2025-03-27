@@ -19,6 +19,8 @@ const ContributeDetails = () => {
    const [popupVisible, setPopupVisible] = useState(false)
    const [popupType, setPopupType] = useState("success")
 
+   const Token = AsyncStorage.getItem('userToken')
+   
    const createContribution = async () => {
       try{
          const response = await axios.post(CREATE_CONTRIBUTION, {
@@ -27,6 +29,11 @@ const ContributeDetails = () => {
             cycle,
             maxMembers
          }, 
+         {
+            headers: {
+               Authorization: `Bearer ${Token}`
+             }
+         }
          )
          if(response.status === 201){
             AsyncStorage.setItem("contributionId", response.data.id)

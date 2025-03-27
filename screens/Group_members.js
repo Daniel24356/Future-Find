@@ -6,15 +6,22 @@ import EvilIcons from '@expo/vector-icons/EvilIcons';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 import { ALL_MEMBERS } from '../API_URL';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Group_members = () => {
 
     const [members, setMembers] = useState([])
 
+    const id = AsyncStorage.getItem('UserId')
+
     useEffect(() => {
         const getContributionMembers = async () =>{
             try{
-                const response = await axios.get(`${ALL_MEMBERS}/${id}`)
+                const response = await axios.get(`${ALL_MEMBERS}/${id}`, {
+                    headers: {
+                        Authorization: `Bearer ${Token}`
+                      }
+                })
                 if(response.status === 200){
                     setMembers(response.data)
                 }

@@ -9,17 +9,28 @@ import CustomButton from "../props/CustomButton";
 import { useState } from "react";
 import axios from "axios";
 import { INVITE_USERS } from "../API_URL";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 const InviteScreen = () => {
   const [emails, setEmails] = useState([])
+  const userId = AsyncStorage.getItem('UserId')
+  const contributionId = AsyncStorage.getItem('contributionId')
+  const Token = AsyncStorage.getItem('userToken')
 
   const inviteUserToContribution = async () => {
     try{
       if(emails.length === 0){
         Alert.alert("Error", "Please enter at least one email")
       }
-      const response = await axios.post(`${INVITE_USERS}/${id}/invite`, {id, emails})
+      const response = await axios.post(`${INVITE_USERS}/invite`, {
+        contributionId,
+        userId
+      }, {
+        headers: {
+          Authorization: `Bearer ${Token}`
+        }
+      })
       if(response.status === 200){
         Alert.alert("Success", "Invitations successfully sent to the valid emails.")
     }

@@ -1,44 +1,110 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 
-const API_BASE_URL = "https://future-fund-backend-production.up.railway.app/api/v1"; // Replace with actual backend URL
+const API_BASE_URL =
+  "https://future-fund-backend-production.up.railway.app/api/v1"; // Replace with actual backend URL
 
-e
-export const agreeToPaymentTerms = async (userId: string, contributionId: string) => {
-  return await axios.post(`${API_BASE_URL}/contribution/agree-to-terms`, { userId, contributionId });
+const userId = AsyncStorage.getItem("UserId");
+const contributionId = AsyncStorage.getItem("contributionId");
+const Token = AsyncStorage.getItem('userToken')
+
+export const agreeToPaymentTerms = async () => {
+  return await axios.post(
+    `${API_BASE_URL}/contribution/agree`,
+    { userId, contributionId },
+    {
+      headers: {
+        Authorization: `Bearer ${Token}`
+      }
+    }
+  );
 };
 
-export const assignContributionTurns = async (contributionId: string) => {
-  return await axios.post(`${API_BASE_URL}/contribution/assign-turns`, { contributionId });
+export const assignContributionTurns = async () => {
+  return await axios.post(`${API_BASE_URL}/contribution/assign`, {
+    contributionId,
+  }, {
+    headers: {
+      Authorization: `Bearer ${Token}`
+    }
+  });
 };
 
-export const startContributionCycle = async (contributionId: string) => {
-  return await axios.post(`${API_BASE_URL}/contribution/start-cycle`, { contributionId });
+export const startContributionCycle = async () => {
+  return await axios.post(
+    `${API_BASE_URL}/contribution/${contributionId}/start`,
+    { contributionId },
+    {
+      headers: {
+        Authorization: `Bearer ${Token}`
+      }
+    }
+  );
 };
 
-export const holdFundsInEscrow = async (contributionId: string, amount: number) => {
-  return await axios.post(`${API_BASE_URL}/contribution/hold-funds`, { contributionId, amount });
+export const holdFundsInEscrow = async (amount: number) => {
+  return await axios.post(`${API_BASE_URL}/contribution/hold-funds`, {
+    contributionId,
+    amount,
+  }, {
+    headers: {
+      Authorization: `Bearer ${Token}`
+    }
+  });
 };
 
-export const enforceTrustBuildingPeriod = async (contributionId: string) => {
-  return await axios.post(`${API_BASE_URL}/contribution/enforce-trust`, { contributionId });
+export const enforceTrustBuildingPeriod = async () => {
+  return await axios.post(`${API_BASE_URL}/contribution/enforce-trust`, {
+    contributionId,
+  }, {
+    headers: {
+      Authorization: `Bearer ${Token}`
+    }
+  });
 };
 
-export const processPayouts = async (contributionId: string) => {
-  return await axios.post(`${API_BASE_URL}/contribution/process-payouts`, { contributionId });
+export const processPayouts = async () => {
+  return await axios.post(`${API_BASE_URL}/contribution/payouts`, {
+    contributionId,
+  }, {
+    headers: {
+      Authorization: `Bearer ${Token}`
+    }
+  });
 };
 
-export const splitPayoutForSecurity = async (contributionId: string, payoutAmount: number) => {
-  return await axios.post(`${API_BASE_URL}/contribution/split-payout`, { contributionId, payoutAmount });
+// export const splitPayoutForSecurity = async (contributionId: string, payoutAmount: number) => {
+//   return await axios.post(`${API_BASE_URL}/contribution/split-payout`, { contributionId, payoutAmount });
+// };
+
+export const penalizeLatePayers = async () => {
+  return await axios.post(
+    `${API_BASE_URL}/contribution/${contributionId}/${userId}penalize`,
+    { contributionId },
+    {
+      headers: {
+        Authorization: `Bearer ${Token}`
+      }
+    }
+  );
 };
 
-export const penalizeLatePayers = async (contributionId: string) => {
-  return await axios.post(`${API_BASE_URL}/contribution/penalize-late`, { contributionId });
+export const reassignForfeitedSpots = async () => {
+  return await axios.post(`${API_BASE_URL}/contribution/reassign`, {
+    contributionId,
+  }, {
+    headers: {
+      Authorization: `Bearer ${Token}`
+    }
+  });
 };
 
-export const reassignForfeitedSpots = async (contributionId: string) => {
-  return await axios.post(`${API_BASE_URL}/contribution/reassign-spots`, { contributionId });
-};
-
-export const finalizeContributionCycle = async (contributionId: string) => {
-  return await axios.post(`${API_BASE_URL}/contribution/finalize-cycle`, { contributionId });
+export const finalizeContributionCycle = async () => {
+  return await axios.post(`${API_BASE_URL}/contribution/finalize`, {
+    contributionId,
+  }, {
+    headers: {
+      Authorization: `Bearer ${Token}`
+    }
+  });
 };
