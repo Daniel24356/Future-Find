@@ -67,7 +67,7 @@ const Group_members = () => {
             
             <View style={styles.third_section}>
                <View style={styles.first}>
-                   <Text style={{fontSize:12,fontWeight:400,paddingLeft:10}}>23 {members.length}members</Text>
+                   <Text style={{fontSize:12,fontWeight:400,paddingLeft:10}}>23 {members.length} members</Text>
                  <View style={styles.export}>
                       <View style={styles.inner}>
                           <Image source={require("../assets/calendar.png")}/>
@@ -99,13 +99,13 @@ const Group_members = () => {
                             />
                         </View>
                         <View style={styles.texts}>
-                            <Text style={styles.text1}>{members.firstName} {members.lastName} King Alex Ade</Text>
-                            <Text style={styles.text2}>{members.email}Kingalexade@gmail.com</Text>
+                            <Text style={styles.text1}>{members.firstName} {members.lastName}</Text>
+                            <Text style={styles.text2}>{members.email}</Text>
                         </View>
 
                     </View>
                     <View style={styles.paid}>
-                    <Text style={{fontSize:12,fontWeight:400,color:'#6C727F'}}>Paid</Text>
+                    <Text style={{fontSize:12,fontWeight:400,color:'#6C727F'}}>{members.status}</Text>
                     </View>
                 </View>
                 {/* <View style={styles.sub_sec}>
