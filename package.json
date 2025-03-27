@@ -18,6 +18,7 @@
     "@react-navigation/stack": "^7.1.1",
     "axios": "^1.8.3",
     "expo": "~52.0.37",
+    "expo-document-picker": "^13.0.3",
     "expo-splash-screen": "^0.29.22",
     "expo-status-bar": "~2.0.1",
     "jwt-decode": "^4.0.0",
