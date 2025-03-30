@@ -198,7 +198,7 @@ export default function SignUpForm() {
         </ScrollView>
       </SafeAreaView>
       {/* <PopUpScreen otpResent={true}/> */}
-      {popupVisible && (
+      {/* {popupVisible && ( */}
             <TouchableOpacity   onPress={() => navigation.navigate('Login')}  style={styles.secButton}>
                         <Text style={styles.buttonTexttwo}>Sign In</Text>
                       </TouchableOpacity>

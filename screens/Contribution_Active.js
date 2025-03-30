@@ -6,28 +6,75 @@ import TabBar from '../props/TabBar';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import CustomButton from '../props/CustomButton';
 import { useNavigation } from '@react-navigation/native';
-import { ALL_CONTRIBUTION } from '../API_URL';
+import { ALL_CONTRIBUTION, JOIN_CONTRIBUTION } from '../API_URL';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { agreeToPaymentTerms, assignContributionTurns, enforceTrustBuildingPeriod, finalizeContributionCycle, holdFundsInEscrow, penalizeLatePayers, processPayouts, reassignForfeitedSpots, startContributionCycle, verifyIdentityAndJoin } from '../API_SERVICE';
+import PopUpScreen from '../props/PopUpScreen';
+import axios from 'axios';
 
 
 const Contribution_Active = () => {
 
+    const [popupVisible, setPopupVisible] = useState(false)
+    const [popupType, setPopupType] = useState("success")
      const [joinedContribution, setJoinedContribution] = useState(false)
      const [contributions, setContributions] = useState([])
+     const [amount, setAmount] = useState("")
+     const UserId = AsyncStorage.getItem("UserId")
+     const contributionId = AsyncStorage.getItem("contributionId")
 
      useEffect(() =>{
-        const getUserContribution = async () => {
-            try{
-              const response = await axios.get(`${ALL_CONTRIBUTION}/${id}`)
-              if(response.status === 200){
-               setContributions(response.data)
-              }
-    
-            }catch(error){
-                Alert.alert("Error", error.response?.data?.message || "Something went wrong")
-            }
-         }
+                const getUserContribution = async () => {
+                    try{
+                      const response = await axios.get(`${ALL_CONTRIBUTION}/${UserId}`)
+                      if(response.status === 200){
+                       setContributions(response.data)
+                      }
+            
+                    }catch(error){
+                        Alert.alert("Error", error.response?.data?.message || "Something went wrong")
+                    }
+                 }
+
+                 const contributionProcess = async () => {
+                    try{
+                        await Promise.all([
+                            startContributionCycle(contributionId),
+                            assignContributionTurns(contributionId),
+                            agreeToPaymentTerms(UserId, contributionId),
+                            enforceTrustBuildingPeriod(contributionId),
+                            penalizeLatePayers(contributionId),
+                            reassignForfeitedSpots(contributionId),
+                            holdFundsInEscrow(contributionId, amount),
+                            processPayouts(contributionId),
+                            finalizeContributionCycle(contributionId)
+
+                        ])
+                    }catch(error){
+                        console.error("Error", error)
+                        Alert.alert(error.response?.data.message || "An unexpected error occured")
+                    }
+                 }
+         
          getUserContribution()
+         contributionProcess()
      }, [])
+
+     const verifyIdentityAndJoin = async () => {
+        try{
+            const response = await axios.post(`${JOIN_CONTRIBUTION}/${contributionId}/join`, {
+                UserId,
+                contributionId
+            },
+        )
+        if(response.status === 200){
+            setJoinedContribution(true)
+        }
+        }catch(error){
+            Alert.alert("Error", "Failed to join contribution. Try again.")
+        }
+     }
+     
      
 
   const navigation = useNavigation();
@@ -73,7 +120,8 @@ const Contribution_Active = () => {
                                    </View><Image
                                            source={require('../assets/investing/green_comm.png')} /><Text style={{ fontSize: 14, color: '#292B2D', fontWeight: 500 }}>
                                            Saving groups {contribution.name}
-                                       </Text><View style={styles.green_group_info} key={contribution.id}>
+                                       </Text>
+                                       <View style={styles.green_group_info} key={contribution.id}>
                                            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 5 }}>
                                                <Image
                                                    source={require('../assets/homePage/tab_contribution.png')}
@@ -108,34 +156,41 @@ const Contribution_Active = () => {
                            />
                         </View>
                       )}
-                {/* NEW MEMBERS */}
-                {/* <View style={{alignItems:'center',paddingHorizontal:10,paddingBottom:10,gap:15}}>
+                {/* NEW MEMBERS JOIN*/}
+                {joinedContribution === true && (
+                <View style={{alignItems:'center',paddingHorizontal:10,paddingBottom:10,gap:15}}>
                     <Text style={{fontSize:16,fontWeight:600,color:'#131313'}}>Groups invitation</Text>
                     <Text style={{fontSize:12,color:'#292B2D'}}>You have been invited to join this contribution</Text>
                     <View style={{flexDirection:'row',gap:20,marginTop:10}}>
-                        <TouchableOpacity style={[styles.invite, {backgroundColor:'#FD3C4A0D'}]}>
+                        <TouchableOpacity style={[styles.invite, {backgroundColor:'#FD3C4A0D'}]} onPress={setPopupType("caution")}>
                             <Text style={{fontSize:14,fontWeight:500,color:'#FD3C4A'}}>Decline</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={[styles.invite, {backgroundColor:'#2C14DD0D'}]}>
+                        <TouchableOpacity style={[styles.invite, {backgroundColor:'#2C14DD0D'}]}
+                        onPress={verifyIdentityAndJoin && setPopupType("success")}>
                             <Text style={{fontSize:14,fontWeight:500,color:'#442CF5'}}>Join</Text>
                         </TouchableOpacity>
                     </View>
-                </View> */}
+                </View>
+                )}
 
-                {/* JOINED */}
-                
-                {/* </TouchableOpacity>
-            </View> */}
              
-            {/* <CustomButton 
+            <CustomButton 
                 backgroundColor={'#2C14DD'}
                 title={'Create my own group'}
                 onPress={() => navigation.navigate('Contribute')}
-            /> */}
+            />
 
         </SafeAreaView>
 
         <TabBar contribution={true}/>
+        {popupVisible && (
+            <PopUpScreen 
+            joinedSavingsGroup={popupType === "success"}
+            declinedSavingsGroup={popupType === "caution"}
+            onPress={setPopupVisible(false)}
+            />
+        )}
+       
         
     </View>
   )

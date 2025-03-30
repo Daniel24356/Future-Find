@@ -1,8 +1,6 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View, Image } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaView } from "react-native-safe-area-context";
-import Ionicons from "@expo/vector-icons/Ionicons";
-import { Image } from "react-native";
 import TabBar from "../props/TabBar";
 import EvilIcons from '@expo/vector-icons/EvilIcons';
 import { useNavigation } from '@react-navigation/native';
@@ -10,13 +8,10 @@ import { useNavigation } from '@react-navigation/native';
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { ActivityIndicator } from "react-native-paper";
-// import AsyncStorage from "@react-native-async-storage/async-storage";
 const userID = "31417bb4-e6b1-4775-bb6e-d33e5d65b6d2"
 
 import { ProfileContext } from "./ProfileContext";
-import { useContext } from "react";import { useState, useEffect } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import axios from 'axios';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 const HomeScreen = () => {

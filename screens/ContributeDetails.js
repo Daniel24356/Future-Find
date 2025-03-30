@@ -7,6 +7,8 @@ import { StatusBar } from "expo-status-bar";
 import EvilIcons from '@expo/vector-icons/EvilIcons';
 import CustomButton from "../props/CustomButton";
 import { CREATE_CONTRIBUTION } from "../API_URL";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import PopUpScreen from "../props/PopUpScreen";
 
 
 const ContributeDetails = () => {
@@ -14,7 +16,11 @@ const ContributeDetails = () => {
    const [amount, setAmount] = useState("")
    const [cycle, setCycle] = useState("")
    const [maxMembers, setMaxMembers] = useState("")
+   const [popupVisible, setPopupVisible] = useState(false)
+   const [popupType, setPopupType] = useState("success")
 
+   const Token = AsyncStorage.getItem('userToken')
+   
    const createContribution = async () => {
       try{
          const response = await axios.post(CREATE_CONTRIBUTION, {
@@ -23,8 +29,14 @@ const ContributeDetails = () => {
             cycle,
             maxMembers
          }, 
+         {
+            headers: {
+               Authorization: `Bearer ${Token}`
+             }
+         }
          )
          if(response.status === 201){
+            AsyncStorage.setItem("contributionId", response.data.id)
             Alert.alert("Success", "Contribution group created.")
          }
       }catch(error){
@@ -123,6 +135,13 @@ const ContributeDetails = () => {
                />
             </View>
          </SafeAreaView>
+         {popupVisible && (
+             <PopUpScreen 
+             contributionGroupCreated={popupType === "success"}
+             onPress={() => setPopupVisible(false)}
+             />
+         )}
+         
       </View>
    )
 }

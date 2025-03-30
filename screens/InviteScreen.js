@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text, TextInput, Image, TouchableOpacity} from "react-native"
+import { StyleSheet, View, Text, TextInput, Image, TouchableOpacity, Alert} from "react-native"
 import Ionicons from '@expo/vector-icons/Ionicons';
 import Custom2Button from "../props/Custom2Button";
 import { useNavigation } from "@react-navigation/native";
@@ -6,9 +6,38 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
 import EvilIcons from '@expo/vector-icons/EvilIcons';
 import CustomButton from "../props/CustomButton";
+import { useState } from "react";
+import axios from "axios";
+import { INVITE_USERS } from "../API_URL";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 const InviteScreen = () => {
+  const [emails, setEmails] = useState([])
+  const userId = AsyncStorage.getItem('UserId')
+  const contributionId = AsyncStorage.getItem('contributionId')
+  const Token = AsyncStorage.getItem('userToken')
+
+  const inviteUserToContribution = async () => {
+    try{
+      if(emails.length === 0){
+        Alert.alert("Error", "Please enter at least one email")
+      }
+      const response = await axios.post(`${INVITE_USERS}/invite`, {
+        contributionId,
+        userId
+      }, {
+        headers: {
+          Authorization: `Bearer ${Token}`
+        }
+      })
+      if(response.status === 200){
+        Alert.alert("Success", "Invitations successfully sent to the valid emails.")
+    }
+  }catch(error){
+    Alert.alert("Error", error.response?.message || "Something went wrong")
+  }
+}
    const navigate = useNavigation()
    return (
     <View style = {styles.conContainer}>
@@ -44,6 +73,8 @@ const InviteScreen = () => {
                   multiline = {true}
                   placeholder= "Enter email addresses"
                   placeholderTextColor= "#8F94A3"
+                  value={emails}
+                  onChangeText={setEmails}
                 />
               </View>
                 
@@ -67,6 +98,7 @@ const InviteScreen = () => {
           <CustomButton
             title={'Continue'}
             backgroundColor={'#b9b3f5'}
+            onPress={inviteUserToContribution}
           />
         </View>
 
@@ -124,12 +156,12 @@ const styles = StyleSheet.create({
     gap: 15,
     paddingHorizontal:15,
     marginTop: 40,
-    // backgroundColor:'red'
+   
 },
   progress:{
     flexDirection: "row",
     gap: 20,
-  //   backgroundColor:'red'
+ 
  },
  bar: {
    flex:1,
@@ -154,7 +186,7 @@ const styles = StyleSheet.create({
    backgroundColor: "#FFFF",
    borderRadius: 16,
    paddingHorizontal:12,
-  //  paddingVertical: 8,
+  
   },
 
   input: {
@@ -164,7 +196,7 @@ const styles = StyleSheet.create({
     color:'#292B2D',
     lineHeight:20,
     textAlignVertical: "top",
-    //  backgroundColor:'red',
+   
    
   },
   link: {
