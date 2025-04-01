@@ -6,7 +6,7 @@ import EvilIcons from '@expo/vector-icons/EvilIcons';
 import { useNavigation } from '@react-navigation/native';
 
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { ActivityIndicator } from "react-native-paper";
 const userID = "31417bb4-e6b1-4775-bb6e-d33e5d65b6d2"
 
@@ -25,7 +25,7 @@ const HomeScreen = () => {
 
  const showBalance = async () => {
    try {
-     const response = await axios.get(`http://192.168.145.144:5000/api/v1/wallet/getUserBalance/${userID}`)
+     const response = await axios.get(`https://future-fund-backend-production.up.railway.app/api/v1/wallet/getUserBalance/${userID}`)
       setBalance(response.data.balance);
       
      setBalance(response.data.balance); // Assuming API returns { balance: 20983 }

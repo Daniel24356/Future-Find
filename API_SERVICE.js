@@ -42,7 +42,7 @@ export const startContributionCycle = async () => {
   );
 };
 
-export const holdFundsInEscrow = async (amount: number) => {
+export const holdFundsInEscrow = async (amount) => {
   return await axios.post(`${API_BASE_URL}/contribution/hold-funds`, {
     contributionId,
     amount,

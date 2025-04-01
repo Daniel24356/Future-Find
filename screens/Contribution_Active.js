@@ -144,6 +144,11 @@ const Contribution_Active = () => {
                               
                           </TouchableOpacity>
                       </View>
+                      <CustomButton 
+                backgroundColor={'#2C14DD'}
+                title={'Create my own group'}
+                onPress={() => navigation.navigate('Contribute')}
+            />
                       </> ) : (
                         <View style= {styles.noView}>
                            <Text style={styles.noGroup}>No Groups</Text>
@@ -173,12 +178,7 @@ const Contribution_Active = () => {
                 </View>
                 )}
 
-             
-            <CustomButton 
-                backgroundColor={'#2C14DD'}
-                title={'Create my own group'}
-                onPress={() => navigation.navigate('Contribute')}
-            />
+            
 
         </SafeAreaView>
 
