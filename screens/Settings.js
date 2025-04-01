@@ -4,10 +4,46 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import Entypo from '@expo/vector-icons/Entypo';
 import { useNavigation } from '@react-navigation/native';
 import TopHeader from '../props/TopHeader';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { ProfileContext } from './ProfileContext';
+import { useContext } from 'react';
 
 const Settings = () => {
 
+    const { profilePic, updateProfilePic } = useContext(ProfileContext);
      const navigation = useNavigation();
+
+     const handleLogout = async () => {
+        try {
+            // Remove user tokens and ID from storage
+            await AsyncStorage.removeItem("userToken");
+            await AsyncStorage.removeItem("userId");
+    
+            // Set profile picture back to default from assets using context
+            const defaultProfilePic = require('../assets/Group 20474.png'); // Use the default profile image from assets
+            
+            // Accessing context to update the profile picture globally
+            if (updateProfilePic) {
+                updateProfilePic(defaultProfilePic); // Reset profile picture to default
+            }
+    
+            console.log("User logged out successfully!");
+    
+            // Reset navigation to Login screen
+            navigation.reset({
+                index: 0,
+                routes: [{ name: "Login" }],
+            });
+    
+        } catch (error) {
+            console.error("Logout Error:", error);
+            alert("Logout failed. Please try again.");
+        }
+    };
+    
+    
+    
+    
 
     return (
         <View style={styles.container}>
@@ -42,7 +78,7 @@ const Settings = () => {
                     </View>
                 </View>
             </View>
-            <TouchableOpacity style={{ backgroundColor: "blue", padding: 12, marginRight: 20, marginLeft: 20, borderRadius: 10, alignItems: "center", marginTop: 200, justifyContent: "center" }}>
+            <TouchableOpacity style={{ backgroundColor: "blue", padding: 12, marginRight: 20, marginLeft: 20, borderRadius: 10, alignItems: "center", marginTop: 200, justifyContent: "center" }} onPress={handleLogout}>
                 <Text style={{ color: "white", fontSize: 16, fontWeight: "bold", textAlign: "center" }}>
                     Log Out
                 </Text>

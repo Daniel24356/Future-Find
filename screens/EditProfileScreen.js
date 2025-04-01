@@ -79,7 +79,10 @@ const EditProfileScreen = () => {
     
         try {
             const token = await AsyncStorage.getItem("userToken");
-            if (!token) throw new Error("User authentication failed.");
+            if (!token) {
+                Alert.alert("Authentication Error", "Please log in again.");
+                return;
+            }
     
             const formData = new FormData();
             formData.append("profilePic", {
@@ -99,7 +102,7 @@ const EditProfileScreen = () => {
                 }
             );
     
-            if (response.status === 200 && response.data.success) {
+            if (response.status >= 200 && response.status < 300) {
                 Alert.alert("Success", "Profile picture updated!");
             } else {
                 throw new Error("Unexpected response from server");
@@ -108,10 +111,10 @@ const EditProfileScreen = () => {
             console.error("🚨 Error updating profile picture:", error);
             
             // Display a detailed message if available
-            const errorMessage =
-                error.response?.data?.message || "Failed to update profile picture.";
+            // const errorMessage =
+            //     error.response?.data?.message || "Failed to update profile picture.";
             
-            Alert.alert("Error", errorMessage);
+            // Alert.alert("Error", errorMessage);
         }
     };
     

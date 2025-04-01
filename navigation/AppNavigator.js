@@ -39,6 +39,7 @@ import DataTopupScreen from '../screens/DataTopup';
 import Investments from '../screens/Investments';
 import LoanApplication from '../screens/LoanApplication';
 import Withdrawal from '../screens/Withdrawal';
+import CreatePin from '../screens/CreatePin';
 
 
 
@@ -56,6 +57,7 @@ const AppNavigator = () => {
         <Stack.Screen name="Splash" component={SplashScreen}  options={{ animation: "none" }}  />
         <Stack.Screen name="Signup" component={SignUpForm}  options={{ animation: "none" }}  />
       <Stack.Screen name="Transaction"component={Transaction}  options={{ animation: "none" }}  />
+      <Stack.Screen name="Pin"component={CreatePin}  options={{ animation: "none" }}  />
         <Stack.Screen name="Notifications" component={Notifications}  options={{ animation: "none" }}  />
         <Stack.Screen name="Investments" component={Investment}  options={{ animation: "none" }}  />
         <Stack.Screen name="Payment" component={Payments}  options={{ animation: "none" }}  />
