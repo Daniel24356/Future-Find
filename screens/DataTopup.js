@@ -139,7 +139,7 @@ export default function DataTopupScreen() {
 
   return (
     <>
-      <TopHeader title="Data topup" />
+      {/* <TopHeader title="Data topup" /> */}
 
       <View style={styles.container}>
         {/* Provider & Phone */}
