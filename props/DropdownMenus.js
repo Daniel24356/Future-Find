@@ -22,6 +22,7 @@ const DropdownMenus = ({
   selectedBank,
   savingPeriod,
   paymentInterval,
+  selectedInterval,
   selectProvider,
   exportAs,
   selectDate,
@@ -307,22 +308,10 @@ const DropdownMenus = ({
                 
                 <View>
                     {
-                        maritalStatus?
-                        <TouchableOpacity style={styles.option} onPress={()=>maritalSelect('Married')}>
-                            <Text style={{fontSize:14,color:'#292B2D'}}>Married</Text>
-                        </TouchableOpacity> : 
                         sourceOfIncome?
                         <TouchableOpacity style={styles.option}>
                             <Text style={{fontSize:14,color:'#292B2D'}}>Business</Text>
                         </TouchableOpacity> :
-                        employmentStatus?
-                        <TouchableOpacity style={styles.option} onPress={()=>employmentSelect('Employed')}>
-                            <Text style={{fontSize:14,color:'#292B2D'}}>Employed</Text>
-                        </TouchableOpacity> :
-                         paymentInterval?
-                         <TouchableOpacity style={styles.option}>
-                             <Text style={{fontSize:14,color:'#292B2D'}}>Weekly</Text>
-                         </TouchableOpacity> :
                          exportAs?
                          <TouchableOpacity style={styles.option}>
                              <Text style={{fontSize:14,color:'#292B2D'}}>PDF</Text>
@@ -330,22 +319,10 @@ const DropdownMenus = ({
                     }
 
                     {
-                        maritalStatus?
-                        <TouchableOpacity style={styles.option} onPress={()=>maritalSelect('Single')}>
-                            <Text style={{fontSize:14,color:'#292B2D'}}>Single</Text>
-                        </TouchableOpacity> : 
                         sourceOfIncome?
                         <TouchableOpacity style={styles.option}>
                             <Text style={{fontSize:14,color:'#292B2D'}}>Freelance</Text>
                         </TouchableOpacity> :
-                        employmentStatus?
-                        <TouchableOpacity style={styles.option} onPress={()=>employmentSelect('Self employed')}>
-                            <Text style={{fontSize:14,color:'#292B2D'}}>Self employed</Text>
-                        </TouchableOpacity> :
-                         paymentInterval?
-                         <TouchableOpacity style={styles.option}>
-                             <Text style={{fontSize:14,color:'#292B2D'}}>Monthly</Text>
-                         </TouchableOpacity> :
                          exportAs?
                          <TouchableOpacity style={styles.option}>
                              <Text style={{fontSize:14,color:'#292B2D'}}>Excel</Text>
@@ -353,25 +330,17 @@ const DropdownMenus = ({
                     }
 
                     {
-                        maritalStatus?
-                        <TouchableOpacity style={styles.option}onPress={()=>maritalSelect('Divorced')} >
-                            <Text style={{fontSize:14,color:'#292B2D'}}>Divorced</Text>
-                        </TouchableOpacity> : 
                         sourceOfIncome?
                         <TouchableOpacity style={styles.option}>
                             <Text style={{fontSize:14,color:'#292B2D'}}>E-commerce</Text>
                         </TouchableOpacity> : 
-                        employmentStatus?
-                        <TouchableOpacity style={styles.option} onPress={()=>employmentSelect('Business owner')}>
-                            <Text style={{fontSize:14,color:'#292B2D'}}>Business owner</Text>
-                        </TouchableOpacity> :
                         exportAs?
                         <TouchableOpacity style={styles.option}>
                             <Text style={{fontSize:14,color:'#292B2D'}}>Word</Text>
                         </TouchableOpacity> : ''
                     }
 
-                    {
+                    {/* {
                        (maritalStatus||sourceOfIncome||employmentStatus) && (
                         <TouchableOpacity style={styles.option} onPress={
                             maritalSelect ?
@@ -381,7 +350,8 @@ const DropdownMenus = ({
                         }>
                             <Text style={{fontSize:14,color:'#292B2D'}}>Student</Text>
                         </TouchableOpacity> 
-                    )}
+                    )} */}
+
                   </View>
 
                   {/* <Text style={{ fontSize: 14, color: "#292B2D" }}>
@@ -409,26 +379,26 @@ const DropdownMenus = ({
 
           {/* Single options for maritalStatus, sourceOfIncome, etc. */}
           <View>
-            {maritalStatus && (
-              <TouchableOpacity style={styles.option}>
-                <Text style={{ fontSize: 14, color: "#292B2D" }}>Married</Text>
-              </TouchableOpacity>
-            )}
             {sourceOfIncome && (
               <TouchableOpacity style={styles.option}>
                 <Text style={{ fontSize: 14, color: "#292B2D" }}>Business</Text>
               </TouchableOpacity>
             )}
-            {employmentStatus && (
-              <TouchableOpacity style={styles.option}>
-                <Text style={{ fontSize: 14, color: "#292B2D" }}>Employed</Text>
-              </TouchableOpacity>
-            )}
+
+
+            {/* PAYMENT INTERVAL DROPDOWN */}
             {paymentInterval && (
-              <TouchableOpacity style={styles.option}>
+              <TouchableOpacity style={styles.option} onPress={()=> selectedInterval('weekly')}>
                 <Text style={{ fontSize: 14, color: "#292B2D" }}>Weekly</Text>
               </TouchableOpacity>
             )}
+            {paymentInterval && (
+              <TouchableOpacity style={styles.option} onPress={()=> selectedInterval('weekly')}>
+                <Text style={{ fontSize: 14, color: "#292B2D" }}>Monthly</Text>
+              </TouchableOpacity>
+            )}
+
+
             {exportAs && (
               <TouchableOpacity style={styles.option}>
                 <Text style={{ fontSize: 14, color: "#292B2D" }}>PDF</Text>
@@ -462,11 +432,6 @@ const DropdownMenus = ({
 
 
             {/* More options */}
-            {maritalStatus && (
-              <TouchableOpacity style={styles.option}>
-                <Text style={{ fontSize: 14, color: "#292B2D" }}>Single</Text>
-              </TouchableOpacity>
-            )}
             {sourceOfIncome && (
               <TouchableOpacity style={styles.option}>
                 <Text style={{ fontSize: 14, color: "#292B2D" }}>
@@ -474,40 +439,73 @@ const DropdownMenus = ({
                 </Text>
               </TouchableOpacity>
             )}
+
+
+
+            {/* MARITAL STATUS */}
+            {maritalStatus && (
+              <TouchableOpacity style={styles.option} onPress={()=>maritalSelect('Single')}>
+                <Text style={{ fontSize: 14, color: "#292B2D" }}>Single</Text>
+              </TouchableOpacity>
+            )}
+            {maritalStatus && (
+              <TouchableOpacity style={styles.option} onPress={()=>maritalSelect('Married')}>
+                  <Text style={{fontSize:14,color:'#292B2D'}}>Married</Text>
+              </TouchableOpacity>
+            )}
+            {maritalStatus && (
+              <TouchableOpacity style={styles.option} onPress={()=>maritalSelect('Divorced')}>
+                <Text style={{ fontSize: 14, color: "#292B2D" }}>Divorced</Text>
+              </TouchableOpacity>
+            )}
+            {maritalStatus && (
+              <TouchableOpacity style={styles.option} onPress={()=>maritalSelect('Student')}>
+                  <Text style={{fontSize:14,color:'#292B2D'}}>Student</Text>
+              </TouchableOpacity>
+            )}
+
+
+
+
+            {/* EMPLOYMENT STATUS */}
             {employmentStatus && (
-              <TouchableOpacity style={styles.option}>
+              <TouchableOpacity style={styles.option} onPress={()=>employmentSelect('Employed')}>
+                <Text style={{ fontSize: 14, color: "#292B2D" }}>Employed</Text>
+              </TouchableOpacity>
+            )}
+            {employmentStatus && (
+              <TouchableOpacity style={styles.option} onPress={()=>employmentSelect('Self employed')}>
                 <Text style={{ fontSize: 14, color: "#292B2D" }}>
                   Self employed
                 </Text>
               </TouchableOpacity>
             )}
-            {paymentInterval && (
-              <TouchableOpacity style={styles.option}>
-                <Text style={{ fontSize: 14, color: "#292B2D" }}>Monthly</Text>
+            {employmentStatus && (
+              <TouchableOpacity style={styles.option} onPress={()=>employmentSelect('Business owner')}>
+                <Text style={{ fontSize: 14, color: "#292B2D" }}>
+                  Business owner
+                </Text>
               </TouchableOpacity>
             )}
+            {employmentStatus && (
+              <TouchableOpacity style={styles.option} onPress={()=>employmentSelect('Student')}>
+                <Text style={{ fontSize: 14, color: "#292B2D" }}>
+                  Student
+                </Text>
+              </TouchableOpacity>
+            )}
+
+
             {exportAs && (
               <TouchableOpacity style={styles.option}>
                 <Text style={{ fontSize: 14, color: "#292B2D" }}>Excel</Text>
               </TouchableOpacity>
             )}
 
-            {maritalStatus && (
-              <TouchableOpacity style={styles.option}>
-                <Text style={{ fontSize: 14, color: "#292B2D" }}>Divorced</Text>
-              </TouchableOpacity>
-            )}
             {sourceOfIncome && (
               <TouchableOpacity style={styles.option}>
                 <Text style={{ fontSize: 14, color: "#292B2D" }}>
                   E-commerce
-                </Text>
-              </TouchableOpacity>
-            )}
-            {employmentStatus && (
-              <TouchableOpacity style={styles.option}>
-                <Text style={{ fontSize: 14, color: "#292B2D" }}>
-                  Business owner
                 </Text>
               </TouchableOpacity>
             )}
@@ -518,11 +516,12 @@ const DropdownMenus = ({
             )}
 
             {/* Student if maritalStatus || sourceOfIncome || employmentStatus */}
-            {(maritalStatus || sourceOfIncome || employmentStatus) && (
+            {/* {(maritalStatus || sourceOfIncome || employmentStatus) && (
               <TouchableOpacity style={styles.option}>
                 <Text style={{ fontSize: 14, color: "#292B2D" }}>Student</Text>
               </TouchableOpacity>
-            )}
+            )} */}
+
 
             {/* List of banks */}
             {
@@ -540,8 +539,6 @@ const DropdownMenus = ({
                       <Image source={bank.image} />
                       <Text style={{fontSize:14,color:'#292B2D'}}>{bank.name}</Text>
                   </TouchableOpacity>
-
-
               )) :''
             }
 
