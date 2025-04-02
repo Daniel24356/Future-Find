@@ -18,8 +18,9 @@ import VerificationPopup from "../props/VerificationPopup";
 import { useNavigation } from "@react-navigation/native";
 import PopUpScreen from "../props/PopUpScreen";
 import EvilIcons from '@expo/vector-icons/EvilIcons';
-const URL = "http://192.168.145.225:5000/api/v1/wallet/"
-const userID = '12208cd0-2e23-42ef-ac42-1c2ed9041104'
+import AsyncStorage from "@react-native-async-storage/async-storage";
+const URL = "https://future-fund-backend-production.up.railway.app/api/v1/wallet";
+
 
 const FinalWithdrawal =()=> {
   const navigation = useNavigation();
@@ -53,13 +54,17 @@ const FinalWithdrawal =()=> {
   useEffect(()=>{
     const getBalance = async ()=>{
       try {
-        axios.get(`${URL}getUserBalance/${userID}`)
-        .then((response)=>{
-          setAccBalance(response.data.balance);
-          setLoading(false);
-        })
+        const userID = await AsyncStorage.getItem('userId');
+        if(userID){
+          axios.get(`${URL}/getUserBalance/${userID}`)
+          .then((response)=>{
+            setAccBalance(response.data.balance);
+            setLoading(false);
+          })
+        }
+
       } catch (error) {
-        
+        alert("error getting balance");
       }
     };
     getBalance();
@@ -98,7 +103,9 @@ const FinalWithdrawal =()=> {
 
   const handleWithdrawal = async ()=>{
     try {
-      axios.post(`${URL}withdrawal`, {userId: userID, amount: Number(amount)})
+      const userID = await AsyncStorage.getItem('userId');
+      if(userID){
+      axios.post(`${URL}/withdrawal`, {userId: userID, amount: Number(amount)})
       .then((response)=>{
         console.log(response.data);
         setSuccess(true);
@@ -106,6 +113,7 @@ const FinalWithdrawal =()=> {
         setBank(null);
         setAccNumber(0);
       })
+    }
     } catch (error) {
       console.log(error);
     }

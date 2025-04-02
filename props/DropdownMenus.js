@@ -13,11 +13,13 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Feather from "@expo/vector-icons/Feather";
 
+
 const DropdownMenus = ({
   maritalStatus,
   sourceOfIncome,
   employmentStatus,
   selectBank,
+  selectedBank,
   savingPeriod,
   paymentInterval,
   selectProvider,
@@ -117,22 +119,18 @@ const DropdownMenus = ({
     //                         onChangeText={ (text)=>{ setSearchValue(text); }}
     //                     />
     //                 </View>
+    
     <View style={styles.background}>
     <SafeAreaView style={{ flex: 1, justifyContent: "flex-end", paddingBottom: 30 }}>
       <View style={styles.pop_up}>
         {/* Header: Close icon and search input */}
-        <View style={{ height: 68, justifyContent: "space-between" }}>
+        <View style={{ justifyContent: "space-between" }}>
           <Ionicons name="close-outline" size={24} color="black" onPress={onClose} />
-          <TextInput
-            style={styles.input}
-            placeholder="Search banks"
-            value={searchValue}
-            onChangeText={(text) => setSearchValue(text)}
-          />
+          
         </View>
                 
 
-
+          <View>
             {maritalStatus ? (
               <Text style={styles.popupTitle}>Marital status</Text>
             ) : sourceOfIncome ? (
@@ -158,7 +156,12 @@ const DropdownMenus = ({
           {selectBank && (
             <View style={styles.input_wrapper}>
               <Feather name="search" size={16} color="black" />
-              <TextInput style={styles.input} placeholder="Search banks" />
+              <TextInput
+                style={styles.input}
+                placeholder="Search banks"
+                value={searchValue}
+                onChangeText={(text) => setSearchValue(text)}
+              />
             </View>
           )}
 
@@ -228,7 +231,7 @@ const DropdownMenus = ({
                     },
                   ]}
                   onPress={() => setRanges("range4")}
-                >
+                  >
                   <Text
                     style={{
                       fontSize: 10,
@@ -297,7 +300,7 @@ const DropdownMenus = ({
                     />
                     </Pressable>
                     <Text style={{ fontSize: 14, color: "#292B2D" }}>{item}</Text>
-                    </View>
+                  </View>
               )}
               />
             )}
@@ -379,6 +382,7 @@ const DropdownMenus = ({
                             <Text style={{fontSize:14,color:'#292B2D'}}>Student</Text>
                         </TouchableOpacity> 
                     )}
+                  </View>
 
                   {/* <Text style={{ fontSize: 14, color: "#292B2D" }}>
                     {month.item}
@@ -388,14 +392,6 @@ const DropdownMenus = ({
             />
           )} */}
    
-           {selectBank &&
-              bankSearch.map((bank, index) => (
-                <TouchableOpacity style={styles.option} key={index}>
-                  <Image source={bank.image} />
-                  <Text style={{ fontSize: 14, color: "#292B2D" }}>{bank.name}</Text>
-                </TouchableOpacity>
-              ))}
-
              {selectProvider &&
               providerList.map((provider, index) => (
                 <TouchableOpacity
@@ -529,15 +525,25 @@ const DropdownMenus = ({
             )}
 
             {/* List of banks */}
-            {selectBank &&
-              banksList.map((bank, index) => (
-                <TouchableOpacity style={styles.option} key={index}>
-                  <Image source={bank.image} />
-                  <Text style={{ fontSize: 14, color: "#292B2D" }}>
-                    {bank.name}
-                  </Text>
-                </TouchableOpacity>
-              ))}
+            {
+              selectBank && searchValue.length < 1?
+              banksList.map((bank, index)=>(
+                  <TouchableOpacity style={styles.option} key={index} onPress={()=>selectedBank(bank)}>
+                      <Image source={bank.image} />
+                      <Text style={{fontSize:14,color:'#292B2D'}}>{bank.name}</Text>
+                  </TouchableOpacity>
+
+              )) :
+              selectBank && searchValue.length > 0?
+              bankSearch.map((bank, index)=>(
+                  <TouchableOpacity style={styles.option} key={index} onPress={()=>selectedBank(bank)}>
+                      <Image source={bank.image} />
+                      <Text style={{fontSize:14,color:'#292B2D'}}>{bank.name}</Text>
+                  </TouchableOpacity>
+
+
+              )) :''
+            }
 
             {/* Provider list */}
             {selectProvider &&
