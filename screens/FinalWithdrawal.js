@@ -237,8 +237,8 @@ const FinalWithdrawal =()=> {
         {
           selectBank ?
           <DropdownMenus 
-            selectBank={true}
-            onClose={()=> setSelectBank(false)}
+            maritalStatus={true}
+            onClose={()=> setSelectBank(false)} 
             selectedBank={handleSelect}
           /> :
           verification ?
