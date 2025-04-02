@@ -25,7 +25,7 @@ const HomeScreen = () => {
 
  const showBalance = async () => {
    try {
-     const response = await axios.get(`http://192.168.145.144:5000/api/v1/wallet/getUserBalance/${userID}`)
+     const response = await axios.get(`http://192.168.160.138:5000/api/v1/wallet/getUserBalance/${userID}`)
       setBalance(response.data.balance);
       
      setBalance(response.data.balance); // Assuming API returns { balance: 20983 }
@@ -41,7 +41,7 @@ const HomeScreen = () => {
  const fetchTransactions = async () => {
   try {
     setLoading(true);
-    const response = await axios.get(`http://192.168.145.144:5000/api/v1/wallet/getUserTransactions/${userID}`);
+    const response = await axios.get(`http://192.168.160.138:5000/api/v1/wallet/getUserTransactions/${userID}`);
     const transactions = response.data.transactions; // Ensure your API returns an array of transactions
     
     navigation.navigate('Transaction', { transactions });

@@ -102,7 +102,7 @@ export default function SignUpForm() {
             agreed: false,
         });
     
-        navigation.navigate("home");
+        navigation.navigate("Login");
     
     } catch (error) {
         console.error("Error:", error.response ? error.response.data : error.message);
@@ -202,14 +202,14 @@ export default function SignUpForm() {
             <TouchableOpacity   onPress={() => navigation.navigate('Login')}  style={styles.secButton}>
                         <Text style={styles.buttonTexttwo}>Sign In</Text>
                       </TouchableOpacity>
-            {popupVisible && (
+            {/* {popupVisible && (
 
         <PopUpScreen 
           accountSaved={popupType === "success"}
           forgotPassword={popupType === "caution"}
           onPress={() => setPopupVisible(false)} // Hide popup when clicking "Okay"
         />
-      )}
+      )} */}
     </View>
   );
 }
