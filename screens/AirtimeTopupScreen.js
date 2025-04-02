@@ -56,7 +56,7 @@ const AirtimeTopupScreen = () => {
       console.error("redirection failed", error);
     }
   };
-  
+ 
 
   const validateForm = () => {
     const isValid =
@@ -194,7 +194,7 @@ const AirtimeTopupScreen = () => {
         <TouchableOpacity
           style={[styles.button, !isFormValid && styles.buttonDisabled]}
           onPress={handleContinue}
-          disabled={!isFormValid}
+          // disabled={!isFormValid}
         >
           <Text style={styles.buttonText}>Continue</Text>
         </TouchableOpacity>
