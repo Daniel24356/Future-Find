@@ -11,7 +11,8 @@ import {
 } from "react-native";
 import { MaterialIcons, Ionicons } from "@expo/vector-icons";
 import TopHeader from "../props/TopHeader";
-import axios from "axios";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useNavigation } from '@react-navigation/native'
 
 export const providerIcons = {
   MTN: require("../assets/mtn.png"),
@@ -21,23 +22,13 @@ export const providerIcons = {
 };
 // const BASE_URL = "https://future-fund-backend-production.up.railway.app/api/v1";
 
-const buyAirtime = async (network, phone, amount) => {
+export const buyAirtime = async (network, phone, amount) => {
   const payload = { network, phone, amount };
-
   try {
-    const response = await axios.post(
-      "https://future-fund-backend-production.up.railway.app/api/v1/vtpass/airtime",
-      payload,
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    console.log("Airtime purchase response: ", response.data);
-    return response.data;
+    await AsyncStorage.setItem("transactionPayload", JSON.stringify(payload));
+    console.log("Transaction payload stored successfully");
   } catch (error) {
-    console.error("Error purchasing airtime", error);
+    console.error("Error storing transaction payload", error);
   }
 };
 
@@ -48,6 +39,7 @@ const AirtimeTopupScreen = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [airtimeAmount, setAirtimeAmount] = useState("");
   const [isFormValid, setIsFormValid] = useState(false);
+  // const navigation = useNavigation()
 
   const providerList = [
     { id: "1", name: "MTN" },
@@ -59,10 +51,12 @@ const AirtimeTopupScreen = () => {
   const handleContinue = async () => {
     try {
       await buyAirtime(selectedProvider, phoneNumber, airtimeAmount);
+      // navigation.navigate("ReviewTransaction"); //help me navigate the stuff pr0perly to this page
     } catch (error) {
-      console.error("Transaction failed", error);
+      console.error("redirection failed", error);
     }
   };
+ 
 
   const validateForm = () => {
     const isValid =
@@ -101,7 +95,7 @@ const AirtimeTopupScreen = () => {
 
   return (
     <>
-      <TopHeader title="Airtime topup" />
+      {/* <TopHeader title="Airtime topup" /> */}
 
       <View style={styles.container}>
         {/* Phone + Provider Section */}
